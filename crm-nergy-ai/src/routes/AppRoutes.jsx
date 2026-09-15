@@ -100,6 +100,7 @@ import { OalAdminSupport } from '../pages/oal/admin/OalAdminSupport';
 import { OalAdminCms, OalAdminAudit } from '../pages/oal/admin/OalAdminCms';
 
 import { Showcase } from '../pages/Showcase';
+import { OmpInventoryRoutes } from './ompInventoryRoutes';
 import { useAuth } from '../context/AuthContext';
 import { normalizeRoleId } from '../utils/rbac';
 
@@ -125,9 +126,12 @@ export const AppRoutes = () => {
         <Route path="/showcase" element={<Showcase />} />
       </Route>
 
+      {/* Developer 2 Scope: OMP Deals Verified Dealers & Inventory Suite */}
+      <Route path="/omp/*" element={<OmpInventoryRoutes />} />
+
       {/* CRM Auth Onboarding Routes */}
       <Route path="/crm" element={<Navigate to="/crm/dashboard" replace />} />
-      
+
       <Route element={<AuthLayout />}>
         <Route path="/crm/signup" element={<CrmSignup />} />
         <Route path="/crm/forgot-password" element={<CrmForgotPassword />} />
