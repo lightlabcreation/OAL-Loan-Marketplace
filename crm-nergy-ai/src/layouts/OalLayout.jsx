@@ -1,0 +1,93 @@
+import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import { Topbar } from './components/Topbar';
+import { Sidebar } from './components/Sidebar';
+import { Drawer } from '../components/ui/Drawer';
+import { ToastContainer } from '../components/ui/Toast';
+import { useResponsive } from '../hooks/useResponsive';
+
+export const OalLayout = () => {
+  const { isMobile, isTablet } = useResponsive();
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(isTablet);
+  const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
+
+  const handleToggleSidebar = () => {
+    if (isMobile) {
+      setIsMobileDrawerOpen((prev) => !prev);
+    } else {
+      setIsSidebarCollapsed((prev) => !prev);
+    }
+  };
+
+  return (
+    <div
+      style={{
+        height: '100vh',
+        maxHeight: '100vh',
+        width: '100vw',
+        maxWidth: '100vw',
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: 'var(--background)',
+        overflow: 'hidden',
+      }}
+    >
+      {/* Fixed Topbar Header */}
+      <Topbar onToggleSidebar={handleToggleSidebar} product="oal" />
+
+      {/* Main Shell Container */}
+      <div
+        style={{
+          flex: 1,
+          display: 'flex',
+          overflow: 'hidden',
+          height: 'calc(100vh - var(--topbar-height))',
+          maxHeight: 'calc(100vh - var(--topbar-height))',
+        }}
+      >
+        {/* Desktop / Tablet Sidebar (Fixed Height) */}
+        {!isMobile && (
+          <Sidebar
+            isCollapsed={isSidebarCollapsed}
+            onToggleCollapse={() => setIsSidebarCollapsed((prev) => !prev)}
+            product="oal"
+          />
+        )}
+
+        {/* Mobile Drawer Sidebar */}
+        {isMobile && (
+          <Drawer
+            isOpen={isMobileDrawerOpen}
+            onClose={() => setIsMobileDrawerOpen(false)}
+            position="left"
+            width="280px"
+          >
+            <Sidebar
+              isCollapsed={false}
+              onToggleCollapse={() => setIsMobileDrawerOpen(false)}
+              product="oal"
+              onCloseMobile={() => setIsMobileDrawerOpen(false)}
+            />
+          </Drawer>
+        )}
+
+        {/* Main Content Area — ONLY THIS AREA SCROLLS */}
+        <main
+          style={{
+            flex: 1,
+            height: '100%',
+            overflowY: 'auto',
+            padding: isMobile ? '1rem' : '1.5rem',
+            backgroundColor: 'var(--background)',
+            boxSizing: 'border-box',
+          }}
+        >
+          <Outlet />
+        </main>
+      </div>
+
+      {/* Global Toast Container */}
+      <ToastContainer />
+    </div>
+  );
+};
