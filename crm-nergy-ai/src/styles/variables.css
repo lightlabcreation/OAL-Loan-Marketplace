@@ -43,6 +43,16 @@
   --z-modal: 1060;
   --z-toast: 1070;
   --z-tooltip: 1080;
+
+  /* Client-Specified Energy Brand & Hover Tokens */
+  --energy-orange: #f97316;
+  --energy-orange-hover: #ea580c;
+  --energy-cyan: #06b6d4;
+  --energy-sky: #38bdf8;
+  --energy-sky-hover: #0284c7;
+  --nav-hover-bg: rgba(56, 189, 248, 0.12);
+  --nav-hover-text: #0284c7;
+  --icon-hover-color: #38bdf8;
 }
 
 /* Light Theme Variables */

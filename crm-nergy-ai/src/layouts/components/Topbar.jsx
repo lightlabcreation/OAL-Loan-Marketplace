@@ -42,6 +42,8 @@ import { Avatar } from '../../components/ui/Avatar';
 import { mockNotifications } from '../../data/mockData';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { isRouteAllowed, getDefaultRouteForRole } from '../../utils/rbac';
+import { AiEnergyLogo } from '../../components/common/AiEnergyLogo';
+import { LanguageToggle } from '../../components/common/LanguageToggle';
 import iconLogo from '../../assets/crm_nergy_ai_icon.png';
 
 export const Topbar = ({ onToggleSidebar, product = 'crm' }) => {
@@ -262,16 +264,7 @@ export const Topbar = ({ onToggleSidebar, product = 'crm' }) => {
           className="flex items-center gap-2.5 cursor-pointer"
         >
           {product === 'crm' ? (
-            <img
-              src={iconLogo}
-              alt="CRM nErgy AI"
-              style={{
-                width: '32px',
-                height: '32px',
-                objectFit: 'contain',
-                flexShrink: 0,
-              }}
-            />
+            <AiEnergyLogo size={32} showText={false} />
           ) : (
             <div
               style={{
@@ -384,8 +377,38 @@ export const Topbar = ({ onToggleSidebar, product = 'crm' }) => {
         </button>
       </div>
 
-      {/* Right Actions: Notifications, Theme Toggle, User Profile */}
-      <div className="flex items-center gap-2 ml-auto" style={{ marginLeft: 'auto' }}>
+      {/* Right Actions: Bestie Quick Action, Language Toggle, Notifications, Theme Toggle, User Profile */}
+      <div className="flex items-center gap-2.5 ml-auto" style={{ marginLeft: 'auto' }}>
+        {/* Ask Bestie AI Quick Button */}
+        {product === 'crm' && (
+          <button
+            type="button"
+            onClick={() => navigate('/crm/bestie')}
+            className="hidden-mobile flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer transition-all"
+            style={{
+              background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%)',
+              border: '1px solid rgba(6, 182, 212, 0.4)',
+              color: '#0284c7',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = '#0284c7';
+              e.currentTarget.style.boxShadow = '0 0 10px rgba(6, 182, 212, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(6, 182, 212, 0.4)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+            title="Ask Bestie AI Copilot"
+          >
+            <Sparkles size={14} style={{ color: '#0ea5e9' }} />
+            <span>Ask Bestie</span>
+            <span style={{ fontSize: '9px', background: '#0284c7', color: '#fff', padding: '1px 4px', borderRadius: '4px' }}>AI</span>
+          </button>
+        )}
+
+        {/* 1-Click Language Switcher */}
+        <LanguageToggle />
+
         {/* Notifications Dropdown (Badge 8) */}
         <Dropdown
           trigger={

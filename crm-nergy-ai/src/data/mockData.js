@@ -18,26 +18,45 @@ import {
   Building2,
   TrendingUp,
   History,
-  BookOpen
+  BookOpen,
+  MapPin,
+  Bot,
+  Video,
+  Megaphone,
+  Grid,
+  Search
 } from 'lucide-react';
 
 export const crmNavigation = [
-  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, path: '/crm/dashboard', section: 'Core Modules' },
-  { id: 'contacts', label: 'Contacts', icon: Users, path: '/crm/contacts', section: 'Core Modules' },
-  { id: 'leads', label: 'Leads Directory', icon: Target, path: '/crm/leads', section: 'Core Modules' },
-  { id: 'pipeline', label: 'Sales Pipeline', icon: Kanban, path: '/crm/pipeline', section: 'Core Modules' },
-  { id: 'tasks', label: 'Tasks & Reminders', icon: CheckSquare, path: '/crm/tasks', section: 'Core Modules' },
-  { id: 'communication', label: 'Communication Hub', icon: MessageSquare, path: '/crm/communication', section: 'Core Modules' },
+  // Core Modules
+  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, path: '/crm/dashboard', section: 'Core CRM' },
+  { id: 'contacts', label: 'Contacts', icon: Users, path: '/crm/contacts', section: 'Core CRM' },
+  { id: 'leads', label: 'Leads Directory', icon: Target, path: '/crm/leads', section: 'Core CRM' },
+  { id: 'pipeline', label: 'Sales Pipeline', icon: Kanban, path: '/crm/pipeline', section: 'Core CRM' },
+  { id: 'tasks', label: 'Tasks & Reminders', icon: CheckSquare, path: '/crm/tasks', section: 'Core CRM' },
+  { id: 'communication', label: 'Communication Hub', icon: MessageSquare, path: '/crm/communication', section: 'Core CRM' },
+  { id: 'territory', label: 'Territory Management', icon: MapPin, path: '/crm/territory', section: 'Core CRM' },
 
-  { id: 'erp', label: 'ERP & Operations', icon: Boxes, path: '/crm/erp', section: 'Enterprise Suites' },
-  { id: 'hr', label: 'HR & Recruiting', icon: UserCheck, path: '/crm/hr', section: 'Enterprise Suites' },
-  { id: 'support', label: 'Customer Support', icon: LifeBuoy, path: '/crm/support', section: 'Enterprise Suites' },
+  // Enterprise ERP
+  { id: 'erp', label: 'ERP & Operations', icon: Boxes, path: '/crm/erp', section: 'Enterprise ERP' },
 
-  { id: 'ai', label: 'AI Content Studio', icon: Sparkles, path: '/crm/ai-studio', section: 'Intelligence & Data' },
-  { id: 'reports', label: 'Reports Hub', icon: FileText, path: '/crm/reports', section: 'Intelligence & Data' },
+  // AI SuperHouse
+  { id: 'bestie', label: 'Bestie AI Copilot', icon: Bot, path: '/crm/bestie', section: 'AI SuperHouse' },
+  { id: 'ai', label: 'AI Content Studio', icon: Sparkles, path: '/crm/ai-studio', section: 'AI SuperHouse' },
+  { id: 'ai-video', label: 'AI Video Agent', icon: Video, path: '/crm/ai-video', section: 'AI SuperHouse' },
+  { id: 'marketing', label: 'AI Marketing Hub', icon: Megaphone, path: '/crm/marketing', section: 'AI SuperHouse' },
 
-  { id: 'admin', label: 'Administration', icon: ShieldCheck, path: '/crm/admin', section: 'System Governance' },
-  { id: 'settings', label: 'Settings', icon: Settings, path: '/crm/settings', section: 'System Governance' },
+  // Business Solutions
+  { id: 'hr', label: 'HR & Recruiting', icon: UserCheck, path: '/crm/hr', section: 'Business Solutions' },
+  { id: 'support', label: 'Customer Support', icon: LifeBuoy, path: '/crm/support', section: 'Business Solutions' },
+  { id: 'knowledge-base', label: 'Knowledge Base', icon: BookOpen, path: '/crm/knowledge-base', section: 'Business Solutions' },
+  { id: 'my-apps', label: 'My Fav Apps', icon: Grid, path: '/crm/my-apps', section: 'Business Solutions' },
+
+  // Governance & Intelligence
+  { id: 'search', label: 'Internal AI Search', icon: Search, path: '/crm/search', section: 'Governance & Data' },
+  { id: 'reports', label: 'Reports Hub', icon: FileText, path: '/crm/reports', section: 'Governance & Data' },
+  { id: 'admin', label: 'Administration', icon: ShieldCheck, path: '/crm/admin', section: 'Governance & Data' },
+  { id: 'settings', label: 'Settings', icon: Settings, path: '/crm/settings', section: 'Governance & Data' },
 ];
 
 export const oalNavigation = [

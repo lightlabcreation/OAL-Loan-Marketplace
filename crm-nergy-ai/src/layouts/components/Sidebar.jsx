@@ -115,8 +115,24 @@ export const Sidebar = ({
                       transition: 'all var(--transition-fast)',
                     };
                   }}
+                  onMouseEnter={(e) => {
+                    if (!isActive) {
+                      e.currentTarget.style.color = '#0284c7';
+                      e.currentTarget.style.backgroundColor = 'rgba(56, 189, 248, 0.1)';
+                      const iconEl = e.currentTarget.querySelector('svg');
+                      if (iconEl) iconEl.style.color = '#38bdf8';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) {
+                      e.currentTarget.style.color = 'var(--text-secondary)';
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                      const iconEl = e.currentTarget.querySelector('svg');
+                      if (iconEl) iconEl.style.color = '';
+                    }
+                  }}
                 >
-                  <Icon size={18} className="flex-shrink-0" style={{ color: (location.pathname === item.path) ? '#1d4ed8' : undefined }} />
+                  <Icon size={18} className="flex-shrink-0 transition-colors" style={{ color: (location.pathname === item.path) ? '#1d4ed8' : undefined }} />
                   {!isCollapsed && <span>{item.label}</span>}
                 </NavLink>
               );
