@@ -20,7 +20,14 @@ import {
   Layers,
   CheckCircle2,
   Activity,
-  Car
+  Car,
+  ShoppingBag,
+  RefreshCw,
+  Target,
+  Camera,
+  Wrench,
+  Share2,
+  Globe
 } from 'lucide-react';
 import { ToastContainer } from '../components/ui/Toast';
 
@@ -41,7 +48,34 @@ export const OmpLayout = () => {
 
   const navItems = [
     {
-      group: 'Pillar 4: Executive & Admin',
+      group: 'Marketplace & Verified Dealers',
+      items: [
+        { path: '/omp/marketplace', label: 'OfferUp Marketplace (O-01)', icon: ShoppingBag, tag: 'B2C/B2B' },
+        { path: '/omp/verified-dealer', label: 'Verified Dealer Hub (V-02)', icon: ShieldCheck, tag: 'ADP Tier' },
+        { path: '/omp/verify', label: 'Dealer Onboarding (V-01)', icon: CheckCircle2, tag: '4-Step' },
+        { path: '/omp/feed-sync', label: 'DMS Feed Sync (V-03)', icon: RefreshCw, tag: 'Auto' },
+        { path: '/omp/top-leads', label: 'AI Top Lead Radar (N-01)', icon: Target, badge: 'AI Hot' },
+      ],
+    },
+    {
+      group: 'Pillar 1: Stock The Lot',
+      items: [
+        { path: '/omp/vin-scanner', label: 'VIN Scanner & Bookout (E-02)', icon: Camera, tag: 'Optical' },
+        { path: '/omp/market-pricing', label: 'AI RealPrice™ AIMP (E-03)', icon: TrendingUp, tag: 'Matrix' },
+        { path: '/omp/title-search', label: 'NMVTIS Title & Lien (E-04)', icon: FileSignature, tag: '50-State' },
+        { path: '/omp/recon-center', label: 'Recon & Repair ROM (E-05)', icon: Wrench, tag: 'Cost' },
+      ],
+    },
+    {
+      group: 'Pillar 2: Attract Buyers',
+      items: [
+        { path: '/omp/photo-genius', label: 'PhotoGenius AI Media (E-06)', icon: Sparkles, tag: '3D Walk' },
+        { path: '/omp/postmaster', label: 'AI Postmaster Social (E-07)', icon: Share2, tag: 'Syndicate' },
+        { path: '/omp/web-builder', label: 'Dealer WebBuilder (E-08)', icon: Globe, tag: 'Instant' },
+      ],
+    },
+    {
+      group: 'Pillar 4: Executive & Multi-Store',
       items: [
         { path: '/omp/executive/central-office', label: 'Central Office (E-01)', icon: Building2, tag: 'Umbrella' },
         { path: '/omp/executive/permissions', label: 'Team Roles & RBAC (E-19)', icon: ShieldCheck, tag: 'Security' },
@@ -91,20 +125,20 @@ export const OmpLayout = () => {
             {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', cursor: 'pointer' }} onClick={() => navigate('/omp/executive/central-office')}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', cursor: 'pointer' }} onClick={() => navigate('/omp/marketplace')}>
             <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'linear-gradient(135deg, #0284c7 0%, #38bdf8 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 16px rgba(56,189,248,0.35)' }}>
               <Car size={20} color="#ffffff" />
             </div>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <span style={{ fontWeight: 800, fontSize: '1.05rem', letterSpacing: '-0.02em', background: 'linear-gradient(to right, #ffffff, #93c5fd)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                  OMP DEALS
+                  OMP DEALS & MARKETPLACE
                 </span>
                 <span style={{ fontSize: '0.65rem', padding: '0.1rem 0.45rem', borderRadius: '9999px', backgroundColor: 'rgba(56, 189, 248, 0.15)', color: '#38bdf8', border: '1px solid rgba(56, 189, 248, 0.3)', fontWeight: 700 }}>
-                  ⚡ DEV 3 SUITE
+                  ⚡ UNIFIED AUTO DMS
                 </span>
               </div>
-              <span style={{ fontSize: '0.72rem', color: '#64748b' }}>Dealer Essentials & Multi-Store Desking Hub</span>
+              <span style={{ fontSize: '0.72rem', color: '#64748b' }}>OfferUp Marketplace, Verified Dealers, Desking & Lot Operations</span>
             </div>
           </div>
         </div>
