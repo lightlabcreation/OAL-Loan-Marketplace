@@ -120,7 +120,7 @@ export const Sidebar = ({
                       e.currentTarget.style.color = '#0284c7';
                       e.currentTarget.style.backgroundColor = 'rgba(56, 189, 248, 0.1)';
                       const iconEl = e.currentTarget.querySelector('svg');
-                      if (iconEl) iconEl.style.color = '#38bdf8';
+                      if (iconEl) iconEl.style.color = '#0ea5e9';
                     }
                   }}
                   onMouseLeave={(e) => {
@@ -128,11 +128,18 @@ export const Sidebar = ({
                       e.currentTarget.style.color = 'var(--text-secondary)';
                       e.currentTarget.style.backgroundColor = 'transparent';
                       const iconEl = e.currentTarget.querySelector('svg');
-                      if (iconEl) iconEl.style.color = '';
+                      if (iconEl) iconEl.style.color = '#f97316';
                     }
                   }}
                 >
-                  <Icon size={18} className="flex-shrink-0 transition-colors" style={{ color: (location.pathname === item.path) ? '#1d4ed8' : undefined }} />
+                  <Icon
+                    size={18}
+                    className="flex-shrink-0"
+                    style={{
+                      color: (location.pathname === item.path) ? '#1d4ed8' : '#f97316',
+                      transition: 'color 200ms ease',
+                    }}
+                  />
                   {!isCollapsed && <span>{item.label}</span>}
                 </NavLink>
               );

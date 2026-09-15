@@ -210,10 +210,11 @@ export const UnifiedLogin = ({ mode }) => {
     <div
       style={{
         minHeight: '100vh',
-        backgroundColor: 'var(--background)',
+        backgroundColor: currentPlatform === 'crm' ? '#070b19' : 'var(--background)',
         backgroundImage: currentPlatform === 'crm'
-          ? 'radial-gradient(circle at 50% 0%, rgba(29, 78, 216, 0.03) 0%, transparent 65%)'
+          ? 'radial-gradient(circle at 50% -10%, rgba(14, 165, 233, 0.2) 0%, transparent 60%), radial-gradient(circle at 10% 90%, rgba(59, 130, 246, 0.12) 0%, transparent 50%), radial-gradient(circle at 90% 90%, rgba(249, 115, 22, 0.08) 0%, transparent 50%)'
           : 'radial-gradient(circle at 50% 0%, rgba(15, 118, 110, 0.03) 0%, transparent 65%)',
+        color: currentPlatform === 'crm' ? '#f8fafc' : 'inherit',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -335,10 +336,12 @@ export const UnifiedLogin = ({ mode }) => {
           <div
             style={{
               gridColumn: 'span 5 / span 5',
-              backgroundColor: 'var(--surface)',
-              borderRadius: '12px',
-              border: '1px solid var(--border)',
-              padding: '1.5rem',
+              backgroundColor: currentPlatform === 'crm' ? 'rgba(15, 23, 42, 0.85)' : 'var(--surface)',
+              backdropFilter: currentPlatform === 'crm' ? 'blur(20px)' : 'none',
+              borderRadius: '16px',
+              border: currentPlatform === 'crm' ? '1px solid rgba(56, 189, 248, 0.22)' : '1px solid var(--border)',
+              boxShadow: currentPlatform === 'crm' ? '0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 25px rgba(6, 182, 212, 0.12)' : 'var(--shadow-md)',
+              padding: '1.75rem',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
@@ -404,13 +407,13 @@ export const UnifiedLogin = ({ mode }) => {
 
               {/* Form Input: Email */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.375rem', textAlign: 'left' }}>
-                <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-primary)' }}>
+                <label style={{ fontSize: '12px', fontWeight: 600, color: currentPlatform === 'crm' ? '#e2e8f0' : 'var(--text-primary)' }}>
                   Email Address
                 </label>
                 <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
                   <Mail
                     size={16}
-                    style={{ position: 'absolute', left: '14px', color: 'var(--text-tertiary)', pointerEvents: 'none' }}
+                    style={{ position: 'absolute', left: '14px', color: currentPlatform === 'crm' ? '#38bdf8' : 'var(--text-tertiary)', pointerEvents: 'none' }}
                   />
                   <input
                     type="email"
@@ -422,10 +425,10 @@ export const UnifiedLogin = ({ mode }) => {
                       height: '48px',
                       paddingLeft: '40px',
                       paddingRight: '14px',
-                      borderRadius: '8px',
-                      border: '1px solid var(--border)',
-                      backgroundColor: 'var(--surface)',
-                      color: 'var(--text-primary)',
+                      borderRadius: '10px',
+                      border: currentPlatform === 'crm' ? '1px solid rgba(56, 189, 248, 0.28)' : '1px solid var(--border)',
+                      backgroundColor: currentPlatform === 'crm' ? 'rgba(30, 41, 59, 0.7)' : 'var(--surface)',
+                      color: currentPlatform === 'crm' ? '#f8fafc' : 'var(--text-primary)',
                       fontSize: '13px',
                       outline: 'none',
                     }}
@@ -436,14 +439,14 @@ export const UnifiedLogin = ({ mode }) => {
               {/* Form Input: Password */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.375rem', textAlign: 'left' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <label style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-primary)' }}>
+                  <label style={{ fontSize: '12px', fontWeight: 600, color: currentPlatform === 'crm' ? '#e2e8f0' : 'var(--text-primary)' }}>
                     Password
                   </label>
                 </div>
                 <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
                   <Lock
                     size={16}
-                    style={{ position: 'absolute', left: '14px', color: 'var(--text-tertiary)', pointerEvents: 'none' }}
+                    style={{ position: 'absolute', left: '14px', color: currentPlatform === 'crm' ? '#38bdf8' : 'var(--text-tertiary)', pointerEvents: 'none' }}
                   />
                   <input
                     type="password"
@@ -455,10 +458,10 @@ export const UnifiedLogin = ({ mode }) => {
                       height: '48px',
                       paddingLeft: '40px',
                       paddingRight: '14px',
-                      borderRadius: '8px',
-                      border: '1px solid var(--border)',
-                      backgroundColor: 'var(--surface)',
-                      color: 'var(--text-primary)',
+                      borderRadius: '10px',
+                      border: currentPlatform === 'crm' ? '1px solid rgba(56, 189, 248, 0.28)' : '1px solid var(--border)',
+                      backgroundColor: currentPlatform === 'crm' ? 'rgba(30, 41, 59, 0.7)' : 'var(--surface)',
+                      color: currentPlatform === 'crm' ? '#f8fafc' : 'var(--text-primary)',
                       fontSize: '13px',
                       outline: 'none',
                     }}
@@ -469,10 +472,10 @@ export const UnifiedLogin = ({ mode }) => {
               {/* Compact Authenticated Information Box */}
               <div
                 style={{
-                  padding: '0.75rem',
-                  borderRadius: '8px',
-                  backgroundColor: 'var(--surface-secondary)',
-                  border: '1px solid var(--border)',
+                  padding: '0.75rem 1rem',
+                  borderRadius: '10px',
+                  backgroundColor: currentPlatform === 'crm' ? 'rgba(30, 41, 59, 0.55)' : 'var(--surface-secondary)',
+                  border: currentPlatform === 'crm' ? '1px solid rgba(148, 163, 184, 0.16)' : '1px solid var(--border)',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '0.375rem',
@@ -481,12 +484,12 @@ export const UnifiedLogin = ({ mode }) => {
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ color: 'var(--text-tertiary)', fontSize: '11px' }}>Authenticated as</span>
-                  <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{selectedRole.name}</span>
+                  <span style={{ color: currentPlatform === 'crm' ? '#94a3b8' : 'var(--text-tertiary)', fontSize: '11px' }}>Authenticated as</span>
+                  <span style={{ fontWeight: 600, color: currentPlatform === 'crm' ? '#f8fafc' : 'var(--text-primary)' }}>{selectedRole.name}</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ color: 'var(--text-tertiary)', fontSize: '11px' }}>Organization</span>
-                  <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{selectedRole.company}</span>
+                  <span style={{ color: currentPlatform === 'crm' ? '#94a3b8' : 'var(--text-tertiary)', fontSize: '11px' }}>Organization</span>
+                  <span style={{ fontWeight: 600, color: currentPlatform === 'crm' ? '#38bdf8' : 'var(--text-primary)' }}>{selectedRole.company}</span>
                 </div>
               </div>
 
@@ -497,18 +500,23 @@ export const UnifiedLogin = ({ mode }) => {
                 style={{
                   width: '100%',
                   height: '48px',
-                  borderRadius: '8px',
-                  backgroundColor: primaryThemeColor,
+                  borderRadius: '10px',
+                  background: currentPlatform === 'crm'
+                    ? 'linear-gradient(135deg, #0284c7 0%, #2563eb 100%)'
+                    : primaryThemeColor,
+                  boxShadow: currentPlatform === 'crm'
+                    ? '0 4px 18px rgba(2, 132, 199, 0.45)'
+                    : 'none',
                   color: '#ffffff',
                   border: 'none',
                   fontSize: '14px',
-                  fontWeight: 600,
+                  fontWeight: 700,
                   display: 'inline-flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   gap: '0.5rem',
                   cursor: isLoading ? 'not-allowed' : 'pointer',
-                  transition: 'background-color var(--transition-fast)',
+                  transition: 'all var(--transition-fast)',
                 }}
               >
                 <span>{isLoading ? 'Signing In...' : `Sign in as ${selectedRole.title}`}</span>
@@ -524,9 +532,9 @@ export const UnifiedLogin = ({ mode }) => {
                 justifyContent: 'center',
                 gap: '0.375rem',
                 fontSize: '12px',
-                color: 'var(--text-tertiary)',
+                color: currentPlatform === 'crm' ? '#94a3b8' : 'var(--text-tertiary)',
                 paddingTop: '0.75rem',
-                borderTop: '1px solid var(--border)',
+                borderTop: currentPlatform === 'crm' ? '1px solid rgba(148, 163, 184, 0.16)' : '1px solid var(--border)',
               }}
             >
               <ShieldCheck size={14} style={{ color: 'var(--success)' }} />
@@ -538,10 +546,12 @@ export const UnifiedLogin = ({ mode }) => {
           <div
             style={{
               gridColumn: 'span 7 / span 7',
-              backgroundColor: 'var(--surface)',
-              borderRadius: '12px',
-              border: '1px solid var(--border)',
-              padding: '1.5rem',
+              backgroundColor: currentPlatform === 'crm' ? 'rgba(15, 23, 42, 0.85)' : 'var(--surface)',
+              backdropFilter: currentPlatform === 'crm' ? 'blur(20px)' : 'none',
+              borderRadius: '16px',
+              border: currentPlatform === 'crm' ? '1px solid rgba(56, 189, 248, 0.22)' : '1px solid var(--border)',
+              boxShadow: currentPlatform === 'crm' ? '0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 25px rgba(6, 182, 212, 0.12)' : 'var(--shadow-md)',
+              padding: '1.75rem',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
@@ -592,8 +602,13 @@ export const UnifiedLogin = ({ mode }) => {
                         padding: '0.875rem 1rem',
                         borderRadius: '10px',
                         border: '1px solid',
-                        borderColor: isSelected ? primaryThemeColor : 'var(--border)',
-                        backgroundColor: isSelected ? primaryLightBg : 'var(--surface)',
+                        borderColor: isSelected
+                          ? (currentPlatform === 'crm' ? '#38bdf8' : primaryThemeColor)
+                          : (currentPlatform === 'crm' ? 'rgba(148, 163, 184, 0.16)' : 'var(--border)'),
+                        backgroundColor: isSelected
+                          ? (currentPlatform === 'crm' ? 'rgba(14, 165, 233, 0.15)' : primaryLightBg)
+                          : (currentPlatform === 'crm' ? 'rgba(30, 41, 59, 0.5)' : 'var(--surface)'),
+                        boxShadow: isSelected && currentPlatform === 'crm' ? '0 0 16px rgba(56, 189, 248, 0.22)' : 'none',
                         cursor: 'pointer',
                         transition: 'all var(--transition-fast)',
                       }}
@@ -605,8 +620,10 @@ export const UnifiedLogin = ({ mode }) => {
                             width: '38px',
                             height: '38px',
                             borderRadius: '50%',
-                            backgroundColor: isSelected ? primaryThemeColor : 'var(--surface-secondary)',
-                            color: isSelected ? '#ffffff' : 'var(--text-secondary)',
+                            backgroundColor: isSelected
+                              ? (currentPlatform === 'crm' ? '#0284c7' : primaryThemeColor)
+                              : (currentPlatform === 'crm' ? 'rgba(51, 65, 85, 0.7)' : 'var(--surface-secondary)'),
+                            color: isSelected ? '#ffffff' : (currentPlatform === 'crm' ? '#94a3b8' : 'var(--text-secondary)'),
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
@@ -618,15 +635,15 @@ export const UnifiedLogin = ({ mode }) => {
 
                         <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left', minWidth: 0 }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                            <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-primary)' }}>
+                            <span style={{ fontSize: '13px', fontWeight: 700, color: currentPlatform === 'crm' ? '#f8fafc' : 'var(--text-primary)' }}>
                               {r.title}
                             </span>
                             {isSelected && (
-                              <CheckCircle2 size={14} style={{ color: primaryThemeColor }} />
+                              <CheckCircle2 size={14} style={{ color: currentPlatform === 'crm' ? '#38bdf8' : primaryThemeColor }} />
                             )}
                           </div>
-                          <span style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '2px', wordBreak: 'break-word' }}>
-                            {r.name} &bull; <span style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}>{r.email}</span>
+                          <span style={{ fontSize: '12px', color: currentPlatform === 'crm' ? '#94a3b8' : 'var(--text-secondary)', marginTop: '2px', wordBreak: 'break-word' }}>
+                            {r.name} &bull; <span style={{ fontFamily: 'var(--font-mono)', color: currentPlatform === 'crm' ? '#64748b' : 'var(--text-tertiary)' }}>{r.email}</span>
                           </span>
                         </div>
                       </div>

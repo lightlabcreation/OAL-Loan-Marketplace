@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Sparkles,
   Search as SearchIcon,
@@ -13,7 +14,18 @@ import {
   Bell,
   Trash2,
   ExternalLink,
-  ChevronRight
+  ChevronRight,
+  Target,
+  Boxes,
+  Bot,
+  Video,
+  UserCheck,
+  LifeBuoy,
+  MapPin,
+  BookOpen,
+  Lock,
+  ArrowRight,
+  Zap,
 } from 'lucide-react';
 import {
   Button,
@@ -59,6 +71,7 @@ import { useToast } from '../context/ToastContext';
 import { useTheme } from '../context/ThemeContext';
 
 export const Showcase = () => {
+  const navigate = useNavigate();
   const { addToast } = useToast();
   const { theme, toggleTheme } = useTheme();
 
@@ -222,6 +235,144 @@ export const Showcase = () => {
                 </TableBody>
               </Table>
             </CardBody>
+          </Card>
+
+          {/* 9 Strategic Architectural Pillars & Interactive Demonstrator */}
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-lg font-bold text-primary">
+                  Core Architectural Pillars — Interactive Due Diligence
+                </h3>
+                <p className="text-xs text-secondary">
+                  Click any verified enterprise module below to launch the live interface and inspect workflow completeness.
+                </p>
+              </div>
+              <Badge variant="primary" icon={Zap}>9 Verified Workspaces</Badge>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {[
+                {
+                  title: 'Core CRM & Sales Velocity',
+                  desc: 'Comprehensive multi-stage deals pipeline, verified contacts roster, lead scoring, and automated task reminders.',
+                  icon: Target,
+                  path: '/crm/pipeline',
+                  badge: 'Pipeline Live',
+                },
+                {
+                  title: 'Enterprise ERP & Supply Chain',
+                  desc: 'General Ledger Chart of Accounts, live AR invoicing, multi-warehouse stock tracking, and shop-floor BOM manufacturing.',
+                  icon: Boxes,
+                  path: '/crm/erp/finance',
+                  badge: 'ERP Suite Live',
+                },
+                {
+                  title: 'AI SuperHouse (15 Sub-Studios)',
+                  desc: 'Full creative tool cluster including AAI Muzik, Real Talk, Logo Generator, Film Maker, and Big Movies Lab.',
+                  icon: Sparkles,
+                  path: '/crm/ai-studio',
+                  badge: '15 Sub-Studios',
+                },
+                {
+                  title: 'Bestie AI Copilot',
+                  desc: 'Autonomous enterprise operating assistant with contextual action cards: Ask Bestie, Analyze, Automate, and Execute.',
+                  icon: Bot,
+                  path: '/crm/bestie',
+                  badge: 'Operating Assistant',
+                },
+                {
+                  title: 'AI Video Agent Pipeline',
+                  desc: '4-step video creation engine: SAY IT → SEE IT → SHAPE IT → SHIP IT supporting script, image, and voice avatars.',
+                  icon: Video,
+                  path: '/crm/ai-video',
+                  badge: '4-Step Pipeline',
+                },
+                {
+                  title: 'HR & Recruiting ATS',
+                  desc: 'Candidate talent roster, semantic AI skill match percentages, applicant tracking, and interactive candidate profile drawers.',
+                  icon: UserCheck,
+                  path: '/crm/hr/candidates',
+                  badge: 'ATS Live',
+                },
+                {
+                  title: 'Customer Support & SLA Desk',
+                  desc: 'Enterprise ticket queue, SLA countdown timers, priority severity badges, and AI auto-response routing preview.',
+                  icon: LifeBuoy,
+                  path: '/crm/support/tickets',
+                  badge: 'SLA Engine',
+                },
+                {
+                  title: 'Territory Field Management',
+                  desc: '5-tier hierarchy (Region → Territory → Manager → Rep → Customer) with interactive US geographic map and quota tracking.',
+                  icon: MapPin,
+                  path: '/crm/territory',
+                  badge: 'Territory Map',
+                },
+                {
+                  title: 'Secured eBox & Cognitive Search',
+                  desc: 'Private SEA (Johnny) ↔ Kiaan Tech Team direct encrypted communications eBox and unified cognitive enterprise AI search.',
+                  icon: Lock,
+                  path: '/crm/admin/ebox',
+                  badge: 'Private Channel',
+                },
+              ].map((pillar, i) => {
+                const Icon = pillar.icon;
+                return (
+                  <div
+                    key={i}
+                    onClick={() => navigate(pillar.path)}
+                    className="p-4 rounded-xl border border-border bg-surface hover:border-sky-500/50 hover:shadow-md cursor-pointer transition-all flex flex-col justify-between gap-3 group"
+                  >
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-center justify-between">
+                        <div className="w-8 h-8 rounded-lg bg-sky-50 dark:bg-sky-950/50 text-sky-600 flex items-center justify-center">
+                          <Icon size={18} />
+                        </div>
+                        <Badge variant="default" className="text-[10px]">{pillar.badge}</Badge>
+                      </div>
+                      <h4 className="text-sm font-bold text-primary group-hover:text-sky-600 transition-colors">
+                        {pillar.title}
+                      </h4>
+                      <p className="text-xs text-secondary leading-relaxed">
+                        {pillar.desc}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-1 text-xs font-bold text-sky-600 pt-2 border-t border-subtle">
+                      <span>Launch Verified Interface</span>
+                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Attorney Due Diligence & Architecture Readiness Summary Card */}
+          <Card className="border border-border bg-surface-secondary/50 p-5">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <span className="text-xs font-mono font-bold text-sky-600 uppercase tracking-wide">
+                  Enterprise Architecture Due Diligence
+                </span>
+                <h4 className="text-base font-bold text-primary">
+                  Proprietary Unified SuperHouse IP Summary
+                </h4>
+                <p className="text-xs text-secondary max-w-2xl">
+                  CRM nErgy AI is architected with strict multi-tenant isolation, clean presentation-layer separation, and modular sub-studios. Eliminates multi-vendor vendor lock-in while preserving enterprise compliance standards.
+                </p>
+              </div>
+
+              <Button
+                variant="primary"
+                size="md"
+                icon={ArrowRight}
+                onClick={() => navigate('/crm/dashboard')}
+              >
+                Enter Executive Dashboard
+              </Button>
+            </div>
           </Card>
         </div>
       )}
