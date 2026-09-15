@@ -136,8 +136,10 @@ export const AppRoutes = () => {
         <Route path="/showcase" element={<Showcase />} />
       </Route>
 
-      {/* Developer 2 Scope: OMP Deals Verified Dealers & Inventory Suite */}
-      <Route path="/omp/*" element={<OmpInventoryRoutes />} />
+      {/* Unified OMP Deals Suite (Verified Dealers, Desking & Executive Hub) */}
+      <Route element={<ProtectedRoute product="crm" />}>
+        {getOmpFinanceRoutes()}
+      </Route>
 
       {/* CRM Auth Onboarding Routes */}
       <Route path="/crm" element={<Navigate to="/crm/dashboard" replace />} />
@@ -293,9 +295,6 @@ export const AppRoutes = () => {
       ) : (
         <Route path="/oal/*" element={<Navigate to="/crm/dashboard" replace />} />
       )}
-
-      {/* Developer 3: OMP Deals (Sales Desking, Financing & Executive) */}
-      {getOmpFinanceRoutes()}
 
       <Route path="*" element={<Navigate to="/crm/login" replace />} />
     </Routes>
