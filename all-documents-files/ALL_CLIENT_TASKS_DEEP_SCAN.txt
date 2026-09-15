@@ -1,0 +1,729 @@
+====================================================================================================
+       CRM nErgy AI + OAL NETWORK + OMP DEALS
+       COMPLETE CLIENT TASK SPECIFICATION — 1000% DEEP SCAN
+====================================================================================================
+
+Sources Scanned (All 1000% investigated):
+  1. chat.md — Messages from 27/08/26 onwards (Johnny's exact words)
+  2. What is OfferUp - OMP Deals.docx
+  3. Verified Auto Dealers Program - OMP Deals.docx
+  4. Nationwide Auto Dealer Program - OMP Deals.docx
+  5. OMP Exec - OMP Deals.docx
+
+NOTE: Baki ki existing UI ko bilkul TOUCH nahi karna. Sirf naye tasks implement karne hain.
+
+====================================================================================================
+PART 1 — CHAT.MD (27/08/26 KE BAAD) SE NIKALE GYE TASKS
+====================================================================================================
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CHAT TASK C-01: GLOBAL BRAND RENAME TO "CRM nErgy AI"
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Date:     Aug 27, 12:15 PM
+Source:   Chat — Johnny (johnnybaums007)
+Exact Quote: "I forgot to mention we decided to include AI in our name. CRM nErgy AI"
+
+ACTION REQUIRED:
+  - Replace "CRM nErgy" with "CRM nErgy AI" everywhere:
+    * Browser tab title (index.html <title>)
+    * Login page header / card
+    * Sidebar brand badge
+    * Topbar logo text
+    * Dashboard welcome message
+    * All meta tags and SEO descriptions
+    * Footer copyright text
+    * Onboarding screens
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CHAT TASK C-02: FINAL MASTER ARCHITECTURE FILES DELIVERED (IMPLEMENTATION GUIDE)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Date:     Aug 27, 1:31 PM
+Source:   Chat — Johnny
+Files:    FINAL MASTER ARCH - reply.docx + 3 - CRM software roadmap - REVISED update.docx
+
+Exact Quote: "I sent you the Final Master Architecture with my comments. If you have any questions
+             please let me know. I'm going to relax and let you go to work now. This should be
+             enough information for you to have a better idea. Keep in mind, I will be sitting
+             down with my attorney reviewing all the notes and research that I sent you to
+             discussing legal, patents, trademarks and etc. Now the Ball is on your court."
+
+ACTION REQUIRED:
+  - Use FINAL MASTER ARCH as the single reference document for all architecture decisions
+  - Attorney / Legal review is underway — platform must be presentation-ready
+  - Implementation must match the exact roadmap provided
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CHAT TASK C-03: AI GRAPHICS CONFIRMATION REQUIRED BEFORE IMPLEMENTING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Date:     Aug 27, 2:13 PM
+Source:   Chat — Johnny
+
+Exact Quote: "if you have any questions about the AI Graphics for the CRM software let me know...
+             I have a design team already I can use if the AI graphics are going to be an issue.
+             You mentioned you can handle all the AI work."
+
+ACTION REQUIRED:
+  - Always confirm logo/graphic design with client BEFORE implementing
+  - Do NOT implement final graphics without client approval
+  - Client has an in-house design team as backup — coordinate before proceeding
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CHAT TASK C-04: NETLIFY DEPLOYMENT — LOGO NEEDS REWORK (CLIENT REVIEWED ON NETLIFY)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Date:     Sep 07, 7:58 AM
+Source:   Chat — Johnny
+
+Exact Quote: "hello there, hope all is well. I did check netlify."
+             "the logo needs some work, I would appreciate it, if you confirm things with me
+             before we start. I NEVER CONFIRMED THE LOGO."
+
+ACTION REQUIRED:
+  - Current deployed logo on Netlify is NOT approved by client
+  - Logo must be completely redesigned with Energy/Smoke/Glow effect (see Task C-05)
+  - Must get client confirmation before any logo goes live again
+  - Platform is live on Netlify — client is actively checking it
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CHAT TASK C-05: NEW LOGO — DIGITAL AI ENERGY / GAS / CLOUD SMOKE EFFECT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Date:     Sep 07, 8:10 AM AND Sep 10, 9:20 AM
+Source:   Chat — Johnny (with image.png reference)
+
+Exact Quote: "I want the logo to have an energy or smoke effect."
+             "this is the concept for the logo but more like an energy, gas, cloud smoke like.
+             I want it to have a digital look. Artificial Intelligence feature"
+Reference:  image.png (multi-layer concentric glowing digital energy vortex rings — neon colored)
+
+ACTION REQUIRED:
+  - Design completely new logo with these characteristics:
+    * Multi-layered concentric digital energy rings (like image.png)
+    * Glowing neon effect (orange + cyan/blue energy colors)
+    * Subtle gas/smoke/cloud aura around the rings
+    * Digital / AI aesthetic — futuristic, not corporate
+    * Text "CRM nErgy AI" positioned cleanly beside or below logo icon
+  - Place logo on: Sidebar, Topbar, Login Screen, Favicon, Splash/Loading screen
+  - MUST be confirmed with client before final deployment
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CHAT TASK C-06: AI-FIRST FUTURISTIC ENTRY / LOGIN SCREEN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Date:     Sep 08, 5:06 AM + Sep 08, 9:44 AM
+Source:   Chat — Johnny
+
+Exact Quote: "this is more of an AI look: https://hospitalui.softwaredemolive.live/login"
+             "That looks more like an AI look when they first enter the platform."
+
+ACTION REQUIRED:
+  - Redesign the Login / Gateway entry screen to match the aesthetic of:
+    https://hospitalui.softwaredemolive.live/login
+  - Key visual elements required:
+    * Deep dark futuristic background (not plain white)
+    * Glassmorphism login card / panel
+    * Animated ambient elements (energy grid, floating particles, or mesh)
+    * AI brand identity colors (neon/cyber feel)
+    * CRM nErgy AI vs OAL Network role selector on same page
+  - This is the FIRST impression of the platform — must be WOW factor
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CHAT TASK C-07: PROJECT DEADLINE — DECEMBER 30TH HARD DEADLINE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Date:     Sep 08, 5:07 AM
+Source:   Chat — Johnny
+
+Exact Quote: "remember my deadline is Dec. 30th, I'll be available later on"
+
+ACTION REQUIRED:
+  - All deliverables must be ready for launch by December 30th
+  - Plan and prioritize all features accordingly
+  - Attorney presentation is 2 weeks away (from Sep 09) — immediate priority
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CHAT TASK C-08: ATTORNEY PRESENTATION DEMO — 2-WEEK URGENT PRIORITY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Date:     Sep 09, 12:07–12:08 PM
+Source:   Chat — Johnny (URGENT / HIGH PRIORITY)
+
+Exact Quote: "I have added a super attorney to my team and mentioned to him how I think this
+             CRM ERP project is going to be much different than Sales Force with all the AI
+             features. He is very excited. He told me how AI has changed the law sector."
+             "I have to do a presentation in two weeks, nothing major. I need something to show
+             him so we can start looking at the legal aspects."
+
+ACTION REQUIRED:
+  - Build an interactive Attorney/Investor Presentation at /showcase
+  - Must clearly demonstrate HOW this is different from Salesforce
+  - Key sections to showcase:
+    * AI Content Studio (15 sub-studios) — unique differentiator
+    * AI Video Agent "Bestie" — 3D storytelling capability
+    * Central AI Knowledge Base (RAG-powered FAQ)
+    * AI HR & Recruiting (vs manual CRM)
+    * Territory Management
+    * CRM + ERP + HR + AI Support in ONE platform
+    * OAL Network lending integration (vs no finance in Salesforce)
+  - Must be polished, professional, and impressive — attorney + legal + IP context
+  - DEADLINE: 2 weeks from Sep 09 = approximately Sep 23
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CHAT TASK C-09: PLATFORM ROADMAP CLARITY — MULTIPLE PROJECTS, DO NOT MIX
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Date:     Chat (Before 27/08/26) — Still Active Requirement
+Source:   Chat — Johnny
+
+Active Projects (keep each SEPARATE):
+  1. CRM nErgy AI (CRM + ERP + AI Studio + HR + Help Desk + Mobile App)
+  2. OAL Network (Lending/Loan Marketplace)
+  3. OMP Deals (Hybrid OfferUp + Dealer Essentials automotive marketplace)
+  4. CRMnErgy.com Website (website content NOT yet shared by client)
+  5. OALnetwork.com Website
+  6. Mobile APP — CRM nErgy AI (iOS + Android)
+  7. AI 3D Animated Explainer Videos for YouTube Channel
+
+ACTION REQUIRED:
+  - Keep all 7 projects clearly separated in architecture
+  - Never mix data, routes, or UI between separate products
+  - Client has NOT yet sent website content — do not build website yet
+
+====================================================================================================
+PART 2 — DOCX FILES DEEP SCAN — ALL TASKS
+====================================================================================================
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+OMP DEALS — FILE: "What is OfferUp - OMP Deals.docx"
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DOCX TASK O-01: OMP DEALS CORE MARKETPLACE (OfferUp-Style Mobile-First Marketplace)
+  - Mobile-first design: 90%+ transactions via mobile app
+  - Location-based geo-detection for listings (buyer + seller proximity)
+  - Easy photo upload + listing creation flow for sellers
+  - Sophisticated search with filters + location-based results
+  - Buyer protection for shipped items
+
+DOCX TASK O-02: TRUYOU — SELLER & BUYER IDENTITY VERIFICATION SYSTEM
+  - "TruYou" identity verification badge on profiles (confirms real identity)
+  - Verified user profiles with ratings & reviews system
+  - Community trust scores visible on all listings
+
+DOCX TASK O-03: NATIONWIDE SHIPPING INTEGRATION (ADD-ON MODULE)
+  - Integration with USPS / UPS for nationwide delivery on listings
+  - Option for local pickup OR shipped delivery
+  - Shipping fee: min $1.99 or 12.9% of sale price (whichever higher)
+
+DOCX TASK O-04: OMP REVENUE STREAMS
+  - Transaction fees on shipped items (12.9% or $1.99 min)
+  - Promoted listings (paid visibility boost for sellers)
+  - Verified Merchant Program subscriptions
+  - Advertising & strategic partnerships
+
+DOCX TASK O-05: COMMUNITY MEETUP SAFETY SPOTS
+  - 1,600+ safe MeetUp spots partnered with police departments
+  - Show MeetUp spot locations on map for local pickup transactions
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+OMP DEALS — FILE: "Verified Auto Dealers Program - OMP Deals.docx"
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DOCX TASK V-01: ADP VERIFIED — DEALER VERIFICATION PROGRAM & BADGE
+  Name:  "ADP Verified" — OMP Deals Verified Auto Dealer Program
+  Badge: {ADP Verified} displayed on dealer profiles + vehicle cards
+  
+  Dealer Types covered:
+    1. Small Dealerships (Independent / Local)
+    2. Franchise Dealerships (Multi-location brand dealers)
+    3. Large Dealerships (Enterprise auto groups / conglomerates)
+
+  Verification Process Steps:
+    1. Dealer submits business license + official documentation
+    2. Identity confirmation & legitimacy check
+    3. Upon approval: ADP Verified badge + Verified Profile created
+    4. Access to full dealer tool suite unlocked
+
+DOCX TASK V-02: VERIFIED DEALER BENEFITS & TOOLS DASHBOARD
+  Once verified, dealers get access to:
+    - Verified profile badge on all listings
+    - Advanced advertising solutions for increased visibility
+    - Click-to-Call instant buyer communication
+    - Lead management dashboard
+    - Automatic inventory syncing from their DMS
+    - Display Carfax report per vehicle listing
+
+DOCX TASK V-03: DMS AUTOMATIC INVENTORY SYNC (Key Differentiator vs Facebook Marketplace)
+  - Auto-sync vehicle inventory from dealer's DMS system
+  - No manual entry required (unlike Facebook Marketplace)
+  - Real-time inventory updates
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+OMP DEALS — FILE: "Nationwide Auto Dealer Program - OMP Deals.docx"
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DOCX TASK N-01: NATIONWIDE AUTO DEALER FEATURE SUITE
+  Full suite of tools for verified dealers:
+
+  Tool 1: AUTOMATIC INVENTORY LISTING VIA INVENTORY FEED
+    - Connect dealer's inventory feed (DMS) to auto-list all vehicles
+    - No manual entry needed
+    - Real-time sync with stock updates
+
+  Tool 2: CARFAX VEHICLE HISTORY REPORT PER LISTING
+    - Each vehicle listing displays Carfax report button
+    - Buyers can view full vehicle history before purchase
+
+  Tool 3: INSTANT COMMUNICATION — CHAT + CLICK-TO-CALL
+    - Live in-app chat between buyer and dealer
+    - Click-to-Call button for immediate phone contact
+    - Notification system for new buyer inquiries
+
+  Tool 4: TOP LEAD INDICATOR (AI-Powered Lead Intent Scoring)
+    - AI analyzes buyer shopping behavior
+    - Flags "high-intent" leads who are most likely to purchase
+    - Dealers see Top Lead indicator on their leads dashboard
+
+  Tool 5: ADVANCED ADVERTISING SOLUTIONS
+    - Paid promoted placement in marketplace search results
+    - Boost specific vehicle listings for more visibility
+
+  Tool 6: BUY HERE PAY HERE (BHPH) CUSTOM SOLUTIONS
+    - Special tools for BHPH dealers
+    - In-house financing management features
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+OMP DEALS — FILE: "OMP Exec - OMP Deals.docx" (MASTER HYBRID BLUEPRINT)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CLIENT VISION STATEMENT (Exact from docx):
+"I want to build a hybrid platform with more power than OfferUp. Merge OfferUp and Dealer
+Essentials and now you have OMP Deals. Now on the Dealer Essentials platform which is a Auto
+Dealership platform we will apply those features/tools for VERIFIED BUSINESS ACCOUNTS."
+
+Reference site to reverse engineer: https://www.dealeressential.com/
+
+DOCX TASK E-01: OMP EXECUTIVE ACCOUNT — MULTI-LOCATION FRANCHISE MANAGEMENT
+  Purpose: For franchise owners & major corporations with multiple dealer locations.
+
+  Features:
+    - Central Office Management dashboard
+    - Manage all franchise locations from ONE umbrella account
+    - Individual license per location required
+    - Individual reporting per location
+    - Collective/consolidated reporting for all locations combined
+    - 3 account setup options:
+      Option A: 1 Account + 1 License for 1 Location
+      Option B: 1 Account + Multiple Licenses (one per location, registered at signup)
+      Option C: Separate accounts per location (each location manages independently)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PILLAR 1: "STOCK THE LOT" — INVENTORY ACQUISITION TOOLS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DOCX TASK E-02: VIN SCANNER & VEHICLE HISTORY REPORT (VHR)
+  Dealer Essentials Name: "Stock the Lot > VIN Scanner & Bookout"
+  OMP Deals Name: Vehicle History Report (VHR)
+  
+  Features:
+    - Scan vehicle VIN number via mobile camera
+    - Pull full vehicle history report automatically
+    - Integrations: Bumper, Carfax, VinAudit (NMVTIS-backed), iSeeCars
+    - Show: accidents, title brands, ownership history, mileage verification
+
+DOCX TASK E-03: AI MARKET PRICING — REAL-TIME PRICE SCANNER (AIMP)
+  Dealer Essentials Name: "AI RealPrice™ Market Pricing"
+  OMP Deals Name: AI Market Pricing (AIMP)
+  
+  Features:
+    - Research product pricing online automatically
+    - Shows: Lowest Market Price / Medium / Highest Market Price
+    - Live market comparison data from competing listings
+    - Helps dealer price vehicles competitively
+
+DOCX TASK E-04: AUTO LIEN & TITLE SEARCH (ALTS)
+  Dealer Essentials Name: "DMV & Title Search"
+  OMP Deals Name: Auto Lien & Title Search (ALTS)
+  
+  Features:
+    - Instant check for active liens on a vehicle
+    - Detect title brands (salvage, rebuilt, flood, lemon)
+    - Sources: NMVTIS, VinAudit, EpicVIN
+    - Avoid costly surprises before purchasing
+
+DOCX TASK E-05: REPAIR ORDER MANAGEMENT / RECONDITIONING CENTER (ROM)
+  Dealer Essentials Name: "Reconditioning Center"
+  OMP Deals Name: Repair Order Management (ROM)
+  
+  Features:
+    - Track vehicle recon costs from purchase to front-lot ready
+    - Assign repair tasks per vehicle stock number
+    - Monitor vehicle status: Purchased → In Recon → Ready for Sale
+    - Know true cost of each vehicle at every stage
+
+DOCX TASK E-06: AI PHOTO GENIUS + AI MULTIVERSE BACKGROUNDS (AIPG + AIMB)
+  Dealer Essentials Name: "Guided Photography"
+  OMP Deals Name: AI Photo Genius (AIPG) / AI Multiverse Backgrounds (AIMB)
+  
+  Features (AI Photo Genius):
+    - Mobile app guides dealer through professional photo process
+    - Step-by-step prompts for each required angle (front, rear, sides, interior, etc.)
+    - Ensures every vehicle looks professional online
+  
+  Features (AI Multiverse Backgrounds):
+    - Remove cluttered lot/warehouse backgrounds from photos
+    - Replace with 100+ professional studio background choices
+    - One-click background swap
+    - Before/After preview toggle
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PILLAR 2: "ATTRACT BUYERS" — MARKETING & LISTING TOOLS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DOCX TASK E-07: AI POSTMASTER — MULTI-PLATFORM LISTING SYNDICATION (AIPM)
+  Dealer Essentials Name: "Magic Lister"
+  OMP Deals Name: AI Postmaster (AIPM)
+  
+  Features:
+    - AI creates complete vehicle listing description in seconds
+    - 1-click post to ALL platforms simultaneously:
+      * Facebook Marketplace
+      * CarGurus
+      * AutoTrader
+      * Craigslist
+      * Google Vehicle Ads
+      * Google Ads
+    - Automatic formatting per platform requirements
+
+DOCX TASK E-08: HIGH-QUALITY AUTO DEALER WEBSITE BUILDER (HQAW)
+  Dealer Essentials Name: "Premium Dealer Website"
+  OMP Deals Name: High-Quality Auto Website (HQAW)
+  
+  Features:
+    - No-code instant dealer website creation
+    - Mobile-friendly responsive design
+    - Auto-synced with inventory (vehicles appear automatically)
+    - Lead capture forms built-in
+    - "Turns visitors into leads" — conversion optimized
+
+DOCX TASK E-09: AI SEO — GOOGLE OPTIMIZATION TOOL
+  Dealer Essentials Name: "Google Optimization"
+  OMP Deals Name: AI Search Engine Optimization (AI SEO)
+  
+  Features:
+    - Manage Google Business Profile automatically
+    - Review collection & response automation
+    - Local SEO optimization for dealer area
+    - "Show up first on Google" for local car buyers
+
+DOCX TASK E-10: AUTO VIDEO LIVE — 4K INVENTORY WALKAROUND VIDEOS (AVL)
+  Dealer Essentials Name: "4K Video Walkarounds"
+  OMP Deals Name: Auto Video Live (AVL)
+  
+  Features:
+    - Film 4K quality video walkaround from mobile phone
+    - Share directly to social media (Facebook, Instagram, TikTok, YouTube)
+    - Send directly to buyer contacts via messaging
+    - Professional quality without professional equipment
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PILLAR 3: "WORK THE DEAL" — SALES & FINANCING TOOLS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DOCX TASK E-11: OMP DEALS CRM — UNIFIED INBOX
+  Dealer Essentials Name: "Unified Inbox & CRM"
+  OMP Deals Name: OMP Deals CRM
+  
+  Features:
+    - All buyer messages in one inbox (SMS + Email + Facebook + marketplace chats)
+    - Manage leads and save buyer contacts into CRM
+    - Track conversation history per lead
+    - Never miss a lead from any platform
+
+DOCX TASK E-12: AI PHONE RECEPTIONIST (24/7)
+  Dealer Essentials Name: "AI Call Assistant"
+  OMP Deals Name: AI Phone Receptionist
+  
+  Features:
+    - 24/7 AI voice agent answers all incoming calls
+    - Books test drive appointments automatically
+    - Collects lead information from callers
+    - "Never miss a lead" — no voicemail black holes
+
+DOCX TASK E-13: 60-SECOND DEAL CALCULATOR (DESKING TOOL)
+  Dealer Essentials Name: "Desking & Deal Calculator"
+  OMP Deals Name: 60 Second Deal Offer
+  
+  Features:
+    - Create any deal structure in 60 seconds:
+      * Cash deal
+      * Finance deal
+      * BHPH (Buy Here Pay Here) deal
+    - Inputs: Interest rate + Term + Down payment + Trade-in value
+    - Output: Monthly payment amount
+    - Key logic: "Customers focus on monthly payments, not MSRP"
+    - Shows right cars for buyer's budget automatically
+    - Protects dealer profit margins
+  
+  Reference sites for feature study:
+    * https://www.dealervlo.com/tools/deal-structuring-calculator
+    * https://loturn.com/features/desking
+    * https://leadlocate.com/sales-leads/desking-tool
+
+DOCX TASK E-14: AUTO LOANS MARKETPLACE — MULTI-LENDER SUBMISSION (Connected to OAL Network)
+  Dealer Essentials Name: "Lender Marketplace"
+  OMP Deals Name: Auto Loans Marketplace
+  
+  Features:
+    - Submit one credit application to ALL lenders simultaneously
+    - Fast approvals from multiple financing sources
+    - DIRECT CONNECTION to OAL Network lending platform
+    - Real-time approval status tracking
+
+DOCX TASK E-15: AUTO E-BUSINESS — PAPERLESS DIGITAL DOCUMENT SIGNING
+  Dealer Essentials Name: "E-Sign & Digital Docs"
+  OMP Deals Name: Auto E-Business
+  
+  Features:
+    - 100% paperless dealership workflow
+    - Secure cloud-based document storage
+    - Electronic signature for all contracts (purchase agreements, financing, etc.)
+    - Access documents from anywhere on any device
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PILLAR 4: "MANAGE THE BUSINESS" — OPERATIONS & ANALYTICS TOOLS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DOCX TASK E-16: PROFIT DASHBOARD / ROI DASHBOARD
+  Dealer Essentials Name: "Profit Dashboard"
+  OMP Deals Name: ROI Dashboard
+  
+  Features:
+    - Real-time net profit calculation per vehicle sold
+    - Automatic profit tracking updated with each sale
+    - Visual dashboard with profit trends over time
+
+DOCX TASK E-17: EXPENSE TRACKING / COST MANAGEMENT
+  Dealer Essentials Name: "Expense Tracking"
+  OMP Deals Name: Cost Management
+  
+  Features:
+    - Snap photo of receipts on mobile
+    - Link cost directly to a specific vehicle stock number
+    - Track all expenses: repairs, reconditioning, transport, advertising
+    - Know exact cost basis per vehicle
+
+DOCX TASK E-18: BUY HERE PAY HERE (BHPH) MANAGEMENT SUITE
+  Features (Full BHPH Portfolio Management):
+    - Manage entire BHPH loan portfolio
+    - Track buyer payments per vehicle
+    - Automate payment reminders to buyers
+    - DeskManager / QuickBooks interface integration including:
+      * Automatic late-fee processing
+      * Automatic recurring payment processing (Credit Card, Debit Card, ACH)
+      * Automatic buyer notifications on all automated transactions
+      * Payment date changes and modifications
+      * Multiple merchant account support (Global Payments/OpenEdge compliance)
+      * Detailed transaction, payment, and accounting history
+      * User-defined account statuses
+      * Task generation, Notes, Conversation Logs, Follow-Ups
+      * Side Notes and Adjustments
+      * Support for Related Finance Company (RFC)
+      * Extensive Reports and Charts
+      * Deferred Payment tracking
+  
+  Reference sites:
+    * https://www.dealercenter.com/buyherepayhere/
+    * https://www.dealeressential.com/solutions/buy-here-pay-here-management-suite
+    * https://www.automanager.com/buy-here-pay-here/
+
+DOCX TASK E-19: TEAM PERMISSIONS / TEAM MANAGEMENT
+  Dealer Essentials Name: "Team Permissions"
+  OMP Deals Name: Team Management
+  
+  Features:
+    - Add entire dealership team with custom roles
+    - Roles: Owner, Manager, Sales Rep, Guest
+    - Granular permission controls: who can see & do what
+    - Manage team creation, channel access, file sharing
+
+DOCX TASK E-20: MODERN MOBILE APP — "OMP APP" (iOS + Android)
+  Dealer Essentials Name: "Modern Mobile Apps"
+  OMP Deals Name: OMP App
+  
+  Features:
+    - Run entire dealership operations from phone
+    - All 4 Pillars (Stock, Attract, Work, Manage) accessible on mobile
+    - Office Management for executives managing multiple locations
+    - Individual + collective location data, reports, analytics on mobile
+    - Each location requires its own license
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+OMP WHITE LABEL CONSIDERATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DOCX TASK E-21: WHITE LABEL FEATURE (TBD — Client Confirmation Required)
+  From docx: "[ White Label Feature ?? ]"
+  Status: Client has noted this as a potential feature — needs confirmation
+  Meaning: Allow verified dealers to white-label the OMP Deals platform under their own brand
+
+====================================================================================================
+PART 3 — TASKS REFERENCED IN EARLIER CHAT (BEFORE 27/08/26) — STILL ACTIVE
+====================================================================================================
+
+These were mentioned in chat BEFORE 27/08/26 and are STILL required:
+
+TASK P-01: INSTANT 1-CLICK ENGLISH ↔ SPANISH TRANSLATION
+  Exact Quote: "website pages and funnels can be viewed in English or Spanish with just one
+               click—no extra plugins required. I work with Spanish speaking clients. I spend a
+               lot of time in California."
+  Action: Add bilingual toggle in Topbar. Key UI labels must translate instantly.
+
+TASK P-02: HOVER COLOR SCHEME SPECIFICATION
+  Exact Quote: "when you hover on the menu tab and or links, I want the colors on the button to
+               change from the Dark Blue to the 'Light Blue or Sky Blue'. For Icon Buttons,
+               I want them to have the CRM nErgy 'ORANGE' look and when you hover on the Icon
+               button, it changes from orange to the 'SKY BLUE' color."
+  Action: Update global CSS tokens for hover states.
+
+TASK P-03: MENU LABEL RENAME — "BUSINESS SOLUTIONS"
+  Exact Quote: "EDIT: Software / Products to: 'BUSINESS SOLUTIONS'"
+  Action: In site menu AND Admin Panel footer, rename label to BUSINESS SOLUTIONS.
+
+TASK P-04: DATA SECURITY & COMPLIANCE — MAJOR FACTOR
+  Exact Quote: "Data Security is going to be a MAJOR FACTOR... I need to make sure that the team
+               designated to work on this project is ethical and meets all compliance with respect
+               to the project during development as well as launch phase. We have to protect the
+               data of Clients and their customers at all costs."
+  Action: Implement proper security architecture notes — client data encryption, access controls,
+          audit logging, compliance features visible in admin.
+
+TASK P-05: SECURED COMMUNICATIONS eBox (SEA ↔ KTT)
+  Description: Private encrypted inbox between Super Executive Admin (Johnny) and Kiaan Tech Team
+  Features: Secure chat messages + file uploads + WhatsApp communication capability
+  Access: ONLY the SEA (Johnny) can communicate directly with KTT in this environment
+
+TASK P-06: TERRITORY MANAGEMENT
+  Exact Quote: "I've been doing more thinking and one important thing that I forgot was
+               'Territory Management Features'"
+  Action: Allow sales teams to be grouped by State / City / Custom Territory
+
+TASK P-07: TUTORIAL TRAINING VIDEOS SECTION
+  Description: Comprehensive tutorial videos integrated into the platform for CRM feature
+               terminology and navigation guidance.
+  Location: Help Center / Support Section
+
+TASK P-08: INTERNAL AI SEARCH ENGINE BAR
+  Description: "Search docs, tasks, files and others with AI"
+  Action: Global search bar powered by AI (not just keyword search — semantic search)
+
+TASK P-09: FAQs DATA SEARCH BAR ENGINE (AI-Powered RAG)
+  Description: Central AI knowledge base serving FAQs for 100+ website pages, website assistant,
+               CRM assistant, ERP assistant, customer support, and AI agents.
+  Action: Build one central AI knowledge system that grows with the platform.
+
+TASK P-10: CUSTOMIZABLE DRAG-AND-DROP DASHBOARD
+  Description: "Drag-and-Drop Interface allowing users to easily organize and manage contacts,
+               tasks, and sales pipelines with minimal clicks. Customizable dashboards and smart
+               bookmarks."
+  Action: Dashboard widgets must be drag-and-drop repositionable per user role.
+
+TASK P-11: FULLY TRANSLATABLE SYSTEM (English ↔ Spanish)
+  Scope: CRM ERP Software AND CRM ERP Website
+  Description: Instant website translation — English or Spanish with one click
+  No extra plugins required — built-in translation system
+
+TASK P-12: MOBILE APP — "MY CRM nErgy" APP
+  Description: iOS + Android mobile app with:
+    - "My Fav APPs" folder organizer (organize daily external apps used by clients)
+    - Expandable "Big Screen" viewport for search results display
+    - Clients can shrink/stretch big screen with fingers or mouse
+    - Switch between apps in real-time from within CRM app
+    - Big screen shows results of whatever app is selected
+
+TASK P-13: AI CONTENT STUDIO — VIRTUAL PRODUCTION STUDIO EXPERIENCE
+  Description: When users enter AI Content Studio, they get a virtual experience of being inside:
+    - A recording studio
+    - A production studio
+    - An audio studio
+    - A movie film studio
+  Content Types:
+    - YouTube Story Telling Videos (15 minutes)
+    - AI Movies (3–50 minutes)
+    - Tutorial Videos (7–10 minutes)
+    - Explainer Videos / 2D / 3D Avatars (up to 7–10 minutes)
+  
+  15 Sub-Studios:
+    1. Bestie — My AI Agent
+    2. AAI Muzik Hit Studio
+    3. AAI Real Talk
+    4. AI Audio Writer
+    5. AI ConTalk
+    6. AI Film Maker
+    7. AI Image TalkR
+    8. AI Logo Generator
+    9. AI Photo Life
+    10. AI Video Crew
+    11. AI Visual Workflow
+    12. AI VoiceX Change
+    13. AAI BIG Movies Lab
+    14. Train AI to Speak
+    15. AI Video Agent
+
+TASK P-14: INDUSTRY HOME PAGE — INDUSTRY VERTICAL NAVIGATION
+  Description: When user clicks on "Industry" in the menu, it opens an Industry Home page
+               showing different industry categories the CRM supports.
+
+====================================================================================================
+PRIORITY ORDER FOR IMPLEMENTATION
+====================================================================================================
+
+🔴 CRITICAL / URGENT (Do First):
+  1. C-05 — New AI Energy Logo (client rejected current logo)
+  2. C-06 — Futuristic AI Login Screen (first impression)
+  3. C-01 — Global rename to "CRM nErgy AI"
+  4. C-08 — Attorney Presentation Showcase (2-week deadline)
+
+🟠 HIGH PRIORITY:
+  5. P-01 — English/Spanish 1-click toggle
+  6. P-02 — Hover color scheme (Orange → Sky Blue)
+  7. P-03 — "Business Solutions" label rename
+  8. P-05 — Secured eBox (SEA ↔ KTT)
+  9. P-08 — Internal AI Search Bar
+
+🟡 MEDIUM PRIORITY (OMP Deals Modules):
+  10. E-01 — OMP Executive Account (Multi-location)
+  11. E-07 — AI Postmaster (1-click listing syndication)
+  12. E-11 — Unified Inbox CRM
+  13. E-13 — 60-Second Deal Calculator
+  14. E-14 — Auto Loans Marketplace (OAL connection)
+  15. V-01 — ADP Verified Badge & Dealer Verification
+  16. N-01 — Nationwide Dealer Tool Suite
+
+🟢 STANDARD PRIORITY:
+  17. E-02 to E-06 — Stock the Lot tools
+  18. E-08 to E-10 — Attract Buyers tools
+  19. E-15 to E-20 — Manage the Business tools
+  20. P-06 — Territory Management
+  21. P-12 — Mobile App
+  22. P-13 — AI Content Studio (15 sub-studios)
+
+====================================================================================================
+SAFETY MANDATE — ABSOLUTE RULE
+====================================================================================================
+
+BAKI KI UI ME KUCH BHI TOUCH NAHI KARNA.
+
+Existing working pages/components that must NOT be modified:
+  - CrmDashboard.jsx
+  - CrmContacts.jsx / CrmContactDetail.jsx
+  - CrmLeads.jsx / CrmPipeline.jsx / CrmTasks.jsx
+  - CrmCommunication.jsx
+  - All ERP pages (ErpDashboard, ErpProjects, etc.)
+  - All HR pages (HrDashboard, HrEmployees, etc.)
+  - All Support pages (SupportDashboard, SupportTickets, etc.)
+  - All OAL pages (Borrower, Lender, Rep, Admin)
+  - All Auth pages (Login, Signup, Verify, MFA, etc.)
+  - AppRoutes.jsx (routes)
+  - CrmLayout.jsx / OalLayout.jsx / AuthLayout.jsx
+  - All context files (AuthContext, CrmContext, etc.)
+  - All CSS files (variables.css, global.css, etc.)
+
+New tasks = NEW files / NEW routes / Additive changes only.
+
+====================================================================================================
+END OF DOCUMENT — Total Tasks: 52 identified client requirements
+====================================================================================================
