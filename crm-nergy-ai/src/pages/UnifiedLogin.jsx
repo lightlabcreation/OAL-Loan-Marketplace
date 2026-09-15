@@ -359,17 +359,14 @@ export const UnifiedLogin = ({ mode }) => {
                 }}
               >
                 {currentPlatform === 'crm' ? (
-                  <img
-                    src={fullLogo}
-                    alt="CRM nErgy AI"
-                    style={{
-                      height: '140px',
-                      width: 'auto',
-                      maxWidth: '100%',
-                      objectFit: 'contain',
-                      marginBottom: '0.75rem',
-                    }}
-                  />
+                  <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.875rem' }}>
+                    <AiEnergyLogo
+                      size={76}
+                      showText={true}
+                      subtitle="Enterprise CRM • ERP • AI SuperHouse"
+                      style={{ flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '0.5rem' }}
+                    />
+                  </div>
                 ) : (
                   <div
                     style={{
