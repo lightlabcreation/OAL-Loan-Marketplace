@@ -17,15 +17,32 @@ import {
   RefreshCw,
   Users,
   BarChart3,
-  Activity
+  Activity,
+  X,
+  FileCheck,
+  Download,
+  Calendar,
+  Sparkles
 } from 'lucide-react';
+import { toast } from '../../../utils/ompToast';
 
 export const CentralOffice = () => {
   const { selectedStore, currentStoreObj } = useOutletContext() || { selectedStore: 'all', currentStoreObj: { name: 'All Locations' } };
-  const [activeTab, setActiveTab] = useState('overview');
-  const [filterPeriod, setFilterPeriod] = useState('mtd');
+  const [selectedFilter, setSelectedFilter] = useState('all');
+  
+  // Modals state
+  const [isProvisionModalOpen, setIsProvisionModalOpen] = useState(false);
+  const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
+  const [auditedStore, setAuditedStore] = useState(null);
 
-  const branches = [
+  // New Store Form State
+  const [newStoreName, setNewStoreName] = useState('');
+  const [newStoreCity, setNewStoreCity] = useState('');
+  const [newStoreManager, setNewStoreManager] = useState('');
+  const [newStoreUnits, setNewStoreUnits] = useState(40);
+  const [newStoreTier, setNewStoreTier] = useState('Franchise Location Tier');
+
+  const [branches, setBranches] = useState([
     {
       id: 'dallas',
       name: 'Dallas Central Motors',
@@ -37,6 +54,8 @@ export const CentralOffice = () => {
       grossProfit: '$74,200',
       status: 'Healthy',
       turnoverDays: '22 Days',
+      auditScore: '98/100 (Clean)',
+      compliance: 'Fully Compliant with Texas DMV',
     },
     {
       id: 'houston',
@@ -49,6 +68,8 @@ export const CentralOffice = () => {
       grossProfit: '$58,650',
       status: 'Healthy',
       turnoverDays: '26 Days',
+      auditScore: '95/100 (Clean)',
+      compliance: 'Fully Compliant with Texas DMV',
     },
     {
       id: 'austin',
@@ -61,8 +82,59 @@ export const CentralOffice = () => {
       grossProfit: '$39,800',
       status: 'Warning',
       turnoverDays: '31 Days',
+      auditScore: '82/100 (Attention Needed)',
+      compliance: 'State License Renewal Required by Oct 01',
     },
-  ];
+  ]);
+
+  // Dynamic calculations based on live branches state
+  const totalInventory = branches.reduce((sum, b) => sum + Number(b.activeUnits), 0);
+  const totalSold = branches.reduce((sum, b) => sum + Number(b.soldMtd), 0);
+  const allocatedLicenses = branches.length;
+
+  // Filtered branches list
+  const filteredBranches = branches.filter((b) => {
+    if (selectedFilter === 'active') return b.status === 'Healthy';
+    if (selectedFilter === 'audit') return b.status === 'Warning';
+    return true; // 'all'
+  });
+
+  // Provision Store Handler
+  const handleProvisionStore = (e) => {
+    e.preventDefault();
+    if (!newStoreName.trim() || !newStoreCity.trim()) {
+      toast.error('Please enter store name and city/state');
+      return;
+    }
+
+    const newBranchObj = {
+      id: newStoreName.toLowerCase().replace(/\s+/g, '-'),
+      name: newStoreName,
+      city: newStoreCity,
+      manager: newStoreManager || 'Store Manager Designated',
+      licenseStatus: 'Active (Provisioned Today)',
+      activeUnits: Number(newStoreUnits) || 30,
+      soldMtd: 0,
+      grossProfit: '$0',
+      status: 'Healthy',
+      turnoverDays: '1 Day',
+      auditScore: '100/100 (New Provision)',
+      compliance: 'New License Provisioned & Seeded',
+    };
+
+    setBranches([...branches, newBranchObj]);
+    setIsProvisionModalOpen(false);
+    setNewStoreName('');
+    setNewStoreCity('');
+    setNewStoreManager('');
+    toast.success(`Store "${newBranchObj.name}" provisioned under Master Umbrella.`);
+  };
+
+  // Open Audit Modal Handler
+  const handleOpenAudit = (store) => {
+    setAuditedStore(store);
+    setIsAuditModalOpen(true);
+  };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -84,7 +156,10 @@ export const CentralOffice = () => {
         </div>
 
         <div style={{ display: 'flex', gap: '0.75rem' }}>
-          <button style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', backgroundColor: '#0284c7', color: '#fff', border: 'none', padding: '0.55rem 1rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', boxShadow: '0 4px 12px rgba(2, 132, 199, 0.3)' }}>
+          <button
+            onClick={() => setIsProvisionModalOpen(true)}
+            style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', backgroundColor: '#0284c7', color: '#fff', border: 'none', padding: '0.55rem 1rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', boxShadow: '0 4px 12px rgba(2, 132, 199, 0.3)' }}
+          >
             <Plus size={16} /> Provision New Store Location
           </button>
         </div>
@@ -98,10 +173,10 @@ export const CentralOffice = () => {
             <Car size={18} color="#38bdf8" />
           </div>
           <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#f8fafc', marginTop: '0.5rem' }}>
-            142 <span style={{ fontSize: '0.85rem', fontWeight: 500, color: '#94a3b8' }}>Vehicles</span>
+            {totalInventory} <span style={{ fontSize: '0.85rem', fontWeight: 500, color: '#94a3b8' }}>Vehicles</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#10b981', fontSize: '0.75rem', marginTop: '0.35rem' }}>
-            <ArrowUpRight size={14} /> +12% vs last month across 3 stores
+            <ArrowUpRight size={14} /> Across {branches.length} Franchise Locations
           </div>
         </div>
 
@@ -124,7 +199,7 @@ export const CentralOffice = () => {
             <TrendingUp size={18} color="#a855f7" />
           </div>
           <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#f8fafc', marginTop: '0.5rem' }}>
-            57 <span style={{ fontSize: '0.85rem', fontWeight: 500, color: '#94a3b8' }}>Cars Delivered</span>
+            {totalSold} <span style={{ fontSize: '0.85rem', fontWeight: 500, color: '#94a3b8' }}>Cars Delivered</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#38bdf8', fontSize: '0.75rem', marginTop: '0.35rem' }}>
             <Activity size={14} /> 74% Finance / 26% Cash
@@ -137,7 +212,7 @@ export const CentralOffice = () => {
             <Key size={18} color="#f59e0b" />
           </div>
           <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#f8fafc', marginTop: '0.5rem' }}>
-            3 / 5 <span style={{ fontSize: '0.85rem', fontWeight: 500, color: '#94a3b8' }}>Allocated</span>
+            {allocatedLicenses} / 5 <span style={{ fontSize: '0.85rem', fontWeight: 500, color: '#94a3b8' }}>Allocated</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#f59e0b', fontSize: '0.75rem', marginTop: '0.35rem' }}>
             <AlertTriangle size={14} /> 1 Store Renewal in 14 Days
@@ -150,19 +225,36 @@ export const CentralOffice = () => {
         <div style={{ padding: '1rem 1.25rem', borderBottom: '1px solid rgba(255, 255, 255, 0.06)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
           <div>
             <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#f8fafc', margin: 0 }}>
-              Dealership Locations under Master Umbrella
+              Dealership Locations under Master Umbrella ({filteredBranches.length} Stores Shown)
             </h3>
             <p style={{ fontSize: '0.75rem', color: '#64748b', margin: '0.2rem 0 0 0' }}>
               Real-time branch telemetry, license tiering, and individual profit breakdown
             </p>
           </div>
+          
+          {/* Interactive Filters */}
           <div style={{ display: 'flex', gap: '0.5rem' }}>
-            {['All Stores', 'Active Only', 'Audit Risk'].map((f) => (
+            {[
+              { id: 'all', label: 'All Stores' },
+              { id: 'active', label: 'Active Only' },
+              { id: 'audit', label: 'Audit Risk' },
+            ].map((f) => (
               <button
-                key={f}
-                style={{ backgroundColor: f === 'All Stores' ? 'rgba(56, 189, 248, 0.15)' : 'rgba(255,255,255,0.04)', color: f === 'All Stores' ? '#38bdf8' : '#94a3b8', border: f === 'All Stores' ? '1px solid rgba(56, 189, 248, 0.3)' : '1px solid rgba(255,255,255,0.06)', padding: '0.35rem 0.75rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer' }}
+                key={f.id}
+                onClick={() => setSelectedFilter(f.id)}
+                style={{
+                  backgroundColor: selectedFilter === f.id ? 'rgba(56, 189, 248, 0.15)' : 'rgba(255,255,255,0.04)',
+                  color: selectedFilter === f.id ? '#38bdf8' : '#94a3b8',
+                  border: selectedFilter === f.id ? '1px solid rgba(56, 189, 248, 0.4)' : '1px solid rgba(255,255,255,0.06)',
+                  padding: '0.35rem 0.75rem',
+                  borderRadius: '6px',
+                  fontSize: '0.75rem',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                }}
               >
-                {f}
+                {f.label}
               </button>
             ))}
           </div>
@@ -183,7 +275,7 @@ export const CentralOffice = () => {
               </tr>
             </thead>
             <tbody>
-              {branches.map((b) => (
+              {filteredBranches.map((b) => (
                 <tr key={b.id} style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.04)', transition: 'background-color 0.15s' }}>
                   <td style={{ padding: '1rem 1.25rem' }}>
                     <div style={{ fontWeight: 700, color: '#f8fafc' }}>{b.name}</div>
@@ -216,7 +308,10 @@ export const CentralOffice = () => {
                     </span>
                   </td>
                   <td style={{ padding: '1rem 1.25rem', textAlign: 'right' }}>
-                    <button style={{ backgroundColor: 'rgba(56, 189, 248, 0.1)', color: '#38bdf8', border: '1px solid rgba(56, 189, 248, 0.2)', padding: '0.35rem 0.75rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer' }}>
+                    <button
+                      onClick={() => handleOpenAudit(b)}
+                      style={{ backgroundColor: 'rgba(56, 189, 248, 0.12)', color: '#38bdf8', border: '1px solid rgba(56, 189, 248, 0.3)', padding: '0.4rem 0.85rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer', transition: 'all 0.15s' }}
+                    >
                       Audit Store
                     </button>
                   </td>
@@ -226,6 +321,207 @@ export const CentralOffice = () => {
           </table>
         </div>
       </div>
+
+      {/* ========================================================================= */}
+      {/* 🚀 MODAL 1: PROVISION NEW STORE LOCATION DIALOG */}
+      {/* ========================================================================= */}
+      {isProvisionModalOpen && (
+        <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: '1rem' }}>
+          <div style={{ backgroundColor: '#0f172a', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '16px', width: '100%', maxWidth: '520px', overflow: 'hidden', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.8)' }}>
+            <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'rgba(30, 41, 59, 0.5)' }}>
+              <div>
+                <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 800, color: '#f8fafc' }}>
+                  🏢 Provision New Store Location
+                </h3>
+                <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>Add new dealership franchise branch under master umbrella</span>
+              </div>
+              <button
+                onClick={() => setIsProvisionModalOpen(false)}
+                style={{ background: 'transparent', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: '0.25rem' }}
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            <form onSubmit={handleProvisionStore} style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div>
+                <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '0.35rem' }}>
+                  Dealership Location Name *
+                </label>
+                <input
+                  type="text"
+                  placeholder="e.g., San Antonio South Motors"
+                  value={newStoreName}
+                  onChange={(e) => setNewStoreName(e.target.value)}
+                  style={{ width: '100%', backgroundColor: 'rgba(30, 41, 59, 0.6)', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '8px', padding: '0.6rem 0.85rem', color: '#f8fafc', fontSize: '0.85rem', outline: 'none' }}
+                  required
+                />
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '0.35rem' }}>
+                    City & State *
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g., San Antonio, TX"
+                    value={newStoreCity}
+                    onChange={(e) => setNewStoreCity(e.target.value)}
+                    style={{ width: '100%', backgroundColor: 'rgba(30, 41, 59, 0.6)', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '8px', padding: '0.6rem 0.85rem', color: '#f8fafc', fontSize: '0.85rem', outline: 'none' }}
+                    required
+                  />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '0.35rem' }}>
+                    General Manager
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g., David Martinez"
+                    value={newStoreManager}
+                    onChange={(e) => setNewStoreManager(e.target.value)}
+                    style={{ width: '100%', backgroundColor: 'rgba(30, 41, 59, 0.6)', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '8px', padding: '0.6rem 0.85rem', color: '#f8fafc', fontSize: '0.85rem', outline: 'none' }}
+                  />
+                </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '0.35rem' }}>
+                    Initial Lot Units
+                  </label>
+                  <input
+                    type="number"
+                    value={newStoreUnits}
+                    onChange={(e) => setNewStoreUnits(e.target.value)}
+                    style={{ width: '100%', backgroundColor: 'rgba(30, 41, 59, 0.6)', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '8px', padding: '0.6rem 0.85rem', color: '#f8fafc', fontSize: '0.85rem', outline: 'none' }}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '0.35rem' }}>
+                    License Tier
+                  </label>
+                  <select
+                    value={newStoreTier}
+                    onChange={(e) => setNewStoreTier(e.target.value)}
+                    style={{ width: '100%', backgroundColor: 'rgba(30, 41, 59, 0.6)', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '8px', padding: '0.6rem', color: '#f8fafc', fontSize: '0.85rem', outline: 'none' }}
+                  >
+                    <option value="Franchise Location Tier">Franchise Location Tier</option>
+                    <option value="Independent Dealer Tier">Independent Dealer Tier</option>
+                    <option value="Mega Mall Enterprise Tier">Mega Mall Enterprise Tier</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style={{ backgroundColor: 'rgba(56, 189, 248, 0.08)', border: '1px solid rgba(56, 189, 248, 0.2)', borderRadius: '8px', padding: '0.75rem', fontSize: '0.75rem', color: '#cbd5e1' }}>
+                <strong style={{ color: '#38bdf8' }}>License Provisioning Note:</strong> This will generate a dedicated DMS token and allocate 1 license from your corporate umbrella quota (Available: {5 - allocatedLicenses} remaining).
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', marginTop: '0.5rem' }}>
+                <button
+                  type="button"
+                  onClick={() => setIsProvisionModalOpen(false)}
+                  style={{ backgroundColor: 'rgba(255,255,255,0.06)', color: '#cbd5e1', border: '1px solid rgba(255,255,255,0.1)', padding: '0.6rem 1rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer' }}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  style={{ backgroundColor: '#0284c7', color: '#fff', border: 'none', padding: '0.6rem 1.25rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 700, cursor: 'pointer', boxShadow: '0 4px 12px rgba(2, 132, 199, 0.3)' }}
+                >
+                  Provision Store & Issue License
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* 🔍 MODAL 2: AUDIT STORE COMPLIANCE & TELEMETRY */}
+      {/* ========================================================================= */}
+      {isAuditModalOpen && auditedStore && (
+        <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: '1rem' }}>
+          <div style={{ backgroundColor: '#0f172a', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '16px', width: '100%', maxWidth: '580px', overflow: 'hidden', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.8)' }}>
+            <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'rgba(30, 41, 59, 0.5)' }}>
+              <div>
+                <div style={{ fontSize: '0.72rem', color: '#38bdf8', fontWeight: 700, textTransform: 'uppercase' }}>Branch Compliance & Telemetry</div>
+                <h3 style={{ margin: '0.15rem 0 0 0', fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc' }}>
+                  {auditedStore.name} ({auditedStore.city})
+                </h3>
+              </div>
+              <button
+                onClick={() => setIsAuditModalOpen(false)}
+                style={{ background: 'transparent', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: '0.25rem' }}
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
+              {/* Score & Status Highlight */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', backgroundColor: 'rgba(30, 41, 59, 0.4)', padding: '1rem', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)' }}>
+                <div>
+                  <div style={{ fontSize: '0.72rem', color: '#94a3b8' }}>Audit Compliance Score</div>
+                  <div style={{ fontSize: '1.4rem', fontWeight: 800, color: auditedStore.status === 'Healthy' ? '#10b981' : '#f59e0b', marginTop: '0.2rem' }}>
+                    {auditedStore.auditScore}
+                  </div>
+                </div>
+                <div>
+                  <div style={{ fontSize: '0.72rem', color: '#94a3b8' }}>Inventory Health</div>
+                  <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#f8fafc', marginTop: '0.2rem' }}>
+                    {auditedStore.activeUnits} Units ({auditedStore.turnoverDays} Avg Turn)
+                  </div>
+                </div>
+              </div>
+
+              {/* Checklist Breakdown */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.5rem 0.75rem', backgroundColor: 'rgba(255,255,255,0.02)', borderRadius: '6px', fontSize: '0.8rem' }}>
+                  <span style={{ color: '#cbd5e1' }}>DMV Dealer License:</span>
+                  <span style={{ color: '#10b981', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                    <CheckCircle size={14} /> {auditedStore.licenseStatus}
+                  </span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.5rem 0.75rem', backgroundColor: 'rgba(255,255,255,0.02)', borderRadius: '6px', fontSize: '0.8rem' }}>
+                  <span style={{ color: '#cbd5e1' }}>DMS Auto Feed Sync:</span>
+                  <span style={{ color: '#38bdf8', fontWeight: 600 }}>Active (Last Sync 4 mins ago)</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.5rem 0.75rem', backgroundColor: 'rgba(255,255,255,0.02)', borderRadius: '6px', fontSize: '0.8rem' }}>
+                  <span style={{ color: '#cbd5e1' }}>Gross Margin Realization:</span>
+                  <span style={{ color: '#10b981', fontWeight: 700 }}>{auditedStore.grossProfit} MTD</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.5rem 0.75rem', backgroundColor: 'rgba(255,255,255,0.02)', borderRadius: '6px', fontSize: '0.8rem' }}>
+                  <span style={{ color: '#cbd5e1' }}>General Manager:</span>
+                  <span style={{ color: '#f8fafc', fontWeight: 600 }}>{auditedStore.manager}</span>
+                </div>
+              </div>
+
+              {/* Action Buttons in Modal */}
+              <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem' }}>
+                <button
+                  onClick={() => {
+                    toast.success(`Full Audit Report PDF downloaded for ${auditedStore.name}`);
+                  }}
+                  style={{ flex: 1, backgroundColor: 'rgba(56, 189, 248, 0.15)', color: '#38bdf8', border: '1px solid rgba(56, 189, 248, 0.3)', padding: '0.65rem', borderRadius: '8px', fontSize: '0.82rem', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem' }}
+                >
+                  <Download size={15} /> Download Full Audit PDF
+                </button>
+                <button
+                  onClick={() => {
+                    toast.success(`License key renewed for ${auditedStore.name} (+1 Year Extended)`);
+                    setIsAuditModalOpen(false);
+                  }}
+                  style={{ flex: 1, backgroundColor: '#0284c7', color: '#fff', border: 'none', padding: '0.65rem', borderRadius: '8px', fontSize: '0.82rem', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem' }}
+                >
+                  <Key size={15} /> Renew License Key
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
