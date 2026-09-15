@@ -5,6 +5,7 @@ import { OalLayout } from '../layouts/OalLayout';
 import { AuthLayout } from '../layouts/AuthLayout';
 import { ProtectedRoute } from './ProtectedRoute';
 import { SHOW_OAL } from '../config/features';
+import { getOmpFinanceRoutes } from './ompFinanceRoutes';
 
 // Gateway Login Pages
 import { UnifiedLogin } from '../pages/UnifiedLogin';
@@ -288,6 +289,9 @@ export const AppRoutes = () => {
       ) : (
         <Route path="/oal/*" element={<Navigate to="/crm/dashboard" replace />} />
       )}
+
+      {/* Developer 3: OMP Deals (Sales Desking, Financing & Executive) */}
+      {getOmpFinanceRoutes()}
 
       <Route path="*" element={<Navigate to="/crm/login" replace />} />
     </Routes>
