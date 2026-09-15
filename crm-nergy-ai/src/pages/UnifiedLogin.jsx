@@ -19,6 +19,7 @@ import {
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import { SHOW_OAL } from '../config/features';
+import { AiEnergyLogo } from '../components/common/AiEnergyLogo';
 import fullLogo from '../assets/crm_nergy_ai_full_logo.png';
 import iconLogo from '../assets/crm_nergy_ai_icon.png';
 
@@ -246,15 +247,7 @@ export const UnifiedLogin = ({ mode }) => {
           {/* Brand Identity */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
             {currentPlatform === 'crm' ? (
-              <img
-                src={iconLogo}
-                alt="CRM nErgy AI"
-                style={{
-                  width: '38px',
-                  height: '38px',
-                  objectFit: 'contain',
-                }}
-              />
+              <AiEnergyLogo size={42} showText={false} />
             ) : (
               <div
                 style={{
@@ -366,17 +359,14 @@ export const UnifiedLogin = ({ mode }) => {
                 }}
               >
                 {currentPlatform === 'crm' ? (
-                  <img
-                    src={fullLogo}
-                    alt="CRM nErgy AI"
-                    style={{
-                      height: '140px',
-                      width: 'auto',
-                      maxWidth: '100%',
-                      objectFit: 'contain',
-                      marginBottom: '0.75rem',
-                    }}
-                  />
+                  <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.875rem' }}>
+                    <AiEnergyLogo
+                      size={76}
+                      showText={true}
+                      subtitle="Enterprise CRM • ERP • AI SuperHouse"
+                      style={{ flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '0.5rem' }}
+                    />
+                  </div>
                 ) : (
                   <div
                     style={{

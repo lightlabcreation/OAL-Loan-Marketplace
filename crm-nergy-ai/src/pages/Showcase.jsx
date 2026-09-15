@@ -63,7 +63,7 @@ export const Showcase = () => {
   const { theme, toggleTheme } = useTheme();
 
   // State for interactive components
-  const [activeTab, setActiveTab] = useState('buttons');
+  const [activeTab, setActiveTab] = useState('pitch');
   const [inputValue, setInputValue] = useState('Enterprise Search Query');
   const [selectValue, setSelectValue] = useState('crm');
   const [checkboxChecked, setCheckboxChecked] = useState(true);
@@ -121,6 +121,7 @@ export const Showcase = () => {
       {/* Tabs Navigation */}
       <Tabs
         tabs={[
+          { id: 'pitch', label: '⭐ Attorney & Investor Pitch (AI vs Salesforce)' },
           { id: 'buttons', label: '1-6. Buttons & Inputs' },
           { id: 'overlays', label: '7-10. Dropdown, Modal, Drawer & Toast' },
           { id: 'cards', label: '11-15. Tabs, Badges, Cards & Table' },
@@ -131,6 +132,99 @@ export const Showcase = () => {
         activeTab={activeTab}
         onChange={setActiveTab}
       />
+
+      {/* SECTION 0: ATTORNEY & INVESTOR PITCH (SALESFORCE VS CRM NERGY AI) */}
+      {activeTab === 'pitch' && (
+        <div className="flex flex-col gap-6">
+          {/* Executive Overview Banner */}
+          <Card className="border border-sky-500/30 bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white p-6 shadow-xl">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+              <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <Badge variant="primary" className="bg-sky-500 text-white font-mono uppercase text-xs">
+                    Legal & Patent Review Briefing
+                  </Badge>
+                  <span className="text-xs text-slate-300">Confidential Work Product</span>
+                </div>
+                <h2 className="text-2xl font-bold font-display">
+                  Why CRM nErgy AI Disrupts Traditional Enterprise Software
+                </h2>
+                <p className="text-xs text-slate-300 max-w-3xl leading-relaxed">
+                  A proprietary multi-modal platform fusing <strong>CRM + ERP + 15 AI Content Studios + 3D Video Storytelling + Native Commercial Lending (OAL Network)</strong> into an autonomous, non-fragmented business operating system.
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-2 flex-shrink-0">
+                <div className="p-3 rounded-xl bg-white/10 border border-white/20 text-center">
+                  <span className="text-xs font-mono text-sky-400 block">Proprietary Technology</span>
+                  <span className="text-base font-black">15 Sub-Studios</span>
+                </div>
+              </div>
+            </div>
+          </Card>
+
+          {/* Direct Head-to-Head Comparison Matrix */}
+          <Card className="border shadow-sm">
+            <CardHeader
+              title="Salesforce vs. CRM nErgy AI: Architectural Comparison"
+              subtitle="Core technological and business model differentiators"
+            />
+            <CardBody className="p-0 overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableCell isHeader>Platform Capability</TableCell>
+                    <TableCell isHeader>Traditional Salesforce</TableCell>
+                    <TableCell isHeader>CRM nErgy AI SuperHouse</TableCell>
+                    <TableCell isHeader>Enterprise Legal & Cost Impact</TableCell>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {[
+                    {
+                      feature: 'AI Content & Video Creation',
+                      salesforce: 'None (Requires separate Canva, Synthesia, Midjourney subscriptions)',
+                      nergy: 'Native 15 AI Content Studios & 4-Step Video Agent (Say it -> See it -> Shape it -> Ship it)',
+                      impact: 'Eliminates $2,400/seat/yr in fragmented 3rd party creative tools',
+                    },
+                    {
+                      feature: 'Autonomous Business Copilot',
+                      salesforce: 'Einstein (Add-on bolt-on chatbot with heavy token billing)',
+                      nergy: 'Bestie AI Copilot natively wired to live CRM records & ERP supply chains',
+                      impact: 'Real-time contextual action cards with zero per-prompt micro-fees',
+                    },
+                    {
+                      feature: 'Integrated ERP & Supply Chain',
+                      salesforce: 'Requires separate SAP, Oracle or expensive AppExchange connectors',
+                      nergy: 'Native ERP module with Work Orders, BOM, Invoicing & Multi-Warehouse nodes',
+                      impact: 'Zero middleware failure points; 100% unified general ledgers',
+                    },
+                    {
+                      feature: 'Commercial Credit & Financing',
+                      salesforce: 'Zero financing capability (Pure software only)',
+                      nergy: 'Direct API bridge to OAL Network commercial lending marketplace & debt bidding',
+                      impact: 'Enables client companies to secure working capital directly inside their CRM',
+                    },
+                    {
+                      feature: 'Language & Field Mobility',
+                      salesforce: 'Complex localization packs and rigid desktop interfaces',
+                      nergy: '1-Click English/Spanish instant bilingual toggle + My Fav Apps Expandable Big Screen',
+                      impact: 'Optimized for high-growth bilingual markets (e.g. California & Texas corridors)',
+                    },
+                  ].map((row, idx) => (
+                    <TableRow key={idx}>
+                      <TableCell><strong className="text-primary text-xs">{row.feature}</strong></TableCell>
+                      <TableCell><span className="text-secondary text-xs">{row.salesforce}</span></TableCell>
+                      <TableCell><span className="text-sky-600 font-bold text-xs">{row.nergy}</span></TableCell>
+                      <TableCell><Badge variant="success" className="text-[11px]">{row.impact}</Badge></TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardBody>
+          </Card>
+        </div>
+      )}
 
       {/* SECTION 1: BUTTONS & INPUTS */}
       {activeTab === 'buttons' && (

@@ -53,12 +53,21 @@ import { SupportTickets } from '../pages/crm/support/SupportTickets';
 import { SupportTicketDetail } from '../pages/crm/support/SupportTicketDetail';
 import { SupportChat, SupportKb, SupportReports } from '../pages/crm/support/SupportChat';
 
-// Phase 5 Pages
+// Phase 5 AI SuperHouse & Extended Modules
 import { CrmAiStudio } from '../pages/crm/CrmAiStudio';
+import { BestieAi } from '../pages/crm/ai/BestieAi';
+import { AiVideoAgent } from '../pages/crm/ai/AiVideoAgent';
+import { AiMarketing } from '../pages/crm/ai/AiMarketing';
+import { TerritoryManagement } from '../pages/crm/territory/TerritoryManagement';
+import { MyFavApps } from '../pages/crm/myapps/MyFavApps';
+import { InternalAiSearch } from '../pages/crm/search/InternalAiSearch';
+import { KnowledgeBase } from '../pages/crm/support/KnowledgeBase';
+
 import { CrmAnalytics } from '../pages/crm/CrmAnalytics';
 import { CrmReports } from '../pages/crm/CrmReports';
 import { CrmAdmin } from '../pages/crm/CrmAdmin';
 import { CrmSettings } from '../pages/crm/CrmSettings';
+import { SecuredEbox } from '../pages/admin/SecuredEbox';
 
 // Phase 6 OAL Public Pages
 import { OalLanding } from '../pages/oal/OalLanding';
@@ -181,11 +190,21 @@ export const AppRoutes = () => {
           <Route path="/crm/support/kb" element={<SupportKb />} />
           <Route path="/crm/support/reports" element={<SupportReports />} />
 
-          {/* Phase 5 Routes */}
+          {/* AI SuperHouse & Extended Modules */}
+          <Route path="/crm/bestie" element={<BestieAi />} />
           <Route path="/crm/ai-studio" element={<CrmAiStudio />} />
+          <Route path="/crm/ai-video" element={<AiVideoAgent />} />
+          <Route path="/crm/marketing" element={<AiMarketing />} />
+          <Route path="/crm/territory" element={<TerritoryManagement />} />
+          <Route path="/crm/my-apps" element={<MyFavApps />} />
+          <Route path="/crm/search" element={<InternalAiSearch />} />
+          <Route path="/crm/knowledge-base" element={<KnowledgeBase />} />
+
           <Route path="/crm/analytics" element={<CrmAnalytics />} />
           <Route path="/crm/reports" element={<CrmReports />} />
           <Route path="/crm/admin" element={<CrmAdmin />} />
+          <Route path="/crm/admin/ebox" element={<SecuredEbox />} />
+          <Route path="/crm/ebox" element={<SecuredEbox />} />
           <Route path="/crm/settings" element={<CrmSettings />} />
           <Route path="/crm/profile" element={<CrmSettings />} />
 
