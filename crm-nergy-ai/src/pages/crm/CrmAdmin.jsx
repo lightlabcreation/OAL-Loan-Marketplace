@@ -29,6 +29,7 @@ import {
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
 import { SHOW_OAL } from '../../config/features';
+import { SecuredEbox } from '../admin/SecuredEbox';
 
 export const CrmAdmin = () => {
   const { user, companyData } = useAuth();
@@ -92,6 +93,7 @@ export const CrmAdmin = () => {
             { id: 'branding', label: 'Company & Branding', icon: Building2 },
             { id: 'security', label: 'Security & Audit Logs', icon: History },
             { id: 'subscription', label: 'Subscription & Billing', icon: CreditCard },
+            { id: 'ebox', label: 'Secured eBox (Johnny Direct)', icon: Lock },
           ]}
           activeTab={activeAdminTab}
           onChange={setActiveAdminTab}
@@ -268,6 +270,11 @@ export const CrmAdmin = () => {
             </Button>
           </div>
         </div>
+      )}
+
+      {/* TAB 5: SECURED EBOX */}
+      {activeAdminTab === 'ebox' && (
+        <SecuredEbox />
       )}
     </div>
   );
