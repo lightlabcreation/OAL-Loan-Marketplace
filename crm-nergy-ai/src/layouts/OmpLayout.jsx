@@ -21,32 +21,26 @@ import {
   Car,
   ShieldAlert,
   ShoppingBag,
-  Cpu,
+  RefreshCw,
+  Target,
   Camera,
+  Wrench,
   Share2,
-  Globe,
-  Sliders,
-  DollarSign
+  Globe
 } from 'lucide-react';
 import { Topbar } from './components/Topbar';
-import { Drawer } from '../components/ui/Drawer';
 import { ToastContainer } from '../components/ui/Toast';
 import { useResponsive } from '../hooks/useResponsive';
 
 export const OmpLayout = () => {
   const { isMobile, isTablet } = useResponsive();
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(isTablet);
-  const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   const [selectedStore, setSelectedStore] = useState('all');
   const location = useLocation();
   const navigate = useNavigate();
 
   const handleToggleSidebar = () => {
-    if (isMobile) {
-      setIsMobileDrawerOpen((prev) => !prev);
-    } else {
-      setIsSidebarCollapsed((prev) => !prev);
-    }
+    setIsSidebarCollapsed((prev) => !prev);
   };
 
   const stores = [
@@ -60,16 +54,29 @@ export const OmpLayout = () => {
 
   const navGroups = [
     {
-      title: 'Auto Dealer Platform',
+      group: 'Marketplace & Verified Dealers',
       items: [
+        { path: '/omp/marketplace', label: 'OfferUp Marketplace', icon: ShoppingBag, tag: 'B2C/B2B' },
         { path: '/omp/verified-dealer', label: 'Verified Dealer Hub', icon: ShieldCheck, tag: 'ADP' },
-        { path: '/omp/marketplace', label: 'OfferUp Marketplace', icon: ShoppingBag, tag: 'Local' },
-        { path: '/omp/top-leads', label: 'Top Lead Indicator (AI)', icon: Sparkles, badge: 'Hot' },
-        { path: '/omp/feed-sync', label: 'DMS Inventory Sync', icon: Car, tag: 'Feed' },
+        { path: '/omp/verify', label: 'Dealer Onboarding', icon: CheckCircle2, tag: '4-Step' },
+        { path: '/omp/feed-sync', label: 'DMS Feed Sync', icon: RefreshCw, tag: 'Auto' },
+        { path: '/omp/top-leads', label: 'AI Top Lead Radar', icon: Target, badge: 'AI Hot' },
       ],
     },
     {
-      title: 'Desking & Sales CRM',
+      group: 'Stock The Lot & Recon',
+      items: [
+        { path: '/omp/vin-scanner', label: 'VIN Scanner & Bookout', icon: Camera, tag: 'Optical' },
+        { path: '/omp/market-pricing', label: 'AI RealPrice™ Matrix', icon: TrendingUp, tag: 'Matrix' },
+        { path: '/omp/title-search', label: 'NMVTIS Title & Lien', icon: FileSignature, tag: '50-State' },
+        { path: '/omp/recon-center', label: 'Recon & Repair ROM', icon: Wrench, tag: 'Cost' },
+        { path: '/omp/photo-genius', label: 'PhotoGenius AI Media', icon: Sparkles, tag: '3D Walk' },
+        { path: '/omp/postmaster', label: 'AI Postmaster Social', icon: Share2, tag: 'Syndicate' },
+        { path: '/omp/web-builder', label: 'Dealer WebBuilder', icon: Globe, tag: 'Instant' },
+      ],
+    },
+    {
+      group: 'Desking & Sales CRM',
       items: [
         { path: '/omp/desking/calculator', label: '60s Deal Calculator', icon: Calculator, tag: '4-Square' },
         { path: '/omp/crm/inbox', label: 'Unified Omnichannel Inbox', icon: Inbox, badge: '5' },
@@ -79,7 +86,7 @@ export const OmpLayout = () => {
       ],
     },
     {
-      title: 'In-House BHPH & Profit',
+      group: 'In-House BHPH & Profit',
       items: [
         { path: '/omp/bhph/suite', label: 'BHPH Collections Suite', icon: Wallet, badge: '$14k' },
         { path: '/omp/finance/roi', label: 'ROI Profit Dashboard', icon: TrendingUp, tag: 'Gross' },
@@ -87,7 +94,7 @@ export const OmpLayout = () => {
       ],
     },
     {
-      title: 'Executive & Multi-Store',
+      group: 'Executive & Multi-Store',
       items: [
         { path: '/omp/executive/central-office', label: 'Central Office Umbrella', icon: Building2, tag: 'Franchise' },
         { path: '/omp/executive/permissions', label: 'Team Roles & RBAC', icon: ShieldAlert, tag: 'Security' },
@@ -205,7 +212,7 @@ export const OmpLayout = () => {
             <div key={gIdx} style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
               {!isSidebarCollapsed && (
                 <div style={{ fontSize: '0.68rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-tertiary)', fontWeight: 700, padding: '0 0.5rem 0.25rem 0.5rem' }}>
-                  {group.title}
+                  {group.group}
                 </div>
               )}
               {group.items.map((item, iIdx) => {

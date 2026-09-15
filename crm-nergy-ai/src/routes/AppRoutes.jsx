@@ -110,7 +110,6 @@ import { OalAdminSupport } from '../pages/oal/admin/OalAdminSupport';
 import { OalAdminCms, OalAdminAudit } from '../pages/oal/admin/OalAdminCms';
 
 import { Showcase } from '../pages/Showcase';
-import { OmpInventoryRoutes } from './ompInventoryRoutes';
 import { useAuth } from '../context/AuthContext';
 import { normalizeRoleId } from '../utils/rbac';
 

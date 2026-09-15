@@ -57,10 +57,10 @@
 
 /* Light Theme Variables */
 :root, [data-theme="light"] {
-  --primary: #1d4ed8;
-  --primary-hover: #1e40af;
-  --primary-light: #eff6ff;
-  --primary-border: #bfdbfe;
+  --primary: #0f2b5c;
+  --primary-hover: #0284c7;
+  --primary-light: #f0f9ff;
+  --primary-border: #bae6fd;
   
   --secondary: #475569;
   --secondary-hover: #334155;

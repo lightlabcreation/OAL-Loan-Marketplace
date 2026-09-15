@@ -7,20 +7,16 @@ import {
   Link2,
   Volume2,
   Sparkles,
-  Sliders,
   Share2,
-  Download,
   Play,
   CheckCircle2,
-  Layers,
   Clock,
-  Settings,
   ChevronRight,
-  Palette,
   Film,
   Globe,
-  Radio,
-  UserCheck
+  UserCheck,
+  ArrowLeft,
+  Tv
 } from 'lucide-react';
 import { Breadcrumb, Button, Card, CardHeader, CardBody, Badge, Select } from '../../../components/ui';
 import { useToast } from '../../../context/ToastContext';
@@ -68,7 +64,7 @@ export const AiVideoAgent = () => {
       setTimeout(() => {
         setIsProcessing(false);
         setCurrentStep((prev) => prev + 1);
-      }, 500);
+      }, 350);
     }
   };
 
@@ -81,34 +77,42 @@ export const AiVideoAgent = () => {
   };
 
   return (
-    <div className="flex flex-col gap-6 max-w-7xl mx-auto">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%', maxWidth: '1280px', margin: '0 auto', boxSizing: 'border-box' }}>
       {/* Page Header */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
           <Breadcrumb items={[{ label: 'CRM nErgy AI' }, { label: 'AI SuperHouse' }, { label: 'AI Video Agent' }]} />
-          <div className="flex items-center gap-3 mt-1">
-            <h1 className="text-2xl font-bold font-display tracking-tight text-primary flex items-center gap-2">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginTop: '0.25rem', flexWrap: 'wrap' }}>
+            <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               AI Video Agent Pipeline
             </h1>
-            <Badge variant="primary" className="bg-sky-500 text-white font-bold text-xs uppercase tracking-wider">
+            <Badge variant="primary" style={{ backgroundColor: '#0284c7', color: '#ffffff', fontWeight: 700, fontSize: '11px', letterSpacing: '0.05em' }}>
               SAY IT → SEE IT → SHAPE IT → SHIP IT
             </Badge>
           </div>
-          <p className="text-xs text-secondary mt-0.5">
+          <p style={{ fontSize: '12px', color: 'var(--text-secondary)', margin: '0.25rem 0 0 0' }}>
             Turn words, ideas, and URLs into broadcast-quality 4K enterprise videos in four structured stages.
           </p>
         </div>
 
-        <div className="flex items-center gap-2 text-xs font-semibold">
-          <span className="text-tertiary">Rendering Engine:</span>
-          <span className="px-2.5 py-1 rounded-md bg-surface-secondary border border-border font-mono text-primary font-bold">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '12px', fontWeight: 600 }}>
+          <span style={{ color: 'var(--text-tertiary)' }}>Rendering Engine:</span>
+          <span style={{ padding: '0.35rem 0.65rem', borderRadius: '8px', backgroundColor: 'var(--surface-secondary)', border: '1px solid var(--border)', fontFamily: 'var(--font-mono)', color: 'var(--text-primary)', fontWeight: 700 }}>
             Bestie CinemaCore 4.0
           </span>
         </div>
       </div>
 
       {/* 4-Step Pipeline Stepper Bar */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))',
+          gap: '0.875rem',
+          width: '100%',
+          boxSizing: 'border-box',
+        }}
+      >
         {steps.map((step) => {
           const isCurrent = currentStep === step.id;
           const isPassed = currentStep > step.id;
@@ -116,28 +120,52 @@ export const AiVideoAgent = () => {
             <div
               key={step.id}
               onClick={() => setCurrentStep(step.id)}
-              className={`p-3.5 rounded-2xl border transition-all cursor-pointer flex items-center gap-3 ${
-                isCurrent
-                  ? 'border-sky-500 bg-sky-50/50 dark:bg-sky-950/40 shadow-sm ring-2 ring-sky-500/20'
+              style={{
+                padding: '0.875rem 1rem',
+                borderRadius: '14px',
+                border: isCurrent
+                  ? '1.5px solid #0284c7'
                   : isPassed
-                  ? 'border-emerald-500/60 bg-emerald-50/30 dark:bg-emerald-950/20'
-                  : 'border-border bg-surface opacity-75'
-              }`}
+                  ? '1.5px solid #10b981'
+                  : '1px solid var(--border)',
+                backgroundColor: isCurrent
+                  ? 'rgba(56, 189, 248, 0.08)'
+                  : isPassed
+                  ? 'rgba(16, 185, 129, 0.06)'
+                  : 'var(--surface)',
+                boxShadow: isCurrent ? '0 4px 12px rgba(2, 132, 199, 0.15)' : 'none',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.875rem',
+                transition: 'all 200ms ease',
+              }}
             >
               <div
-                className={`w-9 h-9 rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0 ${
-                  isPassed
-                    ? 'bg-emerald-500 text-white'
-                    : isCurrent
-                    ? 'bg-sky-500 text-white shadow-md'
-                    : 'bg-surface-secondary text-secondary'
-                }`}
+                style={{
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '10px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontWeight: 800,
+                  fontSize: '13px',
+                  flexShrink: 0,
+                  backgroundColor: isPassed ? '#10b981' : isCurrent ? '#0284c7' : 'var(--surface-secondary)',
+                  color: isPassed || isCurrent ? '#ffffff' : 'var(--text-secondary)',
+                  boxShadow: isCurrent ? '0 2px 8px rgba(2, 132, 199, 0.3)' : 'none',
+                }}
               >
                 {isPassed ? <CheckCircle2 size={18} /> : step.id}
               </div>
-              <div className="min-w-0">
-                <span className="text-xs font-black tracking-wider block text-primary">{step.label}</span>
-                <span className="text-[11px] text-tertiary truncate block">{step.subtitle}</span>
+              <div style={{ minWidth: 0 }}>
+                <span style={{ fontSize: '12px', fontWeight: 800, letterSpacing: '0.04em', display: 'block', color: isCurrent ? '#0284c7' : 'var(--text-primary)' }}>
+                  {step.label}
+                </span>
+                <span style={{ fontSize: '11px', color: 'var(--text-tertiary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block' }}>
+                  {step.subtitle}
+                </span>
               </div>
             </div>
           );
@@ -145,18 +173,35 @@ export const AiVideoAgent = () => {
       </div>
 
       {/* Main Interactive Stage Body */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left Stage Controls (7 cols) */}
-        <div className="lg:col-span-7 flex flex-col gap-4">
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
+          gap: '1.5rem',
+          alignItems: 'start',
+          width: '100%',
+          boxSizing: 'border-box',
+        }}
+      >
+        {/* Left Stage Controls (min 58%) */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
           {/* STEP 1: SAY IT */}
           {currentStep === 1 && (
-            <Card className="border shadow-sm">
+            <Card className="border shadow-sm" style={{ width: '100%' }}>
               <CardHeader title="Stage 1: SAY IT" subtitle="Define the source input and voice script" />
-              <CardBody className="p-5 flex flex-col gap-4">
+              <CardBody style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                 {/* Input Mode Selector */}
                 <div>
-                  <label className="text-xs font-bold text-primary mb-2 block">Select Creative Input Source</label>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  <label style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.5rem', display: 'block' }}>
+                    Select Creative Input Source
+                  </label>
+                  <div
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
+                      gap: '0.625rem',
+                    }}
+                  >
                     {videoModes.map((m) => {
                       const Icon = m.icon;
                       const isSelected = videoMode === m.id;
@@ -165,15 +210,24 @@ export const AiVideoAgent = () => {
                           key={m.id}
                           type="button"
                           onClick={() => setVideoMode(m.id)}
-                          className={`p-2.5 rounded-xl border text-left flex flex-col gap-1 transition-all cursor-pointer ${
-                            isSelected
-                              ? 'border-sky-500 bg-sky-50/50 dark:bg-sky-950/30'
-                              : 'border-border bg-surface hover:border-sky-300'
-                          }`}
+                          style={{
+                            padding: '0.75rem',
+                            borderRadius: '12px',
+                            border: isSelected ? '1.5px solid #0284c7' : '1px solid var(--border)',
+                            backgroundColor: isSelected ? 'rgba(56, 189, 248, 0.1)' : 'var(--surface)',
+                            textAlign: 'left',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '0.35rem',
+                            cursor: 'pointer',
+                            transition: 'all 200ms ease',
+                          }}
                         >
-                          <Icon size={16} className={isSelected ? 'text-sky-500' : 'text-secondary'} />
-                          <span className="text-xs font-bold text-primary">{m.label}</span>
-                          <span className="text-[10px] text-tertiary line-clamp-1">{m.desc}</span>
+                          <Icon size={16} style={{ color: isSelected ? '#0284c7' : 'var(--text-secondary)' }} />
+                          <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-primary)' }}>{m.label}</span>
+                          <span style={{ fontSize: '10px', color: 'var(--text-tertiary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                            {m.desc}
+                          </span>
                         </button>
                       );
                     })}
@@ -181,24 +235,41 @@ export const AiVideoAgent = () => {
                 </div>
 
                 {/* Script Area */}
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-primary flex items-center justify-between">
-                    <span>Narrator Script / Storyboard Prompt</span>
-                    <span className="text-tertiary font-normal text-[11px]">{scriptText.length} characters</span>
-                  </label>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.375rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <label style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-primary)' }}>
+                      Narrator Script / Storyboard Prompt
+                    </label>
+                    <span style={{ color: 'var(--text-tertiary)', fontSize: '11px' }}>{scriptText.length} characters</span>
+                  </div>
                   <textarea
-                    rows={5}
+                    rows={4}
                     value={scriptText}
                     onChange={(e) => setScriptText(e.target.value)}
-                    className="w-full p-3 rounded-xl border border-border bg-surface text-sm text-primary placeholder:text-tertiary focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/20 font-medium"
+                    style={{
+                      width: '100%',
+                      padding: '0.875rem',
+                      borderRadius: '12px',
+                      border: '1px solid var(--border)',
+                      backgroundColor: 'var(--surface)',
+                      color: 'var(--text-primary)',
+                      fontSize: '13px',
+                      fontWeight: 500,
+                      outline: 'none',
+                      fontFamily: 'inherit',
+                      lineHeight: 1.6,
+                      boxSizing: 'border-box',
+                    }}
                     placeholder="Enter narration script or talking points..."
                   />
                 </div>
 
                 {/* Aspect Ratio & Format */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.875rem' }}>
                   <div>
-                    <label className="text-xs font-bold text-primary mb-1 block">Aspect Ratio</label>
+                    <label style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.25rem', display: 'block' }}>
+                      Aspect Ratio
+                    </label>
                     <Select
                       value={aspectRatio}
                       onChange={(e) => setAspectRatio(e.target.value)}
@@ -210,7 +281,9 @@ export const AiVideoAgent = () => {
                     />
                   </div>
                   <div>
-                    <label className="text-xs font-bold text-primary mb-1 block">Resolution Quality</label>
+                    <label style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.25rem', display: 'block' }}>
+                      Resolution Quality
+                    </label>
                     <Select
                       value="4k"
                       onChange={() => {}}
@@ -222,7 +295,7 @@ export const AiVideoAgent = () => {
                   </div>
                 </div>
 
-                <div className="pt-2 flex justify-end">
+                <div style={{ paddingTop: '0.5rem', display: 'flex', justifyContent: 'flex-end' }}>
                   <Button variant="primary" icon={ChevronRight} onClick={handleNext}>
                     Proceed to SEE IT (Storyboard)
                   </Button>
@@ -233,19 +306,34 @@ export const AiVideoAgent = () => {
 
           {/* STEP 2: SEE IT */}
           {currentStep === 2 && (
-            <Card className="border shadow-sm">
+            <Card className="border shadow-sm" style={{ width: '100%' }}>
               <CardHeader title="Stage 2: SEE IT" subtitle="Inspect generated visual scenes and camera directions" />
-              <CardBody className="p-5 flex flex-col gap-4">
-                <div className="space-y-3">
+              <CardBody style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                   {scenes.map((sc) => (
-                    <div key={sc.id} className="p-3 rounded-xl border border-border bg-surface flex items-center gap-3.5">
-                      <img src={sc.image} alt={sc.title} className="w-20 h-14 rounded-lg object-cover flex-shrink-0" />
-                      <div className="flex-1 min-w-0">
-                        <span className="text-xs font-bold text-primary block">{sc.title}</span>
-                        <div className="flex items-center gap-2 mt-1 text-[11px] text-tertiary">
-                          <span className="flex items-center gap-1"><Clock size={12} /> {sc.duration}</span>
+                    <div
+                      key={sc.id}
+                      style={{
+                        padding: '0.75rem 1rem',
+                        borderRadius: '12px',
+                        border: '1px solid var(--border)',
+                        backgroundColor: 'var(--surface)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '1rem',
+                      }}
+                    >
+                      <img
+                        src={sc.image}
+                        alt={sc.title}
+                        style={{ width: '80px', height: '56px', borderRadius: '8px', objectFit: 'cover', flexShrink: 0 }}
+                      />
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-primary)', display: 'block' }}>{sc.title}</span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.25rem', fontSize: '11px', color: 'var(--text-tertiary)' }}>
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}><Clock size={12} /> {sc.duration}</span>
                           <span>•</span>
-                          <span className="text-emerald-500 font-semibold">{sc.status}</span>
+                          <span style={{ color: '#10b981', fontWeight: 700 }}>{sc.status}</span>
                         </div>
                       </div>
                       <Badge variant="success">Scene Locked</Badge>
@@ -253,8 +341,8 @@ export const AiVideoAgent = () => {
                   ))}
                 </div>
 
-                <div className="pt-2 flex justify-between items-center">
-                  <Button variant="outline" onClick={() => setCurrentStep(1)}>
+                <div style={{ paddingTop: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <Button variant="outline" icon={ArrowLeft} onClick={() => setCurrentStep(1)}>
                     Back to SAY IT
                   </Button>
                   <Button variant="primary" icon={ChevronRight} onClick={handleNext}>
@@ -267,11 +355,13 @@ export const AiVideoAgent = () => {
 
           {/* STEP 3: SHAPE IT */}
           {currentStep === 3 && (
-            <Card className="border shadow-sm">
+            <Card className="border shadow-sm" style={{ width: '100%' }}>
               <CardHeader title="Stage 3: SHAPE IT" subtitle="Audio synthesis, voiceover narrator and sonic identity" />
-              <CardBody className="p-5 flex flex-col gap-4">
+              <CardBody style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                 <div>
-                  <label className="text-xs font-bold text-primary mb-1 block">Neural Voiceover Narrator</label>
+                  <label style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.25rem', display: 'block' }}>
+                    Neural Voiceover Narrator
+                  </label>
                   <Select
                     value={voiceModel}
                     onChange={(e) => setVoiceModel(e.target.value)}
@@ -284,16 +374,26 @@ export const AiVideoAgent = () => {
                   />
                 </div>
 
-                <div className="p-3 rounded-xl bg-surface-secondary border border-border flex items-center justify-between">
-                  <div className="flex items-center gap-2.5 text-xs text-primary">
-                    <Volume2 size={16} className="text-sky-500" />
+                <div
+                  style={{
+                    padding: '0.875rem 1rem',
+                    borderRadius: '12px',
+                    backgroundColor: 'var(--surface-secondary)',
+                    border: '1px solid var(--border)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', fontSize: '12px', color: 'var(--text-primary)' }}>
+                    <Volume2 size={16} style={{ color: '#0284c7' }} />
                     <span>Background Audio: <strong>AAI Muzik Corporate Anthem #4</strong></span>
                   </div>
-                  <span className="text-xs font-semibold text-sky-600">Volume: 24%</span>
+                  <span style={{ fontSize: '12px', fontWeight: 700, color: '#0284c7' }}>Volume: 24%</span>
                 </div>
 
-                <div className="pt-2 flex justify-between items-center">
-                  <Button variant="outline" onClick={() => setCurrentStep(2)}>
+                <div style={{ paddingTop: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <Button variant="outline" icon={ArrowLeft} onClick={() => setCurrentStep(2)}>
                     Back to SEE IT
                   </Button>
                   <Button variant="primary" icon={ChevronRight} onClick={handleNext}>
@@ -306,33 +406,59 @@ export const AiVideoAgent = () => {
 
           {/* STEP 4: SHIP IT */}
           {currentStep === 4 && (
-            <Card className="border shadow-sm">
+            <Card className="border shadow-sm" style={{ width: '100%' }}>
               <CardHeader title="Stage 4: SHIP IT" subtitle="Export 4K master asset and trigger multi-channel distribution" />
-              <CardBody className="p-5 flex flex-col gap-4">
-                <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 flex items-center gap-3">
-                  <CheckCircle2 size={24} className="text-emerald-500 flex-shrink-0" />
+              <CardBody style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                <div
+                  style={{
+                    padding: '1rem',
+                    borderRadius: '12px',
+                    backgroundColor: 'rgba(16, 185, 129, 0.08)',
+                    border: '1px solid rgba(16, 185, 129, 0.3)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.75rem',
+                  }}
+                >
+                  <CheckCircle2 size={24} style={{ color: '#10b981', flexShrink: 0 }} />
                   <div>
-                    <h4 className="text-xs font-bold text-emerald-800 dark:text-emerald-300">4K Master Asset Ready for Broadcast</h4>
-                    <p className="text-[11px] text-emerald-700 dark:text-emerald-400 mt-0.5">
+                    <h4 style={{ fontSize: '12px', fontWeight: 800, color: '#047857', margin: 0 }}>
+                      4K Master Asset Ready for Broadcast
+                    </h4>
+                    <p style={{ fontSize: '11px', color: '#065f46', margin: '0.25rem 0 0 0' }}>
                       All 3 scenes rendered, voiceover synced, and brand energy graphics composite complete.
                     </p>
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-primary block">Select Distribution Destination</label>
-                  <div className="grid grid-cols-2 gap-2">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  <label style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-primary)' }}>Select Distribution Destination</label>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.5rem' }}>
                     {['YouTube 4K Channel', 'Enterprise Client Portal', 'LinkedIn Corporate Feed', 'Email Campaign Video Embed'].map((dest, i) => (
-                      <div key={i} className="p-2.5 rounded-xl border border-border bg-surface flex items-center gap-2 text-xs font-semibold text-primary">
-                        <CheckCircle2 size={14} className="text-sky-500" />
+                      <div
+                        key={i}
+                        style={{
+                          padding: '0.625rem 0.875rem',
+                          borderRadius: '10px',
+                          border: '1px solid var(--border)',
+                          backgroundColor: 'var(--surface)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.5rem',
+                          fontSize: '12px',
+                          fontWeight: 600,
+                          color: 'var(--text-primary)',
+                        }}
+                      >
+                        <CheckCircle2 size={14} style={{ color: '#0284c7' }} />
                         <span>{dest}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="pt-2 flex justify-between items-center">
-                  <Button variant="outline" onClick={() => setCurrentStep(3)}>
+                <div style={{ paddingTop: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <Button variant="outline" icon={ArrowLeft} onClick={() => setCurrentStep(3)}>
                     Back to SHAPE IT
                   </Button>
                   <Button variant="primary" icon={Share2} onClick={handleShip}>
@@ -344,44 +470,109 @@ export const AiVideoAgent = () => {
           )}
         </div>
 
-        {/* Right Canvas Monitor (5 cols) */}
-        <div className="lg:col-span-5 flex flex-col gap-4">
-          <Card className="border shadow-sm">
+        {/* Right Canvas Monitor (42%) */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
+          <Card className="border shadow-sm" style={{ width: '100%' }}>
             <CardHeader title="Live Monitor Viewport" subtitle="Real-time rendering canvas" />
-            <CardBody className="p-4 flex flex-col gap-3">
-              <div className="relative rounded-2xl overflow-hidden border border-border aspect-video bg-black flex items-center justify-center group">
+            <CardBody style={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
+              <div
+                style={{
+                  position: 'relative',
+                  borderRadius: '14px',
+                  overflow: 'hidden',
+                  border: '1px solid var(--border)',
+                  aspectRatio: '16 / 9',
+                  backgroundColor: '#000000',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '100%',
+                }}
+              >
                 <img
                   src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80"
                   alt="Video Canvas"
-                  className="w-full h-full object-cover"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
-                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <div
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
                   <button
                     type="button"
                     onClick={() => addToast({ title: 'Playing 4K Video Preview', message: 'Duration: 0:18 • Codec: ProRes 422', type: 'info' })}
-                    className="p-3.5 rounded-full bg-white text-slate-900 shadow-xl cursor-pointer hover:scale-110 transition-transform"
+                    style={{
+                      padding: '0.875rem',
+                      borderRadius: '9999px',
+                      backgroundColor: '#ffffff',
+                      color: '#0f172a',
+                      border: 'none',
+                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4)',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      transition: 'transform 150ms ease',
+                    }}
                   >
-                    <Play size={22} className="fill-current" />
+                    <Play size={22} style={{ fill: '#0f172a' }} />
                   </button>
                 </div>
-                <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[11px] text-white/90 bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-lg">
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: '0.5rem',
+                    left: '0.5rem',
+                    right: '0.5rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    fontSize: '11px',
+                    color: 'rgba(255, 255, 255, 0.95)',
+                    backgroundColor: 'rgba(0, 0, 0, 0.65)',
+                    backdropFilter: 'blur(4px)',
+                    padding: '0.35rem 0.65rem',
+                    borderRadius: '8px',
+                  }}
+                >
                   <span>0:00 / 0:18</span>
-                  <span className="font-mono text-[10px] text-sky-400 font-bold">4K 60FPS</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#38bdf8', fontWeight: 800 }}>
+                    4K 60FPS
+                  </span>
                 </div>
               </div>
 
-              <div className="p-3 rounded-xl bg-surface-secondary border border-border text-xs space-y-1">
-                <div className="flex justify-between">
-                  <span className="text-secondary font-semibold">Active Mode:</span>
-                  <span className="font-bold text-primary uppercase">{videoMode}</span>
+              <div
+                style={{
+                  padding: '0.875rem 1rem',
+                  borderRadius: '12px',
+                  backgroundColor: 'var(--surface-secondary)',
+                  border: '1px solid var(--border)',
+                  fontSize: '12px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.375rem',
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: 'var(--text-secondary)', fontWeight: 600 }}>Active Mode:</span>
+                  <span style={{ fontWeight: 800, color: 'var(--text-primary)', textTransform: 'uppercase' }}>{videoMode}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-secondary font-semibold">Voice Model:</span>
-                  <span className="font-bold text-primary truncate max-w-[200px]">{voiceModel}</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: 'var(--text-secondary)', fontWeight: 600 }}>Voice Model:</span>
+                  <span style={{ fontWeight: 700, color: 'var(--text-primary)', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    {voiceModel}
+                  </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-secondary font-semibold">Format:</span>
-                  <span className="font-bold text-primary">{aspectRatio} Widescreen</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: 'var(--text-secondary)', fontWeight: 600 }}>Format:</span>
+                  <span style={{ fontWeight: 800, color: 'var(--text-primary)' }}>{aspectRatio} Widescreen</span>
                 </div>
               </div>
             </CardBody>
