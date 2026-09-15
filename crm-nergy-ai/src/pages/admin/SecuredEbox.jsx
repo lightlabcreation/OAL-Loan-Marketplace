@@ -150,7 +150,7 @@ export const SecuredEbox = () => {
       <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-stretch">
         {/* Left Column: Conversation List & Filter (4 Cols) */}
         <div className="md:col-span-4 flex flex-col gap-3">
-          <Card className="border shadow-sm p-4 flex flex-col gap-3 h-[520px]">
+          <Card className="border shadow-sm p-4 flex flex-col gap-3" style={{ height: '540px' }}>
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-primary uppercase tracking-wide">Conversations</span>
               <Badge variant="default" className="text-[10px]">{threads.length} Channels</Badge>
@@ -202,7 +202,7 @@ export const SecuredEbox = () => {
 
         {/* Right Column: Active Thread Messages & Composer (8 Cols) */}
         <div className="md:col-span-8 flex flex-col">
-          <Card className="border shadow-sm flex flex-col h-[520px]">
+          <Card className="border shadow-sm flex flex-col" style={{ height: '540px' }}>
             <CardHeader
               title="Johnny (SEA) ↔ Kiaan Tech Team (KTT)"
               subtitle="Confidential instructions, sprint priorities, and architectural feedback"

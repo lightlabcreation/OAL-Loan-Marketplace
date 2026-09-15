@@ -89,16 +89,16 @@ export const KnowledgeBase = () => {
   });
 
   return (
-    <div className="flex flex-col gap-6 max-w-7xl mx-auto">
+    <div className="flex flex-col gap-6 max-w-7xl mx-auto" style={{ width: '100%', boxSizing: 'border-box' }}>
       {/* Page Header */}
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
           <Breadcrumb items={[{ label: 'CRM nErgy AI' }, { label: 'Support & Help' }, { label: 'Knowledge Base' }]} />
-          <div className="flex items-center gap-3 mt-1">
+          <div className="flex items-center gap-3 mt-1 flex-wrap">
             <h1 className="text-2xl font-bold font-display tracking-tight text-primary flex items-center gap-2">
               Centralized AI Knowledge Base
             </h1>
-            <Badge variant="primary" className="bg-sky-500 text-white font-bold text-xs uppercase tracking-wider">
+            <Badge variant="primary" className="font-bold text-xs uppercase tracking-wider">
               AI RAG Powered
             </Badge>
           </div>
@@ -118,57 +118,135 @@ export const KnowledgeBase = () => {
       </div>
 
       {/* Hero Search Section */}
-      <div className="p-6 md:p-8 rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white shadow-lg flex flex-col items-center text-center gap-4">
-        <div className="max-w-2xl space-y-2">
-          <Badge variant="default" className="bg-white/10 text-sky-400 border-white/20 text-xs uppercase font-mono">
-            Self-Service Hub
-          </Badge>
-          <h2 className="text-2xl md:text-3xl font-bold font-display">How can we assist you today?</h2>
-          <p className="text-xs text-slate-300">
+      <div
+        style={{
+          padding: '2.5rem 1.5rem',
+          borderRadius: '16px',
+          background: 'linear-gradient(135deg, #070b19 0%, #0f172a 50%, #0369a1 100%)',
+          color: '#ffffff',
+          boxShadow: '0 12px 30px -8px rgba(0, 0, 0, 0.35)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          textAlign: 'center',
+          gap: '1rem',
+          boxSizing: 'border-box',
+        }}
+      >
+        <div style={{ maxWidth: '640px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+          <span
+            style={{
+              fontSize: '11px',
+              fontFamily: 'var(--font-mono)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.08em',
+              padding: '3px 10px',
+              borderRadius: '9999px',
+              backgroundColor: 'rgba(255, 255, 255, 0.12)',
+              color: '#38bdf8',
+              fontWeight: 700,
+              border: '1px solid rgba(255, 255, 255, 0.15)',
+            }}
+          >
+            Self-Service Knowledge Hub
+          </span>
+          <h2 style={{ fontSize: '26px', fontWeight: 800, margin: 0, color: '#ffffff', letterSpacing: '-0.02em' }}>
+            How can we assist you today?
+          </h2>
+          <p style={{ fontSize: '13px', color: '#cbd5e1', margin: 0, lineHeight: 1.5 }}>
             Search our comprehensive knowledge base or let Bestie AI find immediate answers from verified enterprise docs.
           </p>
         </div>
 
-        <div className="w-full max-w-xl">
-          <div className="flex items-center gap-3 p-3 rounded-2xl bg-white text-slate-900 shadow-xl border border-slate-200">
-            <Search size={20} className="text-sky-600 flex-shrink-0" />
+        <div style={{ width: '100%', maxWidth: '580px', marginTop: '0.5rem' }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.75rem',
+              padding: '0.75rem 1.25rem',
+              borderRadius: '14px',
+              backgroundColor: '#ffffff',
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              boxShadow: '0 8px 24px rgba(0, 0, 0, 0.25)',
+              boxSizing: 'border-box',
+            }}
+          >
+            <Search size={20} style={{ color: '#0284c7', flexShrink: 0 }} />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Ask a question or enter keywords (e.g., DMS sync, Bestie triggers, ERP ledgers)..."
-              className="flex-1 border-none outline-none text-sm text-slate-900 font-medium placeholder:text-slate-400"
+              style={{
+                flex: 1,
+                border: 'none',
+                outline: 'none',
+                fontSize: '13px',
+                fontWeight: 500,
+                color: '#0f172a',
+                backgroundColor: 'transparent',
+                width: '100%',
+              }}
             />
           </div>
         </div>
       </div>
 
       {/* Main Content Area */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left Category Navigation (3 cols) */}
-        <div className="lg:col-span-3 space-y-2">
-          <h3 className="text-xs font-bold text-secondary uppercase tracking-wider px-2 mb-2">Knowledge Clusters</h3>
-          {categories.map((c) => (
-            <button
-              key={c.id}
-              type="button"
-              onClick={() => setSelectedCategory(c.id === 'all' ? 'All' : c.label.split(' ')[0])}
-              className={`w-full p-3 rounded-xl border text-left text-xs font-bold transition-all flex items-center justify-between cursor-pointer ${
-                (selectedCategory === 'All' && c.id === 'all') || selectedCategory.includes(c.label.split(' ')[0])
-                  ? 'border-sky-500 bg-sky-50 dark:bg-sky-950/40 text-sky-600 dark:text-sky-400 shadow-sm'
-                  : 'border-border bg-surface text-secondary hover:border-sky-300'
-              }`}
-            >
-              <span>{c.label}</span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-surface-secondary text-tertiary">
-                {c.count}
-              </span>
-            </button>
-          ))}
+        <div className="lg:col-span-3 flex flex-col gap-2">
+          <h3 style={{ fontSize: '11px', fontWeight: 700, color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.05em', padding: '0 0.5rem', margin: '0 0 0.25rem 0' }}>
+            Knowledge Clusters
+          </h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            {categories.map((c) => {
+              const isSelected = (selectedCategory === 'All' && c.id === 'all') || selectedCategory.includes(c.label.split(' ')[0]);
+              return (
+                <button
+                  key={c.id}
+                  type="button"
+                  onClick={() => setSelectedCategory(c.id === 'all' ? 'All' : c.label.split(' ')[0])}
+                  style={{
+                    width: '100%',
+                    padding: '0.75rem 1rem',
+                    borderRadius: '12px',
+                    border: isSelected ? '1px solid #0284c7' : '1px solid var(--border)',
+                    backgroundColor: isSelected ? 'rgba(56, 189, 248, 0.1)' : 'var(--surface)',
+                    color: isSelected ? '#0284c7' : 'var(--text-secondary)',
+                    fontWeight: isSelected ? 700 : 500,
+                    fontSize: '13px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    cursor: 'pointer',
+                    transition: 'all 200ms ease',
+                    boxShadow: isSelected ? '0 2px 8px rgba(2, 132, 199, 0.15)' : 'none',
+                    textAlign: 'left',
+                  }}
+                >
+                  <span>{c.label}</span>
+                  <span
+                    style={{
+                      fontSize: '11px',
+                      padding: '2px 8px',
+                      borderRadius: '9999px',
+                      backgroundColor: isSelected ? '#0284c7' : 'var(--surface-secondary)',
+                      color: isSelected ? '#ffffff' : 'var(--text-tertiary)',
+                      fontWeight: 700,
+                    }}
+                  >
+                    {c.count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Right Articles List (9 cols) */}
-        <div className="lg:col-span-9 space-y-4">
+        <div className="lg:col-span-9 flex flex-col gap-4">
           {activeArticle ? (
             /* Article Reader View */
             <Card className="border shadow-sm">
@@ -176,7 +254,7 @@ export const KnowledgeBase = () => {
                 title={activeArticle.title}
                 subtitle={`${activeArticle.category} • Updated ${activeArticle.updated}`}
               />
-              <CardBody className="p-6 space-y-5">
+              <CardBody className="p-6 flex flex-col gap-4">
                 <Button variant="outline" size="sm" icon={ArrowLeft} onClick={() => setActiveArticle(null)}>
                   Back to Articles
                 </Button>
@@ -185,11 +263,11 @@ export const KnowledgeBase = () => {
                   {activeArticle.summary}
                 </div>
 
-                <div className="text-sm text-primary leading-relaxed whitespace-pre-line space-y-3 font-normal">
+                <div className="text-sm text-primary leading-relaxed whitespace-pre-line font-normal" style={{ lineHeight: 1.7 }}>
                   {activeArticle.content}
                 </div>
 
-                <div className="pt-6 border-t border-border flex items-center justify-between text-xs text-tertiary">
+                <div className="pt-6 border-t border-border flex items-center justify-between text-xs text-tertiary flex-wrap gap-3">
                   <span>Was this article helpful?</span>
                   <div className="flex items-center gap-2">
                     <Button
@@ -214,7 +292,7 @@ export const KnowledgeBase = () => {
             </Card>
           ) : (
             /* Articles Grid */
-            <div className="space-y-3">
+            <div className="flex flex-col gap-3">
               <div className="flex items-center justify-between text-xs font-bold text-secondary px-1">
                 <span>Verified Articles ({filteredArticles.length})</span>
                 <span>Sorted by Views</span>
@@ -224,19 +302,41 @@ export const KnowledgeBase = () => {
                 <div
                   key={art.id}
                   onClick={() => setActiveArticle(art)}
-                  className="p-4 rounded-2xl border border-border bg-surface hover:border-sky-400 hover:shadow-md transition-all cursor-pointer flex flex-col md:flex-row items-start md:items-center justify-between gap-4 group"
+                  style={{
+                    padding: '1.25rem',
+                    borderRadius: '14px',
+                    border: '1px solid var(--border)',
+                    backgroundColor: 'var(--surface)',
+                    cursor: 'pointer',
+                    transition: 'all 200ms ease',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: '1rem',
+                  }}
+                  className="hover:border-sky-500 hover:shadow-md group"
                 >
-                  <div className="space-y-1.5 flex-1">
+                  <div className="flex flex-col gap-1.5 flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold font-mono px-2 py-0.5 rounded bg-surface-secondary text-sky-600 dark:text-sky-400">
+                      <span
+                        style={{
+                          fontSize: '11px',
+                          fontWeight: 700,
+                          fontFamily: 'var(--font-mono)',
+                          padding: '2px 8px',
+                          borderRadius: '6px',
+                          backgroundColor: 'var(--surface-secondary)',
+                          color: '#0284c7',
+                        }}
+                      >
                         {art.category}
                       </span>
                       <span className="text-[11px] text-tertiary">{art.readTime}</span>
                     </div>
-                    <h3 className="font-bold text-sm text-primary group-hover:text-sky-600 transition-colors">
+                    <h3 className="font-bold text-sm text-primary group-hover:text-sky-600 transition-colors" style={{ margin: 0 }}>
                       {art.title}
                     </h3>
-                    <p className="text-xs text-secondary leading-relaxed line-clamp-2">
+                    <p className="text-xs text-secondary leading-relaxed" style={{ margin: 0, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                       {art.summary}
                     </p>
                     <div className="flex items-center gap-3 text-[11px] text-tertiary pt-1">

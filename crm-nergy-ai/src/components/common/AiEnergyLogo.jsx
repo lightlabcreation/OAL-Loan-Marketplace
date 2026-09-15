@@ -1,5 +1,5 @@
 import React, { useId } from 'react';
-import newLogoAsset from '../../assets/newupatelogo.png';
+import newLogoAsset from '../../assets/newupdatelogo.png';
 
 /**
  * AiEnergyLogo — Official CRM nErgy AI Energy Logo

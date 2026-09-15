@@ -9,24 +9,70 @@ import {
   Copy,
   Check,
   RotateCw,
-  Share2,
-  Bookmark,
   TrendingUp,
-  FileText,
   Boxes,
   Users,
   Search,
-  Wand2,
   Zap,
-  Clock,
-  ShieldCheck,
   ChevronRight,
   ThumbsUp,
   ThumbsDown,
-  Volume2
+  Database,
+  ShieldCheck,
+  CornerDownLeft
 } from 'lucide-react';
-import { Breadcrumb, Button, Card, CardHeader, CardBody, Badge } from '../../../components/ui';
+import { Breadcrumb, Badge } from '../../../components/ui';
 import { useToast } from '../../../context/ToastContext';
+
+// Helper for parsing inline bold, italics, bullets, and linebreaks
+const renderFormattedText = (content) => {
+  if (!content) return null;
+  const lines = content.split('\n');
+  return lines.map((line, idx) => {
+    const trimmed = line.trim();
+    const isBullet = trimmed.startsWith('•') || trimmed.startsWith('-');
+    const cleanLine = isBullet ? trimmed.replace(/^[•-]\s*/, '') : line;
+
+    // Parse **bold** and *italic*
+    const parts = cleanLine.split(/(\*\*.*?\*\*|\*.*?\*)/g);
+    const parsedLine = parts.map((part, pIdx) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return (
+          <strong key={pIdx} style={{ fontWeight: 700, color: 'var(--text-primary)' }}>
+            {part.slice(2, -2)}
+          </strong>
+        );
+      }
+      if (part.startsWith('*') && part.endsWith('*')) {
+        return (
+          <em key={pIdx} style={{ fontStyle: 'italic' }}>
+            {part.slice(1, -1)}
+          </em>
+        );
+      }
+      return part;
+    });
+
+    if (isBullet) {
+      return (
+        <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', marginTop: '0.3rem', marginBottom: '0.3rem' }}>
+          <span style={{ color: '#0284c7', fontWeight: 800, lineHeight: 1.5, fontSize: '14px' }}>•</span>
+          <span style={{ flex: 1, lineHeight: 1.6 }}>{parsedLine}</span>
+        </div>
+      );
+    }
+
+    if (!trimmed) {
+      return <div key={idx} style={{ height: '0.4rem' }} />;
+    }
+
+    return (
+      <p key={idx} style={{ margin: '0 0 0.35rem 0', lineHeight: 1.65 }}>
+        {parsedLine}
+      </p>
+    );
+  });
+};
 
 export const BestieAi = () => {
   const { addToast } = useToast();
@@ -34,7 +80,6 @@ export const BestieAi = () => {
   const [inputPrompt, setInputPrompt] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [copiedId, setCopiedId] = useState(null);
-  const [activeCategory, setActiveCategory] = useState('all');
 
   const [conversation, setConversation] = useState([
     {
@@ -52,7 +97,7 @@ export const BestieAi = () => {
   ]);
 
   const quickActionPrompts = [
-    { label: 'Ask Bestie', icon: Bot, query: 'What are the top 3 priorities for our executive leadership team today?' },
+    { label: 'Executive Priorities', icon: Bot, query: 'What are the top 3 priorities for our executive leadership team today?' },
     { label: 'Analyze Deals', icon: TrendingUp, query: 'Run AI Win-Probability scoring on all open opportunities in Negotiation stage.' },
     { label: 'Automate Tasks', icon: Zap, query: 'Set up an automated SLA follow-up trigger for enterprise customer inquiries.' },
     { label: 'ERP Audit', icon: Boxes, query: 'Summarize our current Accounts Receivable aging balances over 30 days.' },
@@ -102,7 +147,7 @@ export const BestieAi = () => {
         actionTags = [{ label: 'Schedule Interview', query: 'Send interview invitation to Sarah Lin' }, { label: 'View Candidate Dossier', query: 'Open candidate profile' }];
         sources.push('HR ATS Repository', 'Resume Parsing Vault');
       } else {
-        responseText = `I have analyzed your request regarding: "${promptText}".\n\n**Key Findings & Recommendations:**\n1. Enterprise records have been cross-checked across CRM, ERP, and Knowledge Base nodes.\n2. No compliance breaches or authentication anomalies detected.\n3. Continuous automation monitor is actively listening for event triggers.`;
+        responseText = `I have analyzed your request regarding: "${promptText}".\n\n**Key Findings & Recommendations:**\n• **Cross-Verification:** Enterprise records have been verified across CRM, ERP, and Knowledge Base nodes.\n• **Audit Trail:** SOC-2 compliance check passed with 0 permission violations.\n• **Automated Follow-up:** Bestie event listener has recorded this directive into operational memory.`;
         actionTags = [{ label: 'Create Workflow Rule', query: 'Create automated rule for this query' }, { label: 'Save to Executive Brief', query: 'Bookmark analysis' }];
       }
 
@@ -128,35 +173,69 @@ export const BestieAi = () => {
   };
 
   return (
-    <div className="flex flex-col gap-5 h-full max-w-7xl mx-auto" style={{ minHeight: 'calc(100vh - 120px)' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: 'calc(100vh - var(--topbar-height) - 3rem)',
+        maxHeight: 'calc(100vh - var(--topbar-height) - 3rem)',
+        gap: '0.875rem',
+        width: '100%',
+        maxWidth: '1280px',
+        margin: '0 auto',
+        boxSizing: 'border-box',
+      }}
+    >
       {/* Top Header */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem', flexShrink: 0 }}>
         <div>
           <Breadcrumb items={[{ label: 'CRM nErgy AI' }, { label: 'AI SuperHouse' }, { label: 'Bestie AI Copilot' }]} />
-          <div className="flex items-center gap-2 mt-1">
-            <h1 className="text-2xl font-bold font-display tracking-tight text-primary flex items-center gap-2">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', marginTop: '0.25rem', flexWrap: 'wrap' }}>
+            <h1 style={{ fontSize: '1.4rem', fontWeight: 800, margin: 0, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               Bestie AI Assistant
             </h1>
-            <Badge variant="primary" className="bg-sky-500 text-white font-bold text-xs uppercase tracking-wider">
+            <Badge variant="primary" style={{ backgroundColor: '#0284c7', color: '#ffffff', fontWeight: 700, fontSize: '11px', letterSpacing: '0.04em' }}>
               Autonomous Copilot
             </Badge>
           </div>
-          <p className="text-xs text-secondary mt-0.5">
+          <p style={{ fontSize: '12px', color: 'var(--text-secondary)', margin: '0.15rem 0 0 0' }}>
             Your conversational enterprise business operating assistant with direct access to CRM, ERP, and Knowledge Mesh.
           </p>
         </div>
 
         {/* Status indicator */}
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-sky-200 dark:border-sky-900 bg-sky-50 dark:bg-sky-950/40 text-xs font-semibold text-sky-600 dark:text-sky-400">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            padding: '0.4rem 0.875rem',
+            borderRadius: '9999px',
+            border: '1px solid rgba(2, 132, 199, 0.25)',
+            backgroundColor: 'rgba(56, 189, 248, 0.08)',
+            fontSize: '12px',
+            fontWeight: 600,
+            color: '#0284c7',
+          }}
+        >
+          <span style={{ width: '8px', height: '8px', borderRadius: '9999px', backgroundColor: '#10b981', display: 'inline-block' }} />
           <span>Connected to Enterprise Vault</span>
-          <span className="text-tertiary">|</span>
-          <span className="font-mono text-xs">v3.4-Ultra</span>
+          <span style={{ color: 'var(--text-tertiary)', opacity: 0.6 }}>|</span>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700 }}>v3.4-Ultra</span>
         </div>
       </div>
 
       {/* Quick Action Suggestion Pills */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1.5 scrollbar-thin">
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+          overflowX: 'auto',
+          paddingBottom: '0.25rem',
+          flexShrink: 0,
+        }}
+      >
         {quickActionPrompts.map((q, idx) => {
           const Icon = q.icon;
           return (
@@ -164,22 +243,33 @@ export const BestieAi = () => {
               key={idx}
               type="button"
               onClick={() => handleSend(q.query)}
-              className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer border"
               style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '0.45rem 0.85rem',
+                borderRadius: '10px',
+                fontSize: '12px',
+                fontWeight: 600,
+                whiteSpace: 'nowrap',
+                cursor: 'pointer',
+                border: '1px solid var(--border)',
                 backgroundColor: 'var(--surface)',
-                borderColor: 'var(--border)',
                 color: 'var(--text-primary)',
+                transition: 'all 150ms ease',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = '#0284c7';
                 e.currentTarget.style.backgroundColor = 'rgba(56, 189, 248, 0.08)';
+                e.currentTarget.style.color = '#0284c7';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.borderColor = 'var(--border)';
                 e.currentTarget.style.backgroundColor = 'var(--surface)';
+                e.currentTarget.style.color = 'var(--text-primary)';
               }}
             >
-              <Icon size={14} style={{ color: '#0ea5e9' }} />
+              <Icon size={14} style={{ color: '#0284c7' }} />
               <span>{q.label}</span>
             </button>
           );
@@ -187,22 +277,54 @@ export const BestieAi = () => {
       </div>
 
       {/* Main Chat Workspace Card */}
-      <Card className="flex-1 flex flex-col overflow-hidden border shadow-sm" style={{ minHeight: '520px' }}>
+      <div
+        style={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden',
+          borderRadius: '16px',
+          border: '1px solid var(--border)',
+          backgroundColor: 'var(--surface)',
+          boxShadow: 'var(--shadow-sm)',
+          minHeight: 0,
+        }}
+      >
         {/* Chat Feed */}
-        <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-6">
+        <div
+          style={{
+            flex: 1,
+            overflowY: 'auto',
+            padding: '1.25rem 1.5rem',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1.25rem',
+          }}
+        >
           {conversation.map((msg) => (
             <div
               key={msg.id}
-              className={`flex gap-3.5 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+              style={{
+                display: 'flex',
+                gap: '0.875rem',
+                justifyContent: msg.sender === 'user' ? 'flex-end' : 'flex-start',
+                width: '100%',
+              }}
             >
               {/* Bestie Avatar */}
               {msg.sender === 'bestie' && (
                 <div
-                  className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
                   style={{
-                    background: 'linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%)',
+                    width: '36px',
+                    height: '36px',
+                    borderRadius: '10px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                    background: 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)',
                     color: '#ffffff',
-                    boxShadow: '0 4px 12px rgba(6, 182, 212, 0.3)',
+                    boxShadow: '0 4px 12px rgba(2, 132, 199, 0.3)',
                   }}
                 >
                   <Sparkles size={18} />
@@ -211,33 +333,73 @@ export const BestieAi = () => {
 
               {/* Message Bubble */}
               <div
-                className={`max-w-2xl rounded-2xl p-4 text-sm leading-relaxed ${
-                  msg.sender === 'user'
-                    ? 'bg-blue-600 text-white rounded-tr-none shadow-sm'
-                    : 'border border-border/80 bg-surface-secondary text-primary rounded-tl-none'
-                }`}
+                style={{
+                  maxWidth: '740px',
+                  borderRadius: '16px',
+                  padding: '1.1rem 1.25rem',
+                  fontSize: '13px',
+                  lineHeight: 1.6,
+                  border: msg.sender === 'user' ? 'none' : '1px solid var(--border)',
+                  backgroundColor: msg.sender === 'user' ? '#0284c7' : 'var(--surface-secondary)',
+                  color: msg.sender === 'user' ? '#ffffff' : 'var(--text-primary)',
+                  boxShadow: msg.sender === 'user' ? '0 4px 14px rgba(2, 132, 199, 0.25)' : 'none',
+                  borderTopLeftRadius: msg.sender === 'bestie' ? '4px' : '16px',
+                  borderTopRightRadius: msg.sender === 'user' ? '4px' : '16px',
+                }}
               >
                 {/* Header row */}
-                <div className="flex items-center justify-between gap-4 mb-2 pb-1.5 border-b border-border/40 text-xs opacity-75">
-                  <span className="font-bold">
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: '1rem',
+                    marginBottom: '0.5rem',
+                    paddingBottom: '0.35rem',
+                    borderBottom: msg.sender === 'user' ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid var(--border)',
+                    fontSize: '11px',
+                    opacity: msg.sender === 'user' ? 0.9 : 0.75,
+                  }}
+                >
+                  <span style={{ fontWeight: 700, color: msg.sender === 'bestie' ? '#0284c7' : '#ffffff' }}>
                     {msg.sender === 'bestie' ? 'Bestie AI Copilot' : 'Alexander Wright (Owner)'}
                   </span>
                   <span>{msg.time}</span>
                 </div>
 
                 {/* Body Text */}
-                <div className="whitespace-pre-line space-y-1.5 font-normal">
-                  {msg.text}
+                <div style={{ color: msg.sender === 'user' ? '#ffffff' : 'var(--text-primary)' }}>
+                  {msg.sender === 'bestie' ? renderFormattedText(msg.text) : msg.text}
                 </div>
 
                 {/* Sources Citation */}
                 {msg.sources && msg.sources.length > 0 && (
-                  <div className="mt-3 pt-2.5 border-t border-border/50 flex flex-wrap items-center gap-1.5 text-xs text-secondary">
-                    <span className="font-semibold text-tertiary">Verified Sources:</span>
+                  <div
+                    style={{
+                      marginTop: '0.75rem',
+                      paddingTop: '0.625rem',
+                      borderTop: '1px solid var(--border)',
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      alignItems: 'center',
+                      gap: '0.35rem',
+                      fontSize: '11px',
+                    }}
+                  >
+                    <span style={{ fontWeight: 700, color: 'var(--text-tertiary)' }}>Verified Sources:</span>
                     {msg.sources.map((s, i) => (
                       <span
                         key={i}
-                        className="px-2 py-0.5 rounded bg-surface border border-border text-[11px] font-mono text-sky-600 dark:text-sky-400"
+                        style={{
+                          padding: '0.2rem 0.5rem',
+                          borderRadius: '6px',
+                          backgroundColor: 'var(--surface)',
+                          border: '1px solid var(--border)',
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '10px',
+                          color: '#0284c7',
+                          fontWeight: 600,
+                        }}
                       >
                         {s}
                       </span>
@@ -247,16 +409,42 @@ export const BestieAi = () => {
 
                 {/* Interactive Action Chips */}
                 {msg.actions && msg.actions.length > 0 && (
-                  <div className="mt-3.5 pt-2.5 border-t border-border/60 flex flex-wrap gap-2">
+                  <div
+                    style={{
+                      marginTop: '0.75rem',
+                      paddingTop: '0.625rem',
+                      borderTop: '1px solid var(--border)',
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      gap: '0.5rem',
+                    }}
+                  >
                     {msg.actions.map((act, i) => (
                       <button
                         key={i}
                         type="button"
                         onClick={() => handleSend(act.query)}
-                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer"
                         style={{
-                          backgroundColor: '#0284c7',
-                          color: '#ffffff',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.35rem',
+                          padding: '0.4rem 0.75rem',
+                          borderRadius: '8px',
+                          fontSize: '11px',
+                          fontWeight: 700,
+                          cursor: 'pointer',
+                          backgroundColor: 'rgba(2, 132, 199, 0.1)',
+                          border: '1px solid rgba(2, 132, 199, 0.25)',
+                          color: '#0284c7',
+                          transition: 'all 150ms ease',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = '#0284c7';
+                          e.currentTarget.style.color = '#ffffff';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(2, 132, 199, 0.1)';
+                          e.currentTarget.style.color = '#0284c7';
                         }}
                       >
                         <span>{act.label}</span>
@@ -268,40 +456,65 @@ export const BestieAi = () => {
 
                 {/* Message Footer Controls for Bestie */}
                 {msg.sender === 'bestie' && (
-                  <div className="mt-3 flex items-center justify-between text-xs text-tertiary pt-2 border-t border-border/40">
-                    <div className="flex items-center gap-3">
+                  <div
+                    style={{
+                      marginTop: '0.75rem',
+                      paddingTop: '0.5rem',
+                      borderTop: '1px solid var(--border)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      fontSize: '11px',
+                      color: 'var(--text-tertiary)',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
                       <button
                         type="button"
                         onClick={() => handleCopy(msg.id, msg.text)}
-                        className="hover:text-primary transition-colors flex items-center gap-1 cursor-pointer"
-                        title="Copy response"
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.3rem',
+                          color: copiedId === msg.id ? '#10b981' : 'var(--text-secondary)',
+                          cursor: 'pointer',
+                          fontWeight: 600,
+                        }}
                       >
-                        {copiedId === msg.id ? <Check size={14} className="text-emerald-500" /> : <Copy size={14} />}
-                        <span>{copiedId === msg.id ? 'Copied' : 'Copy'}</span>
+                        {copiedId === msg.id ? <Check size={13} style={{ color: '#10b981' }} /> : <Copy size={13} />}
+                        <span>{copiedId === msg.id ? 'Copied!' : 'Copy'}</span>
                       </button>
                       <button
                         type="button"
                         onClick={() => handleSend(`Regenerate response for: "${msg.text.slice(0, 30)}..."`)}
-                        className="hover:text-primary transition-colors flex items-center gap-1 cursor-pointer"
-                        title="Regenerate response"
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.3rem',
+                          color: 'var(--text-secondary)',
+                          cursor: 'pointer',
+                          fontWeight: 600,
+                        }}
                       >
-                        <RotateCw size={14} />
+                        <RotateCw size={13} />
                         <span>Regenerate</span>
                       </button>
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                       <button
                         type="button"
-                        onClick={() => addToast({ title: 'Feedback Recorded', message: 'Thank you for your rating!', type: 'success' })}
-                        className="p-1 hover:text-emerald-500 cursor-pointer"
+                        onClick={() => addToast({ title: 'Feedback Recorded', message: 'Marked as helpful.', type: 'success' })}
+                        style={{ padding: '3px 6px', borderRadius: '6px', color: 'var(--text-tertiary)', cursor: 'pointer' }}
+                        title="Helpful"
                       >
                         <ThumbsUp size={13} />
                       </button>
                       <button
                         type="button"
-                        onClick={() => addToast({ title: 'Feedback Recorded', message: 'We will refine the answer model.', type: 'info' })}
-                        className="p-1 hover:text-rose-500 cursor-pointer"
+                        onClick={() => addToast({ title: 'Feedback Recorded', message: 'We will improve this response model.', type: 'info' })}
+                        style={{ padding: '3px 6px', borderRadius: '6px', color: 'var(--text-tertiary)', cursor: 'pointer' }}
+                        title="Not Helpful"
                       >
                         <ThumbsDown size={13} />
                       </button>
@@ -312,7 +525,21 @@ export const BestieAi = () => {
 
               {/* User Avatar */}
               {msg.sender === 'user' && (
-                <div className="w-9 h-9 rounded-xl bg-slate-800 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">
+                <div
+                  style={{
+                    width: '36px',
+                    height: '36px',
+                    borderRadius: '10px',
+                    backgroundColor: '#0f172a',
+                    color: '#ffffff',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontWeight: 800,
+                    fontSize: '12px',
+                    flexShrink: 0,
+                  }}
+                >
                   AW
                 </div>
               )}
@@ -321,16 +548,40 @@ export const BestieAi = () => {
 
           {/* Typing Animation */}
           {isTyping && (
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 text-white flex items-center justify-center">
-                <Sparkles size={18} className="animate-spin" />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <div
+                style={{
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '10px',
+                  background: 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)',
+                  color: '#ffffff',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Sparkles size={18} />
               </div>
-              <div className="px-4 py-3 rounded-2xl rounded-tl-none bg-surface-secondary border border-border flex items-center gap-1.5 text-xs text-secondary">
-                <span>Bestie is synthesizing enterprise records</span>
-                <span className="flex gap-1 ml-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-bounce" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-bounce delay-100" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-bounce delay-200" />
+              <div
+                style={{
+                  padding: '0.75rem 1rem',
+                  borderRadius: '14px',
+                  borderTopLeftRadius: '4px',
+                  backgroundColor: 'var(--surface-secondary)',
+                  border: '1px solid var(--border)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  fontSize: '12px',
+                  color: 'var(--text-secondary)',
+                }}
+              >
+                <span>Bestie is synthesizing enterprise records...</span>
+                <span style={{ display: 'inline-flex', gap: '3px' }}>
+                  <span style={{ width: '5px', height: '5px', borderRadius: '9999px', backgroundColor: '#0284c7', display: 'inline-block' }} />
+                  <span style={{ width: '5px', height: '5px', borderRadius: '9999px', backgroundColor: '#38bdf8', display: 'inline-block' }} />
+                  <span style={{ width: '5px', height: '5px', borderRadius: '9999px', backgroundColor: '#93c5fd', display: 'inline-block' }} />
                 </span>
               </div>
             </div>
@@ -338,20 +589,44 @@ export const BestieAi = () => {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input Bar */}
-        <div className="p-3.5 md:p-4 border-t border-border bg-surface">
+        {/* Input Bar (Permanently Docked at Bottom) */}
+        <div
+          style={{
+            padding: '0.875rem 1.25rem',
+            borderTop: '1px solid var(--border)',
+            backgroundColor: 'var(--surface)',
+            flexShrink: 0,
+          }}
+        >
           <form
             onSubmit={(e) => {
               e.preventDefault();
               handleSend();
             }}
-            className="flex items-center gap-2 p-1.5 rounded-2xl border border-border focus-within:border-sky-500 focus-within:ring-2 focus-within:ring-sky-500/20 bg-surface-secondary transition-all"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              padding: '0.4rem 0.6rem',
+              borderRadius: '14px',
+              border: '1.5px solid var(--border)',
+              backgroundColor: 'var(--surface-secondary)',
+              transition: 'border-color 150ms ease',
+            }}
           >
             {/* Attachment Button */}
             <button
               type="button"
               onClick={() => addToast({ title: 'Attachment Vault', message: 'Attach PDF, CSV or Excel files for Bestie to analyze.', type: 'info' })}
-              className="p-2 rounded-xl text-tertiary hover:text-primary hover:bg-surface cursor-pointer transition-colors"
+              style={{
+                padding: '0.45rem',
+                borderRadius: '8px',
+                color: 'var(--text-tertiary)',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
               title="Attach document or dataset"
             >
               <Paperclip size={18} />
@@ -363,38 +638,79 @@ export const BestieAi = () => {
               value={inputPrompt}
               onChange={(e) => setInputPrompt(e.target.value)}
               placeholder="Ask Bestie anything about sales, ERP orders, candidates, or automations..."
-              className="flex-1 bg-transparent border-none outline-none text-sm text-primary px-2 font-medium placeholder:text-tertiary"
+              style={{
+                flex: 1,
+                backgroundColor: 'transparent',
+                border: 'none',
+                outline: 'none',
+                fontSize: '13px',
+                color: 'var(--text-primary)',
+                padding: '0.25rem 0.5rem',
+                fontWeight: 500,
+                width: '100%',
+              }}
             />
 
-            {/* Voice Input Mock */}
+            {/* Voice Input */}
             <button
               type="button"
-              onClick={() => addToast({ title: 'Voice Microphone Activated', message: 'Speak your prompt clearly...', type: 'info' })}
-              className="p-2 rounded-xl text-tertiary hover:text-primary hover:bg-surface cursor-pointer transition-colors"
+              onClick={() => addToast({ title: 'Voice Input Activated', message: 'Speak your prompt clearly...', type: 'info' })}
+              style={{
+                padding: '0.45rem',
+                borderRadius: '8px',
+                color: 'var(--text-tertiary)',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
               title="Voice input"
             >
               <Mic size={18} />
             </button>
 
-            {/* Submit Send Button */}
-            <Button
+            {/* Send Button */}
+            <button
               type="submit"
-              variant="primary"
-              size="sm"
               disabled={!inputPrompt.trim() || isTyping}
-              icon={Send}
-              className="rounded-xl px-4 font-bold"
+              style={{
+                padding: '0.5rem 1rem',
+                borderRadius: '10px',
+                backgroundColor: !inputPrompt.trim() || isTyping ? 'var(--border)' : '#0284c7',
+                color: '#ffffff',
+                fontWeight: 700,
+                fontSize: '12px',
+                cursor: !inputPrompt.trim() || isTyping ? 'not-allowed' : 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.35rem',
+                boxShadow: !inputPrompt.trim() || isTyping ? 'none' : '0 2px 8px rgba(2, 132, 199, 0.3)',
+                transition: 'all 150ms ease',
+              }}
             >
-              Send
-            </Button>
+              <span>Send</span>
+              <CornerDownLeft size={14} />
+            </button>
           </form>
 
-          <div className="flex items-center justify-between text-[11px] text-tertiary mt-2 px-1">
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              fontSize: '11px',
+              color: 'var(--text-tertiary)',
+              marginTop: '0.5rem',
+              padding: '0 0.25rem',
+              flexWrap: 'wrap',
+              gap: '0.5rem',
+            }}
+          >
             <span>Powered by CRM nErgy AI Neural RAG Engine</span>
             <span>Press Enter ↵ to send • Confidential SOC-2 Guardrails Active</span>
           </div>
         </div>
-      </Card>
+      </div>
     </div>
   );
 };
