@@ -99,15 +99,15 @@ export const BhphSuite = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
-            <span style={{ fontSize: '0.75rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '4px', backgroundColor: 'rgba(56, 189, 248, 0.1)', color: '#38bdf8', border: '1px solid rgba(56, 189, 248, 0.2)' }}>
+            <span style={{ fontSize: '0.75rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '4px', backgroundColor: 'var(--primary-subtle, rgba(56, 189, 248, 0.1))', color: 'var(--primary)', border: '1px solid var(--border)' }}>
               TASK E-18 • PILLAR 4
             </span>
-            <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>In-House Dealership Financing & Collections Suite</span>
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>In-House Dealership Financing & Collections Suite</span>
           </div>
-          <h1 style={{ fontSize: '1.65rem', fontWeight: 800, color: '#f8fafc', margin: 0, letterSpacing: '-0.02em' }}>
+          <h1 style={{ fontSize: '1.65rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
             BHPH (Buy Here Pay Here) Management Suite
           </h1>
-          <p style={{ color: '#94a3b8', fontSize: '0.875rem', margin: '0.25rem 0 0 0' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', margin: '0.25rem 0 0 0' }}>
             Automated recurring ACH debit collections, delinquency buckets, late fee engine, and accounting synchronization.
           </p>
         </div>
@@ -115,7 +115,7 @@ export const BhphSuite = () => {
         <div style={{ display: 'flex', gap: '0.75rem' }}>
           <button
             onClick={handleSyncQuickBooks}
-            style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', backgroundColor: '#10b981', color: '#fff', border: 'none', padding: '0.55rem 1rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)' }}
+            style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', backgroundColor: '#10b981', color: '#fff', border: 'none', padding: '0.55rem 1rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', boxShadow: 'var(--shadow-sm)' }}
           >
             <FileSpreadsheet size={16} /> Sync with QuickBooks Online
           </button>
@@ -124,12 +124,12 @@ export const BhphSuite = () => {
 
       {/* Portfolio Health KPIs */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
-        <div style={{ backgroundColor: 'rgba(30, 41, 59, 0.5)', border: '1px solid rgba(255, 255, 255, 0.07)', borderRadius: '12px', padding: '1.25rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', color: '#94a3b8', fontSize: '0.8rem' }}>
+        <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem', boxShadow: 'var(--shadow-sm)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-secondary)', fontSize: '0.8rem' }}>
             <span>Active BHPH Portfolio</span>
-            <Wallet size={18} color="#38bdf8" />
+            <Wallet size={18} color="var(--primary)" />
           </div>
-          <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#f8fafc', marginTop: '0.4rem' }}>
+          <div style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.4rem' }}>
             $248,600
           </div>
           <div style={{ fontSize: '0.75rem', color: '#10b981', marginTop: '0.3rem' }}>
@@ -137,34 +137,34 @@ export const BhphSuite = () => {
           </div>
         </div>
 
-        <div style={{ backgroundColor: 'rgba(30, 41, 59, 0.5)', border: '1px solid rgba(255, 255, 255, 0.07)', borderRadius: '12px', padding: '1.25rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', color: '#94a3b8', fontSize: '0.8rem' }}>
+        <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem', boxShadow: 'var(--shadow-sm)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-secondary)', fontSize: '0.8rem' }}>
             <span>Expected Weekly Cashflow</span>
             <DollarSign size={18} color="#10b981" />
           </div>
           <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#10b981', marginTop: '0.4rem' }}>
             $14,250
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#38bdf8', marginTop: '0.3rem' }}>
+          <div style={{ fontSize: '0.75rem', color: 'var(--primary)', marginTop: '0.3rem' }}>
             82% On Auto-ACH Bank Recurring
           </div>
         </div>
 
-        <div style={{ backgroundColor: 'rgba(30, 41, 59, 0.5)', border: '1px solid rgba(255, 255, 255, 0.07)', borderRadius: '12px', padding: '1.25rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', color: '#94a3b8', fontSize: '0.8rem' }}>
+        <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem', boxShadow: 'var(--shadow-sm)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-secondary)', fontSize: '0.8rem' }}>
             <span>Delinquency Rate (1-30d)</span>
             <AlertTriangle size={18} color="#f59e0b" />
           </div>
           <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#f59e0b', marginTop: '0.4rem' }}>
             5.2%
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#cbd5e1', marginTop: '0.3rem' }}>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.3rem' }}>
             2 Accounts Past 15-Day Grace Period
           </div>
         </div>
 
-        <div style={{ backgroundColor: 'rgba(30, 41, 59, 0.5)', border: '1px solid rgba(255, 255, 255, 0.07)', borderRadius: '12px', padding: '1.25rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', color: '#94a3b8', fontSize: '0.8rem' }}>
+        <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem', boxShadow: 'var(--shadow-sm)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-secondary)', fontSize: '0.8rem' }}>
             <span>Repossession Risk Queue</span>
             <ShieldAlert size={18} color="#ef4444" />
           </div>
@@ -178,7 +178,7 @@ export const BhphSuite = () => {
       </div>
 
       {/* Delinquency Filter Tabs */}
-      <div style={{ display: 'flex', gap: '0.5rem', backgroundColor: 'rgba(30, 41, 59, 0.4)', padding: '0.35rem', borderRadius: '8px', width: 'fit-content' }}>
+      <div style={{ display: 'flex', gap: '0.5rem', backgroundColor: 'var(--surface)', padding: '0.35rem', borderRadius: '8px', width: 'fit-content', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}>
         {[
           { id: 'all', label: 'All Portfolio' },
           { id: 'due_today', label: 'Due Today' },
@@ -190,8 +190,8 @@ export const BhphSuite = () => {
             key={b.id}
             onClick={() => setActiveBucket(b.id)}
             style={{
-              backgroundColor: activeBucket === b.id ? '#0284c7' : 'transparent',
-              color: activeBucket === b.id ? '#fff' : '#94a3b8',
+              backgroundColor: activeBucket === b.id ? 'var(--primary)' : 'transparent',
+              color: activeBucket === b.id ? 'var(--text-on-primary, #fff)' : 'var(--text-secondary)',
               border: 'none',
               padding: '0.4rem 0.85rem',
               borderRadius: '6px',
@@ -206,11 +206,11 @@ export const BhphSuite = () => {
       </div>
 
       {/* BHPH Loan Portfolio Table */}
-      <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '12px', overflow: 'hidden' }}>
+      <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', overflow: 'hidden', boxShadow: 'var(--shadow-sm)' }}>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
             <thead>
-              <tr style={{ backgroundColor: 'rgba(30, 41, 59, 0.5)', color: '#94a3b8', borderBottom: '1px solid rgba(255, 255, 255, 0.06)' }}>
+              <tr style={{ backgroundColor: 'var(--surface-secondary)', color: 'var(--text-secondary)', borderBottom: '1px solid var(--border)' }}>
                 <th style={{ padding: '0.85rem 1.25rem', fontWeight: 600 }}>Note # & Customer</th>
                 <th style={{ padding: '0.85rem 1rem', fontWeight: 600 }}>Vehicle</th>
                 <th style={{ padding: '0.85rem 1rem', fontWeight: 600 }}>Installment</th>
@@ -224,14 +224,14 @@ export const BhphSuite = () => {
               {accounts
                 .filter((a) => activeBucket === 'all' || a.bucket === activeBucket)
                 .map((a) => (
-                  <tr key={a.id} style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.04)' }}>
+                  <tr key={a.id} style={{ borderBottom: '1px solid var(--border)' }}>
                     <td style={{ padding: '1rem 1.25rem' }}>
-                      <div style={{ fontWeight: 700, color: '#f8fafc' }}>{a.customer}</div>
-                      <div style={{ fontSize: '0.75rem', color: '#64748b' }}>{a.id} • {a.phone}</div>
+                      <div style={{ fontWeight: 700, color: 'var(--text-primary)' }}>{a.customer}</div>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>{a.id} • {a.phone}</div>
                     </td>
-                    <td style={{ padding: '1rem 1rem', color: '#cbd5e1' }}>{a.vehicle}</td>
-                    <td style={{ padding: '1rem 1rem', fontWeight: 700, color: '#38bdf8' }}>{a.installment}</td>
-                    <td style={{ padding: '1rem 1rem', fontWeight: 600, color: '#f8fafc' }}>{a.balanceRemaining}</td>
+                    <td style={{ padding: '1rem 1rem', color: 'var(--text-secondary)' }}>{a.vehicle}</td>
+                    <td style={{ padding: '1rem 1rem', fontWeight: 700, color: 'var(--primary)' }}>{a.installment}</td>
+                    <td style={{ padding: '1rem 1rem', fontWeight: 600, color: 'var(--text-primary)' }}>{a.balanceRemaining}</td>
                     <td style={{ padding: '1rem 1rem' }}>
                       <span
                         style={{
@@ -256,20 +256,20 @@ export const BhphSuite = () => {
                         {a.status}
                       </span>
                     </td>
-                    <td style={{ padding: '1rem 1rem', color: a.lateFee > 0 ? '#ef4444' : '#64748b', fontWeight: 700 }}>
+                    <td style={{ padding: '1rem 1rem', color: a.lateFee > 0 ? '#ef4444' : 'var(--text-tertiary)', fontWeight: 700 }}>
                       {a.lateFee > 0 ? `+$${a.lateFee}.00` : '$0.00'}
                     </td>
                     <td style={{ padding: '1rem 1.25rem', textAlign: 'right' }}>
                       <div style={{ display: 'flex', gap: '0.4rem', justifyContent: 'flex-end' }}>
                         <button
                           onClick={() => handleRecordPayment(a.id)}
-                          style={{ backgroundColor: '#0284c7', color: '#fff', border: 'none', padding: '0.35rem 0.65rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer' }}
+                          style={{ backgroundColor: 'var(--primary)', color: 'var(--text-on-primary, #fff)', border: 'none', padding: '0.35rem 0.65rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer' }}
                         >
                           Collect
                         </button>
                         <button
                           onClick={() => handleSendReminder(a.customer)}
-                          style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', color: '#cbd5e1', border: '1px solid rgba(255, 255, 255, 0.1)', padding: '0.35rem 0.5rem', borderRadius: '6px', fontSize: '0.75rem', cursor: 'pointer' }}
+                          style={{ backgroundColor: 'var(--background)', color: 'var(--text-secondary)', border: '1px solid var(--border)', padding: '0.35rem 0.5rem', borderRadius: '6px', fontSize: '0.75rem', cursor: 'pointer' }}
                         >
                           <Send size={13} />
                         </button>

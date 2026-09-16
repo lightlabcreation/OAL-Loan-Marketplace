@@ -86,8 +86,8 @@ export const ReconCenter = () => {
     <div
       style={{
         minHeight: '100vh',
-        background: 'linear-gradient(180deg, #090d16 0%, #0c1220 50%, #070a10 100%)',
-        color: '#f1f5f9',
+        backgroundColor: 'var(--background)',
+        color: 'var(--text-primary)',
         fontFamily: 'system-ui, -apple-system, sans-serif',
         padding: '24px 20px 80px',
       }}
@@ -97,16 +97,16 @@ export const ReconCenter = () => {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '14px' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-              <span style={{ fontSize: '11.5px', color: '#0ea5e9', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+              <span style={{ fontSize: '11.5px', color: '#0284c7', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                 OMP Deals • Pillar 1 (Stock the Lot)
               </span>
-              <span style={{ color: '#475569' }}>/</span>
-              <span style={{ fontSize: '11.5px', color: '#94a3b8' }}>Repair Order Management (Task E-05)</span>
+              <span style={{ color: 'var(--text-tertiary)' }}>/</span>
+              <span style={{ fontSize: '11.5px', color: 'var(--text-secondary)' }}>Repair Order Management (Task E-05)</span>
             </div>
-            <h1 style={{ fontSize: '26px', fontWeight: 800, margin: 0, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <h1 style={{ fontSize: '26px', fontWeight: 800, margin: 0, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '10px' }}>
               <span>Reconditioning Center (ROM)</span>
             </h1>
-            <p style={{ margin: '4px 0 0', fontSize: '13px', color: '#94a3b8' }}>
+            <p style={{ margin: '4px 0 0', fontSize: '13px', color: 'var(--text-secondary)' }}>
               Track vehicle recon costs, repair orders (RO), and parts from purchase to front-lot ready.
             </p>
           </div>
@@ -120,9 +120,9 @@ export const ReconCenter = () => {
                 gap: '6px',
                 padding: '8px 14px',
                 borderRadius: '8px',
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                color: '#cbd5e1',
+                background: 'var(--surface)',
+                border: '1px solid var(--border)',
+                color: 'var(--text-primary)',
                 fontSize: '13px',
                 cursor: 'pointer',
               }}
@@ -139,7 +139,7 @@ export const ReconCenter = () => {
                 gap: '6px',
                 padding: '8px 16px',
                 borderRadius: '8px',
-                background: 'linear-gradient(90deg, #0284c7, #0ea5e9)',
+                background: '#0284c7',
                 border: 'none',
                 color: '#ffffff',
                 fontSize: '13px',
@@ -159,31 +159,32 @@ export const ReconCenter = () => {
             <div
               key={car.stock}
               style={{
-                background: 'rgba(15, 23, 42, 0.75)',
+                background: 'var(--surface)',
                 borderRadius: '16px',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
+                border: '1px solid var(--border)',
                 padding: '22px 24px',
+                boxShadow: 'var(--shadow-sm)',
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px', marginBottom: '16px' }}>
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                    <span style={{ fontSize: '11px', color: '#38bdf8', fontWeight: 700 }}>{car.stock}</span>
+                    <span style={{ fontSize: '11px', color: '#0284c7', fontWeight: 700 }}>{car.stock}</span>
                     <span>•</span>
-                    <span style={{ fontSize: '11px', color: '#64748b', fontFamily: 'monospace' }}>{car.vin}</span>
+                    <span style={{ fontSize: '11px', color: 'var(--text-tertiary)', fontFamily: 'monospace' }}>{car.vin}</span>
                   </div>
-                  <h3 style={{ fontSize: '18px', fontWeight: 800, margin: 0, color: '#ffffff' }}>
+                  <h3 style={{ fontSize: '18px', fontWeight: 800, margin: 0, color: 'var(--text-primary)' }}>
                     {car.title}
                   </h3>
-                  <div style={{ fontSize: '12px', color: '#94a3b8', marginTop: '3px' }}>
+                  <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '3px' }}>
                     Active RO: <strong>{car.roNumber}</strong> • Assigned Tech: <strong>{car.tech}</strong>
                   </div>
                 </div>
 
                 <div style={{ textAlign: 'right' }}>
-                  <div style={{ fontSize: '11px', color: '#94a3b8' }}>Total Vehicle Investment</div>
+                  <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>Total Vehicle Investment</div>
                   <div style={{ fontSize: '20px', fontWeight: 800, color: '#10b981' }}>{car.totalCost}</div>
-                  <div style={{ fontSize: '11.5px', color: '#34d399' }}>Projected Margin: {car.estMargin}</div>
+                  <div style={{ fontSize: '11.5px', color: '#10b981' }}>Projected Margin: {car.estMargin}</div>
                 </div>
               </div>
 
@@ -199,16 +200,16 @@ export const ReconCenter = () => {
                       style={{
                         padding: '8px 10px',
                         borderRadius: '8px',
-                        background: isDone ? 'rgba(16, 185, 129, 0.12)' : 'rgba(255, 255, 255, 0.04)',
+                        background: isDone ? 'rgba(16, 185, 129, 0.1)' : 'var(--surface-secondary)',
                         border: isCurrent
                           ? '1px solid #10b981'
                           : isDone
                           ? '1px solid rgba(16, 185, 129, 0.3)'
-                          : '1px solid rgba(255, 255, 255, 0.06)',
+                          : '1px solid var(--border)',
                         textAlign: 'center',
                         fontSize: '11.5px',
                         fontWeight: isDone ? 700 : 500,
-                        color: isDone ? '#34d399' : '#64748b',
+                        color: isDone ? '#10b981' : 'var(--text-tertiary)',
                       }}
                     >
                       {st.name}
@@ -223,27 +224,28 @@ export const ReconCenter = () => {
                   display: 'grid',
                   gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
                   gap: '8px',
-                  background: 'rgba(0,0,0,0.25)',
+                  background: 'var(--surface-secondary)',
+                  border: '1px solid var(--border)',
                   padding: '10px 14px',
                   borderRadius: '8px',
                   fontSize: '12px',
                 }}
               >
                 <div>
-                  <span style={{ color: '#64748b' }}>Buy Cost: </span>
-                  <span style={{ color: '#ffffff', fontWeight: 600 }}>{car.acquireCost}</span>
+                  <span style={{ color: 'var(--text-secondary)' }}>Buy Cost: </span>
+                  <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{car.acquireCost}</span>
                 </div>
                 <div>
-                  <span style={{ color: '#64748b' }}>Parts: </span>
-                  <span style={{ color: '#ffffff', fontWeight: 600 }}>{car.partsCost}</span>
+                  <span style={{ color: 'var(--text-secondary)' }}>Parts: </span>
+                  <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{car.partsCost}</span>
                 </div>
                 <div>
-                  <span style={{ color: '#64748b' }}>Labor: </span>
-                  <span style={{ color: '#ffffff', fontWeight: 600 }}>{car.laborCost}</span>
+                  <span style={{ color: 'var(--text-secondary)' }}>Labor: </span>
+                  <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{car.laborCost}</span>
                 </div>
                 <div>
-                  <span style={{ color: '#64748b' }}>Detail: </span>
-                  <span style={{ color: '#ffffff', fontWeight: 600 }}>{car.detailCost}</span>
+                  <span style={{ color: 'var(--text-secondary)' }}>Detail: </span>
+                  <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{car.detailCost}</span>
                 </div>
               </div>
             </div>

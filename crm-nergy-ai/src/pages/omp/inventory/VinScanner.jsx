@@ -60,8 +60,8 @@ export const VinScanner = () => {
     <div
       style={{
         minHeight: '100vh',
-        background: 'linear-gradient(180deg, #090d16 0%, #0c1220 50%, #070a10 100%)',
-        color: '#f1f5f9',
+        backgroundColor: 'var(--background)',
+        color: 'var(--text-primary)',
         fontFamily: 'system-ui, -apple-system, sans-serif',
         padding: '24px 20px 80px',
       }}
@@ -74,10 +74,10 @@ export const VinScanner = () => {
               <span style={{ fontSize: '11.5px', color: '#0ea5e9', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                 OMP Deals • Pillar 1 (Stock the Lot)
               </span>
-              <span style={{ color: '#475569' }}>/</span>
-              <span style={{ fontSize: '11.5px', color: '#94a3b8' }}>VIN Scanner & VHR Bookout (Task E-02)</span>
+              <span style={{ color: 'var(--border)' }}>/</span>
+              <span style={{ fontSize: '11.5px', color: 'var(--text-secondary)' }}>VIN Scanner & VHR Bookout (Task E-02)</span>
             </div>
-            <h1 style={{ fontSize: '26px', fontWeight: 800, margin: 0, color: '#ffffff' }}>
+            <h1 style={{ fontSize: '26px', fontWeight: 800, margin: 0, color: 'var(--text-primary)' }}>
               VIN Scanner & Vehicle History Bookout
             </h1>
           </div>
@@ -91,9 +91,9 @@ export const VinScanner = () => {
                 gap: '6px',
                 padding: '8px 14px',
                 borderRadius: '8px',
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                color: '#cbd5e1',
+                background: 'var(--surface)',
+                border: '1px solid var(--border)',
+                color: 'var(--text-secondary)',
                 fontSize: '13px',
                 cursor: 'pointer',
               }}
@@ -127,20 +127,21 @@ export const VinScanner = () => {
         {/* SCANNER INPUT CARD */}
         <div
           style={{
-            background: 'rgba(15, 23, 42, 0.8)',
+            background: 'var(--surface)',
             borderRadius: '16px',
-            border: '1px solid rgba(14, 165, 233, 0.3)',
+            border: '1px solid var(--border)',
             padding: '24px',
             marginBottom: '28px',
+            boxShadow: '0 2px 10px rgba(0,0,0,0.04)',
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
             <div>
-              <h3 style={{ margin: '0 0 4px', fontSize: '16px', fontWeight: 700, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <h3 style={{ margin: '0 0 4px', fontSize: '16px', fontWeight: 700, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Camera size={18} color="#0ea5e9" />
                 <span>Mobile Camera VIN Barcode Scanner or Manual Entry</span>
               </h3>
-              <p style={{ margin: 0, fontSize: '13px', color: '#94a3b8' }}>
+              <p style={{ margin: 0, fontSize: '13px', color: 'var(--text-secondary)' }}>
                 Aim smartphone camera at door jamb or windshield barcode, or enter 17-digit VIN below.
               </p>
             </div>
@@ -154,13 +155,13 @@ export const VinScanner = () => {
                 gap: '8px',
                 padding: '10px 20px',
                 borderRadius: '10px',
-                background: isScanning ? 'rgba(14, 165, 233, 0.2)' : 'linear-gradient(90deg, #0284c7, #0ea5e9)',
+                background: isScanning ? 'rgba(2, 132, 199, 0.2)' : '#0284c7',
                 border: 'none',
                 color: '#ffffff',
                 fontSize: '13.5px',
                 fontWeight: 700,
                 cursor: isScanning ? 'not-allowed' : 'pointer',
-                boxShadow: '0 4px 16px rgba(14, 165, 233, 0.3)',
+                boxShadow: 'var(--shadow-sm)',
               }}
             >
               <Scan size={16} className={isScanning ? 'animate-spin' : ''} />
@@ -178,9 +179,9 @@ export const VinScanner = () => {
                 flex: 1,
                 padding: '12px 16px',
                 borderRadius: '8px',
-                background: 'rgba(2, 6, 23, 0.7)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                color: '#38bdf8',
+                background: 'var(--background)',
+                border: '1px solid var(--border)',
+                color: '#0284c7',
                 fontSize: '15px',
                 fontWeight: 700,
                 fontFamily: 'monospace',
@@ -193,9 +194,9 @@ export const VinScanner = () => {
               style={{
                 padding: '12px 20px',
                 borderRadius: '8px',
-                background: 'rgba(255, 255, 255, 0.08)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                color: '#ffffff',
+                background: 'var(--surface-secondary)',
+                border: '1px solid var(--border)',
+                color: 'var(--text-primary)',
                 fontSize: '13px',
                 fontWeight: 600,
                 cursor: 'pointer',
@@ -212,41 +213,42 @@ export const VinScanner = () => {
             {/* Left: Decoded Vehicle Specs */}
             <div
               style={{
-                background: 'rgba(15, 23, 42, 0.75)',
+                background: 'var(--surface)',
                 borderRadius: '16px',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
+                border: '1px solid var(--border)',
                 padding: '24px',
+                boxShadow: 'var(--shadow-sm)',
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                 <span style={{ fontSize: '11px', color: '#10b981', fontWeight: 700, textTransform: 'uppercase' }}>
                   ✓ VIN DECODED SUCCESSFULLY
                 </span>
-                <span style={{ fontSize: '11px', color: '#64748b' }}>NMVTIS Verified</span>
+                <span style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>NMVTIS Verified</span>
               </div>
 
-              <h2 style={{ fontSize: '20px', fontWeight: 800, margin: '0 0 4px', color: '#ffffff' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: 800, margin: '0 0 4px', color: 'var(--text-primary)' }}>
                 {scannedResult.year} {scannedResult.make} {scannedResult.model}
               </h2>
-              <div style={{ fontSize: '13px', color: '#38bdf8', marginBottom: '20px' }}>
+              <div style={{ fontSize: '13px', color: '#0ea5e9', marginBottom: '20px', fontWeight: 600 }}>
                 {scannedResult.trim} • {scannedResult.driveType}
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', fontSize: '13px', borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '16px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', fontSize: '13px', borderTop: '1px solid var(--border)', paddingTop: '16px' }}>
                 <div>
-                  <div style={{ color: '#64748b', fontSize: '11.5px' }}>Engine</div>
-                  <div style={{ color: '#ffffff', fontWeight: 600 }}>{scannedResult.engine}</div>
+                  <div style={{ color: 'var(--text-secondary)', fontSize: '11.5px' }}>Engine</div>
+                  <div style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{scannedResult.engine}</div>
                 </div>
                 <div>
-                  <div style={{ color: '#64748b', fontSize: '11.5px' }}>Transmission</div>
-                  <div style={{ color: '#ffffff', fontWeight: 600 }}>{scannedResult.transmission}</div>
+                  <div style={{ color: 'var(--text-secondary)', fontSize: '11.5px' }}>Transmission</div>
+                  <div style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{scannedResult.transmission}</div>
                 </div>
                 <div>
-                  <div style={{ color: '#64748b', fontSize: '11.5px' }}>Odometer Check</div>
+                  <div style={{ color: 'var(--text-secondary)', fontSize: '11.5px' }}>Odometer Check</div>
                   <div style={{ color: '#10b981', fontWeight: 600 }}>{scannedResult.historyReport.odometerVerified}</div>
                 </div>
                 <div>
-                  <div style={{ color: '#64748b', fontSize: '11.5px' }}>Title Brand Status</div>
+                  <div style={{ color: 'var(--text-secondary)', fontSize: '11.5px' }}>Title Brand Status</div>
                   <div style={{ color: '#10b981', fontWeight: 600 }}>{scannedResult.historyReport.titleStatus}</div>
                 </div>
               </div>
@@ -255,14 +257,15 @@ export const VinScanner = () => {
             {/* Right: KBB / NADA Bookout & History Pull */}
             <div
               style={{
-                background: 'rgba(15, 23, 42, 0.75)',
+                background: 'var(--surface)',
                 borderRadius: '16px',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
+                border: '1px solid var(--border)',
                 padding: '24px',
+                boxShadow: '0 2px 10px rgba(0,0,0,0.04)',
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 700, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 700, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <DollarSign size={18} color="#10b981" />
                   <span>KBB / NADA Valuation Bookout</span>
                 </h3>
@@ -273,16 +276,16 @@ export const VinScanner = () => {
 
               {/* Bookout 3 Values */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', marginBottom: '20px', textAlign: 'center' }}>
-                <div style={{ background: 'rgba(0,0,0,0.3)', padding: '12px 8px', borderRadius: '8px' }}>
-                  <div style={{ fontSize: '11px', color: '#94a3b8' }}>Wholesale / Trade</div>
-                  <div style={{ fontSize: '16px', fontWeight: 800, color: '#e2e8f0' }}>{scannedResult.kbbBookout.tradeIn}</div>
+                <div style={{ background: 'var(--surface-secondary)', padding: '12px 8px', borderRadius: '8px', border: '1px solid var(--border)' }}>
+                  <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>Wholesale / Trade</div>
+                  <div style={{ fontSize: '16px', fontWeight: 800, color: 'var(--text-primary)' }}>{scannedResult.kbbBookout.tradeIn}</div>
                 </div>
-                <div style={{ background: 'rgba(0,0,0,0.3)', padding: '12px 8px', borderRadius: '8px' }}>
-                  <div style={{ fontSize: '11px', color: '#94a3b8' }}>Private Party</div>
-                  <div style={{ fontSize: '16px', fontWeight: 800, color: '#38bdf8' }}>{scannedResult.kbbBookout.privateParty}</div>
+                <div style={{ background: 'var(--surface-secondary)', padding: '12px 8px', borderRadius: '8px', border: '1px solid var(--border)' }}>
+                  <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>Private Party</div>
+                  <div style={{ fontSize: '16px', fontWeight: 800, color: '#0ea5e9' }}>{scannedResult.kbbBookout.privateParty}</div>
                 </div>
-                <div style={{ background: 'rgba(14, 165, 233, 0.12)', border: '1px solid rgba(14, 165, 233, 0.3)', padding: '12px 8px', borderRadius: '8px' }}>
-                  <div style={{ fontSize: '11px', color: '#38bdf8' }}>Dealer Retail</div>
+                <div style={{ background: 'rgba(14, 165, 233, 0.1)', border: '1px solid rgba(14, 165, 233, 0.3)', padding: '12px 8px', borderRadius: '8px' }}>
+                  <div style={{ fontSize: '11px', color: '#0ea5e9', fontWeight: 600 }}>Dealer Retail</div>
                   <div style={{ fontSize: '16px', fontWeight: 800, color: '#10b981' }}>{scannedResult.kbbBookout.dealerRetail}</div>
                 </div>
               </div>
@@ -309,9 +312,9 @@ export const VinScanner = () => {
                   style={{
                     padding: '10px',
                     borderRadius: '8px',
-                    background: 'rgba(255, 255, 255, 0.08)',
-                    border: '1px solid rgba(255, 255, 255, 0.15)',
-                    color: '#cbd5e1',
+                    background: 'var(--surface-secondary)',
+                    border: '1px solid var(--border)',
+                    color: 'var(--text-primary)',
                     fontSize: '12.5px',
                     fontWeight: 600,
                     cursor: 'pointer',

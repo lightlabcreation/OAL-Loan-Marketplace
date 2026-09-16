@@ -49,10 +49,10 @@ export const OmpMobileView = () => {
             </span>
             <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>Smartphone Lot Management Simulator</span>
           </div>
-          <h1 style={{ fontSize: '1.65rem', fontWeight: 800, color: '#f8fafc', margin: 0, letterSpacing: '-0.02em' }}>
+          <h1 style={{ fontSize: '1.65rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
             OMP Mobile Dealer App
           </h1>
-          <p style={{ color: '#94a3b8', fontSize: '0.875rem', margin: '0.25rem 0 0 0' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', margin: '0.25rem 0 0 0' }}>
             Full dealership operations in the palm of your hand: mobile VIN scanning, lot walk appraisal, and instant deal quotes.
           </p>
         </div>

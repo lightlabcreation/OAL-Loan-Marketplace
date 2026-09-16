@@ -129,8 +129,8 @@ export const TopLeadIndicator = () => {
     <div
       style={{
         minHeight: '100vh',
-        background: 'linear-gradient(180deg, #090d16 0%, #0c1220 50%, #070a10 100%)',
-        color: '#f1f5f9',
+        backgroundColor: 'var(--background)',
+        color: 'var(--text-primary)',
         fontFamily: 'system-ui, -apple-system, sans-serif',
         padding: '28px 20px 80px',
       }}
@@ -140,13 +140,13 @@ export const TopLeadIndicator = () => {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '28px', flexWrap: 'wrap', gap: '16px' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-              <span style={{ fontSize: '11.5px', color: '#0ea5e9', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+              <span style={{ fontSize: '11.5px', color: '#0284c7', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                 OMP Deals • Nationwide Auto Dealer Program
               </span>
-              <span style={{ color: '#475569' }}>/</span>
-              <span style={{ fontSize: '11.5px', color: '#94a3b8' }}>AI Lead Intent Scoring (Tool 4)</span>
+              <span style={{ color: 'var(--text-tertiary)' }}>/</span>
+              <span style={{ fontSize: '11.5px', color: 'var(--text-secondary)' }}>AI Lead Intent Scoring (Tool 4)</span>
             </div>
-            <h1 style={{ fontSize: '26px', fontWeight: 800, margin: 0, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <h1 style={{ fontSize: '26px', fontWeight: 800, margin: 0, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '10px' }}>
               <span>Top Lead Indicator</span>
               <span
                 style={{
@@ -166,7 +166,7 @@ export const TopLeadIndicator = () => {
                 AI Behavioral Scoring
               </span>
             </h1>
-            <p style={{ margin: '4px 0 0', fontSize: '13.5px', color: '#94a3b8' }}>
+            <p style={{ margin: '4px 0 0', fontSize: '13.5px', color: 'var(--text-secondary)' }}>
               AI analyzes buyer shopping behavior across OMP marketplace listings to prioritize buyers ready to buy today.
             </p>
           </div>
@@ -180,9 +180,9 @@ export const TopLeadIndicator = () => {
                 gap: '6px',
                 padding: '8px 14px',
                 borderRadius: '8px',
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                color: '#cbd5e1',
+                background: 'var(--surface)',
+                border: '1px solid var(--border)',
+                color: 'var(--text-primary)',
                 fontSize: '13px',
                 cursor: 'pointer',
               }}
@@ -199,7 +199,7 @@ export const TopLeadIndicator = () => {
                 gap: '6px',
                 padding: '8px 16px',
                 borderRadius: '8px',
-                background: 'linear-gradient(90deg, #0284c7, #0ea5e9)',
+                background: '#0284c7',
                 border: 'none',
                 color: '#ffffff',
                 fontSize: '13px',
@@ -216,7 +216,7 @@ export const TopLeadIndicator = () => {
         {/* AI Intent Intelligence Summary Banner */}
         <div
           style={{
-            background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, rgba(249, 115, 22, 0.08) 50%, rgba(15, 23, 42, 0.8) 100%)',
+            background: 'rgba(239, 68, 68, 0.06)',
             borderRadius: '16px',
             border: '1px solid rgba(239, 68, 68, 0.3)',
             padding: '22px 24px',
@@ -245,23 +245,23 @@ export const TopLeadIndicator = () => {
               <Activity size={26} />
             </div>
             <div>
-              <div style={{ fontSize: '16px', fontWeight: 700, color: '#ffffff', marginBottom: '3px' }}>
+              <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '3px' }}>
                 AI Shopping Intent Radar: 3 Ready-to-Close Buyers Detected
               </div>
-              <div style={{ fontSize: '13px', color: '#cbd5e1' }}>
+              <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
                 Dealers responding to <strong>Top Leads</strong> within 5 minutes achieve a <strong>4.8x higher closing rate</strong> on used inventory.
               </div>
             </div>
           </div>
 
           <div style={{ display: 'flex', gap: '14px' }}>
-            <div style={{ textAlign: 'center', padding: '6px 14px', background: 'rgba(0,0,0,0.3)', borderRadius: '8px' }}>
+            <div style={{ textAlign: 'center', padding: '6px 14px', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '8px' }}>
               <div style={{ fontSize: '18px', fontWeight: 800, color: '#ef4444' }}>96%</div>
-              <div style={{ fontSize: '10.5px', color: '#94a3b8' }}>Peak Intent Score</div>
+              <div style={{ fontSize: '10.5px', color: 'var(--text-tertiary)' }}>Peak Intent Score</div>
             </div>
-            <div style={{ textAlign: 'center', padding: '6px 14px', background: 'rgba(0,0,0,0.3)', borderRadius: '8px' }}>
+            <div style={{ textAlign: 'center', padding: '6px 14px', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '8px' }}>
               <div style={{ fontSize: '18px', fontWeight: 800, color: '#10b981' }}>&lt; 2 min</div>
-              <div style={{ fontSize: '10.5px', color: '#94a3b8' }}>Avg Response Target</div>
+              <div style={{ fontSize: '10.5px', color: 'var(--text-tertiary)' }}>Avg Response Target</div>
             </div>
           </div>
         </div>
@@ -278,7 +278,7 @@ export const TopLeadIndicator = () => {
           }}
         >
           {/* Tabs */}
-          <div style={{ display: 'flex', background: 'rgba(15, 23, 42, 0.7)', padding: '3px', borderRadius: '8px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+          <div style={{ display: 'flex', background: 'var(--surface)', padding: '3px', borderRadius: '8px', border: '1px solid var(--border)' }}>
             {[
               { id: 'all', label: 'All Leads (4)' },
               { id: 'hot', label: '🔥 Hot Leads Only' },
@@ -294,8 +294,8 @@ export const TopLeadIndicator = () => {
                   fontWeight: 600,
                   borderRadius: '6px',
                   border: 'none',
-                  background: filterTab === tab.id ? '#0ea5e9' : 'transparent',
-                  color: filterTab === tab.id ? '#ffffff' : '#94a3b8',
+                  background: filterTab === tab.id ? '#0284c7' : 'transparent',
+                  color: filterTab === tab.id ? '#ffffff' : 'var(--text-secondary)',
                   cursor: 'pointer',
                   transition: 'all 0.15s ease',
                 }}
@@ -310,14 +310,14 @@ export const TopLeadIndicator = () => {
             style={{
               display: 'flex',
               alignItems: 'center',
-              background: 'rgba(15, 23, 42, 0.7)',
+              background: 'var(--surface)',
               borderRadius: '8px',
               padding: '6px 12px',
-              border: '1px solid rgba(255, 255, 255, 0.12)',
+              border: '1px solid var(--border)',
               gap: '8px',
             }}
           >
-            <Search size={14} color="#64748b" />
+            <Search size={14} color="var(--text-tertiary)" />
             <input
               type="text"
               placeholder="Filter by buyer name or vehicle..."
@@ -327,7 +327,7 @@ export const TopLeadIndicator = () => {
                 background: 'transparent',
                 border: 'none',
                 outline: 'none',
-                color: '#ffffff',
+                color: 'var(--text-primary)',
                 fontSize: '12.5px',
                 width: '220px',
               }}
@@ -344,12 +344,12 @@ export const TopLeadIndicator = () => {
               <div
                 key={lead.id}
                 style={{
-                  background: 'rgba(15, 23, 42, 0.75)',
+                  background: 'var(--surface)',
                   borderRadius: '16px',
                   border: isHot
                     ? '1px solid rgba(239, 68, 68, 0.4)'
-                    : '1px solid rgba(255, 255, 255, 0.08)',
-                  boxShadow: isHot ? '0 0 20px rgba(239, 68, 68, 0.15)' : 'none',
+                    : '1px solid var(--border)',
+                  boxShadow: 'var(--shadow-sm)',
                   padding: '22px 24px',
                   transition: 'all 0.2s ease',
                 }}
@@ -364,24 +364,24 @@ export const TopLeadIndicator = () => {
                         borderRadius: '50%',
                         background: isHot
                           ? 'linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(249, 115, 22, 0.15))'
-                          : 'linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(2, 132, 199, 0.1))',
-                        border: isHot ? '2px solid #ef4444' : '2px solid #0ea5e9',
+                          : 'linear-gradient(135deg, rgba(2, 132, 199, 0.2), rgba(2, 132, 199, 0.1))',
+                        border: isHot ? '2px solid #ef4444' : '2px solid #0284c7',
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        color: '#ffffff',
+                        color: isHot ? '#ef4444' : '#0284c7',
                       }}
                     >
                       <span style={{ fontSize: '15px', fontWeight: 800, lineHeight: 1 }}>{lead.intentScore}%</span>
-                      <span style={{ fontSize: '9px', textTransform: 'uppercase', color: isHot ? '#f87171' : '#38bdf8', fontWeight: 700 }}>
+                      <span style={{ fontSize: '9px', textTransform: 'uppercase', color: isHot ? '#ef4444' : '#0284c7', fontWeight: 700 }}>
                         INTENT
                       </span>
                     </div>
 
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px', flexWrap: 'wrap' }}>
-                        <h3 style={{ fontSize: '18px', fontWeight: 700, margin: 0, color: '#ffffff' }}>
+                        <h3 style={{ fontSize: '18px', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
                           {lead.name}
                         </h3>
                         <span
@@ -393,25 +393,25 @@ export const TopLeadIndicator = () => {
                             borderRadius: '9999px',
                             fontSize: '11px',
                             fontWeight: 700,
-                            background: isHot ? 'rgba(239, 68, 68, 0.2)' : 'rgba(14, 165, 233, 0.15)',
-                            color: isHot ? '#f87171' : '#38bdf8',
-                            border: isHot ? '1px solid rgba(239, 68, 68, 0.4)' : '1px solid rgba(14, 165, 233, 0.3)',
+                            background: isHot ? 'rgba(239, 68, 68, 0.15)' : 'rgba(2, 132, 199, 0.15)',
+                            color: isHot ? '#ef4444' : '#0284c7',
+                            border: isHot ? '1px solid rgba(239, 68, 68, 0.4)' : '1px solid rgba(2, 132, 199, 0.3)',
                           }}
                         >
                           <Flame size={12} />
                           <span>{lead.intentLabel}</span>
                         </span>
-                        <span style={{ fontSize: '11.5px', color: '#64748b' }}>Active {lead.lastActive}</span>
+                        <span style={{ fontSize: '11.5px', color: 'var(--text-tertiary)' }}>Active {lead.lastActive}</span>
                       </div>
 
-                      <div style={{ fontSize: '13px', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-                        <span style={{ color: '#e2e8f0', fontWeight: 600 }}>{lead.vehicle}</span>
+                      <div style={{ fontSize: '13px', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+                        <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{lead.vehicle}</span>
                         <span>•</span>
-                        <span style={{ color: '#38bdf8' }}>{lead.stock}</span>
+                        <span style={{ color: '#0284c7' }}>{lead.stock}</span>
                         <span>•</span>
                         <span style={{ color: '#10b981', fontWeight: 700 }}>{lead.price}</span>
                         <span>•</span>
-                        <span style={{ color: '#facc15' }}>Status: {lead.status}</span>
+                        <span style={{ color: '#d97706', fontWeight: 600 }}>Status: {lead.status}</span>
                       </div>
                     </div>
                   </div>
@@ -425,13 +425,12 @@ export const TopLeadIndicator = () => {
                         gap: '6px',
                         padding: '8px 14px',
                         borderRadius: '8px',
-                        background: 'linear-gradient(90deg, #10b981, #059669)',
+                        background: '#10b981',
                         border: 'none',
                         color: '#ffffff',
                         fontSize: '12.5px',
                         fontWeight: 700,
                         cursor: 'pointer',
-                        boxShadow: '0 2px 10px rgba(16, 185, 129, 0.3)',
                       }}
                     >
                       <Phone size={14} />
@@ -445,9 +444,9 @@ export const TopLeadIndicator = () => {
                         gap: '6px',
                         padding: '8px 14px',
                         borderRadius: '8px',
-                        background: 'rgba(14, 165, 233, 0.15)',
-                        border: '1px solid rgba(14, 165, 233, 0.4)',
-                        color: '#38bdf8',
+                        background: 'rgba(2, 132, 199, 0.1)',
+                        border: '1px solid rgba(2, 132, 199, 0.3)',
+                        color: '#0284c7',
                         fontSize: '12.5px',
                         fontWeight: 600,
                         cursor: 'pointer',
@@ -462,18 +461,18 @@ export const TopLeadIndicator = () => {
                 {/* Behavioral Radar Breakdown */}
                 <div
                   style={{
-                    background: 'rgba(2, 6, 23, 0.45)',
+                    background: 'var(--surface-secondary)',
                     borderRadius: '10px',
                     padding: '12px 16px',
-                    border: '1px solid rgba(255, 255, 255, 0.05)',
+                    border: '1px solid var(--border)',
                   }}
                 >
-                  <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px', letterSpacing: '0.05em' }}>
+                  <div style={{ fontSize: '11px', fontWeight: 700, color: 'var(--text-tertiary)', textTransform: 'uppercase', marginBottom: '8px', letterSpacing: '0.05em' }}>
                     AI Buyer Intent Signals Tracked:
                   </div>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '8px' }}>
                     {lead.signals.map((sig, i) => (
-                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#cbd5e1' }}>
+                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: 'var(--text-secondary)' }}>
                         <CheckCircle2 size={14} color="#10b981" style={{ flexShrink: 0 }} />
                         <span>{sig}</span>
                       </div>

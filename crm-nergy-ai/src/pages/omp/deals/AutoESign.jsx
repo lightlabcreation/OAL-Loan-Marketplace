@@ -67,15 +67,15 @@ export const AutoESign = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
-            <span style={{ fontSize: '0.75rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '4px', backgroundColor: 'rgba(56, 189, 248, 0.1)', color: '#38bdf8', border: '1px solid rgba(56, 189, 248, 0.2)' }}>
+            <span style={{ fontSize: '0.75rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '4px', backgroundColor: 'var(--primary-subtle, rgba(56, 189, 248, 0.1))', color: 'var(--primary)', border: '1px solid var(--border)' }}>
               TASK E-15 • PILLAR 3
             </span>
-            <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>100% Paperless Digital Deal Jackets</span>
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>100% Paperless Digital Deal Jackets</span>
           </div>
-          <h1 style={{ fontSize: '1.65rem', fontWeight: 800, color: '#f8fafc', margin: 0, letterSpacing: '-0.02em' }}>
+          <h1 style={{ fontSize: '1.65rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
             Auto E-Business & Digital E-Signature Suite
           </h1>
-          <p style={{ color: '#94a3b8', fontSize: '0.875rem', margin: '0.25rem 0 0 0' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', margin: '0.25rem 0 0 0' }}>
             Execute legally-binding digital deal jackets with touchscreen signature capture and encrypted cryptographic audit trails.
           </p>
         </div>
@@ -83,7 +83,7 @@ export const AutoESign = () => {
         <div style={{ display: 'flex', gap: '0.75rem' }}>
           <button
             onClick={() => toast.success('Encrypted Digital Deal Jacket PDF downloaded')}
-            style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', backgroundColor: '#0284c7', color: '#fff', border: 'none', padding: '0.55rem 1rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', boxShadow: '0 4px 12px rgba(2, 132, 199, 0.3)' }}
+            style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', backgroundColor: 'var(--primary)', color: 'var(--text-on-primary, #fff)', border: 'none', padding: '0.55rem 1rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', boxShadow: 'var(--shadow-sm)' }}
           >
             <Download size={16} /> Download Signed Deal Jacket
           </button>
@@ -93,9 +93,9 @@ export const AutoESign = () => {
       {/* Main Deal Jacket Grid */}
       <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '1.5rem' }}>
         {/* Left Column: Digital Document Viewer */}
-        <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '12px', padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '1rem', boxShadow: 'var(--shadow-sm)' }}>
           {/* Doc Tabs */}
-          <div style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid rgba(255, 255, 255, 0.06)', paddingBottom: '0.75rem' }}>
+          <div style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--border)', paddingBottom: '0.75rem' }}>
             {[
               { id: 'bill_of_sale', label: '1. Bill of Sale' },
               { id: 'odometer', label: '2. Odometer Disclosure' },
@@ -106,9 +106,9 @@ export const AutoESign = () => {
                 key={d.id}
                 onClick={() => setActiveDoc(d.id)}
                 style={{
-                  backgroundColor: activeDoc === d.id ? 'rgba(56, 189, 248, 0.15)' : 'transparent',
-                  color: activeDoc === d.id ? '#38bdf8' : '#94a3b8',
-                  border: activeDoc === d.id ? '1px solid rgba(56, 189, 248, 0.3)' : '1px solid transparent',
+                  backgroundColor: activeDoc === d.id ? 'var(--primary-subtle, rgba(56, 189, 248, 0.15))' : 'transparent',
+                  color: activeDoc === d.id ? 'var(--primary)' : 'var(--text-secondary)',
+                  border: activeDoc === d.id ? '1px solid var(--primary)' : '1px solid transparent',
                   padding: '0.4rem 0.75rem',
                   borderRadius: '6px',
                   fontSize: '0.78rem',
@@ -122,10 +122,10 @@ export const AutoESign = () => {
           </div>
 
           {/* Paper Document Preview Simulation */}
-          <div style={{ backgroundColor: '#ffffff', color: '#0f172a', borderRadius: '8px', padding: '1.5rem', fontFamily: 'serif', boxShadow: '0 4px 20px rgba(0,0,0,0.3)', minHeight: '380px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div style={{ backgroundColor: '#ffffff', color: '#0f172a', borderRadius: '8px', padding: '1.5rem', fontFamily: 'serif', boxShadow: 'var(--shadow-md)', minHeight: '380px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', border: '1px solid #e2e8f0' }}>
             <div>
               <div style={{ textAlign: 'center', borderBottom: '2px solid #0f172a', paddingBottom: '0.5rem', marginBottom: '1rem' }}>
-                <h3 style={{ margin: 0, fontSize: '1.2rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                <h3 style={{ margin: 0, fontSize: '1.2rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#0f172a' }}>
                   State Motor Vehicle Purchase Agreement & Bill of Sale
                 </h3>
                 <span style={{ fontSize: '0.75rem', fontFamily: 'sans-serif', color: '#64748b' }}>
@@ -196,20 +196,20 @@ export const AutoESign = () => {
         {/* Right Column: Interactive Digital Signature Pad & Cryptographic Audit */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {/* E-Signature Canvas */}
-          <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '12px', padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', boxShadow: 'var(--shadow-sm)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.88rem', fontWeight: 700, color: '#f8fafc' }}>
+              <span style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--text-primary)' }}>
                 Draw Digital Signature
               </span>
               <button
                 onClick={clearSignature}
-                style={{ background: 'transparent', border: 'none', color: '#94a3b8', fontSize: '0.75rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem' }}
+                style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', fontSize: '0.75rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem' }}
               >
                 <RotateCcw size={13} /> Clear
               </button>
             </div>
 
-            <div style={{ border: '2px dashed rgba(56, 189, 248, 0.4)', borderRadius: '8px', backgroundColor: 'rgba(30, 41, 59, 0.6)', cursor: 'crosshair', position: 'relative' }}>
+            <div style={{ border: '2px dashed var(--primary)', borderRadius: '8px', backgroundColor: 'var(--background)', cursor: 'crosshair', position: 'relative' }}>
               <canvas
                 ref={canvasRef}
                 width={320}
@@ -220,7 +220,7 @@ export const AutoESign = () => {
                 onMouseLeave={stopDrawing}
                 style={{ width: '100%', height: '130px', display: 'block' }}
               />
-              <span style={{ position: 'absolute', bottom: '6px', left: '10px', fontSize: '0.65rem', color: '#64748b', pointerEvents: 'none' }}>
+              <span style={{ position: 'absolute', bottom: '6px', left: '10px', fontSize: '0.65rem', color: 'var(--text-tertiary)', pointerEvents: 'none' }}>
                 Sign above with stylus, finger, or mouse
               </span>
             </div>
@@ -248,14 +248,14 @@ export const AutoESign = () => {
           </div>
 
           {/* Cryptographic Audit Trail */}
-          <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.78rem' }}>
+          <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.78rem', boxShadow: 'var(--shadow-sm)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#10b981', fontWeight: 700 }}>
               <ShieldCheck size={16} /> Legal Compliance & Audit Trail
             </div>
-            <div style={{ color: '#94a3b8' }}>
+            <div style={{ color: 'var(--text-secondary)' }}>
               ESIGN & UETA Act Certified. Every stroke and timestamp is encrypted with an immutable cryptographic fingerprint.
             </div>
-            <div style={{ backgroundColor: 'rgba(30, 41, 59, 0.5)', padding: '0.5rem', borderRadius: '6px', fontSize: '0.7rem', color: '#cbd5e1', wordBreak: 'break-all' }}>
+            <div style={{ backgroundColor: 'var(--surface-secondary)', padding: '0.5rem', borderRadius: '6px', fontSize: '0.7rem', color: 'var(--text-primary)', wordBreak: 'break-all', border: '1px solid var(--border)' }}>
               <code>SHA-256: 8f4a21b390de8710ca4f5e718b901ad4239841f...</code>
             </div>
           </div>
@@ -264,3 +264,5 @@ export const AutoESign = () => {
     </div>
   );
 };
+
+export default AutoESign;

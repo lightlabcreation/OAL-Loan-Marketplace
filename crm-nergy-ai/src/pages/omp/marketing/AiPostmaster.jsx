@@ -71,8 +71,8 @@ This vehicle has passed our rigorous 150-Point Inspection and is protected under
     <div
       style={{
         minHeight: '100vh',
-        background: 'linear-gradient(180deg, #090d16 0%, #0c1220 50%, #070a10 100%)',
-        color: '#f1f5f9',
+        backgroundColor: 'var(--background)',
+        color: 'var(--text-primary)',
         fontFamily: 'system-ui, -apple-system, sans-serif',
         padding: '24px 20px 80px',
       }}
@@ -82,16 +82,16 @@ This vehicle has passed our rigorous 150-Point Inspection and is protected under
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '14px' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-              <span style={{ fontSize: '11.5px', color: '#0ea5e9', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+              <span style={{ fontSize: '11.5px', color: '#0284c7', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                 OMP Deals • Pillar 2 (Attract Buyers)
               </span>
-              <span style={{ color: '#475569' }}>/</span>
-              <span style={{ fontSize: '11.5px', color: '#94a3b8' }}>AI Postmaster Multi-Lister (Task E-07)</span>
+              <span style={{ color: 'var(--text-tertiary)' }}>/</span>
+              <span style={{ fontSize: '11.5px', color: 'var(--text-secondary)' }}>AI Postmaster Multi-Lister (Task E-07)</span>
             </div>
-            <h1 style={{ fontSize: '26px', fontWeight: 800, margin: 0, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <h1 style={{ fontSize: '26px', fontWeight: 800, margin: 0, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '10px' }}>
               <span>AI Postmaster (AIPM) Multi-Lister</span>
             </h1>
-            <p style={{ margin: '4px 0 0', fontSize: '13px', color: '#94a3b8' }}>
+            <p style={{ margin: '4px 0 0', fontSize: '13px', color: 'var(--text-secondary)' }}>
               1-Click simultaneous vehicle syndication across Facebook Marketplace, CarGurus, AutoTrader, and Craigslist.
             </p>
           </div>
@@ -105,9 +105,9 @@ This vehicle has passed our rigorous 150-Point Inspection and is protected under
                 gap: '6px',
                 padding: '8px 14px',
                 borderRadius: '8px',
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                color: '#cbd5e1',
+                background: 'var(--surface)',
+                border: '1px solid var(--border)',
+                color: 'var(--text-primary)',
                 fontSize: '13px',
                 cursor: 'pointer',
               }}
@@ -124,7 +124,7 @@ This vehicle has passed our rigorous 150-Point Inspection and is protected under
                 gap: '6px',
                 padding: '8px 16px',
                 borderRadius: '8px',
-                background: 'linear-gradient(90deg, #0284c7, #0ea5e9)',
+                background: '#0284c7',
                 border: 'none',
                 color: '#ffffff',
                 fontSize: '13px',
@@ -141,10 +141,10 @@ This vehicle has passed our rigorous 150-Point Inspection and is protected under
         {/* MAIN POSTMASTER GRID */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '24px' }}>
           {/* Left: AI Generated Sales Description */}
-          <div style={{ background: 'rgba(15, 23, 42, 0.8)', borderRadius: '16px', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '24px' }}>
+          <div style={{ background: 'var(--surface)', borderRadius: '16px', border: '1px solid var(--border)', padding: '24px', boxShadow: 'var(--shadow-sm)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
-              <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 700, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Sparkles size={18} color="#0ea5e9" />
+              <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 700, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Sparkles size={18} color="#0284c7" />
                 <span>AI Generated Sales Listing Copy</span>
               </h3>
               <button
@@ -153,9 +153,9 @@ This vehicle has passed our rigorous 150-Point Inspection and is protected under
                   display: 'flex',
                   alignItems: 'center',
                   gap: '5px',
-                  background: 'rgba(255, 255, 255, 0.06)',
-                  border: '1px solid rgba(255, 255, 255, 0.12)',
-                  color: copied ? '#10b981' : '#cbd5e1',
+                  background: 'var(--surface-secondary)',
+                  border: '1px solid var(--border)',
+                  color: copied ? '#10b981' : 'var(--text-primary)',
                   padding: '4px 10px',
                   borderRadius: '6px',
                   fontSize: '11.5px',
@@ -175,9 +175,9 @@ This vehicle has passed our rigorous 150-Point Inspection and is protected under
                 width: '100%',
                 padding: '14px',
                 borderRadius: '10px',
-                background: 'rgba(2, 6, 23, 0.6)',
-                border: '1px solid rgba(255, 255, 255, 0.12)',
-                color: '#e2e8f0',
+                background: 'var(--background)',
+                border: '1px solid var(--border)',
+                color: 'var(--text-primary)',
                 fontSize: '12.5px',
                 fontFamily: 'monospace',
                 lineHeight: 1.5,
@@ -189,11 +189,11 @@ This vehicle has passed our rigorous 150-Point Inspection and is protected under
           </div>
 
           {/* Right: Multi-Platform Syndication Channels */}
-          <div style={{ background: 'rgba(15, 23, 42, 0.8)', borderRadius: '16px', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '24px' }}>
-            <h3 style={{ margin: '0 0 4px', fontSize: '16px', fontWeight: 700, color: '#ffffff' }}>
+          <div style={{ background: 'var(--surface)', borderRadius: '16px', border: '1px solid var(--border)', padding: '24px', boxShadow: 'var(--shadow-sm)' }}>
+            <h3 style={{ margin: '0 0 4px', fontSize: '16px', fontWeight: 700, color: 'var(--text-primary)' }}>
               Target Marketplace Syndication Channels
             </h3>
-            <p style={{ margin: '0 0 20px', fontSize: '12.5px', color: '#94a3b8' }}>
+            <p style={{ margin: '0 0 20px', fontSize: '12.5px', color: 'var(--text-secondary)' }}>
               Select channels to syndicate this vehicle simultaneously in 1 click.
             </p>
 
@@ -209,8 +209,8 @@ This vehicle has passed our rigorous 150-Point Inspection and is protected under
                   style={{
                     padding: '14px 16px',
                     borderRadius: '10px',
-                    background: p.selected ? 'rgba(14, 165, 233, 0.1)' : 'rgba(2, 6, 23, 0.4)',
-                    border: p.selected ? '1px solid #0ea5e9' : '1px solid rgba(255, 255, 255, 0.06)',
+                    background: p.selected ? 'rgba(2, 132, 199, 0.08)' : 'var(--surface-secondary)',
+                    border: p.selected ? '1px solid #0284c7' : '1px solid var(--border)',
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
@@ -235,7 +235,7 @@ This vehicle has passed our rigorous 150-Point Inspection and is protected under
                       {p.icon}
                     </div>
                     <div>
-                      <div style={{ fontSize: '13.5px', fontWeight: 700, color: '#ffffff' }}>{p.name}</div>
+                      <div style={{ fontSize: '13.5px', fontWeight: 700, color: 'var(--text-primary)' }}>{p.name}</div>
                       <div style={{ fontSize: '11px', color: '#10b981' }}>Connected (Auto-Sync Live)</div>
                     </div>
                   </div>
@@ -244,7 +244,7 @@ This vehicle has passed our rigorous 150-Point Inspection and is protected under
                     style={{
                       fontSize: '11.5px',
                       fontWeight: 700,
-                      color: postedSuccess ? '#10b981' : p.selected ? '#38bdf8' : '#64748b',
+                      color: postedSuccess ? '#10b981' : p.selected ? '#0284c7' : 'var(--text-tertiary)',
                     }}
                   >
                     {postedSuccess ? 'Published ✓' : p.selected ? 'Selected' : 'Skip'}
@@ -263,7 +263,7 @@ This vehicle has passed our rigorous 150-Point Inspection and is protected under
                 borderRadius: '10px',
                 background: postedSuccess
                   ? '#10b981'
-                  : 'linear-gradient(90deg, #0284c7, #0ea5e9)',
+                  : '#0284c7',
                 border: 'none',
                 color: '#ffffff',
                 fontSize: '14px',
@@ -273,7 +273,7 @@ This vehicle has passed our rigorous 150-Point Inspection and is protected under
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '8px',
-                boxShadow: '0 4px 20px rgba(14, 165, 233, 0.35)',
+                boxShadow: 'var(--shadow-sm)',
               }}
             >
               <Send size={16} className={isPosting ? 'animate-spin' : ''} />

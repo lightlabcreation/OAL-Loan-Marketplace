@@ -72,8 +72,8 @@ export const MarketPricing = () => {
     <div
       style={{
         minHeight: '100vh',
-        background: 'linear-gradient(180deg, #090d16 0%, #0c1220 50%, #070a10 100%)',
-        color: '#f1f5f9',
+        backgroundColor: 'var(--background)',
+        color: 'var(--text-primary)',
         fontFamily: 'system-ui, -apple-system, sans-serif',
         padding: '24px 20px 80px',
       }}
@@ -83,15 +83,15 @@ export const MarketPricing = () => {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '14px' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-              <span style={{ fontSize: '11.5px', color: '#0ea5e9', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+              <span style={{ fontSize: '11.5px', color: '#0284c7', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                 OMP Deals • Pillar 1 (Stock the Lot)
               </span>
-              <span style={{ color: '#475569' }}>/</span>
-              <span style={{ fontSize: '11.5px', color: '#94a3b8' }}>AI RealPrice™ Market Pricing (Task E-03)</span>
+              <span style={{ color: 'var(--text-tertiary)' }}>/</span>
+              <span style={{ fontSize: '11.5px', color: 'var(--text-secondary)' }}>AI RealPrice™ Market Pricing (Task E-03)</span>
             </div>
-            <h1 style={{ fontSize: '26px', fontWeight: 800, margin: 0, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <h1 style={{ fontSize: '26px', fontWeight: 800, margin: 0, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '10px' }}>
               <span>AI Market Pricing (AIMP)</span>
-              <span style={{ background: 'rgba(14, 165, 233, 0.2)', color: '#38bdf8', padding: '3px 10px', borderRadius: '9999px', fontSize: '11px', fontWeight: 700 }}>
+              <span style={{ background: 'rgba(2, 132, 199, 0.15)', color: '#0284c7', padding: '3px 10px', borderRadius: '9999px', fontSize: '11px', fontWeight: 700 }}>
                 RealPrice™ Scanner
               </span>
             </h1>
@@ -106,9 +106,9 @@ export const MarketPricing = () => {
                 gap: '6px',
                 padding: '8px 14px',
                 borderRadius: '8px',
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                color: '#cbd5e1',
+                background: 'var(--surface)',
+                border: '1px solid var(--border)',
+                color: 'var(--text-primary)',
                 fontSize: '13px',
                 cursor: 'pointer',
               }}
@@ -125,7 +125,7 @@ export const MarketPricing = () => {
                 gap: '6px',
                 padding: '8px 16px',
                 borderRadius: '8px',
-                background: 'linear-gradient(90deg, #0284c7, #0ea5e9)',
+                background: '#0284c7',
                 border: 'none',
                 color: '#ffffff',
                 fontSize: '13px',
@@ -142,38 +142,38 @@ export const MarketPricing = () => {
         {/* 3 Price Markers: Lowest, Median, Highest */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px', marginBottom: '28px' }}>
           {/* Lowest */}
-          <div style={{ background: 'rgba(15, 23, 42, 0.75)', borderRadius: '14px', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '20px' }}>
-            <div style={{ fontSize: '12px', color: '#94a3b8', marginBottom: '4px' }}>Lowest Market Price</div>
-            <div style={{ fontSize: '24px', fontWeight: 800, color: '#38bdf8', marginBottom: '4px' }}>{marketData.lowestPrice}</div>
-            <div style={{ fontSize: '11.5px', color: '#64748b' }}>Bottom 10% of radius listings</div>
+          <div style={{ background: 'var(--surface)', borderRadius: '14px', border: '1px solid var(--border)', padding: '20px', boxShadow: 'var(--shadow-sm)' }}>
+            <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '4px' }}>Lowest Market Price</div>
+            <div style={{ fontSize: '24px', fontWeight: 800, color: '#0284c7', marginBottom: '4px' }}>{marketData.lowestPrice}</div>
+            <div style={{ fontSize: '11.5px', color: 'var(--text-tertiary)' }}>Bottom 10% of radius listings</div>
           </div>
 
           {/* Median */}
-          <div style={{ background: 'rgba(15, 23, 42, 0.75)', borderRadius: '14px', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '20px' }}>
-            <div style={{ fontSize: '12px', color: '#34d399', marginBottom: '4px', fontWeight: 600 }}>Median Market Price (Fair)</div>
+          <div style={{ background: 'var(--surface)', borderRadius: '14px', border: '1px solid rgba(16, 185, 129, 0.4)', padding: '20px', boxShadow: 'var(--shadow-sm)' }}>
+            <div style={{ fontSize: '12px', color: '#10b981', marginBottom: '4px', fontWeight: 600 }}>Median Market Price (Fair)</div>
             <div style={{ fontSize: '24px', fontWeight: 800, color: '#10b981', marginBottom: '4px' }}>{marketData.medianPrice}</div>
-            <div style={{ fontSize: '11.5px', color: '#64748b' }}>50th Percentile Market Benchmark</div>
+            <div style={{ fontSize: '11.5px', color: 'var(--text-tertiary)' }}>50th Percentile Market Benchmark</div>
           </div>
 
           {/* Highest */}
-          <div style={{ background: 'rgba(15, 23, 42, 0.75)', borderRadius: '14px', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '20px' }}>
-            <div style={{ fontSize: '12px', color: '#94a3b8', marginBottom: '4px' }}>Highest Market Price</div>
+          <div style={{ background: 'var(--surface)', borderRadius: '14px', border: '1px solid var(--border)', padding: '20px', boxShadow: 'var(--shadow-sm)' }}>
+            <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '4px' }}>Highest Market Price</div>
             <div style={{ fontSize: '24px', fontWeight: 800, color: '#f59e0b', marginBottom: '4px' }}>{marketData.highestPrice}</div>
-            <div style={{ fontSize: '11.5px', color: '#64748b' }}>Top tier dealer pricing</div>
+            <div style={{ fontSize: '11.5px', color: 'var(--text-tertiary)' }}>Top tier dealer pricing</div>
           </div>
 
           {/* Market Days Supply */}
-          <div style={{ background: 'rgba(15, 23, 42, 0.75)', borderRadius: '14px', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '20px' }}>
-            <div style={{ fontSize: '12px', color: '#94a3b8', marginBottom: '4px' }}>Market Velocity (MDS)</div>
-            <div style={{ fontSize: '20px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>{marketData.marketDaysSupply}</div>
-            <div style={{ fontSize: '11.5px', color: '#64748b' }}>24 competing vehicles within 50 mi</div>
+          <div style={{ background: 'var(--surface)', borderRadius: '14px', border: '1px solid var(--border)', padding: '20px', boxShadow: 'var(--shadow-sm)' }}>
+            <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '4px' }}>Market Velocity (MDS)</div>
+            <div style={{ fontSize: '20px', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '4px' }}>{marketData.marketDaysSupply}</div>
+            <div style={{ fontSize: '11.5px', color: 'var(--text-tertiary)' }}>24 competing vehicles within 50 mi</div>
           </div>
         </div>
 
         {/* AI PRICING STRATEGY SELECTOR */}
-        <div style={{ background: 'rgba(15, 23, 42, 0.8)', borderRadius: '16px', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '24px', marginBottom: '28px' }}>
-          <h3 style={{ fontSize: '17px', fontWeight: 700, margin: '0 0 16px', color: '#ffffff', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Sparkles size={18} color="#0ea5e9" />
+        <div style={{ background: 'var(--surface)', borderRadius: '16px', border: '1px solid var(--border)', padding: '24px', marginBottom: '28px', boxShadow: 'var(--shadow-sm)' }}>
+          <h3 style={{ fontSize: '17px', fontWeight: 700, margin: '0 0 16px', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Sparkles size={18} color="#0284c7" />
             <span>AI Recommended Lot Pricing Strategies</span>
           </h3>
 
@@ -186,9 +186,9 @@ export const MarketPricing = () => {
                   key={strat.id}
                   onClick={() => setSelectedStrategy(strat.id)}
                   style={{
-                    background: isSelected ? 'rgba(14, 165, 233, 0.12)' : 'rgba(2, 6, 23, 0.5)',
+                    background: isSelected ? 'rgba(2, 132, 199, 0.08)' : 'var(--surface-secondary)',
                     borderRadius: '12px',
-                    border: isSelected ? '2px solid #0ea5e9' : '1px solid rgba(255, 255, 255, 0.08)',
+                    border: isSelected ? '2px solid #0284c7' : '1px solid var(--border)',
                     padding: '20px',
                     cursor: 'pointer',
                     position: 'relative',
@@ -200,7 +200,7 @@ export const MarketPricing = () => {
                         position: 'absolute',
                         top: '-10px',
                         right: '16px',
-                        background: '#0ea5e9',
+                        background: '#0284c7',
                         color: '#ffffff',
                         fontSize: '10px',
                         fontWeight: 700,
@@ -213,15 +213,15 @@ export const MarketPricing = () => {
                     </span>
                   )}
 
-                  <div style={{ fontSize: '14px', fontWeight: 700, color: '#ffffff', marginBottom: '4px' }}>
+                  <div style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '4px' }}>
                     {strat.title}
                   </div>
                   <div style={{ fontSize: '22px', fontWeight: 900, color: '#10b981', marginBottom: '8px' }}>
                     {strat.price}
                   </div>
-                  <div style={{ fontSize: '12px', color: '#38bdf8', marginBottom: '4px' }}>{strat.marketPercent}</div>
-                  <div style={{ fontSize: '11.5px', color: '#94a3b8', marginBottom: '8px' }}>{strat.estTurnTime}</div>
-                  <div style={{ fontSize: '12px', fontWeight: 700, color: '#34d399', borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '8px' }}>
+                  <div style={{ fontSize: '12px', color: '#0284c7', marginBottom: '4px', fontWeight: 600 }}>{strat.marketPercent}</div>
+                  <div style={{ fontSize: '11.5px', color: 'var(--text-secondary)', marginBottom: '8px' }}>{strat.estTurnTime}</div>
+                  <div style={{ fontSize: '12px', fontWeight: 700, color: '#10b981', borderTop: '1px solid var(--border)', paddingTop: '8px' }}>
                     {strat.margin}
                   </div>
                 </div>
@@ -238,7 +238,7 @@ export const MarketPricing = () => {
                 gap: '8px',
                 padding: '12px 24px',
                 borderRadius: '10px',
-                background: 'linear-gradient(90deg, #10b981, #059669)',
+                background: '#10b981',
                 border: 'none',
                 color: '#ffffff',
                 fontSize: '13.5px',

@@ -68,15 +68,15 @@ export const TeamPermissions = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
-            <span style={{ fontSize: '0.75rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '4px', backgroundColor: 'rgba(56, 189, 248, 0.1)', color: '#38bdf8', border: '1px solid rgba(56, 189, 248, 0.2)' }}>
+            <span style={{ fontSize: '0.75rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '4px', backgroundColor: 'var(--primary-subtle, rgba(56, 189, 248, 0.1))', color: 'var(--primary)', border: '1px solid var(--border)' }}>
               TASK E-19 • PILLAR 4
             </span>
-            <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>Multi-User Security & Granular RBAC</span>
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Multi-User Security & Granular RBAC</span>
           </div>
-          <h1 style={{ fontSize: '1.65rem', fontWeight: 800, color: '#f8fafc', margin: 0, letterSpacing: '-0.02em' }}>
+          <h1 style={{ fontSize: '1.65rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
             Team Roles & Permissions Matrix
           </h1>
-          <p style={{ color: '#94a3b8', fontSize: '0.875rem', margin: '0.25rem 0 0 0' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', margin: '0.25rem 0 0 0' }}>
             Enforce role-based access control (RBAC) across sales reps, finance managers, and store GMs to protect true vehicle costs and deal margins.
           </p>
         </div>
@@ -84,7 +84,7 @@ export const TeamPermissions = () => {
         <div style={{ display: 'flex', gap: '0.75rem' }}>
           <button
             onClick={handleSave}
-            style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', backgroundColor: '#10b981', color: '#fff', border: 'none', padding: '0.55rem 1.1rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)' }}
+            style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', backgroundColor: '#10b981', color: '#fff', border: 'none', padding: '0.55rem 1.1rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', boxShadow: 'var(--shadow-sm)' }}
           >
             <Save size={16} /> Save Security Profile
           </button>
@@ -100,8 +100,9 @@ export const TeamPermissions = () => {
               key={r.id}
               onClick={() => setSelectedRole(r.id)}
               style={{
-                backgroundColor: isSelected ? 'rgba(56, 189, 248, 0.12)' : 'rgba(30, 41, 59, 0.4)',
-                border: isSelected ? '1px solid #38bdf8' : '1px solid rgba(255, 255, 255, 0.06)',
+                backgroundColor: isSelected ? 'var(--primary-subtle, rgba(56, 189, 248, 0.12))' : 'var(--surface)',
+                border: isSelected ? '1px solid var(--primary)' : '1px solid var(--border)',
+                boxShadow: 'var(--shadow-sm)',
                 borderRadius: '10px',
                 padding: '1rem',
                 cursor: 'pointer',
@@ -109,14 +110,14 @@ export const TeamPermissions = () => {
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '0.7rem', color: isSelected ? '#38bdf8' : '#94a3b8', fontWeight: 600, textTransform: 'uppercase' }}>
+                <span style={{ fontSize: '0.7rem', color: isSelected ? 'var(--primary)' : 'var(--text-secondary)', fontWeight: 600, textTransform: 'uppercase' }}>
                   {r.level}
                 </span>
-                <span style={{ fontSize: '0.72rem', backgroundColor: 'rgba(255,255,255,0.06)', padding: '0.1rem 0.4rem', borderRadius: '4px', color: '#cbd5e1' }}>
+                <span style={{ fontSize: '0.72rem', backgroundColor: 'var(--background)', padding: '0.1rem 0.4rem', borderRadius: '4px', color: 'var(--text-secondary)', border: '1px solid var(--border)' }}>
                   {r.usersCount} Users
                 </span>
               </div>
-              <div style={{ fontWeight: 700, color: isSelected ? '#f8fafc' : '#cbd5e1', fontSize: '0.95rem', marginTop: '0.35rem' }}>
+              <div style={{ fontWeight: 700, color: isSelected ? 'var(--primary)' : 'var(--text-primary)', fontSize: '0.95rem', marginTop: '0.35rem' }}>
                 {r.name}
               </div>
             </div>
@@ -125,13 +126,13 @@ export const TeamPermissions = () => {
       </div>
 
       {/* Permissions Table for Selected Role */}
-      <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '12px', overflow: 'hidden' }}>
-        <div style={{ padding: '1rem 1.25rem', borderBottom: '1px solid rgba(255, 255, 255, 0.06)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', overflow: 'hidden', boxShadow: 'var(--shadow-sm)' }}>
+        <div style={{ padding: '1rem 1.25rem', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'var(--surface-secondary)' }}>
           <div>
-            <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#f8fafc', margin: 0 }}>
-              Configuring Permissions for: <span style={{ color: '#38bdf8' }}>{roles.find(r => r.id === selectedRole)?.name}</span>
+            <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
+              Configuring Permissions for: <span style={{ color: 'var(--primary)' }}>{roles.find(r => r.id === selectedRole)?.name}</span>
             </h3>
-            <p style={{ fontSize: '0.75rem', color: '#64748b', margin: '0.2rem 0 0 0' }}>
+            <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', margin: '0.2rem 0 0 0' }}>
               Click on any permission toggle to enable or disable access in real-time.
             </p>
           </div>
@@ -148,7 +149,7 @@ export const TeamPermissions = () => {
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   padding: '0.85rem 0',
-                  borderBottom: '1px solid rgba(255, 255, 255, 0.04)',
+                  borderBottom: '1px solid var(--border)',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
@@ -167,17 +168,17 @@ export const TeamPermissions = () => {
                     {hasAccess ? <Unlock size={16} /> : <Lock size={16} />}
                   </div>
                   <div>
-                    <div style={{ fontWeight: 600, color: '#f8fafc', fontSize: '0.88rem' }}>{item.name}</div>
-                    <div style={{ fontSize: '0.72rem', color: '#64748b' }}>Permission Key: <code>{key}</code></div>
+                    <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.88rem' }}>{item.name}</div>
+                    <div style={{ fontSize: '0.72rem', color: 'var(--text-tertiary)' }}>Permission Key: <code>{key}</code></div>
                   </div>
                 </div>
 
                 <button
                   onClick={() => togglePermission(key)}
                   style={{
-                    backgroundColor: hasAccess ? 'rgba(16, 185, 129, 0.2)' : 'rgba(255, 255, 255, 0.05)',
-                    color: hasAccess ? '#10b981' : '#94a3b8',
-                    border: hasAccess ? '1px solid rgba(16, 185, 129, 0.4)' : '1px solid rgba(255, 255, 255, 0.1)',
+                    backgroundColor: hasAccess ? 'rgba(16, 185, 129, 0.15)' : 'var(--background)',
+                    color: hasAccess ? '#10b981' : 'var(--text-secondary)',
+                    border: hasAccess ? '1px solid rgba(16, 185, 129, 0.4)' : '1px solid var(--border)',
                     padding: '0.4rem 0.9rem',
                     borderRadius: '6px',
                     fontSize: '0.75rem',
@@ -201,3 +202,5 @@ export const TeamPermissions = () => {
     </div>
   );
 };
+
+export default TeamPermissions;

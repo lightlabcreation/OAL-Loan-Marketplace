@@ -137,8 +137,8 @@ export const DealerVerificationFlow = () => {
     <div
       style={{
         minHeight: '100vh',
-        background: 'linear-gradient(180deg, #090d16 0%, #0c1220 50%, #070a10 100%)',
-        color: '#f1f5f9',
+        backgroundColor: 'var(--background)',
+        color: 'var(--text-primary)',
         fontFamily: 'system-ui, -apple-system, sans-serif',
         padding: '32px 20px 80px',
       }}
@@ -147,16 +147,16 @@ export const DealerVerificationFlow = () => {
         <div style={{ marginBottom: '32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-              <span style={{ fontSize: '12px', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#0ea5e9', fontWeight: 700 }}>
+              <span style={{ fontSize: '12px', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#0284c7', fontWeight: 700 }}>
                 OMP Deals • Auto Dealer Program
               </span>
-              <span style={{ color: '#475569' }}>•</span>
+              <span style={{ color: 'var(--text-tertiary)' }}>•</span>
               <AdpVerifiedBadge tier={formData.tier} size="sm" />
             </div>
-            <h1 style={{ fontSize: '28px', fontWeight: 800, margin: 0, color: '#ffffff' }}>
+            <h1 style={{ fontSize: '28px', fontWeight: 800, margin: 0, color: 'var(--text-primary)' }}>
               Verified Auto Dealer Onboarding (ADP Verified)
             </h1>
-            <p style={{ margin: '6px 0 0', color: '#94a3b8', fontSize: '14px' }}>
+            <p style={{ margin: '6px 0 0', color: 'var(--text-secondary)', fontSize: '14px' }}>
               Verify your automotive business, activate the official {'{ADP Verified}'} badge, and unlock the complete dealer tool suite.
             </p>
           </div>
@@ -169,9 +169,9 @@ export const DealerVerificationFlow = () => {
               gap: '8px',
               padding: '8px 16px',
               borderRadius: '8px',
-              background: 'rgba(255, 255, 255, 0.05)',
-              border: '1px solid rgba(255, 255, 255, 0.15)',
-              color: '#94a3b8',
+              background: 'var(--surface)',
+              border: '1px solid var(--border)',
+              color: 'var(--text-secondary)',
               fontSize: '13px',
               cursor: 'pointer',
             }}
@@ -200,19 +200,20 @@ export const DealerVerificationFlow = () => {
                   padding: '14px 16px',
                   borderRadius: '12px',
                   background: isActive
-                    ? 'linear-gradient(135deg, rgba(14, 165, 233, 0.18) 0%, rgba(3, 105, 161, 0.1) 100%)'
+                    ? 'rgba(2, 132, 199, 0.1)'
                     : isDone
                     ? 'rgba(16, 185, 129, 0.08)'
-                    : 'rgba(255, 255, 255, 0.03)',
+                    : 'var(--surface)',
                   border: isActive
-                    ? '1px solid rgba(14, 165, 233, 0.5)'
+                    ? '1px solid #0284c7'
                     : isDone
                     ? '1px solid rgba(16, 185, 129, 0.3)'
-                    : '1px solid rgba(255, 255, 255, 0.07)',
+                    : '1px solid var(--border)',
                   cursor: isDone ? 'pointer' : 'default',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '10px',
+                  boxShadow: 'var(--shadow-sm)',
                 }}
               >
                 <div
@@ -225,17 +226,17 @@ export const DealerVerificationFlow = () => {
                     justifyContent: 'center',
                     fontSize: '12px',
                     fontWeight: 700,
-                    background: isDone ? '#10b981' : isActive ? '#0ea5e9' : 'rgba(255, 255, 255, 0.1)',
-                    color: '#ffffff',
+                    background: isDone ? '#10b981' : isActive ? '#0284c7' : 'var(--surface-secondary)',
+                    color: isDone || isActive ? '#ffffff' : 'var(--text-secondary)',
                   }}
                 >
                   {isDone ? <Check size={14} strokeWidth={3} /> : item.step}
                 </div>
                 <div>
-                  <div style={{ fontSize: '13px', fontWeight: 700, color: isActive ? '#38bdf8' : isDone ? '#34d399' : '#cbd5e1' }}>
+                  <div style={{ fontSize: '13px', fontWeight: 700, color: isActive ? '#0284c7' : isDone ? '#10b981' : 'var(--text-primary)' }}>
                     {item.title}
                   </div>
-                  <div style={{ fontSize: '11px', color: '#64748b' }}>{item.desc}</div>
+                  <div style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>{item.desc}</div>
                 </div>
               </div>
             );
@@ -246,10 +247,10 @@ export const DealerVerificationFlow = () => {
         {currentStep === 1 && (
           <div>
             <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-              <h2 style={{ fontSize: '22px', fontWeight: 700, margin: '0 0 8px', color: '#ffffff' }}>
+              <h2 style={{ fontSize: '22px', fontWeight: 700, margin: '0 0 8px', color: 'var(--text-primary)' }}>
                 Step 1: Choose Your Dealership Classification
               </h2>
-              <p style={{ color: '#94a3b8', fontSize: '14px', maxWidth: '600px', margin: '0 auto' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '14px', maxWidth: '600px', margin: '0 auto' }}>
                 OMP Deals provides dedicated verification tiers tailored to independent used lots, franchise dealer groups, and nationwide auto retailers.
               </p>
             </div>
@@ -265,10 +266,10 @@ export const DealerVerificationFlow = () => {
                       borderRadius: '16px',
                       padding: '24px',
                       background: isSelected
-                        ? 'linear-gradient(180deg, rgba(14, 165, 233, 0.12) 0%, rgba(15, 23, 42, 0.8) 100%)'
-                        : 'rgba(15, 23, 42, 0.6)',
-                      border: isSelected ? '2px solid #0ea5e9' : '1px solid rgba(255, 255, 255, 0.08)',
-                      boxShadow: isSelected ? '0 0 24px rgba(14, 165, 233, 0.2)' : 'none',
+                        ? 'rgba(2, 132, 199, 0.08)'
+                        : 'var(--surface)',
+                      border: isSelected ? '2px solid #0284c7' : '1px solid var(--border)',
+                      boxShadow: 'var(--shadow-sm)',
                       cursor: 'pointer',
                       display: 'flex',
                       flexDirection: 'column',
@@ -276,15 +277,15 @@ export const DealerVerificationFlow = () => {
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
                       <div>
-                        <h3 style={{ fontSize: '18px', fontWeight: 700, margin: '0 0 4px', color: '#ffffff' }}>{t.name}</h3>
-                        <p style={{ fontSize: '12px', color: '#94a3b8', margin: 0 }}>{t.badgeDesc}</p>
+                        <h3 style={{ fontSize: '18px', fontWeight: 700, margin: '0 0 4px', color: 'var(--text-primary)' }}>{t.name}</h3>
+                        <p style={{ fontSize: '12px', color: 'var(--text-secondary)', margin: 0 }}>{t.badgeDesc}</p>
                       </div>
                       <div
                         style={{
                           width: '20px',
                           height: '20px',
                           borderRadius: '50%',
-                          border: isSelected ? '6px solid #0ea5e9' : '2px solid #475569',
+                          border: isSelected ? '6px solid #0284c7' : '2px solid var(--border)',
                           background: isSelected ? '#ffffff' : 'transparent',
                         }}
                       />
@@ -294,14 +295,14 @@ export const DealerVerificationFlow = () => {
                       <AdpVerifiedBadge tier={t.badgeTier} size="sm" />
                     </div>
 
-                    <div style={{ marginBottom: '16px', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', paddingBottom: '14px' }}>
-                      <div style={{ fontSize: '22px', fontWeight: 800, color: '#ffffff' }}>{t.monthly}</div>
-                      <div style={{ fontSize: '12px', color: '#64748b' }}>Capacity: {t.idealFor}</div>
+                    <div style={{ marginBottom: '16px', borderBottom: '1px solid var(--border)', paddingBottom: '14px' }}>
+                      <div style={{ fontSize: '22px', fontWeight: 800, color: 'var(--text-primary)' }}>{t.monthly}</div>
+                      <div style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>Capacity: {t.idealFor}</div>
                     </div>
 
                     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '20px' }}>
                       {t.features.map((f, idx) => (
-                        <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontSize: '12.5px', color: '#cbd5e1' }}>
+                        <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontSize: '12.5px', color: 'var(--text-secondary)' }}>
                           <CheckCircle2 size={15} color="#10b981" style={{ marginTop: '2px', flexShrink: 0 }} />
                           <span>{f}</span>
                         </div>
@@ -323,8 +324,8 @@ export const DealerVerificationFlow = () => {
                         fontSize: '13px',
                         cursor: 'pointer',
                         border: 'none',
-                        background: isSelected ? 'linear-gradient(90deg, #0284c7, #0ea5e9)' : 'rgba(255, 255, 255, 0.08)',
-                        color: '#ffffff',
+                        background: isSelected ? '#0284c7' : 'var(--surface-secondary)',
+                        color: isSelected ? '#ffffff' : 'var(--text-primary)',
                       }}
                     >
                       {isSelected ? 'Continue with this Tier' : 'Select Plan'}
@@ -344,7 +345,7 @@ export const DealerVerificationFlow = () => {
                   gap: '8px',
                   padding: '12px 24px',
                   borderRadius: '10px',
-                  background: 'linear-gradient(90deg, #0284c7, #0ea5e9)',
+                  background: '#0284c7',
                   border: 'none',
                   color: '#ffffff',
                   fontSize: '14px',
@@ -363,61 +364,61 @@ export const DealerVerificationFlow = () => {
         {currentStep === 2 && (
           <div>
             <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-              <h2 style={{ fontSize: '22px', fontWeight: 700, margin: '0 0 8px', color: '#ffffff' }}>
+              <h2 style={{ fontSize: '22px', fontWeight: 700, margin: '0 0 8px', color: 'var(--text-primary)' }}>
                 Step 2: Dealership Registration & DMV Credentials
               </h2>
-              <p style={{ color: '#94a3b8', fontSize: '14px', maxWidth: '600px', margin: '0 auto' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '14px', maxWidth: '600px', margin: '0 auto' }}>
                 To earn the {'{ADP Verified}'} badge, our compliance engine cross-checks your state motor vehicle dealer license and federal tax identification.
               </p>
             </div>
 
-            <div style={{ background: 'rgba(15, 23, 42, 0.7)', borderRadius: '16px', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '28px', marginBottom: '28px' }}>
+            <div style={{ background: 'var(--surface)', borderRadius: '16px', border: '1px solid var(--border)', padding: '28px', marginBottom: '28px', boxShadow: 'var(--shadow-sm)' }}>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '18px', marginBottom: '24px' }}>
                 <div>
-                  <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 600, color: '#94a3b8', marginBottom: '6px' }}>
+                  <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '6px' }}>
                     Dealership Legal Name *
                   </label>
                   <input
                     type="text"
                     value={formData.dealershipName}
                     onChange={(e) => setFormData({ ...formData, dealershipName: e.target.value })}
-                    style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'rgba(2, 6, 23, 0.6)', border: '1px solid rgba(255, 255, 255, 0.12)', color: '#ffffff', fontSize: '14px', boxSizing: 'border-box' }}
+                    style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--background)', border: '1px solid var(--border)', color: 'var(--text-primary)', fontSize: '14px', boxSizing: 'border-box' }}
                   />
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 600, color: '#94a3b8', marginBottom: '6px' }}>
+                  <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '6px' }}>
                     State DMV Dealer License # *
                   </label>
                   <input
                     type="text"
                     value={formData.licenseNumber}
                     onChange={(e) => setFormData({ ...formData, licenseNumber: e.target.value })}
-                    style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'rgba(2, 6, 23, 0.6)', border: '1px solid rgba(14, 165, 233, 0.4)', color: '#38bdf8', fontWeight: 600, fontSize: '14px', boxSizing: 'border-box' }}
+                    style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--background)', border: '1px solid #0284c7', color: '#0284c7', fontWeight: 600, fontSize: '14px', boxSizing: 'border-box' }}
                   />
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 600, color: '#94a3b8', marginBottom: '6px' }}>
+                  <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '6px' }}>
                     Federal Tax EIN / TIN *
                   </label>
                   <input
                     type="text"
                     value={formData.ein}
                     onChange={(e) => setFormData({ ...formData, ein: e.target.value })}
-                    style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'rgba(2, 6, 23, 0.6)', border: '1px solid rgba(255, 255, 255, 0.12)', color: '#ffffff', fontSize: '14px', boxSizing: 'border-box' }}
+                    style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--background)', border: '1px solid var(--border)', color: 'var(--text-primary)', fontSize: '14px', boxSizing: 'border-box' }}
                   />
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 600, color: '#94a3b8', marginBottom: '6px' }}>
+                  <label style={{ display: 'block', fontSize: '12.5px', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '6px' }}>
                     Sales Desk Phone (Click-to-Call) *
                   </label>
                   <input
                     type="text"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'rgba(2, 6, 23, 0.6)', border: '1px solid rgba(255, 255, 255, 0.12)', color: '#ffffff', fontSize: '14px', boxSizing: 'border-box' }}
+                    style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', background: 'var(--background)', border: '1px solid var(--border)', color: 'var(--text-primary)', fontSize: '14px', boxSizing: 'border-box' }}
                   />
                 </div>
               </div>
@@ -427,14 +428,14 @@ export const DealerVerificationFlow = () => {
               <button
                 type="button"
                 onClick={() => setCurrentStep(1)}
-                style={{ padding: '12px 20px', borderRadius: '8px', background: 'transparent', border: '1px solid rgba(255, 255, 255, 0.15)', color: '#cbd5e1', fontSize: '14px', cursor: 'pointer' }}
+                style={{ padding: '12px 20px', borderRadius: '8px', background: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--text-secondary)', fontSize: '14px', cursor: 'pointer' }}
               >
                 Back to Tiers
               </button>
               <button
                 type="button"
                 onClick={() => setCurrentStep(3)}
-                style={{ padding: '12px 24px', borderRadius: '10px', background: 'linear-gradient(90deg, #0284c7, #0ea5e9)', border: 'none', color: '#ffffff', fontSize: '14px', fontWeight: 700, cursor: 'pointer' }}
+                style={{ padding: '12px 24px', borderRadius: '10px', background: '#0284c7', border: 'none', color: '#ffffff', fontSize: '14px', fontWeight: 700, cursor: 'pointer' }}
               >
                 Proceed to Document Upload
               </button>
@@ -446,10 +447,10 @@ export const DealerVerificationFlow = () => {
         {currentStep === 3 && (
           <div>
             <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-              <h2 style={{ fontSize: '22px', fontWeight: 700, margin: '0 0 8px', color: '#ffffff' }}>
+              <h2 style={{ fontSize: '22px', fontWeight: 700, margin: '0 0 8px', color: 'var(--text-primary)' }}>
                 Step 3: Verification Documentation Upload
               </h2>
-              <p style={{ color: '#94a3b8', fontSize: '14px', maxWidth: '600px', margin: '0 auto' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '14px', maxWidth: '600px', margin: '0 auto' }}>
                 Upload official regulatory records. OMP Deals verifies each document directly with state licensing records.
               </p>
             </div>
@@ -460,14 +461,14 @@ export const DealerVerificationFlow = () => {
                 { title: 'Garage Liability Insurance (COI) *', doc: documents.insuranceDoc, status: '$1M Coverage Active' },
                 { title: 'State Resale / Sales Tax Permit *', doc: documents.resaleCert, status: 'Good Standing' },
               ].map((d, i) => (
-                <div key={i} style={{ background: 'rgba(15, 23, 42, 0.7)', borderRadius: '14px', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '20px' }}>
-                  <div style={{ fontSize: '13.5px', fontWeight: 700, color: '#ffffff', marginBottom: '12px' }}>{d.title}</div>
+                <div key={i} style={{ background: 'var(--surface)', borderRadius: '14px', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '20px', boxShadow: 'var(--shadow-sm)' }}>
+                  <div style={{ fontSize: '13.5px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '12px' }}>{d.title}</div>
                   <div style={{ border: '1px dashed rgba(16, 185, 129, 0.4)', borderRadius: '8px', padding: '14px', textAlign: 'center', background: 'rgba(16, 185, 129, 0.04)', marginBottom: '10px' }}>
                     <CheckCircle2 size={22} color="#10b981" style={{ margin: '0 auto 4px' }} />
-                    <div style={{ fontSize: '12.5px', fontWeight: 600, color: '#34d399' }}>{d.doc.name}</div>
-                    <div style={{ fontSize: '11px', color: '#64748b' }}>{d.doc.size}</div>
+                    <div style={{ fontSize: '12.5px', fontWeight: 600, color: '#10b981' }}>{d.doc.name}</div>
+                    <div style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>{d.doc.size}</div>
                   </div>
-                  <div style={{ fontSize: '11px', color: '#94a3b8' }}>{d.status}</div>
+                  <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>{d.status}</div>
                 </div>
               ))}
             </div>
@@ -476,7 +477,7 @@ export const DealerVerificationFlow = () => {
               <button
                 type="button"
                 onClick={() => setCurrentStep(2)}
-                style={{ padding: '12px 20px', borderRadius: '8px', background: 'transparent', border: '1px solid rgba(255, 255, 255, 0.15)', color: '#cbd5e1', fontSize: '14px', cursor: 'pointer' }}
+                style={{ padding: '12px 20px', borderRadius: '8px', background: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--text-secondary)', fontSize: '14px', cursor: 'pointer' }}
               >
                 Back to Business Info
               </button>
@@ -486,7 +487,7 @@ export const DealerVerificationFlow = () => {
                   setCurrentStep(4);
                   handleStartVerification();
                 }}
-                style={{ padding: '12px 24px', borderRadius: '10px', background: 'linear-gradient(90deg, #0284c7, #0ea5e9)', border: 'none', color: '#ffffff', fontSize: '14px', fontWeight: 700, cursor: 'pointer' }}
+                style={{ padding: '12px 24px', borderRadius: '10px', background: '#0284c7', border: 'none', color: '#ffffff', fontSize: '14px', fontWeight: 700, cursor: 'pointer' }}
               >
                 Run AI Verification Audit
               </button>
@@ -498,15 +499,15 @@ export const DealerVerificationFlow = () => {
         {currentStep === 4 && (
           <div>
             <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-              <h2 style={{ fontSize: '22px', fontWeight: 700, margin: '0 0 8px', color: '#ffffff' }}>
+              <h2 style={{ fontSize: '22px', fontWeight: 700, margin: '0 0 8px', color: 'var(--text-primary)' }}>
                 Step 4: Real-Time ADP Verification Audit
               </h2>
-              <p style={{ color: '#94a3b8', fontSize: '14px', maxWidth: '600px', margin: '0 auto' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '14px', maxWidth: '600px', margin: '0 auto' }}>
                 The automated compliance engine checks state licensing registries and sets up your verified dealer account credentials.
               </p>
             </div>
 
-            <div style={{ background: 'rgba(15, 23, 42, 0.75)', borderRadius: '16px', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '32px 24px', maxWidth: '680px', margin: '0 auto 32px' }}>
+            <div style={{ background: 'var(--surface)', borderRadius: '16px', border: '1px solid var(--border)', padding: '32px 24px', maxWidth: '680px', margin: '0 auto 32px', boxShadow: 'var(--shadow-sm)' }}>
               {/* Audit items */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginBottom: '28px' }}>
                 {[
@@ -522,18 +523,18 @@ export const DealerVerificationFlow = () => {
                       justifyContent: 'space-between',
                       padding: '12px 16px',
                       borderRadius: '8px',
-                      background: item.passed ? 'rgba(16, 185, 129, 0.08)' : 'rgba(255, 255, 255, 0.03)',
-                      border: item.passed ? '1px solid rgba(16, 185, 129, 0.3)' : '1px solid rgba(255, 255, 255, 0.06)',
+                      background: item.passed ? 'rgba(16, 185, 129, 0.08)' : 'var(--surface-secondary)',
+                      border: item.passed ? '1px solid rgba(16, 185, 129, 0.3)' : '1px solid var(--border)',
                     }}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                      {item.passed ? <CheckCircle2 size={18} color="#10b981" /> : <Clock size={18} color="#0ea5e9" className="animate-spin" />}
+                      {item.passed ? <CheckCircle2 size={18} color="#10b981" /> : <Clock size={18} color="#0284c7" className="animate-spin" />}
                       <div>
-                        <div style={{ fontSize: '13px', fontWeight: 600, color: '#ffffff' }}>{item.name}</div>
-                        <div style={{ fontSize: '11px', color: '#94a3b8' }}>{item.detail}</div>
+                        <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-primary)' }}>{item.name}</div>
+                        <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>{item.detail}</div>
                       </div>
                     </div>
-                    <span style={{ fontSize: '11.5px', fontWeight: 700, color: item.passed ? '#10b981' : '#0ea5e9' }}>
+                    <span style={{ fontSize: '11.5px', fontWeight: 700, color: item.passed ? '#10b981' : '#0284c7' }}>
                       {item.passed ? 'PASSED / ACTIVE' : 'SCANNING...'}
                     </span>
                   </div>
@@ -541,26 +542,26 @@ export const DealerVerificationFlow = () => {
               </div>
 
               {verificationProgress.finalApproval ? (
-                <div style={{ background: 'linear-gradient(135deg, rgba(14, 165, 233, 0.18) 0%, rgba(16, 185, 129, 0.15) 100%)', borderRadius: '14px', border: '1px solid rgba(14, 165, 233, 0.4)', padding: '24px', textAlign: 'center' }}>
+                <div style={{ background: 'rgba(2, 132, 199, 0.08)', borderRadius: '14px', border: '1px solid rgba(2, 132, 199, 0.4)', padding: '24px', textAlign: 'center' }}>
                   <div style={{ marginBottom: '12px' }}>
                     <AdpVerifiedBadge tier={formData.tier} size="lg" />
                   </div>
-                  <h3 style={{ fontSize: '19px', fontWeight: 800, margin: '0 0 6px', color: '#ffffff' }}>
+                  <h3 style={{ fontSize: '19px', fontWeight: 800, margin: '0 0 6px', color: 'var(--text-primary)' }}>
                     🎉 Official ADP Verified Credential Issued!
                   </h3>
-                  <p style={{ fontSize: '13px', color: '#cbd5e1', maxWidth: '480px', margin: '0 auto 18px' }}>
+                  <p style={{ fontSize: '13px', color: 'var(--text-secondary)', maxWidth: '480px', margin: '0 auto 18px' }}>
                     Congratulations! <strong>{formData.dealershipName}</strong> is certified under the <strong>OMP Deals Verified Auto Dealers Program</strong>.
                   </p>
                   <button
                     type="button"
                     onClick={() => navigate('/omp/verified-dealer')}
-                    style={{ padding: '12px 24px', borderRadius: '10px', background: 'linear-gradient(90deg, #0284c7, #0ea5e9)', border: 'none', color: '#ffffff', fontSize: '14px', fontWeight: 700, cursor: 'pointer' }}
+                    style={{ padding: '12px 24px', borderRadius: '10px', background: '#0284c7', border: 'none', color: '#ffffff', fontSize: '14px', fontWeight: 700, cursor: 'pointer' }}
                   >
                     Enter Verified Dealer Benefits Dashboard
                   </button>
                 </div>
               ) : (
-                <div style={{ textAlign: 'center', color: '#0ea5e9', fontSize: '13px', fontWeight: 600 }}>
+                <div style={{ textAlign: 'center', color: '#0284c7', fontSize: '13px', fontWeight: 600 }}>
                   <Sparkles size={16} style={{ display: 'inline', marginRight: '6px' }} />
                   Verifying DMV and registry databases...
                 </div>

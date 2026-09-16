@@ -63,8 +63,8 @@ export const VehicleListingDetail = () => {
     <div
       style={{
         minHeight: '100vh',
-        background: 'linear-gradient(180deg, #090d16 0%, #0c1220 50%, #070a10 100%)',
-        color: '#f1f5f9',
+        background: 'var(--background)',
+        color: 'var(--text-primary)',
         fontFamily: 'system-ui, -apple-system, sans-serif',
         padding: '24px 20px 80px',
       }}
@@ -80,7 +80,7 @@ export const VehicleListingDetail = () => {
               gap: '6px',
               background: 'transparent',
               border: 'none',
-              color: '#38bdf8',
+              color: '#0ea5e9',
               fontSize: '13.5px',
               fontWeight: 600,
               cursor: 'pointer',
@@ -96,9 +96,9 @@ export const VehicleListingDetail = () => {
               style={{
                 padding: '6px 12px',
                 borderRadius: '8px',
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.12)',
-                color: '#cbd5e1',
+                background: 'var(--surface)',
+                border: '1px solid var(--border)',
+                color: 'var(--text-secondary)',
                 fontSize: '12.5px',
                 cursor: 'pointer',
               }}
@@ -132,10 +132,10 @@ export const VehicleListingDetail = () => {
               style={{
                 borderRadius: '16px',
                 overflow: 'hidden',
-                background: '#020617',
+                background: 'var(--surface)',
                 height: '380px',
                 marginBottom: '12px',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
+                border: '1px solid var(--border)',
                 position: 'relative',
               }}
             >
@@ -161,7 +161,7 @@ export const VehicleListingDetail = () => {
                     borderRadius: '8px',
                     overflow: 'hidden',
                     cursor: 'pointer',
-                    border: activeImage === i ? '2px solid #0ea5e9' : '1px solid rgba(255, 255, 255, 0.1)',
+                    border: activeImage === i ? '2px solid #0ea5e9' : '1px solid var(--border)',
                   }}
                 >
                   <img src={img} alt="Thumbnail" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -172,39 +172,39 @@ export const VehicleListingDetail = () => {
             {/* Specifications Card */}
             <div
               style={{
-                background: 'rgba(15, 23, 42, 0.7)',
+                background: 'var(--surface)',
                 borderRadius: '14px',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
+                border: '1px solid var(--border)',
                 padding: '20px',
               }}
             >
-              <h3 style={{ fontSize: '16px', fontWeight: 700, margin: '0 0 16px', color: '#ffffff' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: 700, margin: '0 0 16px', color: 'var(--text-primary)' }}>
                 Vehicle Specifications
               </h3>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '14px', fontSize: '13px' }}>
                 <div>
-                  <div style={{ color: '#64748b' }}>VIN</div>
-                  <div style={{ fontWeight: 600, color: '#38bdf8', fontFamily: 'monospace' }}>{vehicle.vin}</div>
+                  <div style={{ color: 'var(--text-secondary)' }}>VIN</div>
+                  <div style={{ fontWeight: 600, color: '#0ea5e9', fontFamily: 'monospace' }}>{vehicle.vin}</div>
                 </div>
                 <div>
-                  <div style={{ color: '#64748b' }}>Stock #</div>
-                  <div style={{ fontWeight: 600, color: '#ffffff' }}>{vehicle.stock}</div>
+                  <div style={{ color: 'var(--text-secondary)' }}>Stock #</div>
+                  <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{vehicle.stock}</div>
                 </div>
                 <div>
-                  <div style={{ color: '#64748b' }}>Mileage</div>
-                  <div style={{ fontWeight: 600, color: '#ffffff' }}>{vehicle.mileage}</div>
+                  <div style={{ color: 'var(--text-secondary)' }}>Mileage</div>
+                  <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{vehicle.mileage}</div>
                 </div>
                 <div>
-                  <div style={{ color: '#64748b' }}>Engine</div>
-                  <div style={{ fontWeight: 600, color: '#ffffff' }}>{vehicle.engine}</div>
+                  <div style={{ color: 'var(--text-secondary)' }}>Engine</div>
+                  <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{vehicle.engine}</div>
                 </div>
                 <div>
-                  <div style={{ color: '#64748b' }}>Transmission</div>
-                  <div style={{ fontWeight: 600, color: '#ffffff' }}>{vehicle.transmission}</div>
+                  <div style={{ color: 'var(--text-secondary)' }}>Transmission</div>
+                  <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{vehicle.transmission}</div>
                 </div>
                 <div>
-                  <div style={{ color: '#64748b' }}>Color</div>
-                  <div style={{ fontWeight: 600, color: '#ffffff' }}>{vehicle.exteriorColor}</div>
+                  <div style={{ color: 'var(--text-secondary)' }}>Color</div>
+                  <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{vehicle.exteriorColor}</div>
                 </div>
               </div>
             </div>
@@ -215,10 +215,10 @@ export const VehicleListingDetail = () => {
             {/* Listing Summary Card */}
             <div
               style={{
-                background: 'rgba(15, 23, 42, 0.8)',
+                background: 'var(--surface)',
                 borderRadius: '16px',
-                border: '1px solid rgba(14, 165, 233, 0.3)',
-                boxShadow: '0 4px 24px rgba(0, 0, 0, 0.35)',
+                border: '1px solid var(--border)',
+                boxShadow: '0 4px 24px rgba(0, 0, 0, 0.08)',
                 padding: '24px',
                 marginBottom: '20px',
               }}
@@ -231,13 +231,13 @@ export const VehicleListingDetail = () => {
                 <span style={{ fontSize: '11.5px', color: '#10b981' }}>Clean Title • 1-Owner</span>
               </div>
 
-              <h2 style={{ fontSize: '22px', fontWeight: 800, margin: '0 0 12px', color: '#ffffff' }}>
+              <h2 style={{ fontSize: '22px', fontWeight: 800, margin: '0 0 12px', color: 'var(--text-primary)' }}>
                 {vehicle.title}
               </h2>
 
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '14px', marginBottom: '16px', flexWrap: 'wrap' }}>
                 <div style={{ fontSize: '32px', fontWeight: 900, color: '#10b981' }}>{vehicle.price}</div>
-                <div style={{ fontSize: '13px', color: '#38bdf8', fontWeight: 600 }}>
+                <div style={{ fontSize: '13px', color: '#0ea5e9', fontWeight: 600 }}>
                   Est. {vehicle.estPayment}
                 </div>
               </div>
@@ -302,7 +302,7 @@ export const VehicleListingDetail = () => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <FileSpreadsheet size={20} color="#eab308" />
                   <div>
-                    <div style={{ fontSize: '13px', fontWeight: 700, color: '#ffffff' }}>Carfax Vehicle History Report</div>
+                    <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-primary)' }}>Carfax Vehicle History Report</div>
                     <div style={{ fontSize: '11px', color: '#facc15' }}>No accidents reported • Single Owner</div>
                   </div>
                 </div>
@@ -327,20 +327,20 @@ export const VehicleListingDetail = () => {
             {/* NATIONWIDE SHIPPING MODULE (Task O-03) */}
             <div
               style={{
-                background: 'rgba(15, 23, 42, 0.75)',
+                background: 'var(--surface)',
                 borderRadius: '16px',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
+                border: '1px solid var(--border)',
                 padding: '20px',
                 marginBottom: '20px',
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
                 <Truck size={18} color="#10b981" />
-                <h3 style={{ margin: 0, fontSize: '15px', fontWeight: 700, color: '#ffffff' }}>
+                <h3 style={{ margin: 0, fontSize: '15px', fontWeight: 700, color: 'var(--text-primary)' }}>
                   Nationwide Doorstep Shipping & Protection (Task O-03)
                 </h3>
               </div>
-              <p style={{ margin: '0 0 14px', fontSize: '12.5px', color: '#94a3b8' }}>
+              <p style={{ margin: '0 0 14px', fontSize: '12.5px', color: 'var(--text-secondary)' }}>
                 Insured carrier transport directly to your driveway. Buyer protection guaranteed.
               </p>
 
@@ -353,9 +353,9 @@ export const VehicleListingDetail = () => {
                     flex: 1,
                     padding: '8px 12px',
                     borderRadius: '8px',
-                    background: 'rgba(2, 6, 23, 0.6)',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
-                    color: '#ffffff',
+                    background: 'var(--surface-secondary)',
+                    border: '1px solid var(--border)',
+                    color: 'var(--text-primary)',
                     fontSize: '13px',
                   }}
                 />
@@ -375,7 +375,7 @@ export const VehicleListingDetail = () => {
                 </button>
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12.5px', color: '#cbd5e1' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12.5px', color: 'var(--text-secondary)' }}>
                 <span>Estimated Freight & Insurance:</span>
                 <span style={{ fontWeight: 800, color: '#10b981' }}>{shippingQuote}</span>
               </div>
@@ -384,7 +384,7 @@ export const VehicleListingDetail = () => {
             {/* POLICE SAFE MEETUP SPOT (Task O-05) */}
             <div
               style={{
-                background: 'rgba(15, 23, 42, 0.75)',
+                background: 'var(--surface)',
                 borderRadius: '16px',
                 border: '1px solid rgba(16, 185, 129, 0.25)',
                 padding: '20px',
@@ -392,14 +392,14 @@ export const VehicleListingDetail = () => {
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
                 <ShieldCheck size={18} color="#10b981" />
-                <h3 style={{ margin: 0, fontSize: '15px', fontWeight: 700, color: '#ffffff' }}>
+                <h3 style={{ margin: 0, fontSize: '15px', fontWeight: 700, color: 'var(--text-primary)' }}>
                   Designated Police Safe MeetUp Location (Task O-05)
                 </h3>
               </div>
-              <div style={{ fontSize: '13px', color: '#ffffff', fontWeight: 600, marginBottom: '2px' }}>
+              <div style={{ fontSize: '13px', color: 'var(--text-primary)', fontWeight: 600, marginBottom: '2px' }}>
                 {vehicle.safeMeetupSpot}
               </div>
-              <div style={{ fontSize: '12px', color: '#94a3b8', marginBottom: '8px' }}>
+              <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '8px' }}>
                 2000 Stevenson Blvd, Fremont, CA 94538 (2.8 mi)
               </div>
               <div style={{ fontSize: '11px', color: '#10b981' }}>

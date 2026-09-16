@@ -166,11 +166,11 @@ export const OmpMarketplace = () => {
   return (
     <div
       style={{
-        minHeight: '100vh',
-        background: 'linear-gradient(180deg, #090d16 0%, #0c1220 50%, #070a10 100%)',
-        color: '#f1f5f9',
+        minHeight: '100%',
+        backgroundColor: 'var(--background)',
+        color: 'var(--text-primary)',
         fontFamily: 'system-ui, -apple-system, sans-serif',
-        padding: '24px 20px 80px',
+        padding: '0.5rem 0.5rem 2rem',
       }}
     >
       <div style={{ maxWidth: '1240px', margin: '0 auto' }}>
@@ -178,13 +178,13 @@ export const OmpMarketplace = () => {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '16px' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-              <span style={{ fontSize: '11.5px', color: '#0ea5e9', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+              <span style={{ fontSize: '11.5px', color: 'var(--primary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                 OMP Deals Marketplace
               </span>
-              <span style={{ color: '#475569' }}>•</span>
+              <span style={{ color: 'var(--text-tertiary)' }}>•</span>
               <span style={{ fontSize: '11.5px', color: '#10b981', fontWeight: 600 }}>Hybrid OfferUp + Verified Dealers</span>
             </div>
-            <h1 style={{ fontSize: '26px', fontWeight: 800, margin: 0, color: '#ffffff' }}>
+            <h1 style={{ fontSize: '26px', fontWeight: 800, margin: 0, color: 'var(--text-primary)' }}>
               Buy & Sell Vehicles Locally or Nationwide
             </h1>
           </div>
@@ -198,10 +198,11 @@ export const OmpMarketplace = () => {
                 gap: '6px',
                 padding: '8px 14px',
                 borderRadius: '8px',
-                background: 'rgba(255, 255, 255, 0.06)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                color: '#cbd5e1',
+                background: 'var(--surface)',
+                border: '1px solid var(--border)',
+                color: 'var(--text-secondary)',
                 fontSize: '13px',
+                fontWeight: 600,
                 cursor: 'pointer',
               }}
             >
@@ -217,9 +218,9 @@ export const OmpMarketplace = () => {
                 gap: '6px',
                 padding: '8px 14px',
                 borderRadius: '8px',
-                background: 'rgba(16, 185, 129, 0.15)',
+                background: 'rgba(16, 185, 129, 0.12)',
                 border: '1px solid rgba(16, 185, 129, 0.35)',
-                color: '#34d399',
+                color: '#10b981',
                 fontSize: '12.5px',
                 fontWeight: 700,
                 cursor: 'pointer',
@@ -234,9 +235,10 @@ export const OmpMarketplace = () => {
         {/* SEARCH & GEO-RADIUS BAR (OfferUp Core O-01) */}
         <div
           style={{
-            background: 'rgba(15, 23, 42, 0.8)',
+            background: 'var(--surface)',
             borderRadius: '16px',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
+            border: '1px solid var(--border)',
+            boxShadow: 'var(--shadow-sm)',
             padding: '18px 20px',
             marginBottom: '24px',
             display: 'flex',
@@ -252,14 +254,14 @@ export const OmpMarketplace = () => {
               minWidth: '260px',
               display: 'flex',
               alignItems: 'center',
-              background: 'rgba(2, 6, 23, 0.6)',
+              background: 'var(--background)',
               borderRadius: '10px',
               padding: '10px 14px',
-              border: '1px solid rgba(255, 255, 255, 0.12)',
+              border: '1px solid var(--border)',
               gap: '10px',
             }}
           >
-            <Search size={18} color="#64748b" />
+            <Search size={18} color="var(--text-tertiary)" />
             <input
               type="text"
               placeholder="Search make, model, or dealer..."
@@ -269,7 +271,7 @@ export const OmpMarketplace = () => {
                 background: 'transparent',
                 border: 'none',
                 outline: 'none',
-                color: '#ffffff',
+                color: 'var(--text-primary)',
                 fontSize: '14px',
                 width: '100%',
               }}
@@ -281,22 +283,22 @@ export const OmpMarketplace = () => {
             style={{
               display: 'flex',
               alignItems: 'center',
-              background: 'rgba(2, 6, 23, 0.6)',
+              background: 'var(--background)',
               borderRadius: '10px',
               padding: '10px 14px',
-              border: '1px solid rgba(255, 255, 255, 0.12)',
+              border: '1px solid var(--border)',
               gap: '8px',
             }}
           >
-            <MapPin size={16} color="#0ea5e9" />
-            <span style={{ fontSize: '13px', color: '#cbd5e1' }}>{locationZip}</span>
+            <MapPin size={16} color="var(--primary)" />
+            <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>{locationZip}</span>
             <select
               value={selectedRadius}
               onChange={(e) => setSelectedRadius(e.target.value)}
               style={{
                 background: 'transparent',
                 border: 'none',
-                color: '#38bdf8',
+                color: 'var(--primary)',
                 fontSize: '13px',
                 fontWeight: 700,
                 outline: 'none',
@@ -304,10 +306,10 @@ export const OmpMarketplace = () => {
                 marginLeft: '4px',
               }}
             >
-              <option value="15" style={{ background: '#0f172a', color: '#fff' }}>Within 15 mi</option>
-              <option value="30" style={{ background: '#0f172a', color: '#fff' }}>Within 30 mi</option>
-              <option value="50" style={{ background: '#0f172a', color: '#fff' }}>Within 50 mi</option>
-              <option value="nationwide" style={{ background: '#0f172a', color: '#fff' }}>Nationwide</option>
+              <option value="15" style={{ background: 'var(--surface)', color: 'var(--text-primary)' }}>Within 15 mi</option>
+              <option value="30" style={{ background: 'var(--surface)', color: 'var(--text-primary)' }}>Within 30 mi</option>
+              <option value="50" style={{ background: 'var(--surface)', color: 'var(--text-primary)' }}>Within 50 mi</option>
+              <option value="nationwide" style={{ background: 'var(--surface)', color: 'var(--text-primary)' }}>Nationwide</option>
             </select>
           </div>
 
@@ -318,9 +320,9 @@ export const OmpMarketplace = () => {
               style={{
                 padding: '9px 14px',
                 borderRadius: '8px',
-                background: verifiedOnly ? 'rgba(14, 165, 233, 0.2)' : 'rgba(255, 255, 255, 0.05)',
-                border: verifiedOnly ? '1px solid #0ea5e9' : '1px solid rgba(255, 255, 255, 0.1)',
-                color: verifiedOnly ? '#38bdf8' : '#94a3b8',
+                background: verifiedOnly ? 'var(--primary-subtle, rgba(14, 165, 233, 0.15))' : 'var(--background)',
+                border: verifiedOnly ? '1px solid var(--primary)' : '1px solid var(--border)',
+                color: verifiedOnly ? 'var(--primary)' : 'var(--text-secondary)',
                 fontSize: '12.5px',
                 fontWeight: 600,
                 cursor: 'pointer',
@@ -338,9 +340,9 @@ export const OmpMarketplace = () => {
               style={{
                 padding: '9px 14px',
                 borderRadius: '8px',
-                background: shippingOnly ? 'rgba(16, 185, 129, 0.2)' : 'rgba(255, 255, 255, 0.05)',
-                border: shippingOnly ? '1px solid #10b981' : '1px solid rgba(255, 255, 255, 0.1)',
-                color: shippingOnly ? '#34d399' : '#94a3b8',
+                background: shippingOnly ? 'rgba(16, 185, 129, 0.15)' : 'var(--background)',
+                border: shippingOnly ? '1px solid #10b981' : '1px solid var(--border)',
+                color: shippingOnly ? '#10b981' : 'var(--text-secondary)',
                 fontSize: '12.5px',
                 fontWeight: 600,
                 cursor: 'pointer',
@@ -367,21 +369,22 @@ export const OmpMarketplace = () => {
           {/* Trust Feature 1: TruYou */}
           <div
             style={{
-              background: 'rgba(15, 23, 42, 0.65)',
+              background: 'var(--surface)',
               borderRadius: '12px',
-              border: '1px solid rgba(14, 165, 233, 0.2)',
+              border: '1px solid var(--border)',
+              boxShadow: 'var(--shadow-sm)',
               padding: '14px 18px',
               display: 'flex',
               alignItems: 'center',
               gap: '12px',
             }}
           >
-            <div style={{ background: 'rgba(14, 165, 233, 0.15)', padding: '8px', borderRadius: '8px', color: '#0ea5e9' }}>
+            <div style={{ background: 'var(--primary-subtle, rgba(14, 165, 233, 0.15))', padding: '8px', borderRadius: '8px', color: 'var(--primary)' }}>
               <Award size={20} />
             </div>
             <div>
-              <div style={{ fontSize: '13px', fontWeight: 700, color: '#ffffff' }}>TruYou Identity Protected</div>
-              <div style={{ fontSize: '11px', color: '#94a3b8' }}>Confirmed real buyers & sellers</div>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-primary)' }}>TruYou Identity Protected</div>
+              <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>Confirmed real buyers & sellers</div>
             </div>
           </div>
 
@@ -389,9 +392,10 @@ export const OmpMarketplace = () => {
           <div
             onClick={() => setPoliceSpotModal(true)}
             style={{
-              background: 'rgba(15, 23, 42, 0.65)',
+              background: 'var(--surface)',
               borderRadius: '12px',
-              border: '1px solid rgba(16, 185, 129, 0.2)',
+              border: '1px solid var(--border)',
+              boxShadow: 'var(--shadow-sm)',
               padding: '14px 18px',
               display: 'flex',
               alignItems: 'center',
@@ -403,17 +407,18 @@ export const OmpMarketplace = () => {
               <ShieldCheck size={20} />
             </div>
             <div>
-              <div style={{ fontSize: '13px', fontWeight: 700, color: '#ffffff' }}>1,600+ Police Safe Spots</div>
-              <div style={{ fontSize: '11px', color: '#34d399' }}>Click to view Fremont PD spots ➔</div>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-primary)' }}>1,600+ Police Safe Spots</div>
+              <div style={{ fontSize: '11px', color: '#10b981' }}>Click to view Fremont PD spots ➔</div>
             </div>
           </div>
 
           {/* Trust Feature 3: Shipping */}
           <div
             style={{
-              background: 'rgba(15, 23, 42, 0.65)',
+              background: 'var(--surface)',
               borderRadius: '12px',
-              border: '1px solid rgba(234, 179, 8, 0.2)',
+              border: '1px solid var(--border)',
+              boxShadow: 'var(--shadow-sm)',
               padding: '14px 18px',
               display: 'flex',
               alignItems: 'center',
@@ -424,8 +429,8 @@ export const OmpMarketplace = () => {
               <Truck size={20} />
             </div>
             <div>
-              <div style={{ fontSize: '13px', fontWeight: 700, color: '#ffffff' }}>Buyer Protection & Shipping</div>
-              <div style={{ fontSize: '11px', color: '#94a3b8' }}>Insured nationwide doorstep delivery</div>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-primary)' }}>Buyer Protection & Shipping</div>
+              <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>Insured nationwide doorstep delivery</div>
             </div>
           </div>
         </div>
@@ -433,10 +438,10 @@ export const OmpMarketplace = () => {
         {/* LISTINGS GRID */}
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-            <h2 style={{ fontSize: '18px', fontWeight: 700, margin: 0, color: '#ffffff' }}>
+            <h2 style={{ fontSize: '18px', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
               Vehicles for Sale ({filteredListings.length})
             </h2>
-            <span style={{ fontSize: '12px', color: '#64748b' }}>Sorted by: Proximity & Verified Trust</span>
+            <span style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>Sorted by: Proximity & Verified Trust</span>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
@@ -445,9 +450,10 @@ export const OmpMarketplace = () => {
                 key={item.id}
                 onClick={() => navigate(`/omp/marketplace/${item.id}`)}
                 style={{
-                  background: 'rgba(15, 23, 42, 0.75)',
+                  background: 'var(--surface)',
                   borderRadius: '16px',
-                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  border: '1px solid var(--border)',
+                  boxShadow: 'var(--shadow-sm)',
                   overflow: 'hidden',
                   cursor: 'pointer',
                   transition: 'all 0.2s ease',
@@ -455,15 +461,17 @@ export const OmpMarketplace = () => {
                 }}
                 onMouseOver={(e) => {
                   e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.borderColor = 'rgba(14, 165, 233, 0.4)';
+                  e.currentTarget.style.borderColor = 'var(--primary)';
+                  e.currentTarget.style.boxShadow = 'var(--shadow-md)';
                 }}
                 onMouseOut={(e) => {
                   e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+                  e.currentTarget.style.borderColor = 'var(--border)';
+                  e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
                 }}
               >
                 {/* Image & Badges */}
-                <div style={{ position: 'relative', height: '190px', background: '#020617', overflow: 'hidden' }}>
+                <div style={{ position: 'relative', height: '190px', background: 'var(--surface-secondary)', overflow: 'hidden' }}>
                   <img
                     src={item.image}
                     alt={item.title}
@@ -563,17 +571,17 @@ export const OmpMarketplace = () => {
                 {/* Details */}
                 <div style={{ padding: '16px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '8px' }}>
-                    <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 700, color: '#ffffff' }}>{item.title}</h3>
+                    <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 700, color: 'var(--text-primary)' }}>{item.title}</h3>
                   </div>
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                     <div style={{ fontSize: '20px', fontWeight: 800, color: '#10b981' }}>{item.price}</div>
-                    <div style={{ fontSize: '12px', color: '#94a3b8' }}>{item.mileage}</div>
+                    <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>{item.mileage}</div>
                   </div>
 
-                  <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '11.5px', color: '#94a3b8' }}>
-                    <span>Seller: <strong>{item.seller}</strong></span>
-                    <span>{item.posted}</span>
+                  <div style={{ borderTop: '1px solid var(--border)', paddingTop: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '11.5px', color: 'var(--text-secondary)' }}>
+                    <span>Seller: <strong style={{ color: 'var(--text-primary)' }}>{item.seller}</strong></span>
+                    <span style={{ color: 'var(--text-tertiary)' }}>{item.posted}</span>
                   </div>
                 </div>
               </div>
@@ -590,8 +598,8 @@ export const OmpMarketplace = () => {
               left: 0,
               right: 0,
               bottom: 0,
-              background: 'rgba(0, 0, 0, 0.8)',
-              backdropFilter: 'blur(8px)',
+              background: 'rgba(0, 0, 0, 0.7)',
+              backdropFilter: 'blur(6px)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -601,10 +609,10 @@ export const OmpMarketplace = () => {
           >
             <div
               style={{
-                background: '#0f172a',
+                background: 'var(--surface)',
                 borderRadius: '16px',
-                border: '1px solid rgba(16, 185, 129, 0.4)',
-                boxShadow: '0 0 40px rgba(16, 185, 129, 0.25)',
+                border: '1px solid var(--border)',
+                boxShadow: 'var(--shadow-xl)',
                 padding: '28px',
                 maxWidth: '600px',
                 width: '100%',
@@ -613,7 +621,7 @@ export const OmpMarketplace = () => {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <ShieldCheck size={24} color="#10b981" />
-                  <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: '#ffffff' }}>
+                  <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 800, color: 'var(--text-primary)' }}>
                     1,600+ Police Department Safe MeetUp Spots
                   </h3>
                 </div>
@@ -622,7 +630,7 @@ export const OmpMarketplace = () => {
                   style={{
                     background: 'transparent',
                     border: 'none',
-                    color: '#94a3b8',
+                    color: 'var(--text-tertiary)',
                     fontSize: '18px',
                     cursor: 'pointer',
                   }}
@@ -631,7 +639,7 @@ export const OmpMarketplace = () => {
                 </button>
               </div>
 
-              <p style={{ fontSize: '13px', color: '#cbd5e1', lineHeight: 1.5, marginBottom: '20px' }}>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '20px' }}>
                 OMP Deals partners with local law enforcement across all 50 states to provide designated, well-lit, 24/7 video-surveilled parking spots at police stations for safe in-person car and marketplace transactions.
               </p>
 
@@ -659,18 +667,18 @@ export const OmpMarketplace = () => {
                   <div
                     key={i}
                     style={{
-                      background: 'rgba(255, 255, 255, 0.04)',
+                      background: 'var(--background)',
                       borderRadius: '10px',
                       padding: '12px 16px',
-                      border: '1px solid rgba(255, 255, 255, 0.08)',
+                      border: '1px solid var(--border)',
                     }}
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '4px' }}>
-                      <span style={{ fontSize: '13.5px', fontWeight: 700, color: '#ffffff' }}>{spot.name}</span>
+                      <span style={{ fontSize: '13.5px', fontWeight: 700, color: 'var(--text-primary)' }}>{spot.name}</span>
                       <span style={{ fontSize: '11px', color: '#10b981', fontWeight: 600 }}>{spot.distance}</span>
                     </div>
-                    <div style={{ fontSize: '12px', color: '#94a3b8', marginBottom: '4px' }}>{spot.address}</div>
-                    <div style={{ fontSize: '11px', color: '#38bdf8' }}>✓ {spot.features}</div>
+                    <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '4px' }}>{spot.address}</div>
+                    <div style={{ fontSize: '11px', color: 'var(--primary)' }}>✓ {spot.features}</div>
                   </div>
                 ))}
               </div>

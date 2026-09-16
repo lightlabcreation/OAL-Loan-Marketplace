@@ -137,8 +137,8 @@ export const FeedSync = () => {
     <div
       style={{
         minHeight: '100vh',
-        background: 'linear-gradient(180deg, #090d16 0%, #0c1220 50%, #070a10 100%)',
-        color: '#f1f5f9',
+        backgroundColor: 'var(--background)',
+        color: 'var(--text-primary)',
         fontFamily: 'system-ui, -apple-system, sans-serif',
         padding: '28px 20px 80px',
       }}
@@ -148,16 +148,16 @@ export const FeedSync = () => {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '28px', flexWrap: 'wrap', gap: '16px' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-              <span style={{ fontSize: '11.5px', color: '#0ea5e9', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+              <span style={{ fontSize: '11.5px', color: '#0284c7', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                 OMP Deals • Pillar 1 (Stock the Lot)
               </span>
-              <span style={{ color: '#475569' }}>/</span>
-              <span style={{ fontSize: '11.5px', color: '#94a3b8' }}>DMS Auto Feed Sync (Task V-03 / N-01)</span>
+              <span style={{ color: 'var(--text-tertiary)' }}>/</span>
+              <span style={{ fontSize: '11.5px', color: 'var(--text-secondary)' }}>DMS Auto Feed Sync (Task V-03 / N-01)</span>
             </div>
-            <h1 style={{ fontSize: '26px', fontWeight: 800, margin: 0, color: '#ffffff' }}>
+            <h1 style={{ fontSize: '26px', fontWeight: 800, margin: 0, color: 'var(--text-primary)' }}>
               DMS Auto Inventory Feed Sync
             </h1>
-            <p style={{ margin: '4px 0 0', fontSize: '13.5px', color: '#94a3b8' }}>
+            <p style={{ margin: '4px 0 0', fontSize: '13.5px', color: 'var(--text-secondary)' }}>
               Automatic 2-way vehicle inventory synchronization directly from your dealership DMS. <strong>Zero manual entry required.</strong>
             </p>
           </div>
@@ -171,9 +171,9 @@ export const FeedSync = () => {
                 gap: '6px',
                 padding: '8px 14px',
                 borderRadius: '8px',
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                color: '#cbd5e1',
+                background: 'var(--surface)',
+                border: '1px solid var(--border)',
+                color: 'var(--text-primary)',
                 fontSize: '13px',
                 cursor: 'pointer',
               }}
@@ -190,7 +190,7 @@ export const FeedSync = () => {
                 gap: '6px',
                 padding: '8px 16px',
                 borderRadius: '8px',
-                background: 'linear-gradient(90deg, #0284c7, #0ea5e9)',
+                background: '#0284c7',
                 border: 'none',
                 color: '#ffffff',
                 fontSize: '13px',
@@ -209,106 +209,111 @@ export const FeedSync = () => {
           {/* KPI 1 */}
           <div
             style={{
-              background: 'rgba(15, 23, 42, 0.7)',
+              background: 'var(--surface)',
               borderRadius: '14px',
-              border: '1px solid rgba(14, 165, 233, 0.3)',
+              border: '1px solid var(--border)',
               padding: '18px 20px',
+              boxShadow: 'var(--shadow-sm)',
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontSize: '12px', color: '#94a3b8' }}>Connected DMS</span>
+              <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Connected DMS</span>
               <span style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', padding: '2px 8px', borderRadius: '4px', fontSize: '11px', fontWeight: 700 }}>
                 ACTIVE
               </span>
             </div>
-            <div style={{ fontSize: '20px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>
+            <div style={{ fontSize: '20px', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '4px' }}>
               DealerSocket API
             </div>
-            <div style={{ fontSize: '11.5px', color: '#64748b' }}>Account: METRO-WEST-LOT-1</div>
+            <div style={{ fontSize: '11.5px', color: 'var(--text-tertiary)' }}>Account: METRO-WEST-LOT-1</div>
           </div>
 
           {/* KPI 2 */}
           <div
             style={{
-              background: 'rgba(15, 23, 42, 0.7)',
+              background: 'var(--surface)',
               borderRadius: '14px',
-              border: '1px solid rgba(16, 185, 129, 0.3)',
+              border: '1px solid var(--border)',
               padding: '18px 20px',
+              boxShadow: 'var(--shadow-sm)',
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontSize: '12px', color: '#94a3b8' }}>Live Synced Stock</span>
+              <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Live Synced Stock</span>
               <Database size={16} color="#10b981" />
             </div>
             <div style={{ fontSize: '20px', fontWeight: 800, color: '#10b981', marginBottom: '4px' }}>
               184 Vehicles
             </div>
-            <div style={{ fontSize: '11.5px', color: '#64748b' }}>100% matched to VINs</div>
+            <div style={{ fontSize: '11.5px', color: 'var(--text-tertiary)' }}>100% matched to VINs</div>
           </div>
 
           {/* KPI 3 */}
           <div
             style={{
-              background: 'rgba(15, 23, 42, 0.7)',
+              background: 'var(--surface)',
               borderRadius: '14px',
-              border: '1px solid rgba(234, 179, 8, 0.3)',
+              border: '1px solid var(--border)',
               padding: '18px 20px',
+              boxShadow: 'var(--shadow-sm)',
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontSize: '12px', color: '#94a3b8' }}>Carfax Auto-Reports</span>
+              <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Carfax Auto-Reports</span>
               <FileSpreadsheet size={16} color="#eab308" />
             </div>
             <div style={{ fontSize: '20px', fontWeight: 800, color: '#eab308', marginBottom: '4px' }}>
               184 Attached
             </div>
-            <div style={{ fontSize: '11.5px', color: '#64748b' }}>Automatic 1-Click reports</div>
+            <div style={{ fontSize: '11.5px', color: 'var(--text-tertiary)' }}>Automatic 1-Click reports</div>
           </div>
 
           {/* KPI 4 */}
           <div
             style={{
-              background: 'rgba(15, 23, 42, 0.7)',
+              background: 'var(--surface)',
               borderRadius: '14px',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
+              border: '1px solid var(--border)',
               padding: '18px 20px',
+              boxShadow: 'var(--shadow-sm)',
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontSize: '12px', color: '#94a3b8' }}>Sync Frequency</span>
-              <Clock size={16} color="#0ea5e9" />
+              <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Sync Frequency</span>
+              <Clock size={16} color="#0284c7" />
             </div>
-            <div style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>
+            <div style={{ fontSize: '18px', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '4px' }}>
               {lastSyncedTime}
             </div>
-            <div style={{ fontSize: '11.5px', color: '#64748b' }}>Interval: Hourly auto-poll</div>
+            <div style={{ fontSize: '11.5px', color: 'var(--text-tertiary)' }}>Interval: Hourly auto-poll</div>
           </div>
         </div>
 
         {/* FEED CONTROLLER & SETTINGS SECTION */}
         <div
           style={{
-            background: 'rgba(15, 23, 42, 0.75)',
+            background: 'var(--surface)',
             borderRadius: '16px',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
+            border: '1px solid var(--border)',
             padding: '24px',
             marginBottom: '28px',
+            boxShadow: 'var(--shadow-sm)',
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '14px' }}>
             <div>
-              <h3 style={{ fontSize: '16px', fontWeight: 700, margin: '0 0 4px', color: '#ffffff', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Zap size={18} color="#0ea5e9" />
+              <h3 style={{ fontSize: '16px', fontWeight: 700, margin: '0 0 4px', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Zap size={18} color="#0284c7" />
                 <span>Live Feed Sync Operations & Frequency</span>
               </h3>
-              <p style={{ margin: 0, fontSize: '12.5px', color: '#94a3b8' }}>
+              <p style={{ margin: 0, fontSize: '12.5px', color: 'var(--text-secondary)' }}>
                 Configure sync intervals and manually force instantaneous lot refreshes.
               </p>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               {/* Frequency Selector */}
-              <div style={{ display: 'flex', background: 'rgba(0, 0, 0, 0.4)', borderRadius: '8px', padding: '3px', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
+              <div style={{ display: 'flex', background: 'var(--surface-secondary)', borderRadius: '8px', padding: '3px', border: '1px solid var(--border)' }}>
                 {[
                   { id: '15min', label: '15 Min' },
                   { id: 'hourly', label: 'Hourly' },
@@ -323,8 +328,8 @@ export const FeedSync = () => {
                       fontWeight: 600,
                       borderRadius: '6px',
                       border: 'none',
-                      background: syncFrequency === f.id ? '#0ea5e9' : 'transparent',
-                      color: syncFrequency === f.id ? '#ffffff' : '#94a3b8',
+                      background: syncFrequency === f.id ? '#0284c7' : 'transparent',
+                      color: syncFrequency === f.id ? '#ffffff' : 'var(--text-secondary)',
                       cursor: 'pointer',
                       transition: 'all 0.15s ease',
                     }}
@@ -345,14 +350,14 @@ export const FeedSync = () => {
                   padding: '9px 18px',
                   borderRadius: '8px',
                   background: isSyncing
-                    ? 'rgba(14, 165, 233, 0.2)'
-                    : 'linear-gradient(90deg, #0284c7, #0ea5e9)',
+                    ? 'rgba(2, 132, 199, 0.2)'
+                    : '#0284c7',
                   border: 'none',
                   color: '#ffffff',
                   fontSize: '13px',
                   fontWeight: 700,
                   cursor: isSyncing ? 'not-allowed' : 'pointer',
-                  boxShadow: '0 2px 10px rgba(14, 165, 233, 0.3)',
+                  boxShadow: 'var(--shadow-sm)',
                 }}
               >
                 <RefreshCw size={15} className={isSyncing ? 'animate-spin' : ''} />
@@ -372,8 +377,8 @@ export const FeedSync = () => {
                   style={{
                     padding: '14px 16px',
                     borderRadius: '10px',
-                    background: isSelected ? 'rgba(14, 165, 233, 0.12)' : 'rgba(2, 6, 23, 0.5)',
-                    border: isSelected ? '1px solid #0ea5e9' : '1px solid rgba(255, 255, 255, 0.08)',
+                    background: isSelected ? 'rgba(2, 132, 199, 0.08)' : 'var(--surface-secondary)',
+                    border: isSelected ? '1px solid #0284c7' : '1px solid var(--border)',
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
@@ -381,10 +386,10 @@ export const FeedSync = () => {
                   }}
                 >
                   <div>
-                    <div style={{ fontSize: '13.5px', fontWeight: 700, color: isSelected ? '#38bdf8' : '#ffffff' }}>
+                    <div style={{ fontSize: '13.5px', fontWeight: 700, color: isSelected ? '#0284c7' : 'var(--text-primary)' }}>
                       {dms.name}
                     </div>
-                    <div style={{ fontSize: '11px', color: '#64748b' }}>{dms.protocol}</div>
+                    <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>{dms.protocol}</div>
                   </div>
                   <span
                     style={{
@@ -395,8 +400,9 @@ export const FeedSync = () => {
                       background:
                         dms.status === 'Connected'
                           ? 'rgba(16, 185, 129, 0.15)'
-                          : 'rgba(255, 255, 255, 0.06)',
-                      color: dms.status === 'Connected' ? '#34d399' : '#94a3b8',
+                          : 'var(--surface)',
+                      color: dms.status === 'Connected' ? '#10b981' : 'var(--text-tertiary)',
+                      border: '1px solid var(--border)',
                     }}
                   >
                     {dms.status}
@@ -410,29 +416,31 @@ export const FeedSync = () => {
         {/* SYNCED INVENTORY TABLE & CARFAX STATUS */}
         <div
           style={{
-            background: 'rgba(15, 23, 42, 0.75)',
+            background: 'var(--surface)',
             borderRadius: '16px',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
+            border: '1px solid var(--border)',
             overflow: 'hidden',
+            boxShadow: 'var(--shadow-sm)',
           }}
         >
           {/* Table Header Controls */}
           <div
             style={{
               padding: '18px 22px',
-              borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+              borderBottom: '1px solid var(--border)',
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
               flexWrap: 'wrap',
               gap: '12px',
+              backgroundColor: 'var(--surface-secondary)',
             }}
           >
             <div>
-              <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 700, color: '#ffffff' }}>
+              <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 700, color: 'var(--text-primary)' }}>
                 Auto-Synced Vehicles from DMS ({filteredList.length})
               </h3>
-              <span style={{ fontSize: '12px', color: '#64748b' }}>
+              <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
                 Vehicles are pulled into OMP Deals automatically. No manual typing.
               </span>
             </div>
@@ -442,14 +450,14 @@ export const FeedSync = () => {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  background: 'rgba(2, 6, 23, 0.6)',
+                  background: 'var(--background)',
                   borderRadius: '8px',
                   padding: '6px 12px',
-                  border: '1px solid rgba(255, 255, 255, 0.12)',
+                  border: '1px solid var(--border)',
                   gap: '8px',
                 }}
               >
-                <Search size={14} color="#64748b" />
+                <Search size={14} color="var(--text-tertiary)" />
                 <input
                   type="text"
                   placeholder="Search by VIN, Stock, Model..."
@@ -459,7 +467,7 @@ export const FeedSync = () => {
                     background: 'transparent',
                     border: 'none',
                     outline: 'none',
-                    color: '#ffffff',
+                    color: 'var(--text-primary)',
                     fontSize: '12.5px',
                     width: '200px',
                   }}
@@ -472,7 +480,7 @@ export const FeedSync = () => {
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '13px' }}>
               <thead>
-                <tr style={{ background: 'rgba(0, 0, 0, 0.2)', color: '#94a3b8', borderBottom: '1px solid rgba(255, 255, 255, 0.06)' }}>
+                <tr style={{ background: 'var(--surface-secondary)', color: 'var(--text-secondary)', borderBottom: '1px solid var(--border)' }}>
                   <th style={{ padding: '12px 18px', fontWeight: 600 }}>Stock / VIN</th>
                   <th style={{ padding: '12px 18px', fontWeight: 600 }}>Vehicle Details</th>
                   <th style={{ padding: '12px 18px', fontWeight: 600 }}>List Price</th>
@@ -487,25 +495,23 @@ export const FeedSync = () => {
                   <tr
                     key={v.stock}
                     style={{
-                      borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+                      borderBottom: '1px solid var(--border)',
                       transition: 'background 0.15s ease',
                     }}
-                    onMouseOver={(e) => (e.currentTarget.style.background = 'rgba(255, 255, 255, 0.02)')}
-                    onMouseOut={(e) => (e.currentTarget.style.background = 'transparent')}
                   >
                     <td style={{ padding: '14px 18px' }}>
-                      <div style={{ fontWeight: 700, color: '#38bdf8' }}>{v.stock}</div>
-                      <div style={{ fontSize: '11px', color: '#64748b', fontFamily: 'monospace' }}>{v.vin}</div>
+                      <div style={{ fontWeight: 700, color: '#0284c7' }}>{v.stock}</div>
+                      <div style={{ fontSize: '11px', color: 'var(--text-tertiary)', fontFamily: 'monospace' }}>{v.vin}</div>
                     </td>
                     <td style={{ padding: '14px 18px' }}>
-                      <div style={{ fontWeight: 700, color: '#ffffff' }}>
+                      <div style={{ fontWeight: 700, color: 'var(--text-primary)' }}>
                         {v.year} {v.make} {v.model}
                       </div>
-                      <div style={{ fontSize: '11.5px', color: '#94a3b8' }}>{v.mileage}</div>
+                      <div style={{ fontSize: '11.5px', color: 'var(--text-secondary)' }}>{v.mileage}</div>
                     </td>
                     <td style={{ padding: '14px 18px' }}>
                       <div style={{ fontWeight: 700, color: '#10b981' }}>{v.price}</div>
-                      <div style={{ fontSize: '11px', color: '#64748b' }}>Cost: {v.cost}</div>
+                      <div style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>Cost: {v.cost}</div>
                     </td>
                     <td style={{ padding: '14px 18px' }}>
                       <span
@@ -514,7 +520,7 @@ export const FeedSync = () => {
                           padding: '3px 8px',
                           borderRadius: '4px',
                           background: v.dmsStatus === 'Active on Lot' ? 'rgba(16, 185, 129, 0.15)' : 'rgba(234, 179, 8, 0.15)',
-                          color: v.dmsStatus === 'Active on Lot' ? '#34d399' : '#facc15',
+                          color: v.dmsStatus === 'Active on Lot' ? '#10b981' : '#d97706',
                           fontWeight: 600,
                         }}
                       >
@@ -530,7 +536,7 @@ export const FeedSync = () => {
                           background: 'rgba(234, 179, 8, 0.12)',
                           padding: '3px 8px',
                           borderRadius: '4px',
-                          color: '#facc15',
+                          color: '#d97706',
                           fontSize: '11.5px',
                           fontWeight: 700,
                         }}
@@ -549,9 +555,9 @@ export const FeedSync = () => {
                             background: v.feedSyncStatus === 'Synced' ? '#10b981' : '#facc15',
                           }}
                         />
-                        <span style={{ fontSize: '12px', color: '#e2e8f0' }}>{v.feedSyncStatus}</span>
+                        <span style={{ fontSize: '12px', color: 'var(--text-primary)' }}>{v.feedSyncStatus}</span>
                       </div>
-                      <div style={{ fontSize: '10.5px', color: '#64748b' }}>{v.lastUpdated}</div>
+                      <div style={{ fontSize: '10.5px', color: 'var(--text-tertiary)' }}>{v.lastUpdated}</div>
                     </td>
                     <td style={{ padding: '14px 18px', textAlign: 'right' }}>
                       <button
@@ -559,9 +565,9 @@ export const FeedSync = () => {
                         style={{
                           padding: '5px 10px',
                           borderRadius: '6px',
-                          background: 'rgba(14, 165, 233, 0.1)',
-                          border: '1px solid rgba(14, 165, 233, 0.3)',
-                          color: '#38bdf8',
+                          background: 'rgba(2, 132, 199, 0.1)',
+                          border: '1px solid rgba(2, 132, 199, 0.3)',
+                          color: '#0284c7',
                           fontSize: '11.5px',
                           fontWeight: 600,
                           cursor: 'pointer',

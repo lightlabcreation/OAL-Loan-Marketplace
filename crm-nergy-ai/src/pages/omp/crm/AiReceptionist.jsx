@@ -75,15 +75,15 @@ export const AiReceptionist = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
-            <span style={{ fontSize: '0.75rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '4px', backgroundColor: 'rgba(56, 189, 248, 0.1)', color: '#38bdf8', border: '1px solid rgba(56, 189, 248, 0.2)' }}>
+            <span style={{ fontSize: '0.75rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '4px', backgroundColor: 'rgba(56, 189, 248, 0.1)', color: '#0284c7', border: '1px solid rgba(56, 189, 248, 0.2)' }}>
               TASK E-12 • PILLAR 3
             </span>
-            <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>Voice AI Assistant & 24/7 After-Hours Desking</span>
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>Voice AI Assistant & 24/7 After-Hours Desking</span>
           </div>
-          <h1 style={{ fontSize: '1.65rem', fontWeight: 800, color: '#f8fafc', margin: 0, letterSpacing: '-0.02em' }}>
+          <h1 style={{ fontSize: '1.65rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
             24/7 AI Phone Voice Receptionist
           </h1>
-          <p style={{ color: '#94a3b8', fontSize: '0.875rem', margin: '0.25rem 0 0 0' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', margin: '0.25rem 0 0 0' }}>
             Natural language conversational voice agent answering dealer phone calls, querying live inventory specs, and booking test-drive appointments.
           </p>
         </div>
@@ -113,13 +113,13 @@ export const AiReceptionist = () => {
       {/* Voice Waveform Simulator & Call Stream Grid */}
       <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '1.25rem' }}>
         {/* Left Column: Call Transcript & Live Audio Player */}
-        <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '12px', padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '1rem', boxShadow: 'var(--shadow-sm)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
-              <span style={{ fontSize: '0.72rem', color: '#38bdf8', fontWeight: 700, textTransform: 'uppercase' }}>
+              <span style={{ fontSize: '0.72rem', color: '#0284c7', fontWeight: 700, textTransform: 'uppercase' }}>
                 Active Recording Analysis
               </span>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#f8fafc', margin: '0.15rem 0 0 0' }}>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-primary)', margin: '0.15rem 0 0 0' }}>
                 {activeLog.name} • {activeLog.caller}
               </h3>
             </div>
@@ -129,7 +129,7 @@ export const AiReceptionist = () => {
           </div>
 
           {/* Simulated Audio Waveform Bar */}
-          <div style={{ backgroundColor: 'rgba(30, 41, 59, 0.6)', borderRadius: '10px', padding: '1rem', border: '1px solid rgba(255, 255, 255, 0.06)', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div style={{ backgroundColor: 'var(--surface-secondary)', borderRadius: '10px', padding: '1rem', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <button
               onClick={() => setIsPlayingAudio(!isPlayingAudio)}
               style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#0284c7', color: '#fff', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0 }}
@@ -138,7 +138,7 @@ export const AiReceptionist = () => {
             </button>
 
             <div style={{ flex: 1 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: '#94a3b8', marginBottom: '0.35rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: 'var(--text-secondary)', marginBottom: '0.35rem' }}>
                 <span>AI Voice Synthesis: HD Ultra Natural (ElevenLabs / OpenAI Voice)</span>
                 <span>{isPlayingAudio ? '0:34 / 1:48' : '1:48'}</span>
               </div>
@@ -150,7 +150,7 @@ export const AiReceptionist = () => {
                     style={{
                       flex: 1,
                       height: isPlayingAudio ? `${Math.max(6, (h * (i % 2 === 0 ? 1.2 : 0.8)))}px` : `${h}px`,
-                      backgroundColor: isPlayingAudio ? '#38bdf8' : 'rgba(255,255,255,0.2)',
+                      backgroundColor: isPlayingAudio ? '#0284c7' : 'var(--border)',
                       borderRadius: '2px',
                       transition: 'height 0.15s ease',
                     }}
@@ -161,8 +161,8 @@ export const AiReceptionist = () => {
           </div>
 
           {/* Call Summary Box */}
-          <div style={{ backgroundColor: 'rgba(56, 189, 248, 0.08)', border: '1px solid rgba(56, 189, 248, 0.2)', borderRadius: '8px', padding: '0.75rem', fontSize: '0.8rem', color: '#cbd5e1' }}>
-            <strong style={{ color: '#38bdf8' }}>AI Action Summary:</strong> {activeLog.summary}
+          <div style={{ backgroundColor: 'rgba(2, 132, 199, 0.08)', border: '1px solid rgba(2, 132, 199, 0.2)', borderRadius: '8px', padding: '0.75rem', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+            <strong style={{ color: '#0284c7' }}>AI Action Summary:</strong> {activeLog.summary}
           </div>
 
           {/* Transcript Dialogue */}
@@ -172,13 +172,13 @@ export const AiReceptionist = () => {
                 <span
                   style={{
                     fontWeight: 700,
-                    color: line.speaker === 'AI' ? '#38bdf8' : '#f59e0b',
+                    color: line.speaker === 'AI' ? '#0284c7' : '#d97706',
                     minWidth: '55px',
                   }}
                 >
                   {line.speaker}:
                 </span>
-                <span style={{ color: '#cbd5e1', lineHeight: 1.4 }}>{line.text}</span>
+                <span style={{ color: 'var(--text-secondary)', lineHeight: 1.4 }}>{line.text}</span>
               </div>
             ))}
           </div>
@@ -187,8 +187,8 @@ export const AiReceptionist = () => {
         {/* Right Column: AI Call Logs & Knowledge Config */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {/* Call History List */}
-          <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '12px', padding: '1rem' }}>
-            <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: '#f8fafc', margin: '0 0 0.75rem 0' }}>
+          <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1rem', boxShadow: 'var(--shadow-sm)' }}>
+            <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', margin: '0 0 0.75rem 0' }}>
               Recent AI Voice Inquiries
             </h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
@@ -201,17 +201,17 @@ export const AiReceptionist = () => {
                     style={{
                       padding: '0.75rem',
                       borderRadius: '8px',
-                      backgroundColor: isSelected ? 'rgba(56, 189, 248, 0.12)' : 'rgba(30, 41, 59, 0.4)',
-                      border: isSelected ? '1px solid #38bdf8' : '1px solid rgba(255, 255, 255, 0.05)',
+                      backgroundColor: isSelected ? 'rgba(2, 132, 199, 0.1)' : 'var(--surface-secondary)',
+                      border: isSelected ? '1px solid #0284c7' : '1px solid var(--border)',
                       cursor: 'pointer',
                     }}
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontWeight: 700, color: '#f8fafc', fontSize: '0.85rem' }}>{log.name}</span>
-                      <span style={{ fontSize: '0.7rem', color: '#64748b' }}>{log.time}</span>
+                      <span style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.85rem' }}>{log.name}</span>
+                      <span style={{ fontSize: '0.7rem', color: 'var(--text-tertiary)' }}>{log.time}</span>
                     </div>
-                    <div style={{ fontSize: '0.75rem', color: '#38bdf8', marginTop: '0.2rem' }}>{log.vehicle}</div>
-                    <div style={{ fontSize: '0.72rem', color: '#94a3b8', marginTop: '0.2rem' }}>Duration: {log.duration} • {log.intent}</div>
+                    <div style={{ fontSize: '0.75rem', color: '#0284c7', marginTop: '0.2rem', fontWeight: 600 }}>{log.vehicle}</div>
+                    <div style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', marginTop: '0.2rem' }}>Duration: {log.duration} • {log.intent}</div>
                   </div>
                 );
               })}
@@ -219,22 +219,22 @@ export const AiReceptionist = () => {
           </div>
 
           {/* AI Settings Widget */}
-          <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '12px', padding: '1rem' }}>
-            <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: '#f8fafc', margin: '0 0 0.5rem 0' }}>
+          <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1rem', boxShadow: 'var(--shadow-sm)' }}>
+            <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', margin: '0 0 0.5rem 0' }}>
               AI Persona & Knowledge Link
             </h4>
-            <div style={{ fontSize: '0.78rem', color: '#94a3b8', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+            <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>Inventory Sync:</span>
                 <span style={{ color: '#10b981', fontWeight: 600 }}>Active (142 Vehicles Live)</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>Booking Calendar:</span>
-                <span style={{ color: '#38bdf8', fontWeight: 600 }}>Connected (Google & Outlook)</span>
+                <span style={{ color: '#0284c7', fontWeight: 600 }}>Connected (Google & Outlook)</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>Voice Speed / Pitch:</span>
-                <span style={{ color: '#f8fafc' }}>1.0x (Natural Professional)</span>
+                <span style={{ color: 'var(--text-primary)' }}>1.0x (Natural Professional)</span>
               </div>
             </div>
           </div>

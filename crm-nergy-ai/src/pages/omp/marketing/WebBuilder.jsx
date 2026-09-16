@@ -28,8 +28,8 @@ export const WebBuilder = () => {
     <div
       style={{
         minHeight: '100vh',
-        background: 'linear-gradient(180deg, #090d16 0%, #0c1220 50%, #070a10 100%)',
-        color: '#f1f5f9',
+        background: 'var(--background)',
+        color: 'var(--text-primary)',
         fontFamily: 'system-ui, -apple-system, sans-serif',
         padding: '24px 20px 80px',
       }}
@@ -42,10 +42,10 @@ export const WebBuilder = () => {
               <span style={{ fontSize: '11.5px', color: '#0ea5e9', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                 OMP Deals • Pillar 2 (Attract Buyers)
               </span>
-              <span style={{ color: '#475569' }}>/</span>
-              <span style={{ fontSize: '11.5px', color: '#94a3b8' }}>Website Builder, AI SEO & 4K Video (Tasks E-08..E-10)</span>
+              <span style={{ color: 'var(--border)' }}>/</span>
+              <span style={{ fontSize: '11.5px', color: 'var(--text-secondary)' }}>Website Builder, AI SEO & 4K Video (Tasks E-08..E-10)</span>
             </div>
-            <h1 style={{ fontSize: '26px', fontWeight: 800, margin: 0, color: '#ffffff' }}>
+            <h1 style={{ fontSize: '26px', fontWeight: 800, margin: 0, color: 'var(--text-primary)' }}>
               Dealer Website Builder & Marketing Suite
             </h1>
           </div>
@@ -59,9 +59,9 @@ export const WebBuilder = () => {
                 gap: '6px',
                 padding: '8px 14px',
                 borderRadius: '8px',
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                color: '#cbd5e1',
+                background: 'var(--surface)',
+                border: '1px solid var(--border)',
+                color: 'var(--text-secondary)',
                 fontSize: '13px',
                 cursor: 'pointer',
               }}
@@ -93,7 +93,7 @@ export const WebBuilder = () => {
         </div>
 
         {/* Feature Mode Tabs */}
-        <div style={{ display: 'flex', background: 'rgba(15, 23, 42, 0.7)', padding: '4px', borderRadius: '10px', border: '1px solid rgba(255, 255, 255, 0.08)', marginBottom: '24px', width: 'fit-content' }}>
+        <div style={{ display: 'flex', background: 'var(--surface)', padding: '4px', borderRadius: '10px', border: '1px solid var(--border)', marginBottom: '24px', width: 'fit-content' }}>
           {[
             { id: 'website', label: 'E-08: No-Code Auto Website (HQAW)', icon: Globe },
             { id: 'seo', label: 'E-09: AI Google SEO Optimizer', icon: TrendingUp },
@@ -114,7 +114,7 @@ export const WebBuilder = () => {
                   borderRadius: '8px',
                   border: 'none',
                   background: isSelected ? '#0ea5e9' : 'transparent',
-                  color: isSelected ? '#ffffff' : '#94a3b8',
+                  color: isSelected ? '#ffffff' : 'var(--text-secondary)',
                   fontSize: '13px',
                   fontWeight: 600,
                   cursor: 'pointer',
@@ -132,13 +132,13 @@ export const WebBuilder = () => {
           <div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '24px' }}>
               {/* Controls */}
-              <div style={{ background: 'rgba(15, 23, 42, 0.75)', borderRadius: '16px', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '24px' }}>
-                <h3 style={{ margin: '0 0 16px', fontSize: '16px', fontWeight: 700, color: '#ffffff' }}>
+              <div style={{ background: 'var(--surface)', borderRadius: '16px', border: '1px solid var(--border)', padding: '24px' }}>
+                <h3 style={{ margin: '0 0 16px', fontSize: '16px', fontWeight: 700, color: 'var(--text-primary)' }}>
                   Dealership Website Customizer
                 </h3>
 
                 <div style={{ marginBottom: '16px' }}>
-                  <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', marginBottom: '6px' }}>
+                  <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '6px' }}>
                     Custom Domain
                   </label>
                   <input
@@ -148,9 +148,9 @@ export const WebBuilder = () => {
                       width: '100%',
                       padding: '10px 14px',
                       borderRadius: '8px',
-                      background: 'rgba(2, 6, 23, 0.6)',
-                      border: '1px solid rgba(255, 255, 255, 0.12)',
-                      color: '#ffffff',
+                      background: 'var(--surface-secondary)',
+                      border: '1px solid var(--border)',
+                      color: 'var(--text-primary)',
                       fontSize: '13.5px',
                       boxSizing: 'border-box',
                     }}
@@ -158,7 +158,7 @@ export const WebBuilder = () => {
                 </div>
 
                 <div style={{ marginBottom: '16px' }}>
-                  <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', marginBottom: '6px' }}>
+                  <label style={{ display: 'block', fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '6px' }}>
                     Live Theme Preset
                   </label>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
@@ -168,9 +168,9 @@ export const WebBuilder = () => {
                         style={{
                           padding: '10px',
                           borderRadius: '8px',
-                          background: i === 0 ? 'rgba(14, 165, 233, 0.15)' : 'rgba(255, 255, 255, 0.04)',
-                          border: i === 0 ? '1px solid #0ea5e9' : '1px solid rgba(255, 255, 255, 0.08)',
-                          color: i === 0 ? '#38bdf8' : '#cbd5e1',
+                          background: i === 0 ? 'rgba(14, 165, 233, 0.15)' : 'var(--surface-secondary)',
+                          border: i === 0 ? '1px solid #0ea5e9' : '1px solid var(--border)',
+                          color: i === 0 ? '#0ea5e9' : 'var(--text-secondary)',
                           fontSize: '12px',
                           fontWeight: 600,
                           cursor: 'pointer',
@@ -182,7 +182,7 @@ export const WebBuilder = () => {
                   </div>
                 </div>
 
-                <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '16px', fontSize: '12px', color: '#10b981' }}>
+                <div style={{ borderTop: '1px solid var(--border)', paddingTop: '16px', fontSize: '12px', color: '#10b981' }}>
                   ✓ Auto-Synced with 184 DMS vehicles in real time.
                 </div>
               </div>
@@ -190,26 +190,26 @@ export const WebBuilder = () => {
               {/* Live Preview Container */}
               <div
                 style={{
-                  background: '#020617',
+                  background: 'var(--surface)',
                   borderRadius: '16px',
-                  border: '1px solid rgba(14, 165, 233, 0.3)',
+                  border: '1px solid var(--border)',
                   padding: '20px',
                   height: '380px',
                   overflowY: 'auto',
                 }}
               >
-                <div style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.1)', paddingBottom: '12px', marginBottom: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div style={{ fontWeight: 800, color: '#ffffff', fontSize: '16px' }}>Metro West Motors</div>
+                <div style={{ borderBottom: '1px solid var(--border)', paddingBottom: '12px', marginBottom: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div style={{ fontWeight: 800, color: 'var(--text-primary)', fontSize: '16px' }}>Metro West Motors</div>
                   <AdpVerifiedBadge tier="franchise" size="sm" />
                 </div>
-                <div style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', marginBottom: '6px' }}>
+                <div style={{ fontSize: '18px', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '6px' }}>
                   Find Your Next Luxury Performance Vehicle
                 </div>
-                <div style={{ fontSize: '12.5px', color: '#94a3b8', marginBottom: '18px' }}>
+                <div style={{ fontSize: '12.5px', color: 'var(--text-secondary)', marginBottom: '18px' }}>
                   Over 180+ verified vehicles on lot • Direct dealer financing • 1-Click test drive booking
                 </div>
-                <div style={{ background: 'rgba(255, 255, 255, 0.05)', borderRadius: '10px', padding: '14px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
-                  <div style={{ fontSize: '13px', fontWeight: 700, color: '#38bdf8' }}>Featured Today: 2024 Corvette Stingray 2LT</div>
+                <div style={{ background: 'var(--surface-secondary)', borderRadius: '10px', padding: '14px', border: '1px solid var(--border)' }}>
+                  <div style={{ fontSize: '13px', fontWeight: 700, color: '#0ea5e9' }}>Featured Today: 2024 Corvette Stingray 2LT</div>
                   <div style={{ fontSize: '15px', fontWeight: 800, color: '#10b981', marginTop: '4px' }}>$79,900 • Only 1,840 mi</div>
                 </div>
               </div>
@@ -219,8 +219,8 @@ export const WebBuilder = () => {
 
         {/* TAB 2: AI GOOGLE SEO (E-09) */}
         {activeTab === 'seo' && (
-          <div style={{ background: 'rgba(15, 23, 42, 0.75)', borderRadius: '16px', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '24px' }}>
-            <h3 style={{ fontSize: '16px', fontWeight: 700, margin: '0 0 16px', color: '#ffffff' }}>
+          <div style={{ background: 'var(--surface)', borderRadius: '16px', border: '1px solid var(--border)', padding: '24px' }}>
+            <h3 style={{ fontSize: '16px', fontWeight: 700, margin: '0 0 16px', color: 'var(--text-primary)' }}>
               AI Google Business & Local Automotive SEO
             </h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '14px' }}>
@@ -229,9 +229,9 @@ export const WebBuilder = () => {
                 { label: 'Google Business Profile Status', val: 'Verified & 100% Synced' },
                 { label: 'Automated Review Responses', val: '4.9 ★ Rating (148 Reviews)' },
               ].map((item, i) => (
-                <div key={i} style={{ background: 'rgba(0,0,0,0.3)', padding: '16px', borderRadius: '10px' }}>
-                  <div style={{ fontSize: '12px', color: '#94a3b8' }}>{item.label}</div>
-                  <div style={{ fontSize: '15px', fontWeight: 700, color: '#38bdf8', marginTop: '4px' }}>{item.val}</div>
+                <div key={i} style={{ background: 'var(--surface-secondary)', padding: '16px', borderRadius: '10px', border: '1px solid var(--border)' }}>
+                  <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>{item.label}</div>
+                  <div style={{ fontSize: '15px', fontWeight: 700, color: '#0ea5e9', marginTop: '4px' }}>{item.val}</div>
                 </div>
               ))}
             </div>
@@ -240,13 +240,13 @@ export const WebBuilder = () => {
 
         {/* TAB 3: 4K AUTO VIDEO LIVE (E-10) */}
         {activeTab === 'video' && (
-          <div style={{ background: 'rgba(15, 23, 42, 0.75)', borderRadius: '16px', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '24px' }}>
+          <div style={{ background: 'var(--surface)', borderRadius: '16px', border: '1px solid var(--border)', padding: '24px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
               <div>
-                <h3 style={{ fontSize: '16px', fontWeight: 700, margin: 0, color: '#ffffff' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
                   4K Video Walkarounds (Auto Video Live)
                 </h3>
-                <p style={{ margin: '4px 0 0', fontSize: '12.5px', color: '#94a3b8' }}>
+                <p style={{ margin: '4px 0 0', fontSize: '12.5px', color: 'var(--text-secondary)' }}>
                   Record 4K mobile video tours and publish directly to TikTok, YouTube Shorts, Instagram, and buyer SMS.
                 </p>
               </div>
@@ -275,12 +275,12 @@ export const WebBuilder = () => {
                 { title: '2024 BMW M4 Exhaust & Interior Tour', duration: '1:45', views: '1,420 views', platform: 'YouTube Shorts + SMS' },
                 { title: '2023 Porsche Taycan Launch Control & Tech', duration: '2:10', views: '2,890 views', platform: 'TikTok + Instagram' },
               ].map((vid, i) => (
-                <div key={i} style={{ background: '#020617', borderRadius: '12px', padding: '16px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                <div key={i} style={{ background: 'var(--surface-secondary)', borderRadius: '12px', padding: '16px', border: '1px solid var(--border)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
                     <Play size={20} color="#0ea5e9" />
-                    <div style={{ fontWeight: 700, color: '#ffffff', fontSize: '14px' }}>{vid.title}</div>
+                    <div style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '14px' }}>{vid.title}</div>
                   </div>
-                  <div style={{ fontSize: '12px', color: '#94a3b8' }}>Length: {vid.duration} • {vid.views}</div>
+                  <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Length: {vid.duration} • {vid.views}</div>
                   <div style={{ fontSize: '11px', color: '#10b981', marginTop: '6px' }}>Syndicated to: {vid.platform}</div>
                 </div>
               ))}

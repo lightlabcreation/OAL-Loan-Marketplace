@@ -140,25 +140,25 @@ export const UnifiedInbox = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem', flexShrink: 0 }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span style={{ fontSize: '0.75rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '4px', backgroundColor: 'rgba(56, 189, 248, 0.1)', color: '#38bdf8', border: '1px solid rgba(56, 189, 248, 0.2)' }}>
+            <span style={{ fontSize: '0.75rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '4px', backgroundColor: 'rgba(56, 189, 248, 0.1)', color: '#0284c7', border: '1px solid rgba(56, 189, 248, 0.2)' }}>
               TASK E-11 • PILLAR 3
             </span>
-            <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>Omnichannel Leads & Buyer Messaging</span>
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>Omnichannel Leads & Buyer Messaging</span>
           </div>
-          <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#f8fafc', margin: '0.2rem 0 0 0' }}>
+          <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-primary)', margin: '0.2rem 0 0 0' }}>
             OMP Deals Unified Omnichannel Inbox
           </h1>
         </div>
 
         {/* Channel Filters */}
-        <div style={{ display: 'flex', gap: '0.4rem', backgroundColor: 'rgba(30, 41, 59, 0.6)', padding: '0.25rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.06)' }}>
+        <div style={{ display: 'flex', gap: '0.4rem', backgroundColor: 'var(--surface)', padding: '0.25rem', borderRadius: '8px', border: '1px solid var(--border)' }}>
           {['all', 'OfferUp', 'SMS', 'Email', 'Call Log'].map((ch) => (
             <button
               key={ch}
               onClick={() => setActiveChannel(ch)}
               style={{
                 backgroundColor: activeChannel === ch ? '#0284c7' : 'transparent',
-                color: activeChannel === ch ? '#ffffff' : '#94a3b8',
+                color: activeChannel === ch ? '#ffffff' : 'var(--text-secondary)',
                 border: 'none',
                 padding: '0.35rem 0.75rem',
                 borderRadius: '6px',
@@ -176,12 +176,12 @@ export const UnifiedInbox = () => {
       {/* Main Inbox 3-Column Split */}
       <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '320px 1fr 280px', gap: '1rem', minHeight: 0, overflow: 'hidden' }}>
         {/* Column 1: Conversations List */}
-        <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '12px', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-          <div style={{ padding: '0.75rem', borderBottom: '1px solid rgba(255, 255, 255, 0.06)', display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: 'rgba(30, 41, 59, 0.3)' }}>
-            <Search size={15} color="#64748b" />
+        <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: 'var(--shadow-sm)' }}>
+          <div style={{ padding: '0.75rem', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: 'var(--surface-secondary)' }}>
+            <Search size={15} color="var(--text-tertiary)" />
             <input
               placeholder="Search leads, VIN, names..."
-              style={{ background: 'transparent', border: 'none', color: '#f8fafc', fontSize: '0.82rem', outline: 'none', width: '100%' }}
+              style={{ background: 'transparent', border: 'none', color: 'var(--text-primary)', fontSize: '0.82rem', outline: 'none', width: '100%' }}
             />
           </div>
 
@@ -197,27 +197,27 @@ export const UnifiedInbox = () => {
                     style={{
                       padding: '0.75rem',
                       borderRadius: '8px',
-                      backgroundColor: isSelected ? 'rgba(56, 189, 248, 0.12)' : 'rgba(255, 255, 255, 0.02)',
-                      border: isSelected ? '1px solid rgba(56, 189, 248, 0.3)' : '1px solid transparent',
+                      backgroundColor: isSelected ? 'rgba(2, 132, 199, 0.12)' : 'transparent',
+                      border: isSelected ? '1px solid rgba(2, 132, 199, 0.3)' : '1px solid transparent',
                       cursor: 'pointer',
                       transition: 'all 0.15s ease',
                     }}
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.25rem' }}>
-                      <span style={{ fontWeight: 700, color: '#f8fafc', fontSize: '0.85rem' }}>{t.customerName}</span>
-                      <span style={{ fontSize: '0.7rem', color: '#64748b' }}>{t.timestamp}</span>
+                      <span style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.85rem' }}>{t.customerName}</span>
+                      <span style={{ fontSize: '0.7rem', color: 'var(--text-tertiary)' }}>{t.timestamp}</span>
                     </div>
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginBottom: '0.35rem' }}>
-                      <span style={{ fontSize: '0.65rem', padding: '0.1rem 0.35rem', borderRadius: '4px', backgroundColor: 'rgba(2, 132, 199, 0.2)', color: '#38bdf8', fontWeight: 700 }}>
+                      <span style={{ fontSize: '0.65rem', padding: '0.1rem 0.35rem', borderRadius: '4px', backgroundColor: 'rgba(2, 132, 199, 0.15)', color: '#0284c7', fontWeight: 700 }}>
                         {t.channel}
                       </span>
-                      <span style={{ fontSize: '0.72rem', color: '#cbd5e1', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                         {t.vehicle.year} {t.vehicle.make} {t.vehicle.model}
                       </span>
                     </div>
 
-                    <p style={{ fontSize: '0.75rem', color: isSelected ? '#94a3b8' : '#64748b', margin: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    <p style={{ fontSize: '0.75rem', color: isSelected ? 'var(--text-primary)' : 'var(--text-tertiary)', margin: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                       {t.lastMessage}
                     </p>
                   </div>
@@ -227,12 +227,12 @@ export const UnifiedInbox = () => {
         </div>
 
         {/* Column 2: Active Chat Thread */}
-        <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '12px', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+        <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', display: 'flex', flexDirection: 'column', overflow: 'hidden', boxShadow: 'var(--shadow-sm)' }}>
           {/* Thread Header */}
-          <div style={{ padding: '0.85rem 1.25rem', borderBottom: '1px solid rgba(255, 255, 255, 0.06)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'rgba(30, 41, 59, 0.4)' }}>
+          <div style={{ padding: '0.85rem 1.25rem', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'var(--surface-secondary)' }}>
             <div>
-              <div style={{ fontWeight: 700, color: '#f8fafc', fontSize: '0.95rem' }}>{activeThread.customerName}</div>
-              <div style={{ fontSize: '0.75rem', color: '#38bdf8' }}>Channel: {activeThread.channel} • Ready to Desk</div>
+              <div style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.95rem' }}>{activeThread.customerName}</div>
+              <div style={{ fontSize: '0.75rem', color: '#0284c7', fontWeight: 600 }}>Channel: {activeThread.channel} • Ready to Desk</div>
             </div>
             <div style={{ display: 'flex', gap: '0.5rem' }}>
               <button style={{ backgroundColor: 'rgba(16, 185, 129, 0.15)', color: '#10b981', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '0.35rem 0.65rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.3rem', cursor: 'pointer' }}>
@@ -242,7 +242,7 @@ export const UnifiedInbox = () => {
           </div>
 
           {/* Messages Stream */}
-          <div style={{ flex: 1, overflowY: 'auto', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          <div style={{ flex: 1, overflowY: 'auto', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', backgroundColor: 'var(--background)' }}>
             {activeThread.messages.map((m, idx) => {
               const isDealer = m.sender === 'dealer';
               return (
@@ -251,16 +251,17 @@ export const UnifiedInbox = () => {
                   style={{
                     alignSelf: isDealer ? 'flex-end' : 'flex-start',
                     maxWidth: '75%',
-                    backgroundColor: isDealer ? '#0284c7' : 'rgba(30, 41, 59, 0.8)',
-                    color: '#f8fafc',
+                    backgroundColor: isDealer ? '#0284c7' : 'var(--surface)',
+                    color: isDealer ? '#ffffff' : 'var(--text-primary)',
+                    border: isDealer ? 'none' : '1px solid var(--border)',
                     padding: '0.75rem 1rem',
                     borderRadius: isDealer ? '12px 12px 2px 12px' : '12px 12px 12px 2px',
                     fontSize: '0.85rem',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                    boxShadow: 'var(--shadow-sm)',
                   }}
                 >
                   <p style={{ margin: 0, lineHeight: 1.4 }}>{m.text}</p>
-                  <span style={{ fontSize: '0.65rem', color: isDealer ? '#bae6fd' : '#64748b', display: 'block', marginTop: '0.25rem', textAlign: 'right' }}>
+                  <span style={{ fontSize: '0.65rem', color: isDealer ? 'rgba(255, 255, 255, 0.8)' : 'var(--text-tertiary)', display: 'block', marginTop: '0.25rem', textAlign: 'right' }}>
                     {m.time}
                   </span>
                 </div>
@@ -269,9 +270,9 @@ export const UnifiedInbox = () => {
           </div>
 
           {/* Quick AI Templates */}
-          <div style={{ padding: '0.5rem 1rem', borderTop: '1px solid rgba(255, 255, 255, 0.04)', display: 'flex', gap: '0.5rem', overflowX: 'auto', backgroundColor: 'rgba(15, 23, 42, 0.5)' }}>
-            <span style={{ fontSize: '0.7rem', color: '#64748b', display: 'flex', alignItems: 'center', gap: '0.25rem', flexShrink: 0 }}>
-              <Sparkles size={12} color="#38bdf8" /> AI Quick Reply:
+          <div style={{ padding: '0.5rem 1rem', borderTop: '1px solid var(--border)', display: 'flex', gap: '0.5rem', overflowX: 'auto', backgroundColor: 'var(--surface-secondary)' }}>
+            <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.25rem', flexShrink: 0 }}>
+              <Sparkles size={12} color="#0284c7" /> AI Quick Reply:
             </span>
             {[
               'Yes, it is ready for a test drive today!',
@@ -281,7 +282,7 @@ export const UnifiedInbox = () => {
               <button
                 key={i}
                 onClick={() => handleQuickTemplate(tmpl)}
-                style={{ backgroundColor: 'rgba(255, 255, 255, 0.04)', color: '#cbd5e1', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '0.2rem 0.5rem', borderRadius: '4px', fontSize: '0.7rem', cursor: 'pointer', whiteSpace: 'nowrap' }}
+                style={{ backgroundColor: 'var(--surface)', color: 'var(--text-primary)', border: '1px solid var(--border)', padding: '0.2rem 0.5rem', borderRadius: '4px', fontSize: '0.7rem', cursor: 'pointer', whiteSpace: 'nowrap' }}
               >
                 {tmpl}
               </button>
@@ -289,13 +290,13 @@ export const UnifiedInbox = () => {
           </div>
 
           {/* Message Input Bar */}
-          <form onSubmit={handleSendMessage} style={{ padding: '0.75rem 1rem', borderTop: '1px solid rgba(255, 255, 255, 0.06)', display: 'flex', gap: '0.5rem', backgroundColor: 'rgba(30, 41, 59, 0.4)' }}>
+          <form onSubmit={handleSendMessage} style={{ padding: '0.75rem 1rem', borderTop: '1px solid var(--border)', display: 'flex', gap: '0.5rem', backgroundColor: 'var(--surface)' }}>
             <input
               type="text"
               value={messageText}
               onChange={(e) => setMessageText(e.target.value)}
               placeholder={`Type reply to ${activeThread.customerName} (${activeThread.channel})...`}
-              style={{ flex: 1, backgroundColor: 'rgba(15, 23, 42, 0.8)', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '8px', padding: '0.55rem 0.85rem', color: '#f8fafc', fontSize: '0.85rem', outline: 'none' }}
+              style={{ flex: 1, backgroundColor: 'var(--background)', border: '1px solid var(--border)', borderRadius: '8px', padding: '0.55rem 0.85rem', color: 'var(--text-primary)', fontSize: '0.85rem', outline: 'none' }}
             />
             <button
               type="submit"
@@ -307,12 +308,12 @@ export const UnifiedInbox = () => {
         </div>
 
         {/* Column 3: Vehicle of Interest Drawer */}
-        <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem', overflowY: 'auto' }}>
+        <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem', overflowY: 'auto', boxShadow: 'var(--shadow-sm)' }}>
           <div>
-            <span style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#64748b', fontWeight: 700 }}>
+            <span style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-tertiary)', fontWeight: 700 }}>
               Vehicle of Interest
             </span>
-            <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#f8fafc', margin: '0.25rem 0 0 0' }}>
+            <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)', margin: '0.25rem 0 0 0' }}>
               {activeThread.vehicle.year} {activeThread.vehicle.make} {activeThread.vehicle.model}
             </h3>
             <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#10b981', marginTop: '0.25rem' }}>
@@ -320,16 +321,16 @@ export const UnifiedInbox = () => {
             </div>
           </div>
 
-          <div style={{ backgroundColor: 'rgba(30, 41, 59, 0.5)', padding: '0.75rem', borderRadius: '8px', fontSize: '0.78rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#94a3b8' }}>
+          <div style={{ backgroundColor: 'var(--surface-secondary)', padding: '0.75rem', borderRadius: '8px', fontSize: '0.78rem', display: 'flex', flexDirection: 'column', gap: '0.4rem', border: '1px solid var(--border)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-secondary)' }}>
               <span>Stock #:</span>
-              <span style={{ color: '#f8fafc', fontWeight: 600 }}>{activeThread.vehicle.stock}</span>
+              <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{activeThread.vehicle.stock}</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#94a3b8' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-secondary)' }}>
               <span>VIN:</span>
-              <span style={{ color: '#f8fafc', fontWeight: 600, fontSize: '0.7rem' }}>{activeThread.vehicle.vin}</span>
+              <span style={{ color: 'var(--text-primary)', fontWeight: 600, fontSize: '0.7rem' }}>{activeThread.vehicle.vin}</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#94a3b8' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-secondary)' }}>
               <span>Carfax:</span>
               <span style={{ color: '#10b981', fontWeight: 600 }}>Clean 1-Owner</span>
             </div>
@@ -338,13 +339,13 @@ export const UnifiedInbox = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             <a
               href="/omp/desking/calculator"
-              style={{ display: 'block', textAlign: 'center', backgroundColor: 'rgba(56, 189, 248, 0.15)', color: '#38bdf8', border: '1px solid rgba(56, 189, 248, 0.3)', padding: '0.5rem', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 700, textDecoration: 'none' }}
+              style={{ display: 'block', textAlign: 'center', backgroundColor: 'rgba(2, 132, 199, 0.1)', color: '#0284c7', border: '1px solid rgba(2, 132, 199, 0.3)', padding: '0.5rem', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 700, textDecoration: 'none' }}
             >
               Desk Deal (60s Calculator)
             </a>
             <button
               onClick={() => toast.success('Carfax link attached to thread')}
-              style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', color: '#cbd5e1', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '0.5rem', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer' }}
+              style={{ backgroundColor: 'var(--surface-secondary)', color: 'var(--text-primary)', border: '1px solid var(--border)', padding: '0.5rem', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer' }}
             >
               Attach Carfax Link
             </button>

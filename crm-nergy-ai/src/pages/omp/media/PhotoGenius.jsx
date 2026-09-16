@@ -43,8 +43,8 @@ export const PhotoGenius = () => {
     <div
       style={{
         minHeight: '100vh',
-        background: 'linear-gradient(180deg, #090d16 0%, #0c1220 50%, #070a10 100%)',
-        color: '#f1f5f9',
+        backgroundColor: 'var(--background)',
+        color: 'var(--text-primary)',
         fontFamily: 'system-ui, -apple-system, sans-serif',
         padding: '24px 20px 80px',
       }}
@@ -54,16 +54,16 @@ export const PhotoGenius = () => {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '14px' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-              <span style={{ fontSize: '11.5px', color: '#0ea5e9', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+              <span style={{ fontSize: '11.5px', color: '#0284c7', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                 OMP Deals • Pillar 1 (Stock the Lot)
               </span>
-              <span style={{ color: '#475569' }}>/</span>
-              <span style={{ fontSize: '11.5px', color: '#94a3b8' }}>AI Photo Genius & Multiverse BG (Task E-06)</span>
+              <span style={{ color: 'var(--text-tertiary)' }}>/</span>
+              <span style={{ fontSize: '11.5px', color: 'var(--text-secondary)' }}>AI Photo Genius & Multiverse BG (Task E-06)</span>
             </div>
-            <h1 style={{ fontSize: '26px', fontWeight: 800, margin: 0, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <h1 style={{ fontSize: '26px', fontWeight: 800, margin: 0, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '10px' }}>
               <span>AI Photo Genius & Multiverse Backgrounds</span>
             </h1>
-            <p style={{ margin: '4px 0 0', fontSize: '13px', color: '#94a3b8' }}>
+            <p style={{ margin: '4px 0 0', fontSize: '13px', color: 'var(--text-secondary)' }}>
               Mobile guided photo angles + 1-click 100+ professional studio background replacements.
             </p>
           </div>
@@ -77,9 +77,9 @@ export const PhotoGenius = () => {
                 gap: '6px',
                 padding: '8px 14px',
                 borderRadius: '8px',
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                color: '#cbd5e1',
+                background: 'var(--surface)',
+                border: '1px solid var(--border)',
+                color: 'var(--text-primary)',
                 fontSize: '13px',
                 cursor: 'pointer',
               }}
@@ -96,7 +96,7 @@ export const PhotoGenius = () => {
                 gap: '6px',
                 padding: '8px 16px',
                 borderRadius: '8px',
-                background: 'linear-gradient(90deg, #0284c7, #0ea5e9)',
+                background: '#0284c7',
                 border: 'none',
                 color: '#ffffff',
                 fontSize: '13px',
@@ -119,8 +119,8 @@ export const PhotoGenius = () => {
                 background: '#020617',
                 borderRadius: '16px',
                 height: '380px',
-                border: '1px solid rgba(14, 165, 233, 0.3)',
-                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5)',
+                border: '1px solid var(--border)',
+                boxShadow: 'var(--shadow-sm)',
                 position: 'relative',
                 overflow: 'hidden',
                 marginBottom: '16px',
@@ -190,8 +190,8 @@ export const PhotoGenius = () => {
             </div>
 
             {/* Background Selector Chips */}
-            <div style={{ background: 'rgba(15, 23, 42, 0.75)', borderRadius: '14px', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '16px' }}>
-              <div style={{ fontSize: '13px', fontWeight: 700, color: '#ffffff', marginBottom: '10px' }}>
+            <div style={{ background: 'var(--surface)', borderRadius: '14px', border: '1px solid var(--border)', padding: '16px', boxShadow: 'var(--shadow-sm)' }}>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '10px' }}>
                 Select 1-Click AI Studio Background:
               </div>
               <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
@@ -205,9 +205,9 @@ export const PhotoGenius = () => {
                     style={{
                       padding: '8px 12px',
                       borderRadius: '8px',
-                      background: activeBackground === bg.id ? 'rgba(14, 165, 233, 0.2)' : 'rgba(255, 255, 255, 0.05)',
-                      border: activeBackground === bg.id ? '1px solid #0ea5e9' : '1px solid rgba(255, 255, 255, 0.1)',
-                      color: activeBackground === bg.id ? '#38bdf8' : '#cbd5e1',
+                      background: activeBackground === bg.id ? 'rgba(2, 132, 199, 0.12)' : 'var(--surface-secondary)',
+                      border: activeBackground === bg.id ? '1px solid #0284c7' : '1px solid var(--border)',
+                      color: activeBackground === bg.id ? '#0284c7' : 'var(--text-secondary)',
                       fontSize: '12px',
                       fontWeight: 600,
                       cursor: 'pointer',
@@ -222,12 +222,12 @@ export const PhotoGenius = () => {
 
           {/* Right: Guided Mobile Angle Checklist */}
           <div>
-            <div style={{ background: 'rgba(15, 23, 42, 0.75)', borderRadius: '16px', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '24px' }}>
-              <h3 style={{ fontSize: '16px', fontWeight: 700, margin: '0 0 4px', color: '#ffffff', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Camera size={18} color="#0ea5e9" />
+            <div style={{ background: 'var(--surface)', borderRadius: '16px', border: '1px solid var(--border)', padding: '24px', boxShadow: 'var(--shadow-sm)' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: 700, margin: '0 0 4px', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Camera size={18} color="#0284c7" />
                 <span>AI Guided Photography Mobile Checklist</span>
               </h3>
-              <p style={{ margin: '0 0 16px', fontSize: '12.5px', color: '#94a3b8' }}>
+              <p style={{ margin: '0 0 16px', fontSize: '12.5px', color: 'var(--text-secondary)' }}>
                 Step-by-step angle prompts ensure every vehicle meets high-converting marketplace standards.
               </p>
 
@@ -242,15 +242,15 @@ export const PhotoGenius = () => {
                       style={{
                         padding: '12px 14px',
                         borderRadius: '10px',
-                        background: isSelected ? 'rgba(14, 165, 233, 0.12)' : 'rgba(2, 6, 23, 0.45)',
-                        border: isSelected ? '1px solid #0ea5e9' : '1px solid rgba(255, 255, 255, 0.06)',
+                        background: isSelected ? 'rgba(2, 132, 199, 0.08)' : 'var(--surface-secondary)',
+                        border: isSelected ? '1px solid #0284c7' : '1px solid var(--border)',
                         cursor: 'pointer',
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
                       }}
                     >
-                      <span style={{ fontSize: '13px', fontWeight: 600, color: isSelected ? '#38bdf8' : '#e2e8f0' }}>
+                      <span style={{ fontSize: '13px', fontWeight: 600, color: isSelected ? '#0284c7' : 'var(--text-primary)' }}>
                         {ang.label}
                       </span>
                       {ang.completed ? (
@@ -258,7 +258,7 @@ export const PhotoGenius = () => {
                           <CheckCircle2 size={15} /> Captured
                         </span>
                       ) : (
-                        <span style={{ color: '#64748b', fontSize: '11px' }}>Pending</span>
+                        <span style={{ color: 'var(--text-tertiary)', fontSize: '11px' }}>Pending</span>
                       )}
                     </div>
                   );
@@ -271,7 +271,7 @@ export const PhotoGenius = () => {
                   style={{
                     padding: '10px 18px',
                     borderRadius: '8px',
-                    background: 'linear-gradient(90deg, #0284c7, #0ea5e9)',
+                    background: '#0284c7',
                     border: 'none',
                     color: '#ffffff',
                     fontSize: '13px',
