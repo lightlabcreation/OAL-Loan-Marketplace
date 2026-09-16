@@ -11,7 +11,7 @@ export const ROLE_PRESETS = [
     email: '',
     roleName: 'Guest Visitor',
     badge: 'Guest',
-    defaultRoute: '/',
+    defaultRoute: '/marketplace',
   },
   {
     id: 'MEMBER',
@@ -21,7 +21,7 @@ export const ROLE_PRESETS = [
     email: 'sarah.miller@gmail.com',
     roleName: 'Sarah Miller (Private Seller)',
     badge: 'TruYou Verified',
-    defaultRoute: '/member/dashboard',
+    defaultRoute: '/for-sale',
   },
   {
     id: 'DEALER_PRO',
@@ -31,7 +31,7 @@ export const ROLE_PRESETS = [
     email: 'marcus@dallascentralmotors.com',
     roleName: 'Marcus Vance (General Manager)',
     badge: 'ADP Franchise Partner',
-    defaultRoute: '/dealer/hub',
+    defaultRoute: '/omp/marketplace',
   },
   {
     id: 'SERVICE_PRO',
@@ -51,7 +51,7 @@ export const ROLE_PRESETS = [
     email: 'alexander.wright@nergy.io',
     roleName: 'Alexander Wright (Franchise Umbrella Owner)',
     badge: 'Executive Admin',
-    defaultRoute: '/executive/central-office',
+    defaultRoute: '/omp/executive/central-office',
   },
 ];
 
@@ -105,6 +105,26 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
+  const [userCustomListings, setUserCustomListings] = useState(() => {
+    const saved = localStorage.getItem('omp_custom_listings');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const addNewListing = (newListing) => {
+    const listingWithMeta = {
+      ...newListing,
+      id: `custom-${Date.now()}`,
+      postedAt: 'Just now',
+      truYou: true,
+    };
+    setUserCustomListings((prev) => {
+      const updated = [listingWithMeta, ...prev];
+      localStorage.setItem('omp_custom_listings', JSON.stringify(updated));
+      return updated;
+    });
+    return listingWithMeta;
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -119,6 +139,8 @@ export const AuthProvider = ({ children }) => {
         setSelectedLocation,
         myFavList,
         toggleFav,
+        userCustomListings,
+        addNewListing,
       }}
     >
       {children}

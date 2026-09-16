@@ -5,10 +5,26 @@ import { useNavigate } from 'react-router-dom';
 
 export const ForSalePage = () => {
   const navigate = useNavigate();
-  const { myFavList, toggleFav, selectedLocation } = useAuth();
+  const { myFavList, toggleFav, selectedLocation, userCustomListings } = useAuth();
   const [selectedCat, setSelectedCat] = useState('all');
 
-  const items = [
+  const customForSaleListings = (userCustomListings || [])
+    .filter((item) => !item.category || item.category === 'general')
+    .map((item) => ({
+      id: item.id,
+      title: item.title,
+      price: item.price,
+      category: 'general',
+      location: item.location || selectedLocation || 'Fremont, CA',
+      condition: 'Like New (Direct from Seller)',
+      image: item.image,
+      seller: 'Verified Private Seller',
+      truYou: true,
+      safeSpot: 'Fremont Police Dept Safe Spot',
+      isNew: true,
+    }));
+
+  const defaultItems = [
     {
       id: 'item-1',
       title: 'DeWalt 20V Max Cordless 5-Tool Combo Kit with Case',
@@ -58,6 +74,8 @@ export const ForSalePage = () => {
       safeSpot: 'Fremont Police Dept Safe Spot',
     },
   ];
+
+  const items = [...customForSaleListings, ...defaultItems];
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>

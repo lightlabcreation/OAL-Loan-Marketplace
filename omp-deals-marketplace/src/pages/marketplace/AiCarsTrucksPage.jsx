@@ -20,7 +20,7 @@ import { ShippingCalculatorModal } from '../../components/ShippingCalculatorModa
 
 export const AiCarsTrucksPage = () => {
   const navigate = useNavigate();
-  const { myFavList, toggleFav, selectedLocation, selectedRadius } = useAuth();
+  const { myFavList, toggleFav, selectedLocation, selectedRadius, userCustomListings } = useAuth();
 
   const [activeBodyType, setActiveBodyType] = useState('all');
   const [selectedMake, setSelectedMake] = useState('all');
@@ -145,10 +145,33 @@ export const AiCarsTrucksPage = () => {
     },
   ];
 
-  const filteredVehicles = vehicles.filter((v) => {
+  const customCars = (userCustomListings || [])
+    .filter((item) => item.category === 'cars_trucks' || !item.category)
+    .map((item) => ({
+      id: item.id,
+      bodyType: 'coupe',
+      make: item.title.split(' ')[0] || 'Custom',
+      title: item.title,
+      price: item.price,
+      estMonthly: '$420/mo (Instant Desking)',
+      mileage: '8,500 mi',
+      specs: item.description || 'Clean Title • Direct Private Seller',
+      color: 'Custom Paint Finish',
+      location: item.location || selectedLocation || 'Fremont, CA',
+      image: item.image,
+      dealer: 'Verified Private Seller (TruYou)',
+      adpTier: 'small',
+      vin: '1G1OMP' + item.id.replace(/[^0-9]/g, '').slice(0, 10),
+      titleStatus: 'Clean Title (NMVTIS Verified)',
+      isNewUserListing: true,
+    }));
+
+  const allVehicles = [...customCars, ...vehicles];
+
+  const filteredVehicles = allVehicles.filter((v) => {
     const matchesBody = activeBodyType === 'all' || v.bodyType === activeBodyType;
     const matchesMake = selectedMake === 'all' || v.make.toLowerCase() === selectedMake.toLowerCase();
-    const priceNum = parseInt(v.price.replace(/[^0-9]/g, ''));
+    const priceNum = parseInt(v.price.replace(/[^0-9]/g, '')) || 0;
     const matchesPrice = priceNum <= parseInt(priceMax);
     return matchesBody && matchesMake && matchesPrice;
   });
@@ -305,8 +328,13 @@ export const AiCarsTrucksPage = () => {
               {/* Photo */}
               <div style={{ height: '210px', position: 'relative', overflow: 'hidden', backgroundColor: 'var(--surface-secondary)' }}>
                 <img src={car.image} alt={car.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                <div style={{ position: 'absolute', top: '10px', left: '10px' }}>
+                <div style={{ position: 'absolute', top: '10px', left: '10px', display: 'flex', gap: '6px' }}>
                   <AdpVerifiedBadge tier={car.adpTier} size="sm" />
+                  {car.isNewUserListing && (
+                    <span style={{ backgroundColor: '#10b981', color: '#fff', fontSize: '10px', fontWeight: 800, padding: '3px 7px', borderRadius: '6px', textTransform: 'uppercase', boxShadow: '0 2px 6px rgba(16, 185, 129, 0.4)' }}>
+                      ⚡ NEWLY LISTED
+                    </span>
+                  )}
                 </div>
                 <button
                   onClick={() => toggleFav(car)}
