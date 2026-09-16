@@ -142,12 +142,12 @@ export const CentralOffice = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
         <div style={{ minWidth: 0, flex: 1 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem', flexWrap: 'wrap' }}>
-            <span style={{ fontSize: '0.72rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '4px', backgroundColor: 'var(--primary-subtle, rgba(2, 132, 199, 0.1))', color: 'var(--primary)', border: '1px solid var(--border)' }}>
+            <span style={{ fontSize: '0.75rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '4px', backgroundColor: 'var(--primary-subtle, rgba(56, 189, 248, 0.1))', color: 'var(--primary)', border: '1px solid var(--border)' }}>
               TASK E-01 • PILLAR 4
             </span>
-            <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>Umbrella Franchise Parent Management</span>
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Umbrella Franchise Parent Management</span>
           </div>
-          <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
+          <h1 style={{ fontSize: '1.65rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
             OMP Executive Central Office
           </h1>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', margin: '0.25rem 0 0 0' }}>
@@ -158,7 +158,7 @@ export const CentralOffice = () => {
         <div style={{ display: 'flex', gap: '0.75rem', flexShrink: 0 }}>
           <button
             onClick={() => setIsProvisionModalOpen(true)}
-            style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', backgroundColor: '#0284c7', color: '#fff', border: 'none', padding: '0.55rem 1rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', boxShadow: '0 4px 12px rgba(2, 132, 199, 0.25)' }}
+            style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', backgroundColor: 'var(--primary)', color: 'var(--text-on-primary, #fff)', border: 'none', padding: '0.55rem 1rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', boxShadow: 'var(--shadow-sm)' }}
           >
             <Plus size={16} /> Provision New Store Location
           </button>
@@ -166,26 +166,26 @@ export const CentralOffice = () => {
       </div>
 
       {/* KPI Cards Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-        <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
+        <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem', boxShadow: 'var(--shadow-sm)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--text-secondary)', fontSize: '0.8rem', fontWeight: 500 }}>
             <span>Total Group Inventory</span>
             <Car size={18} color="var(--primary)" />
           </div>
-          <div style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.5rem' }}>
-            {totalInventory} <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-tertiary)' }}>Vehicles</span>
+          <div style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.5rem' }}>
+            {totalInventory} <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-secondary)' }}>Vehicles</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#10b981', fontSize: '0.75rem', marginTop: '0.35rem' }}>
             <ArrowUpRight size={14} /> Across {branches.length} Franchise Locations
           </div>
         </div>
 
-        <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
+        <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem', boxShadow: 'var(--shadow-sm)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--text-secondary)', fontSize: '0.8rem', fontWeight: 500 }}>
             <span>Consolidated Gross MTD</span>
             <DollarSign size={18} color="#10b981" />
           </div>
-          <div style={{ fontSize: '1.75rem', fontWeight: 800, color: '#10b981', marginTop: '0.5rem' }}>
+          <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#10b981', marginTop: '0.5rem' }}>
             $172,650
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#10b981', fontSize: '0.75rem', marginTop: '0.35rem' }}>
@@ -193,26 +193,26 @@ export const CentralOffice = () => {
           </div>
         </div>
 
-        <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
+        <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem', boxShadow: 'var(--shadow-sm)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--text-secondary)', fontSize: '0.8rem', fontWeight: 500 }}>
             <span>Total Units Sold MTD</span>
             <TrendingUp size={18} color="#a855f7" />
           </div>
-          <div style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.5rem' }}>
-            {totalSold} <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-tertiary)' }}>Cars Delivered</span>
+          <div style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.5rem' }}>
+            {totalSold} <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-secondary)' }}>Cars Delivered</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: 'var(--primary)', fontSize: '0.75rem', marginTop: '0.35rem' }}>
             <Activity size={14} /> 74% Finance / 26% Cash
           </div>
         </div>
 
-        <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
+        <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem', boxShadow: 'var(--shadow-sm)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--text-secondary)', fontSize: '0.8rem', fontWeight: 500 }}>
             <span>Active Store Licenses</span>
             <Key size={18} color="#f59e0b" />
           </div>
-          <div style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.5rem' }}>
-            {allocatedLicenses} / 5 <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-tertiary)' }}>Allocated</span>
+          <div style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.5rem' }}>
+            {allocatedLicenses} / 5 <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-secondary)' }}>Allocated</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#f59e0b', fontSize: '0.75rem', marginTop: '0.35rem' }}>
             <AlertTriangle size={14} /> 1 Store Renewal in 14 Days
@@ -221,13 +221,13 @@ export const CentralOffice = () => {
       </div>
 
       {/* Multi-Location Performance Table */}
-      <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
+      <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', overflow: 'hidden', boxShadow: 'var(--shadow-sm)' }}>
         <div style={{ padding: '1rem 1.25rem', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
           <div>
             <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
               Dealership Locations under Master Umbrella ({filteredBranches.length} Stores Shown)
             </h3>
-            <p style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', margin: '0.2rem 0 0 0' }}>
+            <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', margin: '0.2rem 0 0 0' }}>
               Real-time branch telemetry, license tiering, and individual profit breakdown
             </p>
           </div>
@@ -243,9 +243,9 @@ export const CentralOffice = () => {
                 key={f.id}
                 onClick={() => setSelectedFilter(f.id)}
                 style={{
-                  backgroundColor: selectedFilter === f.id ? 'rgba(56, 189, 248, 0.15)' : 'rgba(255,255,255,0.04)',
-                  color: selectedFilter === f.id ? '#38bdf8' : '#94a3b8',
-                  border: selectedFilter === f.id ? '1px solid rgba(56, 189, 248, 0.4)' : '1px solid rgba(255,255,255,0.06)',
+                  backgroundColor: selectedFilter === f.id ? 'var(--primary-subtle, rgba(56, 189, 248, 0.15))' : 'var(--background)',
+                  color: selectedFilter === f.id ? 'var(--primary)' : 'var(--text-secondary)',
+                  border: selectedFilter === f.id ? '1px solid var(--primary)' : '1px solid var(--border)',
                   padding: '0.35rem 0.75rem',
                   borderRadius: '6px',
                   fontSize: '0.75rem',
@@ -263,7 +263,7 @@ export const CentralOffice = () => {
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
             <thead>
-              <tr style={{ backgroundColor: 'var(--surface-secondary, rgba(0,0,0,0.02))', color: 'var(--text-secondary)', borderBottom: '1px solid var(--border)' }}>
+              <tr style={{ backgroundColor: 'var(--surface-secondary)', color: 'var(--text-secondary)', borderBottom: '1px solid var(--border)' }}>
                 <th style={{ padding: '0.85rem 1.25rem', fontWeight: 600 }}>Location Name & City</th>
                 <th style={{ padding: '0.85rem 1rem', fontWeight: 600 }}>General Manager</th>
                 <th style={{ padding: '0.85rem 1rem', fontWeight: 600 }}>Lot Inventory</th>
@@ -310,7 +310,7 @@ export const CentralOffice = () => {
                   <td style={{ padding: '1rem 1.25rem', textAlign: 'right' }}>
                     <button
                       onClick={() => handleOpenAudit(b)}
-                      style={{ backgroundColor: 'var(--primary-subtle, rgba(2, 132, 199, 0.1))', color: 'var(--primary)', border: '1px solid var(--border)', padding: '0.4rem 0.85rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer', transition: 'all 0.15s' }}
+                      style={{ backgroundColor: 'var(--primary-subtle, rgba(56, 189, 248, 0.12))', color: 'var(--primary)', border: '1px solid var(--border)', padding: '0.4rem 0.85rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer', transition: 'all 0.15s' }}
                     >
                       Audit Store
                     </button>
@@ -326,9 +326,9 @@ export const CentralOffice = () => {
       {/* 🚀 MODAL 1: PROVISION NEW STORE LOCATION DIALOG */}
       {/* ========================================================================= */}
       {isProvisionModalOpen && (
-        <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(6px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: '1rem' }}>
-          <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '16px', width: '100%', maxWidth: '520px', overflow: 'hidden', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)' }}>
-            <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'var(--surface-secondary, rgba(0,0,0,0.02))' }}>
+        <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: '1rem' }}>
+          <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '16px', width: '100%', maxWidth: '520px', overflow: 'hidden', boxShadow: 'var(--shadow-xl)' }}>
+            <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'var(--surface-secondary)' }}>
               <div>
                 <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                   🏢 Provision New Store Location
@@ -337,7 +337,7 @@ export const CentralOffice = () => {
               </div>
               <button
                 onClick={() => setIsProvisionModalOpen(false)}
-                style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '0.25rem' }}
+                style={{ background: 'transparent', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer', padding: '0.25rem' }}
               >
                 <X size={20} />
               </button>
@@ -358,7 +358,7 @@ export const CentralOffice = () => {
                 />
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.35rem' }}>
                     City & State *
@@ -386,7 +386,7 @@ export const CentralOffice = () => {
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '0.35rem' }}>
                     Initial Lot Units
@@ -414,7 +414,7 @@ export const CentralOffice = () => {
                 </div>
               </div>
 
-              <div style={{ backgroundColor: 'var(--primary-subtle, rgba(2, 132, 199, 0.08))', border: '1px solid var(--border)', borderRadius: '8px', padding: '0.75rem', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+              <div style={{ backgroundColor: 'var(--primary-subtle, rgba(56, 189, 248, 0.08))', border: '1px solid var(--border)', borderRadius: '8px', padding: '0.75rem', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
                 <strong style={{ color: 'var(--primary)' }}>License Provisioning Note:</strong> This will generate a dedicated DMS token and allocate 1 license from your corporate umbrella quota (Available: {5 - allocatedLicenses} remaining).
               </div>
 
@@ -422,13 +422,13 @@ export const CentralOffice = () => {
                 <button
                   type="button"
                   onClick={() => setIsProvisionModalOpen(false)}
-                  style={{ backgroundColor: 'var(--surface-secondary, rgba(0,0,0,0.05))', color: 'var(--text-secondary)', border: '1px solid var(--border)', padding: '0.6rem 1rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer' }}
+                  style={{ backgroundColor: 'var(--background)', color: 'var(--text-secondary)', border: '1px solid var(--border)', padding: '0.6rem 1rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer' }}
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  style={{ backgroundColor: '#0284c7', color: '#fff', border: 'none', padding: '0.6rem 1.25rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 700, cursor: 'pointer', boxShadow: '0 4px 12px rgba(2, 132, 199, 0.25)' }}
+                  style={{ backgroundColor: 'var(--primary)', color: 'var(--text-on-primary, #fff)', border: 'none', padding: '0.6rem 1.25rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 700, cursor: 'pointer', boxShadow: 'var(--shadow-sm)' }}
                 >
                   Provision Store & Issue License
                 </button>
@@ -442,9 +442,9 @@ export const CentralOffice = () => {
       {/* 🔍 MODAL 2: AUDIT STORE COMPLIANCE & TELEMETRY */}
       {/* ========================================================================= */}
       {isAuditModalOpen && auditedStore && (
-        <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(6px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: '1rem' }}>
-          <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '16px', width: '100%', maxWidth: '580px', overflow: 'hidden', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)' }}>
-            <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'var(--surface-secondary, rgba(0,0,0,0.02))' }}>
+        <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: '1rem' }}>
+          <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '16px', width: '100%', maxWidth: '580px', overflow: 'hidden', boxShadow: 'var(--shadow-xl)' }}>
+            <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'var(--surface-secondary)' }}>
               <div>
                 <div style={{ fontSize: '0.72rem', color: 'var(--primary)', fontWeight: 700, textTransform: 'uppercase' }}>Branch Compliance & Telemetry</div>
                 <h3 style={{ margin: '0.15rem 0 0 0', fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)' }}>
@@ -453,7 +453,7 @@ export const CentralOffice = () => {
               </div>
               <button
                 onClick={() => setIsAuditModalOpen(false)}
-                style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '0.25rem' }}
+                style={{ background: 'transparent', border: 'none', color: 'var(--text-tertiary)', cursor: 'pointer', padding: '0.25rem' }}
               >
                 <X size={20} />
               </button>
@@ -461,7 +461,7 @@ export const CentralOffice = () => {
 
             <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
               {/* Score & Status Highlight */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', backgroundColor: 'var(--surface-secondary, rgba(0,0,0,0.02))', padding: '1rem', borderRadius: '10px', border: '1px solid var(--border)' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', backgroundColor: 'var(--background)', padding: '1rem', borderRadius: '10px', border: '1px solid var(--border)' }}>
                 <div>
                   <div style={{ fontSize: '0.72rem', color: 'var(--text-secondary)' }}>Audit Compliance Score</div>
                   <div style={{ fontSize: '1.4rem', fontWeight: 800, color: auditedStore.status === 'Healthy' ? '#10b981' : '#f59e0b', marginTop: '0.2rem' }}>
@@ -478,42 +478,42 @@ export const CentralOffice = () => {
 
               {/* Checklist Breakdown */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.5rem 0.75rem', backgroundColor: 'var(--background)', border: '1px solid var(--border)', borderRadius: '6px', fontSize: '0.8rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.5rem 0.75rem', backgroundColor: 'var(--surface-secondary)', borderRadius: '6px', fontSize: '0.8rem' }}>
                   <span style={{ color: 'var(--text-secondary)' }}>DMV Dealer License:</span>
                   <span style={{ color: '#10b981', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
                     <CheckCircle size={14} /> {auditedStore.licenseStatus}
                   </span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.5rem 0.75rem', backgroundColor: 'var(--background)', border: '1px solid var(--border)', borderRadius: '6px', fontSize: '0.8rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.5rem 0.75rem', backgroundColor: 'var(--surface-secondary)', borderRadius: '6px', fontSize: '0.8rem' }}>
                   <span style={{ color: 'var(--text-secondary)' }}>DMS Auto Feed Sync:</span>
                   <span style={{ color: 'var(--primary)', fontWeight: 600 }}>Active (Last Sync 4 mins ago)</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.5rem 0.75rem', backgroundColor: 'var(--background)', border: '1px solid var(--border)', borderRadius: '6px', fontSize: '0.8rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.5rem 0.75rem', backgroundColor: 'var(--surface-secondary)', borderRadius: '6px', fontSize: '0.8rem' }}>
                   <span style={{ color: 'var(--text-secondary)' }}>Gross Margin Realization:</span>
                   <span style={{ color: '#10b981', fontWeight: 700 }}>{auditedStore.grossProfit} MTD</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.5rem 0.75rem', backgroundColor: 'var(--background)', border: '1px solid var(--border)', borderRadius: '6px', fontSize: '0.8rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.5rem 0.75rem', backgroundColor: 'var(--surface-secondary)', borderRadius: '6px', fontSize: '0.8rem' }}>
                   <span style={{ color: 'var(--text-secondary)' }}>General Manager:</span>
                   <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{auditedStore.manager}</span>
                 </div>
               </div>
 
               {/* Action Buttons in Modal */}
-              <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem' }}>
                 <button
                   onClick={() => {
                     toast.success(`Full Audit Report PDF downloaded for ${auditedStore.name}`);
                   }}
-                  style={{ flex: 1, minWidth: '160px', backgroundColor: 'var(--primary-subtle, rgba(2, 132, 199, 0.1))', color: 'var(--primary)', border: '1px solid var(--border)', padding: '0.65rem', borderRadius: '8px', fontSize: '0.82rem', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem' }}
+                  style={{ flex: 1, backgroundColor: 'var(--primary-subtle, rgba(56, 189, 248, 0.15))', color: 'var(--primary)', border: '1px solid var(--border)', padding: '0.65rem', borderRadius: '8px', fontSize: '0.82rem', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem' }}
                 >
-                  <Download size={15} /> Download Audit PDF
+                  <Download size={15} /> Download Full Audit PDF
                 </button>
                 <button
                   onClick={() => {
                     toast.success(`License key renewed for ${auditedStore.name} (+1 Year Extended)`);
                     setIsAuditModalOpen(false);
                   }}
-                  style={{ flex: 1, minWidth: '160px', backgroundColor: '#0284c7', color: '#fff', border: 'none', padding: '0.65rem', borderRadius: '8px', fontSize: '0.82rem', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem' }}
+                  style={{ flex: 1, backgroundColor: 'var(--primary)', color: 'var(--text-on-primary, #fff)', border: 'none', padding: '0.65rem', borderRadius: '8px', fontSize: '0.82rem', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem' }}
                 >
                   <Key size={15} /> Renew License Key
                 </button>
@@ -525,3 +525,5 @@ export const CentralOffice = () => {
     </div>
   );
 };
+
+export default CentralOffice;
