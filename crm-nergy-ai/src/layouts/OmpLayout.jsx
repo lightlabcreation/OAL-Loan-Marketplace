@@ -26,21 +26,28 @@ import {
   Camera,
   Wrench,
   Share2,
-  Globe
+  Globe,
+  X
 } from 'lucide-react';
 import { Topbar } from './components/Topbar';
+import { Drawer } from '../components/ui/Drawer';
 import { ToastContainer } from '../components/ui/Toast';
 import { useResponsive } from '../hooks/useResponsive';
 
 export const OmpLayout = () => {
   const { isMobile, isTablet } = useResponsive();
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(isTablet);
+  const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   const [selectedStore, setSelectedStore] = useState('all');
   const location = useLocation();
   const navigate = useNavigate();
 
   const handleToggleSidebar = () => {
-    setIsSidebarCollapsed((prev) => !prev);
+    if (isMobile) {
+      setIsMobileDrawerOpen((prev) => !prev);
+    } else {
+      setIsSidebarCollapsed((prev) => !prev);
+    }
   };
 
   const stores = [
@@ -103,6 +110,83 @@ export const OmpLayout = () => {
     },
   ];
 
+  const renderSidebarLinks = (closeDrawerOnNavigate = false) => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', padding: '0.5rem 0' }}>
+      {navGroups.map((group, gIdx) => (
+        <div key={gIdx} style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+          {(!isSidebarCollapsed || closeDrawerOnNavigate) && (
+            <div style={{ fontSize: '0.68rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-tertiary)', fontWeight: 700, padding: '0 0.5rem 0.25rem 0.5rem' }}>
+              {group.group}
+            </div>
+          )}
+          {group.items.map((item, iIdx) => {
+            const Icon = item.icon;
+            const isActive = location.pathname === item.path || location.pathname.startsWith(item.path);
+            return (
+              <NavLink
+                key={iIdx}
+                to={item.path}
+                onClick={() => {
+                  if (closeDrawerOnNavigate) setIsMobileDrawerOpen(false);
+                }}
+                title={isSidebarCollapsed && !closeDrawerOnNavigate ? item.label : undefined}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: isSidebarCollapsed && !closeDrawerOnNavigate ? 'center' : 'space-between',
+                  padding: '0.5rem 0.65rem',
+                  borderRadius: '8px',
+                  textDecoration: 'none',
+                  fontSize: '0.82rem',
+                  fontWeight: isActive ? 600 : 500,
+                  backgroundColor: isActive ? 'var(--primary-subtle, rgba(2, 132, 199, 0.1))' : 'transparent',
+                  color: isActive ? 'var(--primary)' : 'var(--text-secondary)',
+                  borderLeft: (!isSidebarCollapsed || closeDrawerOnNavigate) && isActive ? '3px solid var(--primary)' : '3px solid transparent',
+                  transition: 'all 0.15s ease',
+                }}
+                onMouseOver={(e) => {
+                  if (!isActive) e.currentTarget.style.backgroundColor = 'var(--background)';
+                }}
+                onMouseOut={(e) => {
+                  if (!isActive) e.currentTarget.style.backgroundColor = 'transparent';
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
+                  <Icon size={17} color={isActive ? 'var(--primary)' : 'var(--text-secondary)'} />
+                  {(!isSidebarCollapsed || closeDrawerOnNavigate) && <span>{item.label}</span>}
+                </div>
+                {(!isSidebarCollapsed || closeDrawerOnNavigate) && item.badge && (
+                  <span style={{ fontSize: '0.65rem', padding: '0.1rem 0.4rem', borderRadius: '4px', backgroundColor: '#ef4444', color: '#fff', fontWeight: 700 }}>
+                    {item.badge}
+                  </span>
+                )}
+                {(!isSidebarCollapsed || closeDrawerOnNavigate) && item.tag && !item.badge && (
+                  <span style={{ fontSize: '0.65rem', padding: '0.1rem 0.35rem', borderRadius: '4px', backgroundColor: 'var(--background)', color: 'var(--text-tertiary)', border: '1px solid var(--border)' }}>
+                    {item.tag}
+                  </span>
+                )}
+              </NavLink>
+            );
+          })}
+        </div>
+      ))}
+
+      {/* Lot Stats Mini Summary */}
+      {(!isSidebarCollapsed || closeDrawerOnNavigate) && (
+        <div style={{ marginTop: 'auto', padding: '0.75rem', borderRadius: '8px', backgroundColor: 'var(--background)', border: '1px solid var(--border)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: 'var(--text-secondary)' }}>
+            <span>Store Inventory</span>
+            <span style={{ fontWeight: 700, color: 'var(--primary)' }}>{currentStoreObj.activeUnits} Cars</span>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
+            <span>MTD Profit</span>
+            <span style={{ fontWeight: 700, color: '#10b981' }}>+$128.4k</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <div
       style={{
@@ -121,42 +205,45 @@ export const OmpLayout = () => {
       {/* Exact Same Topbar as CRM nErgy AI (Same Logo, Same User, Same Search & Controls) */}
       <Topbar onToggleSidebar={handleToggleSidebar} product="crm" />
 
-      {/* Sub-Header Bar with Store Switcher & Module Ticker */}
+      {/* Responsive Sub-Header Bar with Store Switcher & Module Ticker */}
       <div
         style={{
-          height: '46px',
+          minHeight: '46px',
           borderBottom: '1px solid var(--border)',
           backgroundColor: 'var(--surface)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '0 1.25rem',
+          padding: isMobile ? '0.4rem 0.75rem' : '0 1.25rem',
           flexShrink: 0,
           zIndex: 15,
+          flexWrap: 'wrap',
+          gap: '0.5rem',
+          overflowX: 'auto',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.82rem', fontWeight: 700, color: 'var(--primary)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontSize: isMobile ? '0.75rem' : '0.82rem', fontWeight: 700, color: 'var(--primary)' }}>
             <Car size={16} />
-            <span>OMP DEALS AUTO SUITE</span>
+            <span>OMP DEALS</span>
           </div>
-          <span style={{ fontSize: '0.7rem', padding: '0.1rem 0.45rem', borderRadius: '9999px', backgroundColor: 'var(--primary-subtle, rgba(2, 132, 199, 0.1))', color: 'var(--primary)', fontWeight: 700 }}>
-            ⚡ Dealer Essentials & OfferUp DMS
+          <span style={{ fontSize: '0.68rem', padding: '0.1rem 0.45rem', borderRadius: '9999px', backgroundColor: 'var(--primary-subtle, rgba(2, 132, 199, 0.1))', color: 'var(--primary)', fontWeight: 700, whiteSpace: 'nowrap' }}>
+            ⚡ OfferUp DMS
           </span>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
           {/* Store Switcher */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', backgroundColor: 'var(--background)', border: '1px solid var(--border)', padding: '0.25rem 0.65rem', borderRadius: '6px' }}>
-            <Store size={14} color="var(--primary)" />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', backgroundColor: 'var(--background)', border: '1px solid var(--border)', padding: '0.2rem 0.5rem', borderRadius: '6px' }}>
+            <Store size={13} color="var(--primary)" />
             <select
               value={selectedStore}
               onChange={(e) => setSelectedStore(e.target.value)}
-              style={{ background: 'transparent', border: 'none', color: 'var(--text-primary)', fontSize: '0.78rem', fontWeight: 600, outline: 'none', cursor: 'pointer' }}
+              style={{ background: 'transparent', border: 'none', color: 'var(--text-primary)', fontSize: '0.74rem', fontWeight: 600, outline: 'none', cursor: 'pointer', maxWidth: isMobile ? '130px' : '220px' }}
             >
               {stores.map((s) => (
                 <option key={s.id} value={s.id} style={{ backgroundColor: 'var(--surface)', color: 'var(--text-primary)' }}>
-                  {s.name} ({s.activeUnits} Cars)
+                  {s.name} ({s.activeUnits})
                 </option>
               ))}
             </select>
@@ -167,18 +254,19 @@ export const OmpLayout = () => {
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '0.35rem',
+              gap: '0.3rem',
               backgroundColor: 'var(--background)',
               border: '1px solid var(--border)',
               color: 'var(--text-secondary)',
-              padding: '0.3rem 0.65rem',
+              padding: '0.25rem 0.55rem',
               borderRadius: '6px',
-              fontSize: '0.75rem',
+              fontSize: '0.72rem',
               fontWeight: 600,
               cursor: 'pointer',
+              whiteSpace: 'nowrap',
             }}
           >
-            <Layers size={13} /> Back to CRM Home
+            <Layers size={12} /> {isMobile ? 'CRM' : 'Back to CRM'}
           </button>
         </div>
       </div>
@@ -193,91 +281,37 @@ export const OmpLayout = () => {
           maxHeight: 'calc(100vh - var(--topbar-height) - 46px)',
         }}
       >
-        {/* Unified Light/Consistent Left Sidebar */}
-        <aside
-          style={{
-            width: isSidebarCollapsed ? '72px' : '260px',
-            backgroundColor: 'var(--surface)',
-            borderRight: '1px solid var(--border)',
-            display: 'flex',
-            flexDirection: 'column',
-            overflowY: 'auto',
-            padding: '0.85rem 0.6rem',
-            gap: '1rem',
-            flexShrink: 0,
-            transition: 'width 0.2s ease',
-          }}
-        >
-          {navGroups.map((group, gIdx) => (
-            <div key={gIdx} style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
-              {!isSidebarCollapsed && (
-                <div style={{ fontSize: '0.68rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-tertiary)', fontWeight: 700, padding: '0 0.5rem 0.25rem 0.5rem' }}>
-                  {group.group}
-                </div>
-              )}
-              {group.items.map((item, iIdx) => {
-                const Icon = item.icon;
-                const isActive = location.pathname === item.path || location.pathname.startsWith(item.path);
-                return (
-                  <NavLink
-                    key={iIdx}
-                    to={item.path}
-                    title={isSidebarCollapsed ? item.label : undefined}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: isSidebarCollapsed ? 'center' : 'space-between',
-                      padding: '0.5rem 0.65rem',
-                      borderRadius: '8px',
-                      textDecoration: 'none',
-                      fontSize: '0.82rem',
-                      fontWeight: isActive ? 600 : 500,
-                      backgroundColor: isActive ? 'var(--primary-subtle, rgba(2, 132, 199, 0.1))' : 'transparent',
-                      color: isActive ? 'var(--primary)' : 'var(--text-secondary)',
-                      borderLeft: !isSidebarCollapsed && isActive ? '3px solid var(--primary)' : '3px solid transparent',
-                      transition: 'all 0.15s ease',
-                    }}
-                    onMouseOver={(e) => {
-                      if (!isActive) e.currentTarget.style.backgroundColor = 'var(--background)';
-                    }}
-                    onMouseOut={(e) => {
-                      if (!isActive) e.currentTarget.style.backgroundColor = 'transparent';
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
-                      <Icon size={17} color={isActive ? 'var(--primary)' : 'var(--text-secondary)'} />
-                      {!isSidebarCollapsed && <span>{item.label}</span>}
-                    </div>
-                    {!isSidebarCollapsed && item.badge && (
-                      <span style={{ fontSize: '0.65rem', padding: '0.1rem 0.4rem', borderRadius: '4px', backgroundColor: '#ef4444', color: '#fff', fontWeight: 700 }}>
-                        {item.badge}
-                      </span>
-                    )}
-                    {!isSidebarCollapsed && item.tag && !item.badge && (
-                      <span style={{ fontSize: '0.65rem', padding: '0.1rem 0.35rem', borderRadius: '4px', backgroundColor: 'var(--background)', color: 'var(--text-tertiary)', border: '1px solid var(--border)' }}>
-                        {item.tag}
-                      </span>
-                    )}
-                  </NavLink>
-                );
-              })}
-            </div>
-          ))}
+        {/* Desktop / Tablet Left Sidebar */}
+        {!isMobile && (
+          <aside
+            style={{
+              width: isSidebarCollapsed ? '72px' : '260px',
+              backgroundColor: 'var(--surface)',
+              borderRight: '1px solid var(--border)',
+              display: 'flex',
+              flexDirection: 'column',
+              overflowY: 'auto',
+              padding: '0.85rem 0.6rem',
+              flexShrink: 0,
+              transition: 'width 0.2s ease',
+            }}
+          >
+            {renderSidebarLinks(false)}
+          </aside>
+        )}
 
-          {/* Lot Stats Mini Summary */}
-          {!isSidebarCollapsed && (
-            <div style={{ marginTop: 'auto', padding: '0.75rem', borderRadius: '8px', backgroundColor: 'var(--background)', border: '1px solid var(--border)' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: 'var(--text-secondary)' }}>
-                <span>Store Inventory</span>
-                <span style={{ fontWeight: 700, color: 'var(--primary)' }}>{currentStoreObj.activeUnits} Cars</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
-                <span>MTD Profit</span>
-                <span style={{ fontWeight: 700, color: '#10b981' }}>+$128.4k</span>
-              </div>
-            </div>
-          )}
-        </aside>
+        {/* Mobile Slide-Out Drawer Navigation */}
+        {isMobile && (
+          <Drawer
+            isOpen={isMobileDrawerOpen}
+            onClose={() => setIsMobileDrawerOpen(false)}
+            position="left"
+            width="280px"
+            title="OMP Deals Menu"
+          >
+            {renderSidebarLinks(true)}
+          </Drawer>
+        )}
 
         {/* Main Content Area */}
         <main
@@ -287,7 +321,7 @@ export const OmpLayout = () => {
             overflowY: 'auto',
             overflowX: 'hidden',
             backgroundColor: 'var(--background)',
-            padding: '1.5rem',
+            padding: isMobile ? '0.875rem' : '1.5rem',
             boxSizing: 'border-box',
           }}
         >
@@ -299,3 +333,4 @@ export const OmpLayout = () => {
     </div>
   );
 };
+
