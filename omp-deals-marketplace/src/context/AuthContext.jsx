@@ -31,7 +31,7 @@ export const ROLE_PRESETS = [
     email: 'marcus@dallascentralmotors.com',
     roleName: 'Marcus Vance (General Manager)',
     badge: 'ADP Franchise Partner',
-    defaultRoute: '/omp/marketplace',
+    defaultRoute: '/marketplace',
   },
   {
     id: 'SERVICE_PRO',
@@ -125,6 +125,29 @@ export const AuthProvider = ({ children }) => {
     return listingWithMeta;
   };
 
+  // Multi-tier Subscription Management (Marketplace Free vs CRM vs Central Office)
+  const [activeSubscriptions, setActiveSubscriptions] = useState(() => {
+    const saved = localStorage.getItem('omp_subscriptions');
+    return saved ? JSON.parse(saved) : ['MARKETPLACE', 'CRM', 'CENTRAL_OFFICE']; // Pro access default for testing
+  });
+
+  const toggleSubscription = (tierId) => {
+    setActiveSubscriptions((prev) => {
+      let updated;
+      if (prev.includes(tierId)) {
+        updated = prev.filter((id) => id !== tierId);
+      } else {
+        updated = [...prev, tierId];
+      }
+      localStorage.setItem('omp_subscriptions', JSON.stringify(updated));
+      return updated;
+    });
+  };
+
+  const hasSubscription = (tierId) => {
+    return activeSubscriptions.includes(tierId);
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -141,6 +164,9 @@ export const AuthProvider = ({ children }) => {
         toggleFav,
         userCustomListings,
         addNewListing,
+        activeSubscriptions,
+        toggleSubscription,
+        hasSubscription,
       }}
     >
       {children}
