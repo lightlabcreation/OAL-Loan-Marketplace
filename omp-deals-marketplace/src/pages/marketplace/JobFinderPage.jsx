@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { Briefcase, MapPin, DollarSign, Clock, CheckCircle2, Send, Building } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { JobApplicationModal } from '../../components/JobApplicationModal';
+import { JobStatusModal } from '../../components/JobStatusModal';
 
 export const JobFinderPage = () => {
   const { selectedLocation } = useAuth();
   const [selectedDomain, setSelectedDomain] = useState('all');
-  const [appliedJob, setAppliedJob] = useState(null);
+  const [appliedJobIds, setAppliedJobIds] = useState(['job-1']);
+  const [selectedJob, setSelectedJob] = useState(null);
+  const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
+  const [isStatusModalOpen, setIsStatusModalOpen] = useState(false);
 
   const domains = [
     { id: 'all', label: 'All 35+ Domains' },
@@ -164,32 +169,79 @@ export const JobFinderPage = () => {
                 <span>{job.location}</span>
               </div>
 
-              <button
-                onClick={() => {
-                  setAppliedJob(job);
-                  alert(`Application submitted to ${job.company} with 1-Click Fast Resume.`);
-                }}
-                style={{
-                  backgroundColor: '#8b5cf6',
-                  color: '#ffffff',
-                  border: 'none',
-                  padding: '8px 18px',
-                  borderRadius: '8px',
-                  fontSize: '12.5px',
-                  fontWeight: 700,
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                }}
-              >
-                <Send size={13} />
-                <span>{appliedJob?.id === job.id ? 'Applied ✓' : '1-Click Apply'}</span>
-              </button>
+              {appliedJobIds.includes(job.id) ? (
+                <button
+                  id={`job-status-btn-${job.id}`}
+                  onClick={() => {
+                    setSelectedJob(job);
+                    setIsStatusModalOpen(true);
+                  }}
+                  style={{
+                    backgroundColor: 'rgba(16, 185, 129, 0.15)',
+                    color: '#10b981',
+                    border: '1px solid rgba(16, 185, 129, 0.35)',
+                    padding: '8px 18px',
+                    borderRadius: '8px',
+                    fontSize: '12.5px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                  }}
+                >
+                  <CheckCircle2 size={13} color="#10b981" />
+                  <span>Applied ✓</span>
+                </button>
+              ) : (
+                <button
+                  id={`job-apply-btn-${job.id}`}
+                  onClick={() => {
+                    setSelectedJob(job);
+                    setIsApplyModalOpen(true);
+                  }}
+                  style={{
+                    backgroundColor: '#8b5cf6',
+                    color: '#ffffff',
+                    border: 'none',
+                    padding: '8px 18px',
+                    borderRadius: '8px',
+                    fontSize: '12.5px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                  }}
+                >
+                  <Send size={13} />
+                  <span>1-Click Apply</span>
+                </button>
+              )}
             </div>
           </div>
         ))}
       </div>
+
+      {/* 1-Click Fast Job Application Modal */}
+      <JobApplicationModal
+        isOpen={isApplyModalOpen}
+        onClose={() => setIsApplyModalOpen(false)}
+        job={selectedJob}
+        onApplySuccess={(jobId) => {
+          setAppliedJobIds((prev) => [...prev, jobId]);
+        }}
+      />
+
+      {/* Application Status Modal */}
+      <JobStatusModal
+        isOpen={isStatusModalOpen}
+        onClose={() => setIsStatusModalOpen(false)}
+        job={selectedJob}
+        onWithdraw={(jobId) => {
+          setAppliedJobIds((prev) => prev.filter((id) => id !== jobId));
+        }}
+      />
     </div>
   );
 };

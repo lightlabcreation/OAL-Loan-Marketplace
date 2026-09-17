@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Building, DollarSign, TrendingUp, MapPin, CheckCircle2, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { BusinessNdaModal } from '../../components/BusinessNdaModal';
 
 export const BusinessForSalePage = () => {
   const { selectedLocation } = useAuth();
+  const [selectedBiz, setSelectedBiz] = useState(null);
+  const [isNdaModalOpen, setIsNdaModalOpen] = useState(false);
 
   const businesses = [
     {
@@ -135,7 +138,11 @@ export const BusinessForSalePage = () => {
               </div>
 
               <button
-                onClick={() => alert(`Requesting Non-Disclosure Agreement (NDA) & Financial Package for ${biz.title}...`)}
+                id={`request-nda-btn-${biz.id}`}
+                onClick={() => {
+                  setSelectedBiz(biz);
+                  setIsNdaModalOpen(true);
+                }}
                 style={{
                   marginTop: 'auto',
                   backgroundColor: '#3b82f6',
@@ -146,14 +153,26 @@ export const BusinessForSalePage = () => {
                   fontSize: '12.5px',
                   fontWeight: 700,
                   cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px',
                 }}
               >
-                Request NDA & Financials
+                <ShieldCheck size={14} />
+                <span>Request NDA & Financials</span>
               </button>
             </div>
           </div>
         ))}
       </div>
+
+      {/* Business NDA & Financials Modal */}
+      <BusinessNdaModal
+        isOpen={isNdaModalOpen}
+        onClose={() => setIsNdaModalOpen(false)}
+        business={selectedBiz}
+      />
     </div>
   );
 };

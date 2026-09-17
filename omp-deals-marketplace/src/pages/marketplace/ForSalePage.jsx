@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { ShoppingBag, Search, Tag, MapPin, Heart, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { MakeOfferModal } from '../../components/MakeOfferModal';
 
 export const ForSalePage = () => {
   const navigate = useNavigate();
   const { myFavList, toggleFav, selectedLocation, userCustomListings } = useAuth();
   const [selectedCat, setSelectedCat] = useState('all');
+  const [selectedOfferItem, setSelectedOfferItem] = useState(null);
+  const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
 
   const customForSaleListings = (userCustomListings || [])
     .filter((item) => !item.category || item.category === 'general')
@@ -149,7 +152,10 @@ export const ForSalePage = () => {
                     <ShieldCheck size={13} /> TruYou Seller
                   </span>
                   <button
-                    onClick={() => alert(`Opening chat with seller ${item.seller}...`)}
+                    onClick={() => {
+                      setSelectedOfferItem(item);
+                      setIsOfferModalOpen(true);
+                    }}
                     style={{
                       backgroundColor: '#0284c7',
                       color: '#ffffff',
@@ -169,6 +175,12 @@ export const ForSalePage = () => {
           );
         })}
       </div>
+
+      <MakeOfferModal
+        isOpen={isOfferModalOpen}
+        onClose={() => setIsOfferModalOpen(false)}
+        item={selectedOfferItem}
+      />
     </div>
   );
 };

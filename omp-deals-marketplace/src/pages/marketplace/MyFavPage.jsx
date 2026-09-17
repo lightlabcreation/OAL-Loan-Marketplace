@@ -1,13 +1,37 @@
 import React, { useState } from 'react';
-import { Heart, Sparkles, Trash2, MapPin, ArrowRight, Bell, ShieldCheck } from 'lucide-react';
+import { Heart, Sparkles, Trash2, MapPin, ArrowRight, Bell, BellOff, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { OmpAiAgentModal } from '../../components/OmpAiAgentModal';
+import { PriceAlertModal } from '../../components/PriceAlertModal';
 
 export const MyFavPage = () => {
   const navigate = useNavigate();
   const { myFavList, toggleFav } = useAuth();
   const [isAiModalOpen, setIsAiModalOpen] = useState(false);
+  const [activeAlertIds, setActiveAlertIds] = useState(['fav-1', 'fav-2']);
+  const [selectedItemForAlerts, setSelectedItemForAlerts] = useState(null);
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+
+  const handleViewListing = (item) => {
+    if (item.category === 'Cars & Trucks') {
+      navigate('/cars');
+    } else if (item.category === 'Job Finder') {
+      navigate('/jobs');
+    } else if (item.category === 'Services') {
+      navigate('/services');
+    } else if (item.category === 'Businesses' || item.category === 'Business For Sale') {
+      navigate('/businesses');
+    } else {
+      navigate('/for-sale');
+    }
+  };
+
+  const toggleAlert = (itemId) => {
+    setActiveAlertIds((prev) =>
+      prev.includes(itemId) ? prev.filter((id) => id !== itemId) : [...prev, itemId]
+    );
+  };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
@@ -89,95 +113,120 @@ export const MyFavPage = () => {
         </div>
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '16px' }}>
-          {myFavList.map((item) => (
-            <div
-              key={item.id}
-              style={{
-                backgroundColor: 'var(--surface)',
-                borderRadius: '16px',
-                border: '1px solid var(--border)',
-                padding: '18px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '12px',
-                boxShadow: 'var(--card-shadow)',
-              }}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                <div>
-                  <span style={{ fontSize: '11px', color: '#0284c7', fontWeight: 700, textTransform: 'uppercase' }}>
-                    {item.category || 'Marketplace Item'}
-                  </span>
-                  <h3 style={{ fontSize: '15.5px', fontWeight: 800, color: 'var(--text-primary)', margin: '2px 0' }}>
-                    {item.title}
-                  </h3>
+          {myFavList.map((item) => {
+            const isAlertOn = activeAlertIds.includes(item.id);
+            return (
+              <div
+                key={item.id}
+                style={{
+                  backgroundColor: 'var(--surface)',
+                  borderRadius: '16px',
+                  border: '1px solid var(--border)',
+                  padding: '18px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '12px',
+                  boxShadow: 'var(--card-shadow)',
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  <div>
+                    <span style={{ fontSize: '11px', color: '#0284c7', fontWeight: 700, textTransform: 'uppercase' }}>
+                      {item.category || 'Marketplace Item'}
+                    </span>
+                    <h3 style={{ fontSize: '15.5px', fontWeight: 800, color: 'var(--text-primary)', margin: '2px 0' }}>
+                      {item.title}
+                    </h3>
+                  </div>
+                  <button
+                    onClick={() => toggleFav(item)}
+                    style={{
+                      background: 'transparent',
+                      border: 'none',
+                      color: '#ef4444',
+                      cursor: 'pointer',
+                      padding: '4px',
+                    }}
+                    title="Remove from MyFav"
+                  >
+                    <Trash2 size={16} />
+                  </button>
                 </div>
-                <button
-                  onClick={() => toggleFav(item)}
-                  style={{
-                    background: 'transparent',
-                    border: 'none',
-                    color: '#ef4444',
-                    cursor: 'pointer',
-                    padding: '4px',
-                  }}
-                  title="Remove from MyFav"
-                >
-                  <Trash2 size={16} />
-                </button>
-              </div>
 
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div style={{ fontSize: '20px', fontWeight: 900, color: '#10b981' }}>{item.price}</div>
-                <div style={{ fontSize: '12px', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                  <MapPin size={13} color="#0284c7" />
-                  <span>{item.location || 'Fremont, CA'}</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div style={{ fontSize: '20px', fontWeight: 900, color: '#10b981' }}>{item.price}</div>
+                  <div style={{ fontSize: '12px', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <MapPin size={13} color="#0284c7" />
+                    <span>{item.location || 'Fremont, CA'}</span>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', gap: '8px', marginTop: 'auto', paddingTop: '10px', borderTop: '1px solid var(--border)' }}>
+                  <button
+                    id={`view-listing-btn-${item.id}`}
+                    onClick={() => handleViewListing(item)}
+                    style={{
+                      flex: 1,
+                      backgroundColor: '#0284c7',
+                      color: '#ffffff',
+                      border: 'none',
+                      padding: '8px 12px',
+                      borderRadius: '8px',
+                      fontSize: '12.5px',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '4px',
+                    }}
+                  >
+                    <span>View Listing</span>
+                    <ArrowRight size={13} />
+                  </button>
+                  <button
+                    id={`alert-toggle-btn-${item.id}`}
+                    onClick={() => {
+                      setSelectedItemForAlerts(item);
+                      setIsAlertModalOpen(true);
+                    }}
+                    style={{
+                      backgroundColor: isAlertOn ? 'rgba(16, 185, 129, 0.12)' : 'var(--surface-secondary)',
+                      border: isAlertOn ? '1px solid rgba(16, 185, 129, 0.35)' : '1px solid var(--border)',
+                      color: isAlertOn ? '#10b981' : 'var(--text-tertiary)',
+                      padding: '8px 12px',
+                      borderRadius: '8px',
+                      fontSize: '12px',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '5px',
+                      transition: 'all 0.15s ease',
+                    }}
+                    title="Configure price-drop alerts"
+                  >
+                    {isAlertOn ? <Bell size={13} color="#10b981" /> : <BellOff size={13} color="var(--text-tertiary)" />}
+                    <span>{isAlertOn ? 'Alerts On' : 'Muted'}</span>
+                  </button>
                 </div>
               </div>
-
-              <div style={{ display: 'flex', gap: '8px', marginTop: 'auto', paddingTop: '10px', borderTop: '1px solid var(--border)' }}>
-                <button
-                  onClick={() => alert(`Opening details for ${item.title}...`)}
-                  style={{
-                    flex: 1,
-                    backgroundColor: '#0284c7',
-                    color: '#ffffff',
-                    border: 'none',
-                    padding: '8px 12px',
-                    borderRadius: '8px',
-                    fontSize: '12.5px',
-                    fontWeight: 700,
-                    cursor: 'pointer',
-                  }}
-                >
-                  View Listing
-                </button>
-                <button
-                  onClick={() => alert(`Price Drop Alerts Active for ${item.title}!`)}
-                  style={{
-                    backgroundColor: 'var(--surface-secondary)',
-                    border: '1px solid var(--border)',
-                    color: 'var(--text-primary)',
-                    padding: '8px 12px',
-                    borderRadius: '8px',
-                    fontSize: '12px',
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                  }}
-                >
-                  <Bell size={13} color="#10b981" />
-                  <span>Alerts On</span>
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
 
+      {/* AI Agent Modal */}
       <OmpAiAgentModal isOpen={isAiModalOpen} onClose={() => setIsAiModalOpen(false)} />
+
+      {/* Price Drop Alert Settings Modal */}
+      <PriceAlertModal
+        isOpen={isAlertModalOpen}
+        onClose={() => setIsAlertModalOpen(false)}
+        item={selectedItemForAlerts}
+        isAlertActive={selectedItemForAlerts ? activeAlertIds.includes(selectedItemForAlerts.id) : false}
+        onToggleAlert={toggleAlert}
+      />
     </div>
   );
 };

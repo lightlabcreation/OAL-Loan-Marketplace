@@ -1,12 +1,9 @@
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
 $files = @(
-    'OMP Exec - OMP Deals.docx',
-    'What is OfferUp - OMP Deals.docx',
-    'Verified Auto Dealers Program - OMP Deals.docx',
-    'Nationwide Auto Dealer Program - OMP Deals.docx'
+    'OMP Exec - OMP Deals.docx'
 )
-$baseDir = 'c:\Users\bc\Desktop\OAL-Loan-Marketplace\all-documents-files'
+$baseDir = 'c:\Users\bc\Desktop\OAL-Loan-Marketplace\omp-deals-marketplace\alldocuement'
 
 foreach ($f in $files) {
     Write-Host "=================================================="
