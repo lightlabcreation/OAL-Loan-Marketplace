@@ -16,19 +16,26 @@ import {
   ArrowRight,
   TrendingUp,
   Award,
-  DollarSign
+  DollarSign,
+  Inbox,
+  Building2,
+  Lock,
+  CheckCircle2,
+  Zap
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { AdpVerifiedBadge } from '../../components/AdpVerifiedBadge';
 import { PoliceSafeSpotsModal } from '../../components/PoliceSafeSpotsModal';
 import { ShippingCalculatorModal } from '../../components/ShippingCalculatorModal';
+import { SubscriptionPlansModal } from '../../components/SubscriptionPlansModal';
 
 export const HomePage = () => {
   const navigate = useNavigate();
-  const { selectedLocation, selectedRadius, myFavList, toggleFav } = useAuth();
+  const { selectedLocation, selectedRadius, myFavList, toggleFav, currentUser, activeSubscriptions } = useAuth();
   const [activeQuickTab, setActiveQuickTab] = useState('all');
   const [isSafeSpotsOpen, setIsSafeSpotsOpen] = useState(false);
   const [isShippingOpen, setIsShippingOpen] = useState(false);
+  const [isSubscriptionOpen, setIsSubscriptionOpen] = useState(false);
   const [shippingItem, setShippingItem] = useState(null);
 
   const categories = [
@@ -253,6 +260,302 @@ export const HomePage = () => {
         </div>
       </div>
 
+      {/* 2.5 DEALER PRO & EXECUTIVE WORKSPACE TILES (Role-Gated: DEALER_PRO & EXECUTIVE_ADMIN only) */}
+      {(currentUser?.id === 'DEALER_PRO' || currentUser?.id === 'EXECUTIVE_ADMIN') && (
+        <div style={{ marginTop: '32px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '10px' }}>
+            <div>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', backgroundColor: 'rgba(2, 132, 199, 0.1)', color: '#0284c7', padding: '3px 10px', borderRadius: '9999px', fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', marginBottom: '6px' }}>
+                <Zap size={12} />
+                <span>Subscribed B2B Modules</span>
+              </div>
+              <h2 style={{ fontSize: '20px', fontWeight: 800, margin: 0, color: 'var(--text-primary)' }}>
+                Dealer Pro & Executive Tools
+              </h2>
+              <p style={{ fontSize: '12.5px', color: 'var(--text-secondary)', margin: '2px 0 0' }}>
+                Direct access to your active auto desking suite, AI phone attendant, and multi-store umbrella
+              </p>
+            </div>
+
+            <button
+              onClick={() => setIsSubscriptionOpen(true)}
+              style={{
+                backgroundColor: 'var(--surface-secondary)',
+                border: '1px solid var(--border)',
+                color: 'var(--text-primary)',
+                padding: '7px 14px',
+                borderRadius: '10px',
+                fontSize: '12px',
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+              }}
+            >
+              <span>Manage Plans ({activeSubscriptions.length} Active)</span>
+              <ArrowRight size={13} />
+            </button>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '18px' }}>
+            {/* TILE 1: OMP CRM & Sales Desking */}
+            {(() => {
+              const isCrmActive = activeSubscriptions.includes('CRM');
+              return (
+                <div
+                  style={{
+                    backgroundColor: 'var(--surface)',
+                    borderRadius: '18px',
+                    border: isCrmActive ? '2px solid rgba(2, 132, 199, 0.4)' : '1px solid var(--border)',
+                    padding: '22px',
+                    boxShadow: isCrmActive ? '0 8px 24px -6px rgba(2, 132, 199, 0.2)' : 'var(--card-shadow)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    gap: '16px',
+                    position: 'relative',
+                  }}
+                >
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+                      <div
+                        style={{
+                          width: '46px',
+                          height: '46px',
+                          borderRadius: '14px',
+                          backgroundColor: 'rgba(2, 132, 199, 0.12)',
+                          color: '#0284c7',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <Inbox size={24} />
+                      </div>
+
+                      <span
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '5px',
+                          fontSize: '11px',
+                          fontWeight: 800,
+                          padding: '3px 10px',
+                          borderRadius: '9999px',
+                          backgroundColor: isCrmActive ? 'rgba(16, 185, 129, 0.12)' : 'rgba(239, 68, 68, 0.1)',
+                          color: isCrmActive ? '#10b981' : '#ef4444',
+                        }}
+                      >
+                        {isCrmActive ? (
+                          <>
+                            <CheckCircle2 size={12} />
+                            <span>ACTIVE ADD-ON</span>
+                          </>
+                        ) : (
+                          <>
+                            <Lock size={12} />
+                            <span>LOCKED • $149/MO</span>
+                          </>
+                        )}
+                      </span>
+                    </div>
+
+                    <h3 style={{ fontSize: '18px', fontWeight: 800, margin: '0 0 6px', color: 'var(--text-primary)' }}>
+                      OMP CRM & Sales Desking
+                    </h3>
+                    <p style={{ fontSize: '12.5px', color: 'var(--text-secondary)', margin: '0 0 16px', lineHeight: 1.45 }}>
+                      Omnichannel messaging, 24/7 AI call attendant simulator, and rapid 60-second finance & BHPH desking.
+                    </p>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', borderTop: '1px solid var(--border)', paddingTop: '14px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: 'var(--text-primary)' }}>
+                        <CheckCircle2 size={14} color="#0284c7" />
+                        <span>Unified Inbox (SMS, Email, Messenger)</span>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: 'var(--text-primary)' }}>
+                        <CheckCircle2 size={14} color="#0284c7" />
+                        <span>24/7 AI Voice Phone Receptionist</span>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: 'var(--text-primary)' }}>
+                        <CheckCircle2 size={14} color="#0284c7" />
+                        <span>60s Deal Structuring Calculator</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      if (isCrmActive) {
+                        navigate('/omp/crm/inbox');
+                      } else {
+                        setIsSubscriptionOpen(true);
+                      }
+                    }}
+                    style={{
+                      width: '100%',
+                      padding: '11px',
+                      borderRadius: '10px',
+                      border: 'none',
+                      backgroundColor: isCrmActive ? '#0284c7' : 'rgba(2, 132, 199, 0.12)',
+                      color: isCrmActive ? '#ffffff' : '#0284c7',
+                      fontWeight: 800,
+                      fontSize: '13px',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '8px',
+                      transition: 'all 0.15s ease',
+                      boxShadow: isCrmActive ? '0 4px 14px rgba(2, 132, 199, 0.35)' : 'none',
+                    }}
+                  >
+                    {isCrmActive ? (
+                      <>
+                        <span>Launch CRM Workspace</span>
+                        <ArrowRight size={15} />
+                      </>
+                    ) : (
+                      <>
+                        <Lock size={14} />
+                        <span>Unlock OMP CRM ($149/mo)</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              );
+            })()}
+
+            {/* TILE 2: Executive Central Office (EXECUTIVE_ADMIN Only) */}
+            {currentUser?.id === 'EXECUTIVE_ADMIN' && (() => {
+              const isExecActive = activeSubscriptions.includes('CENTRAL_OFFICE');
+              return (
+                <div
+                  style={{
+                    backgroundColor: 'var(--surface)',
+                    borderRadius: '18px',
+                    border: isExecActive ? '2px solid rgba(139, 92, 246, 0.4)' : '1px solid var(--border)',
+                    padding: '22px',
+                    boxShadow: isExecActive ? '0 8px 24px -6px rgba(139, 92, 246, 0.2)' : 'var(--card-shadow)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    gap: '16px',
+                    position: 'relative',
+                  }}
+                >
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+                      <div
+                        style={{
+                          width: '46px',
+                          height: '46px',
+                          borderRadius: '14px',
+                          backgroundColor: 'rgba(139, 92, 246, 0.12)',
+                          color: '#8b5cf6',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <Building2 size={24} />
+                      </div>
+
+                      <span
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '5px',
+                          fontSize: '11px',
+                          fontWeight: 800,
+                          padding: '3px 10px',
+                          borderRadius: '9999px',
+                          backgroundColor: isExecActive ? 'rgba(16, 185, 129, 0.12)' : 'rgba(239, 68, 68, 0.1)',
+                          color: isExecActive ? '#10b981' : '#ef4444',
+                        }}
+                      >
+                        {isExecActive ? (
+                          <>
+                            <CheckCircle2 size={12} />
+                            <span>ACTIVE HQ PLAN</span>
+                          </>
+                        ) : (
+                          <>
+                            <Lock size={12} />
+                            <span>LOCKED • $299/MO</span>
+                          </>
+                        )}
+                      </span>
+                    </div>
+
+                    <h3 style={{ fontSize: '18px', fontWeight: 800, margin: '0 0 6px', color: 'var(--text-primary)' }}>
+                      Executive Central Office
+                    </h3>
+                    <p style={{ fontSize: '12.5px', color: 'var(--text-secondary)', margin: '0 0 16px', lineHeight: 1.45 }}>
+                      Master franchise umbrella command center with consolidated P&L, store telemetry, and DMV audit safeguards.
+                    </p>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', borderTop: '1px solid var(--border)', paddingTop: '14px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: 'var(--text-primary)' }}>
+                        <CheckCircle2 size={14} color="#8b5cf6" />
+                        <span>Multi-Store Dealership Umbrella (Dallas, Houston, Austin)</span>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: 'var(--text-primary)' }}>
+                        <CheckCircle2 size={14} color="#8b5cf6" />
+                        <span>Consolidated Group P&L & Turn Telemetry</span>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: 'var(--text-primary)' }}>
+                        <CheckCircle2 size={14} color="#8b5cf6" />
+                        <span>DMV Audit Risk & Regulatory Safeguards</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      if (isExecActive) {
+                        navigate('/omp/executive/central-office');
+                      } else {
+                        setIsSubscriptionOpen(true);
+                      }
+                    }}
+                    style={{
+                      width: '100%',
+                      padding: '11px',
+                      borderRadius: '10px',
+                      border: 'none',
+                      backgroundColor: isExecActive ? '#8b5cf6' : 'rgba(139, 92, 246, 0.12)',
+                      color: isExecActive ? '#ffffff' : '#8b5cf6',
+                      fontWeight: 800,
+                      fontSize: '13px',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '8px',
+                      transition: 'all 0.15s ease',
+                      boxShadow: isExecActive ? '0 4px 14px rgba(139, 92, 246, 0.35)' : 'none',
+                    }}
+                  >
+                    {isExecActive ? (
+                      <>
+                        <span>Launch Central Office</span>
+                        <ArrowRight size={15} />
+                      </>
+                    ) : (
+                      <>
+                        <Lock size={14} />
+                        <span>Unlock Central Office ($299/mo)</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              );
+            })()}
+          </div>
+        </div>
+      )}
+
       {/* 3. FEATURED LIVE MARKETPLACE LISTINGS */}
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '10px' }}>
@@ -413,6 +716,7 @@ export const HomePage = () => {
 
       <PoliceSafeSpotsModal isOpen={isSafeSpotsOpen} onClose={() => setIsSafeSpotsOpen(false)} />
       <ShippingCalculatorModal isOpen={isShippingOpen} onClose={() => setIsShippingOpen(false)} initialItem={shippingItem} />
+      <SubscriptionPlansModal isOpen={isSubscriptionOpen} onClose={() => setIsSubscriptionOpen(false)} />
     </div>
   );
 };
