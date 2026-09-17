@@ -14,75 +14,222 @@ import {
   Shield,
   CheckCircle2,
   ChevronRight,
-  Sparkles
+  Sparkles,
+  Video,
+  Megaphone,
+  Share2,
+  Sliders,
+  Kanban,
+  ShieldAlert,
+  Eye,
+  EyeOff,
+  Briefcase,
+  UserCheck,
+  Zap,
+  Globe
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import { SHOW_OAL } from '../config/features';
 import { AiEnergyLogo } from '../components/common/AiEnergyLogo';
-import fullLogo from '../assets/crm_nergy_ai_full_logo.png';
-import iconLogo from '../assets/crm_nergy_ai_icon.png';
 
+// 12 CRM Roles matching client specification and 2-column layout
 const crmRoles = [
+  // Column 1 (Left Column)
   {
-    id: 'owner',
-    title: 'Company Owner / CEO',
+    id: 'business_owner',
+    title: 'Business Owners',
+    subtitle: 'Executive Command Access',
     name: 'Alexander Wright',
     email: 'a.wright@nergy.io',
     password: 'Owner@2026',
-    role: 'Company Owner',
+    role: 'Business Owners',
     company: 'nErgy Enterprise Logistics',
     target: '/crm/dashboard',
-    badge: 'Full Admin Access',
+    badge: 'Enterprise Control',
+    description: 'Full executive oversight, revenue analytics, ERP modules, and autonomous AI engine configurations.',
     icon: Building2,
+    column: 1,
+    order: 1,
   },
   {
-    id: 'sales',
-    title: 'VP of Sales',
+    id: 'content_creator',
+    title: 'Content Creators',
+    subtitle: 'AI Video & Media Creation',
+    name: 'Leo Fontaine',
+    email: 'l.fontaine@nergy.io',
+    password: 'Creator@2026',
+    role: 'Content Creators',
+    company: 'nErgy Media Productions',
+    target: '/crm/ai-studio',
+    badge: 'AI SuperHouse',
+    description: 'Autonomous AI video agents, multimedia asset generators, and creative prompt pipelines.',
+    icon: Video,
+    column: 1,
+    order: 2,
+  },
+  {
+    id: 'influencer',
+    title: 'Influencers',
+    subtitle: 'Audience & Referral Tracking',
+    name: 'Chloe Rivera',
+    email: 'c.rivera@nergy.io',
+    password: 'Influencer@2026',
+    role: 'Influencers',
+    company: 'Rivera Social Brand',
+    target: '/crm/leads',
+    badge: 'Viral Growth Hub',
+    description: 'Dedicated campaign affiliate tracking, audience engagement metrics, and social lead capture.',
+    icon: Share2,
+    column: 1,
+    order: 3,
+  },
+  {
+    id: 'ai_marketing_pro',
+    title: 'AI Marketing Pros',
+    subtitle: 'Growth & Autonomous Ads',
+    name: 'Tanya Sterling',
+    email: 't.sterling@nergy.io',
+    password: 'Marketing@2026',
+    role: 'AI Marketing Pros',
+    company: 'nErgy Enterprise Logistics',
+    target: '/crm/marketing',
+    badge: 'Ad Intelligence',
+    description: 'Multi-channel marketing automation, lead scoring algorithms, and autonomous ad distribution.',
+    icon: Megaphone,
+    column: 1,
+    order: 4,
+  },
+  {
+    id: 'admin_1',
+    title: 'Admin I',
+    subtitle: 'Operations & Pipeline Admin',
     name: 'Sarah Jenkins',
     email: 's.jenkins@nergy.io',
-    password: 'Sales@2026',
-    role: 'Sales Manager',
+    password: 'Admin1@2026',
+    role: 'Admin I',
     company: 'nErgy Enterprise Logistics',
     target: '/crm/leads',
-    badge: 'Sales & Leads Pipeline',
-    icon: TrendingUp,
+    badge: 'Operations Desk',
+    description: 'Central operations management, territory allocation, CRM pipelines, and team assignment.',
+    icon: Shield,
+    column: 1,
+    order: 5,
   },
   {
-    id: 'finance',
-    title: 'Finance Director',
-    name: 'David Chen',
-    email: 'd.chen@nergy.io',
-    password: 'Finance@2026',
-    role: 'Finance Lead',
+    id: 'crm_pro',
+    title: 'CRM Pros',
+    subtitle: 'Pipeline & Deal Closing',
+    name: 'Marcus Vance',
+    email: 'm.vance@nergy.io',
+    password: 'CrmPro@2026',
+    role: 'CRM Pros',
     company: 'nErgy Enterprise Logistics',
-    target: '/crm/erp/finance',
-    badge: 'ERP & Ledgers',
-    icon: DollarSign,
+    target: '/crm/pipeline',
+    badge: 'Customer Relations',
+    description: 'High-velocity lead pipelines, customer contact vaults, interaction history, and deal closings.',
+    icon: Kanban,
+    column: 1,
+    order: 6,
+  },
+
+  // Column 2 (Right Column)
+  {
+    id: 'customer',
+    title: 'Customer',
+    subtitle: 'Self-Service Client Portal',
+    name: 'Dr. Aris Thorne',
+    email: 'a.thorne@biogenix.org',
+    password: 'Customer@2026',
+    role: 'Customer',
+    company: 'BioGenix Labs Inc.',
+    target: '/crm/contacts',
+    badge: 'Client Portal',
+    description: 'Secure vault for client accounts, interaction history, support tickets, and service requests.',
+    icon: Globe,
+    column: 2,
+    order: 1,
+  },
+  {
+    id: 'content_builder',
+    title: 'Content Builders',
+    subtitle: 'Campaign & Asset Builder',
+    name: 'Maya Lin',
+    email: 'm.lin@nergy.io',
+    password: 'Builder@2026',
+    role: 'Content Builders',
+    company: 'nErgy Creative Labs',
+    target: '/crm/marketing',
+    badge: 'Content Studio',
+    description: 'Template creation, modular landing page builders, and automated asset generation suites.',
+    icon: Zap,
+    column: 2,
+    order: 2,
+  },
+  {
+    id: 'affiliate_partner',
+    title: 'Affiliate Partners',
+    subtitle: 'Commission & Deal Network',
+    name: 'Julian Vance',
+    email: 'j.vance@nergypartners.net',
+    password: 'Partner@2026',
+    role: 'Affiliate Partners',
+    company: 'Vance Capital Partners',
+    target: '/crm/leads',
+    badge: 'Partner Network',
+    description: 'Partner network portal for lead origination, pipeline deal commissions, and partner links.',
+    icon: TrendingUp,
+    column: 2,
+    order: 3,
   },
   {
     id: 'hr',
-    title: 'HR Manager',
+    title: 'HR',
+    subtitle: 'Talent & Employee Lifecycle',
     name: 'Elena Rostova',
     email: 'e.rostova@nergy.io',
     password: 'HR@2026',
-    role: 'HR Director',
+    role: 'HR',
     company: 'nErgy Enterprise Logistics',
     target: '/crm/hr',
-    badge: 'Recruiting & Staff',
-    icon: Users,
+    badge: 'Human Resources',
+    description: 'Employee directory, candidate recruiting pipelines, interviews, job postings, and onboarding.',
+    icon: UserCheck,
+    column: 2,
+    order: 4,
   },
   {
-    id: 'employee',
-    title: 'Standard Employee',
-    name: 'Marcus Vance',
-    email: 'm.vance@nergy.io',
-    password: 'Emp@2026',
-    role: 'Staff Member',
+    id: 'admin_2',
+    title: 'Admin II',
+    subtitle: 'Finance & Compliance Admin',
+    name: 'David Chen',
+    email: 'd.chen@nergy.io',
+    password: 'Admin2@2026',
+    role: 'Admin II',
     company: 'nErgy Enterprise Logistics',
-    target: '/crm/tasks',
-    badge: 'Tasks & Comms',
-    icon: User,
+    target: '/crm/erp/finance',
+    badge: 'ERP Controller',
+    description: 'Financial ledger management, procurement approval, supply chain tracking, and compliance audits.',
+    icon: Sliders,
+    column: 2,
+    order: 5,
+  },
+  {
+    id: 'super_admin',
+    title: 'Super Admin',
+    subtitle: 'Master Root System Control',
+    name: 'Root Sovereign Admin',
+    email: 'root.superadmin@nergy.io',
+    password: 'SuperAdmin@2026',
+    role: 'Super Admin',
+    company: 'nErgy Global Enterprise',
+    target: '/crm/admin',
+    badge: 'Root Sovereign',
+    description: 'Full system control, tenant provisioning, security policies, and encrypted root eBox vault access.',
+    icon: ShieldAlert,
+    column: 2,
+    order: 6,
+    isSuperAdmin: true,
   },
 ];
 
@@ -90,6 +237,7 @@ const oalRoles = [
   {
     id: 'borrower',
     title: 'Corporate Borrower',
+    subtitle: 'Borrower Onboarding Vault',
     name: 'Dr. Aris Thorne',
     email: 'a.thorne@biogenix.org',
     password: 'Borrower@2026',
@@ -97,11 +245,13 @@ const oalRoles = [
     company: 'BioGenix Labs Inc.',
     target: '/oal/borrower/dashboard',
     badge: 'Borrower Onboarding',
+    description: 'Corporate loan applications, digital KYC verification, terms sheet comparison, and loan disbursement.',
     icon: Landmark,
   },
   {
     id: 'lender',
     title: 'Institutional Lender',
+    subtitle: 'Capital Allocation & Bidding',
     name: 'Marcus Sterling',
     email: 'm.sterling@vanguard.com',
     password: 'Lender@2026',
@@ -109,11 +259,13 @@ const oalRoles = [
     company: 'Vanguard Capital Debt Fund',
     target: '/oal/lender/dashboard',
     badge: 'Leads & Bidding Engine',
+    description: 'Underwrite deals, issue structured debt offers, verify financial covenants, and manage capital portfolios.',
     icon: Building2,
   },
   {
     id: 'rep',
     title: 'Licensed OAL Representative',
+    subtitle: 'Underwriting Desk & Loan Queue',
     name: 'Sarah Jenkins',
     email: 'agent.sarah@oalnetwork.com',
     password: 'Agent@2026',
@@ -121,11 +273,13 @@ const oalRoles = [
     company: 'OAL Network Services',
     target: '/oal/rep/dashboard',
     badge: 'Underwriting Desk',
+    description: 'Manage borrower pipelines, review credit disclosures, coordinate between lenders and borrowers.',
     icon: Shield,
   },
   {
     id: 'admin',
     title: 'Platform Master Admin',
+    subtitle: 'Master Governance & Scoring',
     name: 'Alexander Wright',
     email: 'admin.alexander@oalnetwork.com',
     password: 'Admin@2026',
@@ -133,6 +287,7 @@ const oalRoles = [
     company: 'OAL Network Marketplace',
     target: '/oal/admin/dashboard',
     badge: 'Platform Governance',
+    description: 'Full governance, risk engine parameters, compliance reporting, and marketplace liquidity controls.',
     icon: ShieldCheck,
   },
 ];
@@ -143,15 +298,14 @@ export const UnifiedLogin = ({ mode }) => {
   const { login } = useAuth();
   const { addToast } = useToast();
 
-  // Determine current active platform based on prop, URL path, or SHOW_OAL flag
   const currentPlatform = !SHOW_OAL ? 'crm' : (mode || (location.pathname.includes('/oal') ? 'oal' : 'crm'));
-
   const roleList = currentPlatform === 'crm' ? crmRoles : oalRoles;
 
   const [selectedRole, setSelectedRole] = useState(roleList[0]);
   const [email, setEmail] = useState(roleList[0].email);
   const [password, setPassword] = useState(roleList[0].password);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSuperAdminHidden, setIsSuperAdminHidden] = useState(false);
 
   useEffect(() => {
     const list = currentPlatform === 'crm' ? crmRoles : oalRoles;
@@ -188,14 +342,14 @@ export const UnifiedLogin = ({ mode }) => {
       );
 
       addToast({
-        title: `Signed in as ${roleObj.title}`,
-        message: `Welcome ${roleObj.name}! Navigating to ${roleObj.title} workspace...`,
+        title: `Authenticated as ${roleObj.title}`,
+        message: `Welcome ${roleObj.name}! Navigating to ${roleObj.title} portal...`,
         type: 'success',
       });
 
       setIsLoading(false);
       navigate(roleObj.target);
-    }, 300);
+    }, 250);
   };
 
   const handleLoginSubmit = (e) => {
@@ -203,33 +357,73 @@ export const UnifiedLogin = ({ mode }) => {
     executeLogin(selectedRole);
   };
 
-  const primaryThemeColor = currentPlatform === 'crm' ? '#1d4ed8' : '#0f766e';
-  const primaryLightBg = currentPlatform === 'crm' ? 'var(--primary-light)' : 'var(--accent-light)';
+  // Group CRM roles into Column 1 and Column 2
+  const col1Roles = crmRoles.filter((r) => r.column === 1);
+  const col2Roles = crmRoles.filter((r) => r.column === 2 && (!r.isSuperAdmin || !isSuperAdminHidden));
+
+  const SelectedIcon = selectedRole.icon || Building2;
 
   return (
     <div
       style={{
         minHeight: '100vh',
-        backgroundColor: currentPlatform === 'crm' ? '#070b19' : 'var(--background)',
-        backgroundImage: currentPlatform === 'crm'
-          ? 'radial-gradient(circle at 50% -10%, rgba(14, 165, 233, 0.2) 0%, transparent 60%), radial-gradient(circle at 10% 90%, rgba(59, 130, 246, 0.12) 0%, transparent 50%), radial-gradient(circle at 90% 90%, rgba(249, 115, 22, 0.08) 0%, transparent 50%)'
-          : 'radial-gradient(circle at 50% 0%, rgba(15, 118, 110, 0.03) 0%, transparent 65%)',
-        color: currentPlatform === 'crm' ? '#f8fafc' : 'inherit',
+        height: '100vh',
+        maxHeight: '100vh',
+        backgroundColor: '#070b19',
+        backgroundImage:
+          'radial-gradient(circle at 15% 15%, rgba(14, 165, 233, 0.15) 0%, transparent 45%), radial-gradient(circle at 85% 85%, rgba(59, 130, 246, 0.12) 0%, transparent 45%), radial-gradient(circle at 50% 50%, rgba(2, 6, 23, 0.95) 0%, #070b19 100%)',
+        color: '#f8fafc',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '1.5rem 1rem',
+        padding: '0.75rem 1rem',
         boxSizing: 'border-box',
+        overflowY: 'auto',
+        fontFamily: 'var(--font-sans, system-ui, sans-serif)',
       }}
+      className="unified-login-root"
     >
+      <style>{`
+        @media (max-width: 992px) {
+          .unified-login-root {
+            height: auto !important;
+            max-height: none !important;
+            padding: 1.5rem 1rem !important;
+          }
+          .portal-login-main-container {
+            grid-template-columns: 1fr !important;
+          }
+          .portal-left-panel {
+            grid-column: span 1 !important;
+            border-right: none !important;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.12) !important;
+            padding: 1.5rem 1.25rem !important;
+          }
+          .portal-right-panel {
+            grid-column: span 1 !important;
+            padding: 1.5rem 1.25rem !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .portal-roles-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+        .portal-role-card:hover {
+          background-color: rgba(30, 41, 59, 0.85) !important;
+          border-color: rgba(56, 189, 248, 0.4) !important;
+          transform: translateY(-1px);
+        }
+      `}</style>
+
       <div
         style={{
           width: '100%',
           maxWidth: '1240px',
           display: 'flex',
           flexDirection: 'column',
-          gap: '1.25rem',
+          gap: '0.625rem',
           margin: '0 auto',
         }}
       >
@@ -239,288 +433,274 @@ export const UnifiedLogin = ({ mode }) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            padding: '0 0.5rem',
             flexWrap: 'wrap',
             gap: '0.75rem',
+            padding: '0 0.25rem',
           }}
-          className="login-top-header"
         >
-          {/* Brand Identity */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
-            {currentPlatform === 'crm' ? (
-              <AiEnergyLogo size={42} showText={false} />
-            ) : (
-              <div
-                style={{
-                  width: '36px',
-                  height: '36px',
-                  borderRadius: '8px',
-                  backgroundColor: primaryThemeColor,
-                  color: '#ffffff',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontWeight: 800,
-                  fontSize: '14px',
-                  fontFamily: 'var(--font-display)',
-                }}
-              >
-                OA
-              </div>
-            )}
-
+          {/* Logo Brand Header */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <AiEnergyLogo size={34} showText={false} />
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
-                <h1
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <span style={{ fontSize: '16px', fontWeight: 800, color: '#f8fafc', letterSpacing: '-0.02em' }}>
+                  CRM nErgy
+                </span>
+                <span
                   style={{
-                    fontSize: '22px',
-                    fontWeight: 800,
-                    color: 'var(--text-primary)',
-                    margin: 0,
-                    lineHeight: 1.1,
-                    fontFamily: 'var(--font-display)',
-                    letterSpacing: '-0.02em',
+                    fontSize: '9px',
+                    fontWeight: 700,
+                    letterSpacing: '0.08em',
+                    color: '#38bdf8',
+                    backgroundColor: 'rgba(56, 189, 248, 0.15)',
+                    border: '1px solid rgba(56, 189, 248, 0.3)',
+                    padding: '1px 6px',
+                    borderRadius: '4px',
+                    textTransform: 'uppercase',
                   }}
                 >
-                  {currentPlatform === 'crm' ? 'CRM nErgy AI Enterprise Gateway' : 'OAL Network Marketplace Gateway'}
-                </h1>
+                  AI POWERED
+                </span>
               </div>
-              <span style={{ fontSize: '12px', color: 'var(--text-tertiary)', marginTop: '2px' }}>
-                {currentPlatform === 'crm'
-                  ? 'All 5 CRM Role Presets — Select any role on the right to auto-fill & login instantly'
-                  : 'All 4 OAL Marketplace Role Presets — Select any persona role to auto-fill & login instantly'}
+              <span style={{ fontSize: '11px', color: '#94a3b8' }}>
+                Enterprise Portal Gateway &bull; 12 Autonomous User Hubs
               </span>
             </div>
           </div>
 
-          {/* Switch Platform Gateway Button */}
-          {SHOW_OAL && (
+          {/* Action Bar (Super Admin Hide toggle ONLY) */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <button
               type="button"
-              onClick={handleSwitchPlatform}
+              onClick={() => setIsSuperAdminHidden(!isSuperAdminHidden)}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '0.5rem',
-                padding: '0.5rem 1rem',
-                borderRadius: '8px',
-                backgroundColor: 'var(--surface)',
-                border: '1px solid var(--border)',
-                fontSize: '12px',
+                gap: '0.35rem',
+                padding: '0.35rem 0.75rem',
+                borderRadius: '6px',
+                backgroundColor: isSuperAdminHidden ? 'rgba(239, 68, 68, 0.15)' : 'rgba(30, 41, 59, 0.8)',
+                border: isSuperAdminHidden ? '1px solid rgba(239, 68, 68, 0.4)' : '1px solid rgba(148, 163, 184, 0.2)',
+                color: isSuperAdminHidden ? '#f87171' : '#cbd5e1',
+                fontSize: '11px',
                 fontWeight: 600,
-                color: 'var(--text-primary)',
                 cursor: 'pointer',
-                transition: 'all var(--transition-fast)',
+                transition: 'all 0.2s ease',
               }}
-              className="login-switch-btn"
-              onMouseEnter={(e) => { e.currentTarget.style.borderColor = primaryThemeColor; }}
-              onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; }}
+              title={isSuperAdminHidden ? 'Click to Show Super Admin Button' : 'Click to Hide Super Admin Button'}
             >
-              <span>Switch to {currentPlatform === 'crm' ? 'OAL Network Marketplace Login (4 Roles)' : 'CRM nErgy AI Enterprise Login (5 Roles)'}</span>
-              <ChevronRight size={14} style={{ color: primaryThemeColor }} />
+              {isSuperAdminHidden ? <EyeOff size={13} /> : <Eye size={13} />}
+              <span>Super Admin: {isSuperAdminHidden ? 'HIDDEN' : 'VISIBLE'}</span>
             </button>
-          )}
+          </div>
         </div>
 
-        {/* Main 2-Column Desktop Grid / 1-Column Mobile Stack */}
+        {/* Main SmartCare Style Screen (Left Live Form + Right 2-Col Grid) */}
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(12, 1fr)',
-            gap: '1.25rem',
-            alignItems: 'stretch',
+            backgroundColor: 'rgba(15, 23, 42, 0.75)',
+            backdropFilter: 'blur(24px)',
+            borderRadius: '16px',
+            border: '1px solid rgba(56, 189, 248, 0.2)',
+            boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.8), 0 0 30px rgba(14, 165, 233, 0.08)',
+            overflow: 'hidden',
           }}
-          className="login-grid-wrapper"
+          className="portal-login-main-container"
         >
-          {/* Left Panel: Premium Authentication Card (5 Cols) */}
+          {/* LEFT PANEL: Exact Login Form from Reference Image (Compact Fit) */}
           <div
             style={{
               gridColumn: 'span 5 / span 5',
-              backgroundColor: currentPlatform === 'crm' ? 'rgba(15, 23, 42, 0.85)' : 'var(--surface)',
-              backdropFilter: currentPlatform === 'crm' ? 'blur(20px)' : 'none',
-              borderRadius: '16px',
-              border: currentPlatform === 'crm' ? '1px solid rgba(56, 189, 248, 0.22)' : '1px solid var(--border)',
-              boxShadow: currentPlatform === 'crm' ? '0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 25px rgba(6, 182, 212, 0.12)' : 'var(--shadow-md)',
-              padding: '1.75rem',
+              borderRight: '1px solid rgba(148, 163, 184, 0.12)',
+              backgroundColor: 'rgba(10, 17, 34, 0.75)',
+              padding: '1.25rem 1.5rem',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              gap: '1.25rem',
+              gap: '0.75rem',
             }}
-            className="login-right-card"
+            className="portal-left-panel"
           >
-            <form onSubmit={handleLoginSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.125rem' }}>
-              {/* Login Card Header */}
+            <form onSubmit={handleLoginSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              {/* Header: Logo Sphere + Brand Title */}
               <div
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
                   textAlign: 'center',
-                  paddingBottom: '0.875rem',
-                  borderBottom: '1px solid var(--border)',
+                  gap: '0.25rem',
+                  paddingBottom: '0.625rem',
+                  borderBottom: '1px solid rgba(148, 163, 184, 0.15)',
                 }}
               >
-                {currentPlatform === 'crm' ? (
-                  <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.875rem' }}>
-                    <AiEnergyLogo
-                      size={76}
-                      showText={true}
-                      subtitle="Enterprise CRM • ERP • AI SuperHouse"
-                      style={{ flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '0.5rem' }}
-                    />
-                  </div>
-                ) : (
-                  <div
+                <AiEnergyLogo size={52} showText={false} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '0.15rem' }}>
+                  <span style={{ fontSize: '14px', fontWeight: 800, color: '#f8fafc', letterSpacing: '-0.01em' }}>
+                    CRM nErgy
+                  </span>
+                  <span
                     style={{
-                      width: '44px',
-                      height: '44px',
-                      borderRadius: '10px',
-                      backgroundColor: primaryThemeColor,
-                      color: '#ffffff',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
+                      fontSize: '8px',
                       fontWeight: 800,
-                      fontSize: '16px',
-                      fontFamily: 'var(--font-display)',
-                      marginBottom: '0.5rem',
+                      backgroundColor: '#0284c7',
+                      color: '#ffffff',
+                      padding: '1px 4px',
+                      borderRadius: '3px',
+                      letterSpacing: '0.04em',
                     }}
                   >
-                    OA
-                  </div>
-                )}
-                <h2
+                    AI
+                  </span>
+                </div>
+                <span
                   style={{
-                    fontSize: '16px',
+                    fontSize: '10px',
                     fontWeight: 700,
-                    color: 'var(--text-primary)',
-                    margin: 0,
+                    color: '#94a3b8',
+                    letterSpacing: '0.05em',
+                    textTransform: 'uppercase',
                   }}
                 >
-                  {selectedRole.title}
-                </h2>
-                <span style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '2px' }}>
-                  Sign in to continue to your {currentPlatform === 'crm' ? 'CRM workspace' : 'OAL lending portal'}.
+                  ENTERPRISE CRM &bull; ERP &bull; AI SUPERHOUSE
+                </span>
+                <span style={{ fontSize: '11px', color: '#64748b', marginTop: '0.1rem' }}>
+                  Sign in to continue to your CRM workspace.
                 </span>
               </div>
 
-              {/* Form Input: Email */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.375rem', textAlign: 'left' }}>
-                <label style={{ fontSize: '12px', fontWeight: 600, color: currentPlatform === 'crm' ? '#e2e8f0' : 'var(--text-primary)' }}>
+              {/* Input: Email Address */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', textAlign: 'left' }}>
+                <label style={{ fontSize: '11px', fontWeight: 600, color: '#e2e8f0' }}>
                   Email Address
                 </label>
                 <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
                   <Mail
-                    size={16}
-                    style={{ position: 'absolute', left: '14px', color: currentPlatform === 'crm' ? '#38bdf8' : 'var(--text-tertiary)', pointerEvents: 'none' }}
+                    size={14}
+                    style={{
+                      position: 'absolute',
+                      left: '12px',
+                      color: '#38bdf8',
+                      pointerEvents: 'none',
+                    }}
                   />
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    placeholder="Enter email address"
                     style={{
                       width: '100%',
-                      height: '48px',
-                      paddingLeft: '40px',
-                      paddingRight: '14px',
-                      borderRadius: '10px',
-                      border: currentPlatform === 'crm' ? '1px solid rgba(56, 189, 248, 0.28)' : '1px solid var(--border)',
-                      backgroundColor: currentPlatform === 'crm' ? 'rgba(30, 41, 59, 0.7)' : 'var(--surface)',
-                      color: currentPlatform === 'crm' ? '#f8fafc' : 'var(--text-primary)',
-                      fontSize: '13px',
+                      height: '38px',
+                      paddingLeft: '34px',
+                      paddingRight: '12px',
+                      borderRadius: '8px',
+                      border: '1px solid rgba(56, 189, 248, 0.28)',
+                      backgroundColor: 'rgba(30, 41, 59, 0.7)',
+                      color: '#f8fafc',
+                      fontSize: '12px',
                       outline: 'none',
+                      boxSizing: 'border-box',
+                      transition: 'border-color 0.2s ease',
                     }}
+                    onFocus={(e) => { e.target.style.borderColor = '#38bdf8'; }}
+                    onBlur={(e) => { e.target.style.borderColor = 'rgba(56, 189, 248, 0.28)'; }}
                   />
                 </div>
               </div>
 
-              {/* Form Input: Password */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.375rem', textAlign: 'left' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <label style={{ fontSize: '12px', fontWeight: 600, color: currentPlatform === 'crm' ? '#e2e8f0' : 'var(--text-primary)' }}>
-                    Password
-                  </label>
-                </div>
+              {/* Input: Password */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', textAlign: 'left' }}>
+                <label style={{ fontSize: '11px', fontWeight: 600, color: '#e2e8f0' }}>
+                  Password
+                </label>
                 <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
                   <Lock
-                    size={16}
-                    style={{ position: 'absolute', left: '14px', color: currentPlatform === 'crm' ? '#38bdf8' : 'var(--text-tertiary)', pointerEvents: 'none' }}
+                    size={14}
+                    style={{
+                      position: 'absolute',
+                      left: '12px',
+                      color: '#38bdf8',
+                      pointerEvents: 'none',
+                    }}
                   />
                   <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    placeholder="Enter password"
                     style={{
                       width: '100%',
-                      height: '48px',
-                      paddingLeft: '40px',
-                      paddingRight: '14px',
-                      borderRadius: '10px',
-                      border: currentPlatform === 'crm' ? '1px solid rgba(56, 189, 248, 0.28)' : '1px solid var(--border)',
-                      backgroundColor: currentPlatform === 'crm' ? 'rgba(30, 41, 59, 0.7)' : 'var(--surface)',
-                      color: currentPlatform === 'crm' ? '#f8fafc' : 'var(--text-primary)',
-                      fontSize: '13px',
+                      height: '38px',
+                      paddingLeft: '34px',
+                      paddingRight: '12px',
+                      borderRadius: '8px',
+                      border: '1px solid rgba(56, 189, 248, 0.28)',
+                      backgroundColor: 'rgba(30, 41, 59, 0.7)',
+                      color: '#f8fafc',
+                      fontSize: '12px',
                       outline: 'none',
+                      boxSizing: 'border-box',
+                      transition: 'border-color 0.2s ease',
                     }}
+                    onFocus={(e) => { e.target.style.borderColor = '#38bdf8'; }}
+                    onBlur={(e) => { e.target.style.borderColor = 'rgba(56, 189, 248, 0.28)'; }}
                   />
                 </div>
               </div>
 
-              {/* Compact Authenticated Information Box */}
+              {/* Info Box: Authenticated As / Organization */}
               <div
                 style={{
-                  padding: '0.75rem 1rem',
-                  borderRadius: '10px',
-                  backgroundColor: currentPlatform === 'crm' ? 'rgba(30, 41, 59, 0.55)' : 'var(--surface-secondary)',
-                  border: currentPlatform === 'crm' ? '1px solid rgba(148, 163, 184, 0.16)' : '1px solid var(--border)',
+                  padding: '0.55rem 0.85rem',
+                  borderRadius: '8px',
+                  backgroundColor: 'rgba(30, 41, 59, 0.55)',
+                  border: '1px solid rgba(148, 163, 184, 0.16)',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '0.375rem',
-                  fontSize: '12px',
+                  gap: '0.25rem',
+                  fontSize: '11px',
                   textAlign: 'left',
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ color: currentPlatform === 'crm' ? '#94a3b8' : 'var(--text-tertiary)', fontSize: '11px' }}>Authenticated as</span>
-                  <span style={{ fontWeight: 600, color: currentPlatform === 'crm' ? '#f8fafc' : 'var(--text-primary)' }}>{selectedRole.name}</span>
+                  <span style={{ color: '#94a3b8', fontSize: '10.5px' }}>Authenticated as</span>
+                  <span style={{ fontWeight: 600, color: '#f8fafc' }}>{selectedRole.name}</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ color: currentPlatform === 'crm' ? '#94a3b8' : 'var(--text-tertiary)', fontSize: '11px' }}>Organization</span>
-                  <span style={{ fontWeight: 600, color: currentPlatform === 'crm' ? '#38bdf8' : 'var(--text-primary)' }}>{selectedRole.company}</span>
+                  <span style={{ color: '#94a3b8', fontSize: '10.5px' }}>Organization</span>
+                  <span style={{ fontWeight: 600, color: '#38bdf8' }}>{selectedRole.company}</span>
                 </div>
               </div>
 
-              {/* Primary CTA Button */}
+              {/* Submit Button */}
               <button
                 type="submit"
                 disabled={isLoading}
                 style={{
                   width: '100%',
-                  height: '48px',
-                  borderRadius: '10px',
-                  background: currentPlatform === 'crm'
-                    ? 'linear-gradient(135deg, #0284c7 0%, #2563eb 100%)'
-                    : primaryThemeColor,
-                  boxShadow: currentPlatform === 'crm'
-                    ? '0 4px 18px rgba(2, 132, 199, 0.45)'
-                    : 'none',
+                  height: '40px',
+                  borderRadius: '8px',
+                  background: 'linear-gradient(135deg, #0284c7 0%, #2563eb 100%)',
+                  boxShadow: '0 4px 14px rgba(2, 132, 199, 0.4)',
                   color: '#ffffff',
                   border: 'none',
-                  fontSize: '14px',
+                  fontSize: '13px',
                   fontWeight: 700,
                   display: 'inline-flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '0.5rem',
+                  gap: '0.4rem',
                   cursor: isLoading ? 'not-allowed' : 'pointer',
-                  transition: 'all var(--transition-fast)',
+                  transition: 'all 0.2s ease',
                 }}
               >
                 <span>{isLoading ? 'Signing In...' : `Sign in as ${selectedRole.title}`}</span>
-                {!isLoading && <ArrowRight size={16} />}
+                {!isLoading && <ArrowRight size={15} />}
               </button>
             </form>
 
@@ -530,188 +710,254 @@ export const UnifiedLogin = ({ mode }) => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '0.375rem',
-                fontSize: '12px',
-                color: currentPlatform === 'crm' ? '#94a3b8' : 'var(--text-tertiary)',
-                paddingTop: '0.75rem',
-                borderTop: currentPlatform === 'crm' ? '1px solid rgba(148, 163, 184, 0.16)' : '1px solid var(--border)',
+                gap: '0.35rem',
+                fontSize: '11px',
+                color: '#94a3b8',
+                paddingTop: '0.5rem',
+                borderTop: '1px solid rgba(148, 163, 184, 0.16)',
               }}
             >
-              <ShieldCheck size={14} style={{ color: 'var(--success)' }} />
+              <ShieldCheck size={13} style={{ color: '#10b981' }} />
               <span>Secure enterprise session &bull; Tenant-isolated workspace</span>
             </div>
           </div>
 
-          {/* Right Panel: All Roles for Current Platform (7 Cols) */}
+          {/* RIGHT GRID PANEL: Select Portal (2-Column Grid of 12 Roles - Compact Fit) */}
           <div
             style={{
               gridColumn: 'span 7 / span 7',
-              backgroundColor: currentPlatform === 'crm' ? 'rgba(15, 23, 42, 0.85)' : 'var(--surface)',
-              backdropFilter: currentPlatform === 'crm' ? 'blur(20px)' : 'none',
-              borderRadius: '16px',
-              border: currentPlatform === 'crm' ? '1px solid rgba(56, 189, 248, 0.22)' : '1px solid var(--border)',
-              boxShadow: currentPlatform === 'crm' ? '0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 25px rgba(6, 182, 212, 0.12)' : 'var(--shadow-md)',
-              padding: '1.75rem',
+              padding: '1.25rem 1.5rem',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              gap: '1.25rem',
+              gap: '0.75rem',
             }}
-            className="login-left-card"
+            className="portal-right-panel"
           >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              <div
+            {/* Header */}
+            <div>
+              <h3
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: '0.75rem',
-                  paddingBottom: '0.75rem',
-                  borderBottom: '1px solid var(--border)',
+                  fontSize: '18px',
+                  fontWeight: 800,
+                  color: '#f8fafc',
+                  margin: 0,
+                  letterSpacing: '-0.02em',
                 }}
-                className="login-preset-header"
               >
-                <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text-primary)' }}>
-                  {currentPlatform === 'crm' ? 'CRM nErgy AI Roles (5 Presets)' : 'OAL Network Roles (4 Presets)'}
-                </span>
-                <span
-                  style={{
-                    fontSize: '11px',
-                    color: primaryThemeColor,
-                    backgroundColor: primaryLightBg,
-                    padding: '3px 8px',
-                    borderRadius: '9999px',
-                    fontWeight: 600,
-                  }}
-                >
-                  Click any role card to auto-fill credentials
-                </span>
-              </div>
+                Select Portal
+              </h3>
+              <p
+                style={{
+                  fontSize: '12px',
+                  color: '#94a3b8',
+                  margin: '2px 0 0 0',
+                }}
+              >
+                Choose your role to access the management system.
+              </p>
+            </div>
 
-              {/* Role Cards List for Current Platform */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
-                {roleList.map((r) => {
-                  const Icon = r.icon;
-                  const isSelected = selectedRole.id === r.id;
+            {/* 2-Column Role Grid */}
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2, 1fr)',
+                gap: '0.5rem',
+              }}
+              className="portal-roles-grid"
+            >
+              {/* Column 1 Roles */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                {col1Roles.map((role) => {
+                  const Icon = role.icon;
+                  const isSelected = selectedRole.id === role.id;
 
                   return (
                     <div
-                      key={r.id}
-                      onClick={() => handleSelectRole(r)}
+                      key={role.id}
+                      onClick={() => handleSelectRole(role)}
                       style={{
-                        padding: '0.875rem 1rem',
-                        borderRadius: '10px',
-                        border: '1px solid',
-                        borderColor: isSelected
-                          ? (currentPlatform === 'crm' ? '#38bdf8' : primaryThemeColor)
-                          : (currentPlatform === 'crm' ? 'rgba(148, 163, 184, 0.16)' : 'var(--border)'),
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '0.5rem 0.75rem',
+                        borderRadius: '9px',
                         backgroundColor: isSelected
-                          ? (currentPlatform === 'crm' ? 'rgba(14, 165, 233, 0.15)' : primaryLightBg)
-                          : (currentPlatform === 'crm' ? 'rgba(30, 41, 59, 0.5)' : 'var(--surface)'),
-                        boxShadow: isSelected && currentPlatform === 'crm' ? '0 0 16px rgba(56, 189, 248, 0.22)' : 'none',
+                          ? 'rgba(14, 165, 233, 0.18)'
+                          : 'rgba(30, 41, 59, 0.55)',
+                        border: isSelected
+                          ? '1px solid #38bdf8'
+                          : '1px solid rgba(148, 163, 184, 0.15)',
+                        boxShadow: isSelected
+                          ? '0 0 12px rgba(56, 189, 248, 0.22)'
+                          : 'none',
                         cursor: 'pointer',
-                        transition: 'all var(--transition-fast)',
+                        transition: 'all 0.15s ease',
                       }}
-                      className="login-role-card"
+                      className="portal-role-card"
                     >
-                      <div className="login-role-card-left">
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', minWidth: 0 }}>
                         <div
                           style={{
-                            width: '38px',
-                            height: '38px',
-                            borderRadius: '50%',
+                            width: '30px',
+                            height: '30px',
+                            borderRadius: '7px',
                             backgroundColor: isSelected
-                              ? (currentPlatform === 'crm' ? '#0284c7' : primaryThemeColor)
-                              : (currentPlatform === 'crm' ? 'rgba(51, 65, 85, 0.7)' : 'var(--surface-secondary)'),
-                            color: isSelected ? '#ffffff' : (currentPlatform === 'crm' ? '#94a3b8' : 'var(--text-secondary)'),
+                              ? '#0284c7'
+                              : 'rgba(51, 65, 85, 0.7)',
+                            color: isSelected ? '#ffffff' : '#94a3b8',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
                             flexShrink: 0,
                           }}
                         >
-                          <Icon size={18} />
+                          <Icon size={15} />
                         </div>
-
-                        <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left', minWidth: 0 }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                            <span style={{ fontSize: '13px', fontWeight: 700, color: currentPlatform === 'crm' ? '#f8fafc' : 'var(--text-primary)' }}>
-                              {r.title}
-                            </span>
-                            {isSelected && (
-                              <CheckCircle2 size={14} style={{ color: currentPlatform === 'crm' ? '#38bdf8' : primaryThemeColor }} />
-                            )}
-                          </div>
-                          <span style={{ fontSize: '12px', color: currentPlatform === 'crm' ? '#94a3b8' : 'var(--text-secondary)', marginTop: '2px', wordBreak: 'break-word' }}>
-                            {r.name} &bull; <span style={{ fontFamily: 'var(--font-mono)', color: currentPlatform === 'crm' ? '#64748b' : 'var(--text-tertiary)' }}>{r.email}</span>
+                        <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+                          <span
+                            style={{
+                              fontSize: '12px',
+                              fontWeight: 700,
+                              color: isSelected ? '#38bdf8' : '#f8fafc',
+                              whiteSpace: 'nowrap',
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis',
+                            }}
+                          >
+                            {role.title}
+                          </span>
+                          <span
+                            style={{
+                              fontSize: '10px',
+                              color: '#64748b',
+                              marginTop: '0px',
+                            }}
+                          >
+                            Secure Access
                           </span>
                         </div>
                       </div>
 
-                      <div className="login-role-card-right">
-                        <span
-                          style={{
-                            fontFamily: 'var(--font-mono)',
-                            fontSize: '11px',
-                            color: 'var(--text-tertiary)',
-                            backgroundColor: 'var(--surface-secondary)',
-                            padding: '4px 8px',
-                            borderRadius: '4px',
-                            border: '1px solid var(--border)',
-                          }}
-                          className="login-role-card-pass"
-                        >
-                          Pass: {r.password}
-                        </span>
+                      <ChevronRight
+                        size={14}
+                        style={{
+                          color: isSelected ? '#38bdf8' : '#475569',
+                          flexShrink: 0,
+                        }}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
 
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleSelectRole(r);
-                            executeLogin(r);
-                          }}
+              {/* Column 2 Roles */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                {col2Roles.map((role) => {
+                  const Icon = role.icon;
+                  const isSelected = selectedRole.id === role.id;
+
+                  return (
+                    <div
+                      key={role.id}
+                      onClick={() => handleSelectRole(role)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '0.5rem 0.75rem',
+                        borderRadius: '9px',
+                        backgroundColor: isSelected
+                          ? 'rgba(14, 165, 233, 0.18)'
+                          : 'rgba(30, 41, 59, 0.55)',
+                        border: isSelected
+                          ? '1px solid #38bdf8'
+                          : '1px solid rgba(148, 163, 184, 0.15)',
+                        boxShadow: isSelected
+                          ? '0 0 12px rgba(56, 189, 248, 0.22)'
+                          : 'none',
+                        cursor: 'pointer',
+                        transition: 'all 0.15s ease',
+                      }}
+                      className="portal-role-card"
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', minWidth: 0 }}>
+                        <div
                           style={{
-                            display: 'inline-flex',
+                            width: '30px',
+                            height: '30px',
+                            borderRadius: '7px',
+                            backgroundColor: isSelected
+                              ? '#0284c7'
+                              : 'rgba(51, 65, 85, 0.7)',
+                            color: isSelected ? '#ffffff' : '#94a3b8',
+                            display: 'flex',
                             alignItems: 'center',
-                            gap: '0.375rem',
-                            padding: '0.4rem 0.875rem',
-                            borderRadius: '6px',
-                            fontSize: '12px',
-                            fontWeight: 600,
-                            border: '1px solid',
-                            borderColor: isSelected ? primaryThemeColor : 'var(--border)',
-                            backgroundColor: isSelected ? primaryThemeColor : 'var(--surface)',
-                            color: isSelected ? '#ffffff' : 'var(--text-primary)',
-                            cursor: 'pointer',
-                            transition: 'all var(--transition-fast)',
+                            justifyContent: 'center',
+                            flexShrink: 0,
                           }}
                         >
-                          <span>Sign In</span>
-                          <ChevronRight size={14} />
-                        </button>
+                          <Icon size={15} />
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+                          <span
+                            style={{
+                              fontSize: '12px',
+                              fontWeight: 700,
+                              color: isSelected ? '#38bdf8' : '#f8fafc',
+                              whiteSpace: 'nowrap',
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis',
+                            }}
+                          >
+                            {role.title}
+                          </span>
+                          <span
+                            style={{
+                              fontSize: '10px',
+                              color: '#64748b',
+                              marginTop: '0px',
+                            }}
+                          >
+                            Secure Access
+                          </span>
+                        </div>
                       </div>
+
+                      <ChevronRight
+                        size={14}
+                        style={{
+                          color: isSelected ? '#38bdf8' : '#475569',
+                          flexShrink: 0,
+                        }}
+                      />
                     </div>
                   );
                 })}
               </div>
             </div>
 
-            {/* Bottom Left Helper Text */}
+            {/* Bottom Status Footer */}
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                fontSize: '12px',
-                color: 'var(--text-tertiary)',
-                paddingTop: '0.75rem',
-                borderTop: '1px solid var(--border)',
+                paddingTop: '0.5rem',
+                borderTop: '1px solid rgba(148, 163, 184, 0.12)',
+                fontSize: '11px',
+                color: '#64748b',
+                flexWrap: 'wrap',
+                gap: '0.4rem',
               }}
             >
-              <span>{currentPlatform === 'crm' ? 'Isolated CRM Tenant Database' : 'OAL Marketplace Underwriting Vault'}</span>
-              <span style={{ fontWeight: 600, color: primaryThemeColor }}>
-                {currentPlatform === 'crm' ? '5 CRM Roles Available' : '4 OAL Roles Available'}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                <ShieldCheck size={13} style={{ color: '#10b981' }} />
+                <span>Encrypted RBAC Security Layer Active</span>
+              </div>
+              <span style={{ color: '#38bdf8', fontWeight: 600 }}>
+                12 Roles Configured &bull; Click to switch persona
               </span>
             </div>
           </div>
@@ -720,3 +966,6 @@ export const UnifiedLogin = ({ mode }) => {
     </div>
   );
 };
+
+export default UnifiedLogin;
+
