@@ -4,23 +4,111 @@ import { Truck, X, ShieldCheck, MapPin, Calculator, CheckCircle2, ArrowRight } f
 export const ShippingCalculatorModal = ({ isOpen, onClose, initialItem }) => {
   const [destZip, setDestZip] = useState('75001 (Dallas, TX)');
   const [carrierType, setCarrierType] = useState('open'); // open | enclosed
-  const [calculatedQuote, setCalculatedQuote] = useState({
-    distance: '1,480 miles (Fremont, CA → Dallas, TX)',
-    freightPrice: '$850.00',
-    insuranceCoverage: '$100,000 Zero-Deductible Policy',
-    estDelivery: '3-5 Business Days',
-  });
+
+  const calculateShippingQuote = (inputLocation, carrier) => {
+    const raw = (inputLocation || '').trim();
+    if (!raw) {
+      return {
+        distance: 'Enter destination for distance quote',
+        freightPrice: '$0.00',
+        insuranceCoverage: '$100,000 Zero-Deductible Policy',
+        estDelivery: 'TBD',
+      };
+    }
+
+    const query = raw.toLowerCase();
+    let miles = 1200;
+    let locationLabel = raw;
+
+    // 1. Specific City matching (origin is Fremont, CA)
+    if (query.includes('san jose') || query.includes('oakland') || query.includes('san francisco') || query.includes('sf')) {
+      miles = 35;
+      locationLabel = 'San Francisco Bay Area, CA';
+    } else if (query.includes('los angeles') || query.includes('la') || query.includes('anaheim') || query.includes('san diego')) {
+      miles = 370;
+      locationLabel = 'Southern California (LA / San Diego)';
+    } else if (query.includes('las vegas') || query.includes('reno') || query.includes('nevada')) {
+      miles = 540;
+      locationLabel = 'Nevada (Las Vegas / Reno)';
+    } else if (query.includes('phoenix') || query.includes('arizona') || query.includes('scottsdale')) {
+      miles = 750;
+      locationLabel = 'Phoenix / Scottsdale, AZ';
+    } else if (query.includes('seattle') || query.includes('portland') || query.includes('washington') || query.includes('oregon')) {
+      miles = 820;
+      locationLabel = 'Pacific Northwest (Seattle / Portland)';
+    } else if (query.includes('denver') || query.includes('colorado')) {
+      miles = 1240;
+      locationLabel = 'Denver, CO';
+    } else if (query.includes('dallas') || query.includes('austin') || query.includes('houston') || query.includes('texas') || query.includes('tx')) {
+      miles = 1480;
+      locationLabel = 'Texas (Dallas / Houston / Austin)';
+    } else if (query.includes('chicago') || query.includes('illinois')) {
+      miles = 2120;
+      locationLabel = 'Chicago, IL';
+    } else if (query.includes('atlanta') || query.includes('georgia')) {
+      miles = 2460;
+      locationLabel = 'Atlanta, GA';
+    } else if (query.includes('new york') || query.includes('nyc') || query.includes('boston') || query.includes('new jersey') || query.includes('ny')) {
+      miles = 2940;
+      locationLabel = 'New York / East Coast';
+    } else if (query.includes('miami') || query.includes('florida') || query.includes('orlando')) {
+      miles = 3080;
+      locationLabel = 'Florida (Miami / Orlando)';
+    } else {
+      // 2. Check for 5-digit US zip code matching
+      const zipMatch = query.match(/\b\d{5}\b/);
+      if (zipMatch) {
+        const zipPrefix = parseInt(zipMatch[0].substring(0, 2), 10);
+        if (zipPrefix >= 90 && zipPrefix <= 96) miles = 360; // CA
+        else if (zipPrefix >= 97 && zipPrefix <= 99) miles = 780; // OR/WA
+        else if (zipPrefix >= 84 && zipPrefix <= 89) miles = 620; // NV/UT/AZ
+        else if (zipPrefix >= 80 && zipPrefix <= 83) miles = 1150; // CO/ID/MT
+        else if (zipPrefix >= 70 && zipPrefix <= 79) miles = 1520; // TX/OK/LA
+        else if (zipPrefix >= 50 && zipPrefix <= 69) miles = 1950; // Midwest
+        else if (zipPrefix >= 30 && zipPrefix <= 49) miles = 2380; // South
+        else miles = 2920; // East Coast 00-29
+      } else {
+        // 3. General custom city or international text (e.g. "Indore", "Delhi", "Toronto")
+        let hash = 0;
+        for (let i = 0; i < query.length; i++) {
+          hash = (hash << 5) - hash + query.charCodeAt(i);
+          hash |= 0;
+        }
+        miles = Math.abs(hash % 2200) + 420;
+      }
+    }
+
+    // 4. Rate calculation based on carrier type
+    const ratePerMile = carrier === 'enclosed' ? 0.72 : 0.44;
+    const baseFee = carrier === 'enclosed' ? 360 : 200;
+    const freightAmount = Math.round((baseFee + miles * ratePerMile) / 5) * 5;
+
+    // 5. Transit time
+    let transit = '2-4 Business Days';
+    if (miles < 450) transit = '1-2 Business Days';
+    else if (miles < 1300) transit = '2-3 Business Days';
+    else if (miles < 2200) transit = '3-5 Business Days';
+    else transit = '5-7 Business Days';
+
+    return {
+      distance: `${miles.toLocaleString()} miles to ${locationLabel}`,
+      freightPrice: `$${freightAmount.toLocaleString()}.00`,
+      insuranceCoverage: carrier === 'enclosed' ? '$250,000 Luxury Enclosed Bond' : '$100,000 Carrier Cargo Bond',
+      estDelivery: transit,
+    };
+  };
+
+  const [calculatedQuote, setCalculatedQuote] = useState(() => calculateShippingQuote('75001 (Dallas, TX)', 'open'));
 
   if (!isOpen) return null;
 
-  const handleRecalculate = () => {
-    const base = carrierType === 'enclosed' ? 1450 : 850;
-    setCalculatedQuote({
-      distance: `1,480 miles to ${destZip}`,
-      freightPrice: `$${base}.00`,
-      insuranceCoverage: '$150,000 Comprehensive Carrier Bond',
-      estDelivery: '2-4 Business Days',
-    });
+  const handleCalculate = (zipToUse = destZip, typeToUse = carrierType) => {
+    setCalculatedQuote(calculateShippingQuote(zipToUse, typeToUse));
+  };
+
+  const handleCarrierChange = (type) => {
+    setCarrierType(type);
+    handleCalculate(destZip, type);
   };
 
   return (
@@ -118,7 +206,16 @@ export const ShippingCalculatorModal = ({ isOpen, onClose, initialItem }) => {
               <input
                 type="text"
                 value={destZip}
-                onChange={(e) => setDestZip(e.target.value)}
+                placeholder="Enter City or Zip Code (e.g. Dallas, New York, 90210)..."
+                onChange={(e) => {
+                  setDestZip(e.target.value);
+                  handleCalculate(e.target.value, carrierType);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    handleCalculate(destZip, carrierType);
+                  }
+                }}
                 style={{
                   flex: 1,
                   padding: '10px 14px',
@@ -131,7 +228,7 @@ export const ShippingCalculatorModal = ({ isOpen, onClose, initialItem }) => {
                 }}
               />
               <button
-                onClick={handleRecalculate}
+                onClick={() => handleCalculate(destZip, carrierType)}
                 style={{
                   backgroundColor: '#0284c7',
                   color: '#ffffff',
@@ -154,7 +251,7 @@ export const ShippingCalculatorModal = ({ isOpen, onClose, initialItem }) => {
             </label>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
               <button
-                onClick={() => { setCarrierType('open'); handleRecalculate(); }}
+                onClick={() => handleCarrierChange('open')}
                 style={{
                   padding: '12px',
                   borderRadius: '10px',
@@ -170,7 +267,7 @@ export const ShippingCalculatorModal = ({ isOpen, onClose, initialItem }) => {
               </button>
 
               <button
-                onClick={() => { setCarrierType('enclosed'); handleRecalculate(); }}
+                onClick={() => handleCarrierChange('enclosed')}
                 style={{
                   padding: '12px',
                   borderRadius: '10px',

@@ -1,10 +1,48 @@
 import React, { useState } from 'react';
-import { Home, MapPin, Bed, Bath, Maximize, DollarSign, Key, Building2 } from 'lucide-react';
+import {
+  Home,
+  MapPin,
+  Bed,
+  Bath,
+  Maximize,
+  DollarSign,
+  Key,
+  Building2,
+  Calendar,
+  Clock,
+  X,
+  Phone,
+  CheckCircle2
+} from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { toast } from '../../utils/ompToast';
 
 export const RealEstatePage = () => {
   const { selectedLocation } = useAuth();
   const [dealType, setDealType] = useState('all'); // all | rent | buy
+  const [selectedTourProp, setSelectedTourProp] = useState(null);
+  // Real Dynamic Calendar Dates based on today
+  const getDynamicUpcomingDays = () => {
+    const today = new Date();
+    const days = [];
+    for (let i = 1; i <= 3; i++) {
+      const d = new Date(today);
+      d.setDate(today.getDate() + i);
+      const prefix = i === 1 ? 'Tomorrow' : d.toLocaleDateString('en-US', { weekday: 'short' });
+      const datePart = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      days.push({ id: `${prefix} (${datePart})`, label: `${prefix} (${datePart})` });
+    }
+    return days;
+  };
+
+  const upcomingDays = getDynamicUpcomingDays();
+  const [selectedDate, setSelectedDate] = useState(() => upcomingDays[0]?.id || 'Tomorrow');
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState('10:00 AM (Morning)');
+
+  const handleConfirmTour = () => {
+    toast.success(`In-Person Tour Confirmed! ${selectedTourProp?.broker} will host your on-site walkthrough on ${selectedDate} at ${selectedTimeSlot}.`);
+    setSelectedTourProp(null);
+  };
 
   const properties = [
     {
@@ -124,7 +162,7 @@ export const RealEstatePage = () => {
 
               <div style={{ display: 'flex', gap: '8px', marginTop: 'auto', paddingTop: '8px' }}>
                 <button
-                  onClick={() => alert(`Connecting with broker ${prop.broker}...`)}
+                  onClick={() => setSelectedTourProp(prop)}
                   style={{
                     flex: 1,
                     backgroundColor: '#0284c7',
@@ -144,6 +182,249 @@ export const RealEstatePage = () => {
           </div>
         ))}
       </div>
+
+      {/* Schedule Tour Modal */}
+      {selectedTourProp && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.65)',
+            backdropFilter: 'blur(6px)',
+            zIndex: 9999,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '16px',
+          }}
+          onClick={() => setSelectedTourProp(null)}
+        >
+          <div
+            style={{
+              backgroundColor: 'var(--surface)',
+              borderRadius: '20px',
+              border: '1px solid var(--border)',
+              width: '100%',
+              maxWidth: '540px',
+              overflow: 'hidden',
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.4)',
+              maxHeight: '90vh',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div
+              style={{
+                padding: '18px 22px',
+                borderBottom: '1px solid var(--border)',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                backgroundColor: 'var(--surface-secondary)',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div
+                  style={{
+                    width: '38px',
+                    height: '38px',
+                    borderRadius: '10px',
+                    backgroundColor: 'rgba(2, 132, 199, 0.15)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#0284c7',
+                  }}
+                >
+                  <Calendar size={20} />
+                </div>
+                <div>
+                  <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 800, color: 'var(--text-primary)' }}>
+                    Schedule In-Person Tour
+                  </h3>
+                  <p style={{ margin: '2px 0 0', fontSize: '12px', color: 'var(--text-secondary)' }}>
+                    Free on-site walkthrough with verified licensed broker
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setSelectedTourProp(null)}
+                style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '6px' }}
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div style={{ padding: '20px 22px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              {/* Property Summary Card */}
+              <div
+                style={{
+                  backgroundColor: 'var(--surface-secondary)',
+                  borderRadius: '12px',
+                  padding: '12px 14px',
+                  border: '1px solid var(--border)',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}
+              >
+                <div>
+                  <span style={{ fontSize: '10px', color: '#0284c7', fontWeight: 800, textTransform: 'uppercase' }}>
+                    {selectedTourProp.type}
+                  </span>
+                  <div style={{ fontWeight: 700, fontSize: '13px', color: 'var(--text-primary)' }}>
+                    {selectedTourProp.title}
+                  </div>
+                  <div style={{ fontSize: '11.5px', color: 'var(--text-secondary)' }}>
+                    {selectedTourProp.location}
+                  </div>
+                </div>
+                <div style={{ fontWeight: 900, color: '#10b981', fontSize: '16px' }}>
+                  {selectedTourProp.price}
+                </div>
+              </div>
+
+
+              {/* Preferred Day Chips */}
+              <div>
+                <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: 'var(--text-secondary)', marginBottom: '8px' }}>
+                  SELECT PREFERRED DAY (DYNAMIC CALENDAR)
+                </label>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
+                  {upcomingDays.map((d) => (
+                    <button
+                      type="button"
+                      key={d.id}
+                      onClick={() => setSelectedDate(d.id)}
+                      style={{
+                        padding: '8px 10px',
+                        borderRadius: '8px',
+                        border: selectedDate === d.id ? '2px solid #0284c7' : '1px solid var(--border)',
+                        backgroundColor: selectedDate === d.id ? 'rgba(2, 132, 199, 0.1)' : 'var(--surface-secondary)',
+                        color: selectedDate === d.id ? '#0284c7' : 'var(--text-primary)',
+                        fontSize: '11px',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        textAlign: 'center',
+                      }}
+                    >
+                      {d.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Time Window Chips */}
+              <div>
+                <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: 'var(--text-secondary)', marginBottom: '8px' }}>
+                  SELECT TIME WINDOW
+                </label>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
+                  {['10:00 AM (Morning)', '1:30 PM (Afternoon)', '5:00 PM (Evening)'].map((slot) => (
+                    <button
+                      type="button"
+                      key={slot}
+                      onClick={() => setSelectedTimeSlot(slot)}
+                      style={{
+                        padding: '8px 10px',
+                        borderRadius: '8px',
+                        border: selectedTimeSlot === slot ? '2px solid #0284c7' : '1px solid var(--border)',
+                        backgroundColor: selectedTimeSlot === slot ? 'rgba(2, 132, 199, 0.1)' : 'var(--surface-secondary)',
+                        color: selectedTimeSlot === slot ? '#0284c7' : 'var(--text-primary)',
+                        fontSize: '11px',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                      }}
+                    >
+                      {slot}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* In-Person On-Site Meeting Details */}
+              <div
+                style={{
+                  backgroundColor: 'var(--surface-secondary)',
+                  borderRadius: '10px',
+                  padding: '12px 14px',
+                  border: '1px solid var(--border)',
+                  fontSize: '12px',
+                  color: 'var(--text-secondary)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                }}
+              >
+                <span style={{ fontSize: '15px' }}>📍</span>
+                <span>
+                  <strong>On-Site Walkthrough:</strong> Meet listing broker directly at <strong>{selectedTourProp.location}</strong>. Licensed broker will have full access & keys ready.
+                </span>
+              </div>
+
+              {/* Broker Agency Box */}
+              <div
+                style={{
+                  padding: '12px 14px',
+                  borderRadius: '10px',
+                  backgroundColor: 'var(--surface-secondary)',
+                  border: '1px solid var(--border)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <div>
+                  <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>Exclusive Listing Broker:</div>
+                  <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-primary)' }}>
+                    {selectedTourProp.broker}
+                  </div>
+                </div>
+                <span
+                  style={{
+                    fontSize: '11px',
+                    color: '#10b981',
+                    fontWeight: 700,
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    padding: '3px 8px',
+                    borderRadius: '6px',
+                  }}
+                >
+                  ✓ Verified Realtor
+                </span>
+              </div>
+
+              {/* Confirm Button */}
+              <button
+                type="button"
+                onClick={handleConfirmTour}
+                style={{
+                  backgroundColor: '#0284c7',
+                  color: '#ffffff',
+                  border: 'none',
+                  padding: '13px',
+                  borderRadius: '10px',
+                  fontWeight: 800,
+                  fontSize: '13.5px',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  boxShadow: '0 4px 14px rgba(2, 132, 199, 0.35)',
+                  marginTop: '4px',
+                }}
+              >
+                <CheckCircle2 size={16} />
+                <span>Confirm In-Person Tour</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

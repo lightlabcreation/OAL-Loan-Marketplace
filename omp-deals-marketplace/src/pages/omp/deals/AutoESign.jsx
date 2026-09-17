@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   FileSignature,
   CheckCircle,
@@ -15,23 +15,52 @@ import {
 import { toast } from '../../../utils/ompToast';
 
 export const AutoESign = () => {
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' ? window.innerWidth < 900 : false);
   const [isSigned, setIsSigned] = useState(false);
+  const [signatureImg, setSignatureImg] = useState(null);
+  const [hasDrawn, setHasDrawn] = useState(false);
   const [activeDoc, setActiveDoc] = useState('bill_of_sale');
   const canvasRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
 
-  // Digital Signature Canvas Handlers
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 900);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Digital Signature Canvas Handlers (Mouse & Touch)
+  const getCoordinates = (e) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return { x: 0, y: 0 };
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    if (e.touches && e.touches.length > 0) {
+      return {
+        x: (e.touches[0].clientX - rect.left) * scaleX,
+        y: (e.touches[0].clientY - rect.top) * scaleY,
+      };
+    }
+    return {
+      x: (e.clientX - rect.left) * scaleX,
+      y: (e.clientY - rect.top) * scaleY,
+    };
+  };
+
   const startDrawing = (e) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    const rect = canvas.getBoundingClientRect();
+    const { x, y } = getCoordinates(e);
     ctx.lineWidth = 2.5;
     ctx.lineCap = 'round';
-    ctx.strokeStyle = '#38bdf8';
+    ctx.lineJoin = 'round';
+    ctx.strokeStyle = '#0284c7';
     ctx.beginPath();
-    ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+    ctx.moveTo(x, y);
     setIsDrawing(true);
+    setHasDrawn(true);
   };
 
   const draw = (e) => {
@@ -39,8 +68,8 @@ export const AutoESign = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    const rect = canvas.getBoundingClientRect();
-    ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+    const { x, y } = getCoordinates(e);
+    ctx.lineTo(x, y);
     ctx.stroke();
   };
 
@@ -53,16 +82,25 @@ export const AutoESign = () => {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    setSignatureImg(null);
+    setHasDrawn(false);
     setIsSigned(false);
   };
 
   const handleApplySignature = () => {
+    const canvas = canvasRef.current;
+    if (!hasDrawn || !canvas) {
+      toast.error('Please draw your digital signature on the pad first!');
+      return;
+    }
+    const dataUrl = canvas.toDataURL('image/png');
+    setSignatureImg(dataUrl);
     setIsSigned(true);
     toast.success('Digital Deal Jacket Signed & Sealed with SHA-256 Hash');
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: '100%', overflowX: 'hidden' }}>
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
@@ -72,7 +110,7 @@ export const AutoESign = () => {
             </span>
             <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>100% Paperless Digital Deal Jackets</span>
           </div>
-          <h1 style={{ fontSize: '1.65rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
+          <h1 style={{ fontSize: isMobile ? '1.3rem' : '1.65rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em', wordBreak: 'break-word' }}>
             Auto E-Business & Digital E-Signature Suite
           </h1>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', margin: '0.25rem 0 0 0' }}>
@@ -80,10 +118,10 @@ export const AutoESign = () => {
           </p>
         </div>
 
-        <div style={{ display: 'flex', gap: '0.75rem' }}>
+        <div style={{ display: 'flex', gap: '0.75rem', width: isMobile ? '100%' : 'auto' }}>
           <button
             onClick={() => toast.success('Encrypted Digital Deal Jacket PDF downloaded')}
-            style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', backgroundColor: 'var(--primary)', color: 'var(--text-on-primary, #fff)', border: 'none', padding: '0.55rem 1rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', boxShadow: 'var(--shadow-sm)' }}
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', backgroundColor: 'var(--primary)', color: 'var(--text-on-primary, #fff)', border: 'none', padding: '0.55rem 1rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', boxShadow: 'var(--shadow-sm)', width: isMobile ? '100%' : 'auto' }}
           >
             <Download size={16} /> Download Signed Deal Jacket
           </button>
@@ -91,11 +129,11 @@ export const AutoESign = () => {
       </div>
 
       {/* Main Deal Jacket Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '1.5rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '100%' : '1.4fr 1fr', gap: isMobile ? '1rem' : '1.5rem', width: '100%', minWidth: 0 }}>
         {/* Left Column: Digital Document Viewer */}
-        <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '1rem', boxShadow: 'var(--shadow-sm)' }}>
+        <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: isMobile ? '0.75rem' : '1.25rem', display: 'flex', flexDirection: 'column', gap: '1rem', boxShadow: 'var(--shadow-sm)', minWidth: 0, overflow: 'hidden' }}>
           {/* Doc Tabs */}
-          <div style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--border)', paddingBottom: '0.75rem' }}>
+          <div style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--border)', paddingBottom: '0.75rem', overflowX: 'auto', flexWrap: isMobile ? 'nowrap' : 'wrap', WebkitOverflowScrolling: 'touch' }}>
             {[
               { id: 'bill_of_sale', label: '1. Bill of Sale' },
               { id: 'odometer', label: '2. Odometer Disclosure' },
@@ -114,6 +152,8 @@ export const AutoESign = () => {
                   fontSize: '0.78rem',
                   fontWeight: 600,
                   cursor: 'pointer',
+                  flexShrink: 0,
+                  whiteSpace: 'nowrap',
                 }}
               >
                 {d.label}
@@ -122,18 +162,18 @@ export const AutoESign = () => {
           </div>
 
           {/* Paper Document Preview Simulation */}
-          <div style={{ backgroundColor: '#ffffff', color: '#0f172a', borderRadius: '8px', padding: '1.5rem', fontFamily: 'serif', boxShadow: 'var(--shadow-md)', minHeight: '380px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', border: '1px solid #e2e8f0' }}>
+          <div style={{ backgroundColor: '#ffffff', color: '#0f172a', borderRadius: '8px', padding: isMobile ? '0.85rem' : '1.5rem', fontFamily: 'serif', boxShadow: 'var(--shadow-md)', minHeight: '380px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', border: '1px solid #e2e8f0', minWidth: 0, overflowX: 'hidden' }}>
             <div>
               <div style={{ textAlign: 'center', borderBottom: '2px solid #0f172a', paddingBottom: '0.5rem', marginBottom: '1rem' }}>
-                <h3 style={{ margin: 0, fontSize: '1.2rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#0f172a' }}>
+                <h3 style={{ margin: 0, fontSize: isMobile ? '0.95rem' : '1.2rem', textTransform: 'uppercase', letterSpacing: '0.03em', color: '#0f172a', wordBreak: 'break-word' }}>
                   State Motor Vehicle Purchase Agreement & Bill of Sale
                 </h3>
-                <span style={{ fontSize: '0.75rem', fontFamily: 'sans-serif', color: '#64748b' }}>
+                <span style={{ fontSize: isMobile ? '0.65rem' : '0.75rem', fontFamily: 'sans-serif', color: '#64748b' }}>
                   Deal File # DJ-9824 • Dallas Central Motors License # DL-99214
                 </span>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', fontSize: '0.8rem', fontFamily: 'sans-serif', marginBottom: '1rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? '0.6rem' : '1rem', fontSize: '0.8rem', fontFamily: 'sans-serif', marginBottom: '1rem' }}>
                 <div>
                   <strong>SELLER / DEALER:</strong><br />
                   Dallas Central Motors LLC<br />
@@ -166,24 +206,28 @@ export const AutoESign = () => {
             </div>
 
             {/* Signature Placement Area */}
-            <div style={{ borderTop: '1px dashed #94a3b8', paddingTop: '1rem', marginTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', fontFamily: 'sans-serif' }}>
+            <div style={{ borderTop: '1px dashed #94a3b8', paddingTop: '1rem', marginTop: '1rem', display: 'flex', flexDirection: isMobile ? 'column' : 'row', justifyContent: 'space-between', alignItems: isMobile ? 'flex-start' : 'flex-end', gap: isMobile ? '0.75rem' : '0', fontFamily: 'sans-serif' }}>
               <div>
                 <div style={{ fontSize: '0.7rem', color: '#64748b' }}>BUYER SIGNATURE:</div>
-                {isSigned ? (
-                  <div style={{ color: '#0284c7', fontFamily: 'cursive', fontSize: '1.4rem', fontWeight: 'bold' }}>
-                    Derrick Miller
+                {isSigned && signatureImg ? (
+                  <div style={{ height: '36px', display: 'flex', alignItems: 'center' }}>
+                    <img
+                      src={signatureImg}
+                      alt="Buyer Signature"
+                      style={{ maxHeight: '34px', maxWidth: '180px', objectFit: 'contain' }}
+                    />
                   </div>
                 ) : (
-                  <div style={{ fontSize: '0.8rem', color: '#ef4444', fontStyle: 'italic', height: '32px', display: 'flex', alignItems: 'center' }}>
+                  <div style={{ fontSize: '0.8rem', color: '#ef4444', fontStyle: 'italic', height: '36px', display: 'flex', alignItems: 'center' }}>
                     * Signature Required on Touchpad
                   </div>
                 )}
-                <div style={{ borderTop: '1px solid #0f172a', width: '200px', marginTop: '0.25rem', fontSize: '0.65rem', color: '#64748b' }}>
+                <div style={{ borderTop: '1px solid #0f172a', width: isMobile ? '160px' : '200px', marginTop: '0.25rem', fontSize: '0.65rem', color: '#64748b' }}>
                   Derrick Miller (Buyer)
                 </div>
               </div>
 
-              <div style={{ textAlign: 'right' }}>
+              <div style={{ textAlign: isMobile ? 'left' : 'right' }}>
                 <div style={{ fontSize: '0.65rem', color: '#10b981', fontWeight: 600 }}>
                   {isSigned ? '✓ SHA-256 Verified Seal' : 'Pending Signature'}
                 </div>
@@ -194,9 +238,9 @@ export const AutoESign = () => {
         </div>
 
         {/* Right Column: Interactive Digital Signature Pad & Cryptographic Audit */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', minWidth: 0, width: '100%' }}>
           {/* E-Signature Canvas */}
-          <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', boxShadow: 'var(--shadow-sm)' }}>
+          <div style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '12px', padding: isMobile ? '0.75rem' : '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', boxShadow: 'var(--shadow-sm)', minWidth: 0, overflow: 'hidden' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--text-primary)' }}>
                 Draw Digital Signature
@@ -209,7 +253,7 @@ export const AutoESign = () => {
               </button>
             </div>
 
-            <div style={{ border: '2px dashed var(--primary)', borderRadius: '8px', backgroundColor: 'var(--background)', cursor: 'crosshair', position: 'relative' }}>
+            <div style={{ border: '2px dashed var(--primary)', borderRadius: '8px', backgroundColor: 'var(--background)', cursor: 'crosshair', position: 'relative', width: '100%', overflow: 'hidden' }}>
               <canvas
                 ref={canvasRef}
                 width={320}
@@ -218,7 +262,10 @@ export const AutoESign = () => {
                 onMouseMove={draw}
                 onMouseUp={stopDrawing}
                 onMouseLeave={stopDrawing}
-                style={{ width: '100%', height: '130px', display: 'block' }}
+                onTouchStart={startDrawing}
+                onTouchMove={draw}
+                onTouchEnd={stopDrawing}
+                style={{ width: '100%', height: '130px', display: 'block', touchAction: 'none' }}
               />
               <span style={{ position: 'absolute', bottom: '6px', left: '10px', fontSize: '0.65rem', color: 'var(--text-tertiary)', pointerEvents: 'none' }}>
                 Sign above with stylus, finger, or mouse

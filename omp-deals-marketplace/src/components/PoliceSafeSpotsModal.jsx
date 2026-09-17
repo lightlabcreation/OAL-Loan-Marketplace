@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ShieldCheck, MapPin, Search, X, CheckCircle2, Video, Car } from 'lucide-react';
+import { toast } from '../utils/ompToast';
 
 export const PoliceSafeSpotsModal = ({ isOpen, onClose }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -218,7 +219,7 @@ export const PoliceSafeSpotsModal = ({ isOpen, onClose }) => {
               <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '6px' }}>
                 <button
                   onClick={() => {
-                    alert(`Selected Safe MeetUp Location: ${spot.name}. Location tagged for your next offer.`);
+                    toast.success(`Safe MeetUp Confirmed: ${spot.name} tagged for your deal!`);
                     onClose();
                   }}
                   style={{
