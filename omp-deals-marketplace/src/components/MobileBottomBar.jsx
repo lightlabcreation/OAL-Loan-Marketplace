@@ -41,7 +41,7 @@ export const MobileBottomBar = ({ onOpenDrawer, onOpenAi }) => {
     >
       {tabs.map((tab, idx) => {
         const Icon = tab.icon;
-        const isActive = location.pathname === tab.path;
+        const isActive = location.pathname === tab.path || (tab.path === '/marketplace' && location.pathname === '/');
 
         if (tab.isAction) {
           return (

@@ -1,5 +1,5 @@
 
-16-09-26 clent provide information or Omp
+16-09-26 clent provide information for Omp
 OMP menu buttons
 For Sale
 AI Cars & Trucks
@@ -464,3 +464,8 @@ I noticed this link not to sure what it is or does if you can check it out.
 In the OMP Deals Online Mobile APP the CRM is a button within the OMP Deals site, Users automatically have access to shop , buy, sell in the Marketplace and have an option to subscribe to the CRM feature and/or the OPM Exec Central Office ]
 
 Yes, the CRM and OMP Exec Central Office SHOULD have separate subscription plans.
+
+
+the link you sent is not going directly to the MArketplace?
+
+Remember OMP Deals is a Mobile App Marketplace, the CRM is an added feature within the Marketplace

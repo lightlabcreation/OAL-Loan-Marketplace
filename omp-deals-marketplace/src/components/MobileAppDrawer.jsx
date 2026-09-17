@@ -152,7 +152,7 @@ export const MobileAppDrawer = ({ isOpen, onClose, navGroups, onOpenSubscription
 
               {group.items.map((item, iIdx) => {
                 const Icon = item.icon;
-                const isActive = location.pathname === item.path;
+                const isActive = location.pathname === item.path || (item.path === '/marketplace' && location.pathname === '/');
 
                 return (
                   <button
