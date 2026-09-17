@@ -426,3 +426,41 @@ I'm not sure if you personally logged into offerup to check it out but there's m
 Keep the same look and feel for clicking on pictures and navigation.
 Keep the same look and feel for clicking on pictures and navigation.
 CRM ERP portal button update
+
+/************************************************************************
+ client message :-17-09-2026
+
+OfferUp has become the largest mobile marketplace for local buyers and sellers in the U.S.
+
+It’s very important that you understand that Offerup is a mobile app platform, so when you’re building the OMP Deals that you’re building a mobile app platform.
+
+More than 1 in 5 adults in the United States use the OfferUp mobile app.
+
+User Base of OfferUp
+
+Current User Statistics
+
+
+
+
+•	More than 1 in 5 adults in the United States use the OfferUp mobile app.
+Growth and Popularity
+•	OfferUp has become the largest mobile marketplace for local buyers and sellers in the U.S.
+•	The app has been recognized for its user-friendly interface and has consistently ranked among the top downloaded apps in the shopping category on both the Apple App Store and Google Play Store.
+This significant user base reflects OfferUp's effectiveness in connecting local buyers and sellers through a simple and trusted platform.
+
+What are the demographics of OfferUp mobile app users in the United States?
+OfferUp has around 20 million monthly active users in the United States, with a significant portion of them being adults in major markets. The app is particularly popular among younger generations who prefer mobile platforms for buying and selling items locally.
+
+How does OfferUp's user base compare to other mobile selling apps?
+OfferUp serves over 18 million monthly users, with more than 24% visiting daily, and about 90% of transactions occurring via its mobile app, making it a leading mobile-first marketplace in the U.S.
+
+What features contribute to the popularity of the OfferUp mobile app among users?
+OfferUp's popularity stems from its mobile-first design, in-app messaging, user ratings, and the ability to buy and sell locally or nationwide. These features create a user-friendly experience that fosters trust and convenience.
+
+
+I noticed this link not to sure what it is or does if you can check it out.
+
+In the OMP Deals Online Mobile APP the CRM is a button within the OMP Deals site, Users automatically have access to shop , buy, sell in the Marketplace and have an option to subscribe to the CRM feature and/or the OPM Exec Central Office ]
+
+Yes, the CRM and OMP Exec Central Office SHOULD have separate subscription plans.
