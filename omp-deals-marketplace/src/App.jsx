@@ -51,6 +51,7 @@ export default function App() {
         <Routes>
           <Route element={<OmpLayout />}>
             {/* 1. 8 Core Marketplace Category Routes */}
+            <Route path="/" element={<HomePage />} />
             <Route path="/marketplace" element={<HomePage />} />
             <Route path="/for-sale" element={<ForSalePage />} />
             <Route path="/cars-trucks" element={<AiCarsTrucksPage />} />
@@ -92,7 +93,6 @@ export default function App() {
           </Route>
 
           {/* Standalone Fullscreen Login Gateway (Entry point & Role switcher) */}
-          <Route path="/" element={<LoginPage />} />
           <Route path="/login" element={<LoginPage />} />
 
           {/* Catch-all fallback */}

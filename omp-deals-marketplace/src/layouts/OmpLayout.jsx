@@ -233,7 +233,7 @@ export const OmpLayout = () => {
             </button>
           )}
 
-          <NavLink to="/marketplace" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
+          <NavLink to="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
             <div
               style={{
                 width: isMobile ? '32px' : '38px',
@@ -528,7 +528,7 @@ export const OmpLayout = () => {
 
                 {group.items.map((item, iIdx) => {
                   const Icon = item.icon;
-                  const isActive = location.pathname === item.path;
+                  const isActive = location.pathname === item.path || (item.path === '/marketplace' && location.pathname === '/');
 
                   return (
                     <NavLink
