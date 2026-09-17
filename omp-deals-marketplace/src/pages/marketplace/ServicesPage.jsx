@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { Wrench, Phone, MessageSquare, Star, ShieldCheck, MapPin, CheckCircle2, Clock } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { ServiceDispatcherModal } from '../../components/ServiceDispatcherModal';
+import { ServiceBookingModal } from '../../components/ServiceBookingModal';
 
 export const ServicesPage = () => {
   const { selectedLocation } = useAuth();
   const [activeCategory, setActiveCategory] = useState('all');
+  const [selectedService, setSelectedService] = useState(null);
+  const [isDispatcherModalOpen, setIsDispatcherModalOpen] = useState(false);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
   const subCategories = [
     { id: 'all', label: 'All Services' },
@@ -174,7 +179,11 @@ export const ServicesPage = () => {
 
             <div style={{ display: 'flex', gap: '10px', marginTop: 'auto', paddingTop: '12px', borderTop: '1px solid var(--border)' }}>
               <button
-                onClick={() => alert(`Calling service dispatcher at ${srv.phone}...`)}
+                id={`call-dispatcher-btn-${srv.id}`}
+                onClick={() => {
+                  setSelectedService(srv);
+                  setIsDispatcherModalOpen(true);
+                }}
                 style={{
                   flex: 1,
                   backgroundColor: '#10b981',
@@ -196,7 +205,11 @@ export const ServicesPage = () => {
               </button>
 
               <button
-                onClick={() => alert(`Opening chat with ${srv.name}...`)}
+                id={`message-service-btn-${srv.id}`}
+                onClick={() => {
+                  setSelectedService(srv);
+                  setIsBookingModalOpen(true);
+                }}
                 style={{
                   backgroundColor: 'var(--surface-secondary)',
                   border: '1px solid var(--border)',
@@ -218,6 +231,20 @@ export const ServicesPage = () => {
           </div>
         ))}
       </div>
+
+      {/* Service Dispatcher Modal */}
+      <ServiceDispatcherModal
+        isOpen={isDispatcherModalOpen}
+        onClose={() => setIsDispatcherModalOpen(false)}
+        service={selectedService}
+      />
+
+      {/* Service Message / Booking Modal */}
+      <ServiceBookingModal
+        isOpen={isBookingModalOpen}
+        onClose={() => setIsBookingModalOpen(false)}
+        service={selectedService}
+      />
     </div>
   );
 };
