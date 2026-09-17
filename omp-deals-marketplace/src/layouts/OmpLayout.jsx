@@ -37,7 +37,9 @@ import {
   User,
   LogOut,
   MapPin,
-  Truck
+  Truck,
+  PlusCircle,
+  Key
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { OmpAiAgentModal } from '../components/OmpAiAgentModal';
@@ -45,6 +47,8 @@ import { PoliceSafeSpotsModal } from '../components/PoliceSafeSpotsModal';
 import { ShippingCalculatorModal } from '../components/ShippingCalculatorModal';
 
 export const OmpLayout = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const { currentUser, logout, theme, toggleTheme, selectedLocation, selectedRadius, myFavList } = useAuth();
   const [selectedStore, setSelectedStore] = useState('all');
   const [isAiModalOpen, setIsAiModalOpen] = useState(false);
@@ -58,22 +62,36 @@ export const OmpLayout = () => {
     { id: 'austin', name: '📍 Austin West Dealership', city: 'Austin, TX', activeUnits: 35 },
   ];
 
-  const navGroups = [
+  // Role-Based Navigation Groups (Strict RBAC Matching Client Documents)
+  const allNavGroups = [
     {
-      group: '8 Core Marketplace Categories (OfferUp)',
+      id: 'core_marketplace',
+      group: 'Marketplace Categories',
+      roles: ['GUEST', 'MEMBER', 'DEALER_PRO', 'SERVICE_PRO', 'EXECUTIVE_ADMIN'],
       items: [
-        { path: '/for-sale', label: '1. For Sale (General Items)', icon: ShoppingBag, tag: 'All Items' },
-        { path: '/cars-trucks', label: '2. AI Cars & Trucks', icon: Car, tag: 'Taxonomy' },
-        { path: '/services', label: '3. Local Services', icon: Wrench, tag: '30+ Pros' },
-        { path: '/jobs', label: '4. Job Finder', icon: Briefcase, tag: '35 Domains' },
-        { path: '/real-estate', label: '5. Real Estate', icon: Home, tag: 'Rent/Buy' },
-        { path: '/businesses', label: '6. Business For Sale', icon: Building, tag: 'Turnkey' },
-        { path: '/looking-for', label: '7. Looking For', icon: Search, tag: 'Wanted' },
-        { path: '/my-fav', label: '8. MyFav & OMP AI Agent', icon: Heart, badge: myFavList.length },
+        { path: '/for-sale', label: 'For Sale', icon: ShoppingBag, tag: 'General' },
+        { path: '/cars-trucks', label: 'AI Cars & Trucks', icon: Car, tag: 'Taxonomy' },
+        { path: '/services', label: 'Local Services', icon: Wrench, tag: '30+ Pros' },
+        { path: '/jobs', label: 'Job Finder', icon: Briefcase, tag: '35 Domains' },
+        { path: '/real-estate', label: 'Real Estate', icon: Home, tag: 'Rent/Buy' },
+        { path: '/businesses', label: 'Business For Sale', icon: Building, tag: 'Turnkey' },
+        { path: '/looking-for', label: 'Looking For', icon: Search, tag: 'Wanted' },
+        { path: '/my-fav', label: 'MyFav & OMP AI', icon: Heart, badge: myFavList.length },
       ],
     },
     {
+      id: 'member_suite',
+      group: 'My Member & Seller Tools',
+      roles: ['MEMBER'],
+      items: [
+        { path: '/post-ad', label: 'Post a Fast Listing (30s)', icon: PlusCircle, tag: 'Fast Ad' },
+        { path: '/my-fav', label: 'My Saved Ads & Pinned', icon: Heart, badge: myFavList.length },
+      ],
+    },
+    {
+      id: 'dealers_hub',
       group: 'Marketplace & Verified Dealers',
+      roles: ['DEALER_PRO', 'EXECUTIVE_ADMIN'],
       items: [
         { path: '/omp/marketplace', label: 'OfferUp Marketplace', icon: ShoppingBag, tag: 'B2C/B2B' },
         { path: '/omp/verified-dealer', label: 'Verified Dealer Hub', icon: ShieldCheck, tag: 'ADP' },
@@ -83,7 +101,9 @@ export const OmpLayout = () => {
       ],
     },
     {
+      id: 'stock_recon',
       group: 'Stock The Lot & Recon',
+      roles: ['DEALER_PRO', 'EXECUTIVE_ADMIN'],
       items: [
         { path: '/omp/vin-scanner', label: 'VIN Scanner & Bookout', icon: Camera, tag: 'Optical' },
         { path: '/omp/market-pricing', label: 'AI RealPrice™ Matrix', icon: TrendingUp, tag: 'Matrix' },
@@ -95,7 +115,9 @@ export const OmpLayout = () => {
       ],
     },
     {
+      id: 'sales_crm',
       group: 'Desking & Sales CRM',
+      roles: ['DEALER_PRO', 'EXECUTIVE_ADMIN'],
       items: [
         { path: '/omp/desking/calculator', label: '60s Deal Calculator', icon: Calculator, tag: '4-Square' },
         { path: '/omp/crm/inbox', label: 'Unified Omnichannel Inbox', icon: Inbox, badge: '5' },
@@ -105,7 +127,19 @@ export const OmpLayout = () => {
       ],
     },
     {
+      id: 'service_pro_tools',
+      group: 'Service Pro & Recruiting Suite',
+      roles: ['SERVICE_PRO'],
+      items: [
+        { path: '/services', label: 'My Service Listings & Quotes', icon: Wrench, tag: 'Direct' },
+        { path: '/jobs', label: 'Post Job Openings & Hires', icon: Briefcase, tag: 'Recruit' },
+        { path: '/post-ad', label: 'Post Pro Service Ad', icon: PlusCircle, tag: 'Post' },
+      ],
+    },
+    {
+      id: 'bhph_profit',
       group: 'In-House BHPH & Profit',
+      roles: ['DEALER_PRO', 'EXECUTIVE_ADMIN'],
       items: [
         { path: '/omp/bhph/suite', label: 'BHPH Collections Suite', icon: Wallet, badge: '$14k' },
         { path: '/omp/finance/roi', label: 'ROI Profit Dashboard', icon: TrendingUp, tag: 'Gross' },
@@ -113,7 +147,9 @@ export const OmpLayout = () => {
       ],
     },
     {
-      group: 'Executive & Multi-Store',
+      id: 'executive_master',
+      group: 'Executive & Multi-Store Umbrella',
+      roles: ['EXECUTIVE_ADMIN'],
       items: [
         { path: '/omp/executive/central-office', label: 'Central Office Umbrella', icon: Building2, tag: 'Franchise' },
         { path: '/omp/executive/permissions', label: 'Team Roles & RBAC', icon: ShieldAlert, tag: 'Security' },
@@ -121,6 +157,15 @@ export const OmpLayout = () => {
       ],
     },
   ];
+
+  // Filter groups dynamically according to currently logged in role
+  const currentRoleId = currentUser?.id || 'GUEST';
+  const navGroups = allNavGroups.filter((g) => g.roles.includes(currentRoleId));
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
   return (
     <div
@@ -150,7 +195,7 @@ export const OmpLayout = () => {
         }}
       >
         {/* Brand */}
-        <NavLink to="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
+        <NavLink to="/marketplace" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
           <div
             style={{
               width: '38px',
@@ -176,8 +221,29 @@ export const OmpLayout = () => {
           </div>
         </NavLink>
 
-        {/* Action Tools */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        {/* Action Tools & Role Management */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          {/* Post Ad 30s Fast Button */}
+          <NavLink
+            to="/post-ad"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              backgroundColor: '#10b981',
+              color: '#ffffff',
+              padding: '7px 14px',
+              borderRadius: '8px',
+              fontSize: '12.5px',
+              fontWeight: 800,
+              textDecoration: 'none',
+              boxShadow: '0 2px 8px rgba(16, 185, 129, 0.3)',
+            }}
+          >
+            <PlusCircle size={15} />
+            <span>+ Post Ad (30s)</span>
+          </NavLink>
+
           <button
             onClick={() => setIsAiModalOpen(true)}
             style={{
@@ -254,34 +320,84 @@ export const OmpLayout = () => {
             {theme === 'light' ? <Moon size={16} /> : <Sun size={16} color="#fbbf24" />}
           </button>
 
-          {/* User Role / Logout */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', borderLeft: '1px solid var(--border)', paddingLeft: '12px' }}>
-            <NavLink
-              to="/login"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                fontSize: '12px',
-                fontWeight: 700,
-                color: 'var(--text-primary)',
-                backgroundColor: 'var(--surface-secondary)',
-                padding: '6px 12px',
-                borderRadius: '8px',
-                textDecoration: 'none',
-              }}
-            >
-              <User size={14} color="#0284c7" />
-              <span>{currentUser.roleName.split(' ')[0]}</span>
-            </NavLink>
+          {/* Role Status & Auth Controls */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', borderLeft: '1px solid var(--border)', paddingLeft: '10px' }}>
+            {currentRoleId === 'GUEST' ? (
+              <NavLink
+                to="/login"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  fontSize: '12px',
+                  fontWeight: 800,
+                  color: '#ffffff',
+                  backgroundColor: '#0284c7',
+                  padding: '6px 14px',
+                  borderRadius: '8px',
+                  textDecoration: 'none',
+                  boxShadow: '0 2px 8px rgba(2, 132, 199, 0.3)',
+                }}
+              >
+                <Key size={13} />
+                <span>Sign In / Roles</span>
+              </NavLink>
+            ) : (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <NavLink
+                  to="/login"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    fontSize: '12px',
+                    fontWeight: 700,
+                    color: 'var(--text-primary)',
+                    backgroundColor: 'var(--surface-secondary)',
+                    border: '1px solid var(--border)',
+                    padding: '6px 10px',
+                    borderRadius: '8px',
+                    textDecoration: 'none',
+                  }}
+                  title="Switch Role"
+                >
+                  <span style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#10b981', display: 'inline-block' }} />
+                  <span>{currentUser.roleName.split(' ')[0]}</span>
+                  <span style={{ fontSize: '10px', backgroundColor: 'rgba(2, 132, 199, 0.15)', color: '#0284c7', padding: '1px 5px', borderRadius: '4px', fontWeight: 800 }}>
+                    {currentUser.badge}
+                  </span>
+                </NavLink>
+
+                <button
+                  onClick={handleLogout}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                    border: '1px solid rgba(239, 68, 68, 0.25)',
+                    color: '#ef4444',
+                    padding: '6px 10px',
+                    borderRadius: '8px',
+                    fontSize: '11.5px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                  }}
+                  title="Logout to Guest mode"
+                >
+                  <LogOut size={13} />
+                  <span>Logout</span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </header>
 
-      {/* 2. SUBHEADER WITH DEALER STORE SWITCHER */}
+      {/* 2. SUBHEADER WITH ACTIVE ROLE & STORE STATUS */}
       <div
         style={{
-          height: '46px',
+          height: '44px',
           borderBottom: '1px solid var(--border)',
           backgroundColor: 'var(--surface-secondary)',
           display: 'flex',
@@ -292,94 +408,114 @@ export const OmpLayout = () => {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '12.5px', fontWeight: 700, color: '#0284c7' }}>
-            <Car size={15} />
-            <span>DEALER ESSENTIALS & OFFERUP DMS</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '12px', fontWeight: 700, color: '#0284c7' }}>
+            <Car size={14} />
+            <span>
+              {currentRoleId === 'GUEST' && 'PUBLIC OFFERUP MARKETPLACE'}
+              {currentRoleId === 'MEMBER' && 'MEMBER VERIFIED SELLER PORTAL'}
+              {currentRoleId === 'DEALER_PRO' && 'ADP DEALER ESSENTIALS & LOT DMS'}
+              {currentRoleId === 'SERVICE_PRO' && 'SERVICE PRO & RECRUITING HUB'}
+              {currentRoleId === 'EXECUTIVE_ADMIN' && 'EXECUTIVE CENTRAL OFFICE UMBRELLA'}
+            </span>
           </div>
-          <span style={{ fontSize: '11px', padding: '2px 8px', borderRadius: '9999px', backgroundColor: 'rgba(2, 132, 199, 0.12)', color: '#0284c7', fontWeight: 700 }}>
-            ⚡ 184 DMS Lot Vehicles
+
+          <span style={{ fontSize: '10.5px', padding: '2px 8px', borderRadius: '9999px', backgroundColor: 'rgba(16, 185, 129, 0.12)', color: '#10b981', fontWeight: 700 }}>
+            Active Mode: {currentUser.roleName}
           </span>
         </div>
 
-        {/* Store Switcher */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Store size={14} color="#0284c7" />
-          <select
-            value={selectedStore}
-            onChange={(e) => setSelectedStore(e.target.value)}
-            style={{
-              backgroundColor: 'var(--surface)',
-              border: '1px solid var(--border)',
-              padding: '4px 10px',
-              borderRadius: '6px',
-              color: 'var(--text-primary)',
-              fontSize: '12px',
-              fontWeight: 600,
-              outline: 'none',
-              cursor: 'pointer',
-            }}
-          >
-            {stores.map((s) => (
-              <option key={s.id} value={s.id}>
-                {s.name} ({s.activeUnits} Cars)
-              </option>
-            ))}
-          </select>
-        </div>
+        {/* Store Switcher for Dealers & Executives */}
+        {(currentRoleId === 'DEALER_PRO' || currentRoleId === 'EXECUTIVE_ADMIN') ? (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Store size={14} color="#0284c7" />
+            <select
+              value={selectedStore}
+              onChange={(e) => setSelectedStore(e.target.value)}
+              style={{
+                backgroundColor: 'var(--surface)',
+                border: '1px solid var(--border)',
+                padding: '4px 10px',
+                borderRadius: '6px',
+                color: 'var(--text-primary)',
+                fontSize: '11.5px',
+                fontWeight: 600,
+                outline: 'none',
+                cursor: 'pointer',
+              }}
+            >
+              {stores.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.name} ({s.activeUnits} Cars)
+                </option>
+              ))}
+            </select>
+          </div>
+        ) : (
+          <div style={{ fontSize: '11.5px', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <MapPin size={13} color="#0284c7" />
+            <span>Browsing near <strong>{selectedLocation}</strong> within {selectedRadius} miles</span>
+          </div>
+        )}
       </div>
 
-      {/* 3. BODY (SIDEBAR + OUTLET) */}
+      {/* 3. MAIN BODY WITH ROLE-FILTERED SIDEBAR */}
       <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
-        {/* Master Sidebar */}
+        {/* Left Sidebar */}
         <aside
           style={{
-            width: '270px',
+            width: '265px',
             backgroundColor: 'var(--surface)',
             borderRight: '1px solid var(--border)',
             display: 'flex',
             flexDirection: 'column',
             overflowY: 'auto',
+            padding: '12px 10px',
             flexShrink: 0,
-            padding: '12px',
+            gap: '16px',
           }}
         >
-          {navGroups.map((grp, gIdx) => (
-            <div key={gIdx} style={{ marginBottom: '18px' }}>
-              <div style={{ fontSize: '10.5px', fontWeight: 800, color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.06em', padding: '4px 8px 6px' }}>
-                {grp.group}
+          {navGroups.map((group, gIdx) => (
+            <div key={gIdx} style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
+              <div style={{ fontSize: '10.5px', fontWeight: 800, color: 'var(--text-secondary)', padding: '4px 10px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                {group.group}
               </div>
-              {grp.items.map((item) => {
+
+              {group.items.map((item, iIdx) => {
                 const Icon = item.icon;
+                const isActive = location.pathname === item.path;
+
                 return (
                   <NavLink
-                    key={item.path}
+                    key={iIdx}
                     to={item.path}
-                    style={({ isActive }) => ({
+                    style={{
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
                       padding: '8px 10px',
                       borderRadius: '8px',
-                      fontSize: '12.5px',
-                      fontWeight: isActive ? 700 : 500,
+                      textDecoration: 'none',
                       backgroundColor: isActive ? 'rgba(2, 132, 199, 0.12)' : 'transparent',
                       color: isActive ? '#0284c7' : 'var(--text-primary)',
-                      textDecoration: 'none',
-                      marginBottom: '2px',
-                    })}
+                      fontWeight: isActive ? 700 : 500,
+                      fontSize: '12.5px',
+                      transition: 'all 0.15s ease',
+                    }}
                   >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                      <Icon size={15} style={{ flexShrink: 0 }} />
-                      <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.label}</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <Icon size={16} color={isActive ? '#0284c7' : 'var(--text-secondary)'} />
+                      <span>{item.label}</span>
                     </div>
-                    {item.badge && (
-                      <span style={{ fontSize: '10px', backgroundColor: '#ef4444', color: '#fff', padding: '1px 5px', borderRadius: '4px', fontWeight: 800 }}>
-                        {item.badge}
+
+                    {item.tag && (
+                      <span style={{ fontSize: '10px', padding: '1px 6px', borderRadius: '4px', backgroundColor: 'var(--surface-secondary)', color: 'var(--text-secondary)', fontWeight: 600 }}>
+                        {item.tag}
                       </span>
                     )}
-                    {item.tag && (
-                      <span style={{ fontSize: '10px', backgroundColor: 'var(--surface-secondary)', border: '1px solid var(--border)', color: 'var(--text-secondary)', padding: '1px 5px', borderRadius: '4px' }}>
-                        {item.tag}
+
+                    {item.badge !== undefined && (
+                      <span style={{ fontSize: '10px', padding: '1px 6px', borderRadius: '9999px', backgroundColor: '#0284c7', color: '#ffffff', fontWeight: 800 }}>
+                        {item.badge}
                       </span>
                     )}
                   </NavLink>
@@ -389,13 +525,20 @@ export const OmpLayout = () => {
           ))}
         </aside>
 
-        {/* Scrollable Content View */}
-        <main style={{ flex: 1, overflowY: 'auto', padding: '24px 20px 80px', backgroundColor: 'var(--background)' }}>
+        {/* Main Content Area */}
+        <main
+          style={{
+            flex: 1,
+            overflowY: 'auto',
+            padding: '24px 30px',
+            backgroundColor: 'var(--background)',
+          }}
+        >
           <Outlet />
         </main>
       </div>
 
-      {/* Global Modals */}
+      {/* Modals */}
       <OmpAiAgentModal isOpen={isAiModalOpen} onClose={() => setIsAiModalOpen(false)} />
       <PoliceSafeSpotsModal isOpen={isSafeSpotsOpen} onClose={() => setIsSafeSpotsOpen(false)} />
       <ShippingCalculatorModal isOpen={isShippingOpen} onClose={() => setIsShippingOpen(false)} />

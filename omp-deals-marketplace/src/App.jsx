@@ -51,7 +51,7 @@ export default function App() {
         <Routes>
           <Route element={<OmpLayout />}>
             {/* 1. 8 Core Marketplace Category Routes */}
-            <Route path="/" element={<HomePage />} />
+            <Route path="/marketplace" element={<HomePage />} />
             <Route path="/for-sale" element={<ForSalePage />} />
             <Route path="/cars-trucks" element={<AiCarsTrucksPage />} />
             <Route path="/services" element={<ServicesPage />} />
@@ -62,7 +62,6 @@ export default function App() {
             <Route path="/my-fav" element={<MyFavPage />} />
             <Route path="/post-ad" element={<PostAdWizardPage />} />
             <Route path="/listing/:id" element={<ListingDetailPage />} />
-            <Route path="/login" element={<LoginPage />} />
             <Route path="/member/dashboard" element={<MemberDashboardPage />} />
 
             {/* 2. All 21 OMP Auto Suite Modules (Complete Previous Work) */}
@@ -91,6 +90,10 @@ export default function App() {
             <Route path="/omp/executive/permissions" element={<TeamPermissions />} />
             <Route path="/omp/mobile" element={<OmpMobileView />} />
           </Route>
+
+          {/* Standalone Fullscreen Login Gateway (Entry point & Role switcher) */}
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage />} />
 
           {/* Catch-all fallback */}
           <Route path="*" element={<Navigate to="/" replace />} />
