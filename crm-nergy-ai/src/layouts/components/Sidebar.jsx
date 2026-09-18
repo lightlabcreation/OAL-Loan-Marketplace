@@ -104,31 +104,38 @@ export const Sidebar = ({
                       display: 'flex',
                       alignItems: 'center',
                       gap: '0.75rem',
-                      padding: '0.55rem 0.75rem',
-                      borderRadius: 'var(--radius-sm)',
+                      padding: isCollapsed ? '0.65rem 0' : '0.65rem 0.95rem',
+                      justifyContent: isCollapsed ? 'center' : 'flex-start',
+                      borderRadius: '14px',
                       fontSize: '13px',
-                      fontWeight: currentActive ? 600 : 500,
-                      color: currentActive ? '#1d4ed8' : 'var(--text-secondary)',
-                      backgroundColor: currentActive ? '#eff6ff' : 'transparent',
+                      fontWeight: currentActive ? 700 : 500,
+                      color: currentActive ? '#ffffff' : 'var(--text-secondary, #475569)',
+                      background: currentActive
+                        ? 'linear-gradient(90deg, #6366f1 0%, #8b5cf6 30%, #ec4899 70%, #f97316 100%)'
+                        : 'transparent',
+                      boxShadow: currentActive
+                        ? '0 8px 20px -4px rgba(124, 58, 237, 0.45), 0 4px 12px -2px rgba(249, 115, 22, 0.35)'
+                        : 'none',
                       textDecoration: 'none',
                       whiteSpace: 'nowrap',
-                      transition: 'all var(--transition-fast)',
+                      transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+                      marginBottom: '2px',
                     };
                   }}
                   onMouseEnter={(e) => {
-                    if (!isActive) {
-                      e.currentTarget.style.color = '#0284c7';
-                      e.currentTarget.style.backgroundColor = 'rgba(56, 189, 248, 0.1)';
+                    if (!isActive && location.pathname !== item.path) {
+                      e.currentTarget.style.color = '#6366f1';
+                      e.currentTarget.style.backgroundColor = 'rgba(99, 102, 241, 0.08)';
                       const iconEl = e.currentTarget.querySelector('svg');
-                      if (iconEl) iconEl.style.color = '#0ea5e9';
+                      if (iconEl) iconEl.style.color = '#6366f1';
                     }
                   }}
                   onMouseLeave={(e) => {
-                    if (!isActive) {
-                      e.currentTarget.style.color = 'var(--text-secondary)';
+                    if (!isActive && location.pathname !== item.path) {
+                      e.currentTarget.style.color = 'var(--text-secondary, #475569)';
                       e.currentTarget.style.backgroundColor = 'transparent';
                       const iconEl = e.currentTarget.querySelector('svg');
-                      if (iconEl) iconEl.style.color = '#f97316';
+                      if (iconEl) iconEl.style.color = '#64748b';
                     }
                   }}
                 >
@@ -136,7 +143,7 @@ export const Sidebar = ({
                     size={18}
                     className="flex-shrink-0"
                     style={{
-                      color: (location.pathname === item.path) ? '#1d4ed8' : '#f97316',
+                      color: (isActive || location.pathname === item.path) ? '#ffffff' : '#64748b',
                       transition: 'color 200ms ease',
                     }}
                   />
@@ -159,32 +166,55 @@ export const Sidebar = ({
             if (onCloseMobile) onCloseMobile();
             navigate(getProfilePath());
           }}
-          className="w-full flex items-center gap-3 px-3 py-2 rounded-md text-xs font-semibold cursor-pointer transition-colors"
+          className="w-full flex items-center gap-3 px-3 py-2.5 text-xs font-semibold cursor-pointer transition-colors"
           style={{
-            backgroundColor: (location.pathname.includes('/profile') || location.pathname.includes('/settings')) ? 'rgba(29, 78, 216, 0.1)' : 'transparent',
-            color: (location.pathname.includes('/profile') || location.pathname.includes('/settings')) ? '#1d4ed8' : 'var(--text-secondary)',
+            background: (location.pathname.includes('/profile') || location.pathname.includes('/settings'))
+              ? 'linear-gradient(90deg, #6366f1 0%, #8b5cf6 30%, #ec4899 70%, #f97316 100%)'
+              : 'transparent',
+            color: (location.pathname.includes('/profile') || location.pathname.includes('/settings'))
+              ? '#ffffff'
+              : 'var(--text-secondary, #475569)',
+            boxShadow: (location.pathname.includes('/profile') || location.pathname.includes('/settings'))
+              ? '0 6px 16px -3px rgba(124, 58, 237, 0.4), 0 3px 10px -2px rgba(249, 115, 22, 0.3)'
+              : 'none',
+            borderRadius: '12px',
             border: 'none',
             textAlign: 'left',
           }}
           onMouseEnter={(e) => {
-            if (!location.pathname.includes('/profile') && !location.pathname.includes('/settings')) e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
+            if (!location.pathname.includes('/profile') && !location.pathname.includes('/settings')) {
+              e.currentTarget.style.backgroundColor = 'rgba(99, 102, 241, 0.08)';
+              e.currentTarget.style.color = '#6366f1';
+            }
           }}
           onMouseLeave={(e) => {
-            if (!location.pathname.includes('/profile') && !location.pathname.includes('/settings')) e.currentTarget.style.backgroundColor = 'transparent';
+            if (!location.pathname.includes('/profile') && !location.pathname.includes('/settings')) {
+              e.currentTarget.style.backgroundColor = 'transparent';
+              e.currentTarget.style.color = 'var(--text-secondary, #475569)';
+            }
           }}
           title={isCollapsed ? 'My Profile' : undefined}
         >
-          <User size={16} className="flex-shrink-0" />
+          <User
+            size={16}
+            className="flex-shrink-0"
+            style={{
+              color: (location.pathname.includes('/profile') || location.pathname.includes('/settings'))
+                ? '#ffffff'
+                : 'currentColor',
+            }}
+          />
           {!isCollapsed && <span>My Profile</span>}
         </button>
 
         <button
           type="button"
           onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-3 py-2 rounded-md text-xs font-semibold cursor-pointer transition-colors"
+          className="w-full flex items-center gap-3 px-3 py-2.5 text-xs font-semibold cursor-pointer transition-colors"
           style={{
             backgroundColor: 'transparent',
             color: 'var(--error)',
+            borderRadius: '12px',
             border: 'none',
             textAlign: 'left',
           }}

@@ -28,11 +28,16 @@ import {
   CheckCircle2,
   ShieldCheck,
   Flame,
-  ExternalLink
+  ExternalLink,
+  Copy,
+  Check,
+  FileText,
+  Code
 } from 'lucide-react';
 import { Breadcrumb } from '../../components/ui';
 import { useToast } from '../../context/ToastContext';
 import { useNavigate } from 'react-router-dom';
+import { generateStudioContent } from '../../services/geminiService';
 
 export const CrmAiStudio = () => {
   const { addToast } = useToast();
@@ -83,7 +88,10 @@ export const CrmAiStudio = () => {
 
   const activeStudioObj = subStudios.find((s) => s.id === activeStudio) || subStudios[0];
 
-  const handleGenerate = (e) => {
+  const [monitorTab, setMonitorTab] = useState('output'); // 'output' | 'viewport'
+  const [copiedText, setCopiedText] = useState(false);
+
+  const handleGenerate = async (e) => {
     e.preventDefault();
     if (!prompt.trim()) {
       addToast({ title: 'Prompt Required', message: 'Please enter a generation prompt.', type: 'error' });
@@ -91,42 +99,58 @@ export const CrmAiStudio = () => {
     }
 
     setIsGenerating(true);
-    setGenerationProgress(15);
+    setGenerationProgress(20);
     setGeneratedAsset(null);
+    setMonitorTab('output');
 
-    const interval = setInterval(() => {
+    const progressInterval = setInterval(() => {
       setGenerationProgress((p) => {
-        if (p >= 90) {
-          clearInterval(interval);
-          return 95;
-        }
-        return p + 25;
+        if (p >= 85) return 90;
+        return p + 15;
       });
-    }, 400);
+    }, 300);
 
-    setTimeout(() => {
-      clearInterval(interval);
+    try {
+      const aiResult = await generateStudioContent(activeStudio, prompt, {
+        aspectRatio,
+        modelPreset,
+      });
+
+      clearInterval(progressInterval);
       setGenerationProgress(100);
       setIsGenerating(false);
 
-      const mockResult = {
+      const newAsset = {
         id: Date.now().toString(),
-        title: prompt.slice(0, 36) + '...',
+        title: prompt.slice(0, 42) + (prompt.length > 42 ? '...' : ''),
         studio: activeStudioObj.name,
+        studioId: activeStudio,
         type: activeStudioObj.category.includes('Video') ? 'Video' : activeStudioObj.category.includes('Audio') || activeStudioObj.category.includes('Voice') ? 'Audio' : 'Image',
         date: 'Just now',
         url: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&auto=format&fit=crop&q=80',
         prompt,
+        content: aiResult.text,
+        isRealAi: aiResult.success,
       };
 
-      setGeneratedAsset(mockResult);
-      setSavedLibrary((prev) => [mockResult, ...prev]);
+      setGeneratedAsset(newAsset);
+      setSavedLibrary((prev) => [newAsset, ...prev]);
+
       addToast({
-        title: 'Synthesis Complete',
-        message: `Asset generated via ${activeStudioObj.name}.`,
+        title: aiResult.success ? 'Neural Synthesis Complete' : 'Synthesis Complete (Domain Mode)',
+        message: `${activeStudioObj.name} generated real-time asset.`,
         type: 'success',
       });
-    }, 1800);
+    } catch (err) {
+      clearInterval(progressInterval);
+      setGenerationProgress(100);
+      setIsGenerating(false);
+      addToast({
+        title: 'Synthesis Notice',
+        message: err.message || 'Error communicating with AI engine.',
+        type: 'error',
+      });
+    }
   };
 
   return (
@@ -1109,91 +1133,236 @@ export const CrmAiStudio = () => {
               </span>
             </div>
 
-            {/* Viewport Box */}
-            <div style={{
-              width: '100%',
-              aspectRatio: '16 / 9',
-              borderRadius: '14px',
-              overflow: 'hidden',
-              backgroundColor: '#071911',
-              border: '2px solid rgba(0, 103, 66, 0.3)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              position: 'relative',
-            }}>
-              {/* Corner crosshairs in #006742 */}
-              <div style={{ position: 'absolute', top: '10px', left: '10px', width: '12px', height: '12px', borderTop: '2px solid #006742', borderLeft: '2px solid #006742' }} />
-              <div style={{ position: 'absolute', top: '10px', right: '10px', width: '12px', height: '12px', borderTop: '2px solid #006742', borderRight: '2px solid #006742' }} />
-              <div style={{ position: 'absolute', bottom: '10px', left: '10px', width: '12px', height: '12px', borderBottom: '2px solid #006742', borderLeft: '2px solid #006742' }} />
-              <div style={{ position: 'absolute', bottom: '10px', right: '10px', width: '12px', height: '12px', borderBottom: '2px solid #006742', borderRight: '2px solid #006742' }} />
-
-              {generatedAsset ? (
-                <>
-                  <img
-                    src={generatedAsset.url}
-                    alt={generatedAsset.title}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  />
-                  <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <button
-                      type="button"
-                      onClick={() => addToast({ title: 'Playing Preview', message: 'Streaming 4K preview.', type: 'info' })}
-                      style={{
-                        width: '52px',
-                        height: '52px',
-                        borderRadius: '50%',
-                        backgroundColor: '#ffffff',
-                        color: '#006742',
-                        border: 'none',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        cursor: 'pointer',
-                        boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
-                      }}
-                    >
-                      <Play size={22} fill="#006742" style={{ marginLeft: '2px' }} />
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <div style={{ textAlign: 'center', color: '#6ee7b7', padding: '24px' }}>
-                  <Film size={34} style={{ margin: '0 auto 8px', color: '#34d399', opacity: 0.8 }} />
-                  <div style={{ fontSize: '13px', fontWeight: 800, color: '#ecfdf5' }}>Awaiting Prompt Execution</div>
-                  <div style={{ fontSize: '11px', color: '#a7f3d0', marginTop: '4px', maxWidth: '280px' }}>
-                    Configure directives on the left to render high-fidelity neural assets.
-                  </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
+              <div>
+                <div style={{ fontSize: '15px', fontWeight: 900, color: '#006742', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span>Studio Canvas Monitor</span>
+                  {generatedAsset?.isRealAi && (
+                    <span style={{ fontSize: '10px', fontWeight: 800, padding: '2px 8px', borderRadius: '6px', backgroundColor: '#dcfce7', color: '#166534', border: '1px solid #bbf7d0' }}>
+                      Gemini Live AI
+                    </span>
+                  )}
                 </div>
-              )}
+                <div style={{ fontSize: '11.5px', color: '#64748b' }}>
+                  Real-time neural synthesis & generation console
+                </div>
+              </div>
+
+              {/* View Mode Toggle */}
+              <div style={{ display: 'flex', gap: '6px', backgroundColor: '#f1f5f9', padding: '3px', borderRadius: '10px' }}>
+                <button
+                  type="button"
+                  onClick={() => setMonitorTab('output')}
+                  style={{
+                    padding: '5px 12px',
+                    borderRadius: '8px',
+                    border: 'none',
+                    fontSize: '11px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    backgroundColor: monitorTab === 'output' ? '#006742' : 'transparent',
+                    color: monitorTab === 'output' ? '#ffffff' : '#64748b',
+                    transition: 'all 0.15s ease',
+                  }}
+                >
+                  AI Output & Script
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMonitorTab('viewport')}
+                  style={{
+                    padding: '5px 12px',
+                    borderRadius: '8px',
+                    border: 'none',
+                    fontSize: '11px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    backgroundColor: monitorTab === 'viewport' ? '#006742' : 'transparent',
+                    color: monitorTab === 'viewport' ? '#ffffff' : '#64748b',
+                    transition: 'all 0.15s ease',
+                  }}
+                >
+                  Visual Canvas
+                </button>
+              </div>
             </div>
 
+            {/* Content Display: AI Output Console vs Visual Viewport */}
+            {monitorTab === 'output' ? (
+              <div style={{
+                width: '100%',
+                minHeight: '260px',
+                maxHeight: '420px',
+                borderRadius: '14px',
+                overflowY: 'auto',
+                backgroundColor: '#0f172a',
+                border: '2px solid rgba(0, 103, 66, 0.3)',
+                padding: '18px 20px',
+                color: '#f8fafc',
+                fontSize: '13px',
+                lineHeight: 1.65,
+                position: 'relative',
+                boxSizing: 'border-box',
+              }}>
+                {generatedAsset?.content ? (
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', paddingBottom: '10px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <Sparkles size={16} color="#34d399" />
+                        <span style={{ fontSize: '12px', fontWeight: 800, color: '#34d399', textTransform: 'uppercase', letterSpacing: '0.6px' }}>
+                          {generatedAsset.studio} Output
+                        </span>
+                      </div>
+                      <span style={{ fontSize: '11px', color: '#94a3b8' }}>
+                        Synthesized {generatedAsset.date}
+                      </span>
+                    </div>
+
+                    <div style={{
+                      whiteSpace: 'pre-wrap',
+                      wordBreak: 'break-word',
+                      color: '#e2e8f0',
+                      fontFamily: generatedAsset.studioId === 'visual-workflow' || generatedAsset.studioId === 'logo-gen' ? 'monospace' : 'inherit',
+                      fontSize: '12.5px',
+                    }}>
+                      {generatedAsset.content}
+                    </div>
+                  </div>
+                ) : (
+                  <div style={{ textAlign: 'center', color: '#64748b', padding: '48px 16px' }}>
+                    <FileText size={38} style={{ margin: '0 auto 10px', color: '#34d399', opacity: 0.6 }} />
+                    <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#f8fafc' }}>Awaiting Directive Input</div>
+                    <div style={{ fontSize: '11.5px', color: '#94a3b8', marginTop: '6px', maxWidth: '300px', margin: '6px auto 0' }}>
+                      Enter your prompt on the left and click Generate to see live AI screenplay, lyrics, dialogue, or code here.
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              /* Visual Viewport Box */
+              <div style={{
+                width: '100%',
+                aspectRatio: '16 / 9',
+                borderRadius: '14px',
+                overflow: 'hidden',
+                backgroundColor: '#071911',
+                border: '2px solid rgba(0, 103, 66, 0.3)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                position: 'relative',
+              }}>
+                {/* Corner crosshairs in #006742 */}
+                <div style={{ position: 'absolute', top: '10px', left: '10px', width: '12px', height: '12px', borderTop: '2px solid #006742', borderLeft: '2px solid #006742' }} />
+                <div style={{ position: 'absolute', top: '10px', right: '10px', width: '12px', height: '12px', borderTop: '2px solid #006742', borderRight: '2px solid #006742' }} />
+                <div style={{ position: 'absolute', bottom: '10px', left: '10px', width: '12px', height: '12px', borderBottom: '2px solid #006742', borderLeft: '2px solid #006742' }} />
+                <div style={{ position: 'absolute', bottom: '10px', right: '10px', width: '12px', height: '12px', borderBottom: '2px solid #006742', borderRight: '2px solid #006742' }} />
+
+                {generatedAsset ? (
+                  <>
+                    <img
+                      src={generatedAsset.url}
+                      alt={generatedAsset.title}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
+                    <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <button
+                        type="button"
+                        onClick={() => addToast({ title: 'Playing Preview', message: 'Streaming 4K preview canvas.', type: 'info' })}
+                        style={{
+                          width: '52px',
+                          height: '52px',
+                          borderRadius: '50%',
+                          backgroundColor: '#ffffff',
+                          color: '#006742',
+                          border: 'none',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          cursor: 'pointer',
+                          boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+                        }}
+                      >
+                        <Play size={22} fill="#006742" style={{ marginLeft: '2px' }} />
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <div style={{ textAlign: 'center', color: '#6ee7b7', padding: '24px' }}>
+                    <Film size={34} style={{ margin: '0 auto 8px', color: '#34d399', opacity: 0.8 }} />
+                    <div style={{ fontSize: '13px', fontWeight: 800, color: '#ecfdf5' }}>Awaiting Prompt Execution</div>
+                    <div style={{ fontSize: '11px', color: '#a7f3d0', marginTop: '4px', maxWidth: '280px' }}>
+                      Configure directives on the left to render high-fidelity neural assets.
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
             {generatedAsset && (
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '4px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '4px', flexWrap: 'wrap', gap: '8px' }}>
                 <div>
                   <div style={{ fontSize: '12.5px', fontWeight: 800, color: '#0f172a' }}>{generatedAsset.title}</div>
                   <div style={{ fontSize: '11px', color: '#64748b' }}>{generatedAsset.studio} • Just now</div>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => addToast({ title: 'Exporting Asset', message: 'Saved to local vault.', type: 'success' })}
-                  style={{
-                    padding: '7px 14px',
-                    borderRadius: '8px',
-                    border: '1px solid rgba(0, 103, 66, 0.25)',
-                    backgroundColor: 'rgba(0, 103, 66, 0.08)',
-                    color: '#006742',
-                    fontSize: '11.5px',
-                    fontWeight: 800,
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                  }}
-                >
-                  <Download size={13} />
-                  <span>Export</span>
-                </button>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  {generatedAsset.content && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigator.clipboard.writeText(generatedAsset.content);
+                        setCopiedText(true);
+                        addToast({ title: 'Copied', message: 'AI output copied to clipboard.', type: 'info' });
+                        setTimeout(() => setCopiedText(false), 2000);
+                      }}
+                      style={{
+                        padding: '7px 12px',
+                        borderRadius: '8px',
+                        border: '1px solid #cbd5e1',
+                        backgroundColor: '#ffffff',
+                        color: '#334155',
+                        fontSize: '11.5px',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                      }}
+                    >
+                      {copiedText ? <Check size={13} color="#006742" /> : <Copy size={13} />}
+                      <span>{copiedText ? 'Copied' : 'Copy Output'}</span>
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const element = document.createElement('a');
+                      const file = new Blob([generatedAsset.content || generatedAsset.title], { type: 'text/plain' });
+                      element.href = URL.createObjectURL(file);
+                      element.download = `${generatedAsset.studio.replace(/\s+/g, '_')}_output.txt`;
+                      document.body.appendChild(element);
+                      element.click();
+                      document.body.removeChild(element);
+                      addToast({ title: 'Export Complete', message: 'File downloaded successfully.', type: 'success' });
+                    }}
+                    style={{
+                      padding: '7px 14px',
+                      borderRadius: '8px',
+                      border: '1px solid rgba(0, 103, 66, 0.25)',
+                      backgroundColor: 'rgba(0, 103, 66, 0.08)',
+                      color: '#006742',
+                      fontSize: '11.5px',
+                      fontWeight: 800,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                    }}
+                  >
+                    <Download size={13} />
+                    <span>Download</span>
+                  </button>
+                </div>
               </div>
             )}
           </div>
