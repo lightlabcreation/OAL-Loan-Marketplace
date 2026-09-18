@@ -258,7 +258,7 @@ export const Topbar = ({ onToggleSidebar, product = 'crm' }) => {
       }}
     >
       {/* Left: Brand Logo + Text + Toggle Menu Button (Fits strictly within sidebar section) */}
-      <div style={{ minWidth: '200px', display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
         <div
           onClick={() => navigate(product === 'crm' ? '/crm/dashboard' : '/oal/dashboard')}
           className="flex items-center gap-2.5 cursor-pointer"
@@ -406,8 +406,33 @@ export const Topbar = ({ onToggleSidebar, product = 'crm' }) => {
           </button>
         )}
 
-        {/* 1-Click Language Switcher */}
-        <LanguageToggle />
+        {/* Mobile Search Button (< 768px) */}
+        <button
+          type="button"
+          onClick={() => setIsSearchOpen(true)}
+          className="visible-mobile"
+          style={{
+            width: '36px',
+            height: '36px',
+            borderRadius: '50%',
+            backgroundColor: 'var(--surface-secondary)',
+            border: '1px solid var(--border)',
+            color: 'var(--text-secondary)',
+            display: 'none',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+          }}
+          title="Search"
+          aria-label="Search"
+        >
+          <Search size={16} />
+        </button>
+
+        {/* 1-Click Language Switcher (Desktop only) */}
+        <div className="hidden-mobile">
+          <LanguageToggle />
+        </div>
 
         {/* Notifications Dropdown (Badge 8) */}
         <Dropdown

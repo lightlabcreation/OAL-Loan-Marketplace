@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Topbar } from './components/Topbar';
 import { Sidebar } from './components/Sidebar';
-import { Drawer } from '../components/ui/Drawer';
+import { CrmMobileBottomBar } from './components/CrmMobileBottomBar';
+import { CrmMobileAppDrawer } from './components/CrmMobileAppDrawer';
 import { ToastContainer } from '../components/ui/Toast';
 import { useResponsive } from '../hooks/useResponsive';
 
@@ -54,23 +55,6 @@ export const OalLayout = () => {
           />
         )}
 
-        {/* Mobile Drawer Sidebar */}
-        {isMobile && (
-          <Drawer
-            isOpen={isMobileDrawerOpen}
-            onClose={() => setIsMobileDrawerOpen(false)}
-            position="left"
-            width="280px"
-          >
-            <Sidebar
-              isCollapsed={false}
-              onToggleCollapse={() => setIsMobileDrawerOpen(false)}
-              product="oal"
-              onCloseMobile={() => setIsMobileDrawerOpen(false)}
-            />
-          </Drawer>
-        )}
-
         {/* Main Content Area — ONLY THIS AREA SCROLLS */}
         <main
           style={{
@@ -78,6 +62,7 @@ export const OalLayout = () => {
             height: '100%',
             overflowY: 'auto',
             padding: isMobile ? '1rem' : '1.5rem',
+            paddingBottom: isMobile ? '80px' : '1.5rem',
             backgroundColor: 'var(--background)',
             boxSizing: 'border-box',
           }}
@@ -85,6 +70,21 @@ export const OalLayout = () => {
           <Outlet />
         </main>
       </div>
+
+      {/* Native Mobile Bottom Navigation Bar (< 768px) */}
+      {isMobile && (
+        <CrmMobileBottomBar
+          onOpenDrawer={() => setIsMobileDrawerOpen(true)}
+          product="oal"
+        />
+      )}
+
+      {/* Native Mobile App Slide-Out Touch Drawer (< 768px) */}
+      <CrmMobileAppDrawer
+        isOpen={isMobile && isMobileDrawerOpen}
+        onClose={() => setIsMobileDrawerOpen(false)}
+        product="oal"
+      />
 
       {/* Global Toast Container */}
       <ToastContainer />
