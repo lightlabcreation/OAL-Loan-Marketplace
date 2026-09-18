@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { Breadcrumb, Badge } from '../../../components/ui';
 import { useToast } from '../../../context/ToastContext';
+import { generateBestieChat } from '../../../services/geminiService';
 
 // Helper for parsing inline bold, italics, bullets, and linebreaks
 const renderFormattedText = (content) => {
@@ -113,7 +114,7 @@ export const BestieAi = () => {
     scrollToBottom();
   }, [conversation, isTyping]);
 
-  const handleSend = (textToSend) => {
+  const handleSend = async (textToSend) => {
     const promptText = typeof textToSend === 'string' ? textToSend : inputPrompt;
     if (!promptText || !promptText.trim()) return;
 
@@ -128,41 +129,45 @@ export const BestieAi = () => {
     setInputPrompt('');
     setIsTyping(true);
 
-    // Simulate sophisticated AI enterprise response
-    setTimeout(() => {
-      let responseText = '';
-      let actionTags = [];
-      let sources = ['CRM nErgy Knowledge Mesh', 'Internal Telemetry'];
+    try {
+      const aiResult = await generateBestieChat(conversation, promptText);
 
-      if (promptText.toLowerCase().includes('sales') || promptText.toLowerCase().includes('deal') || promptText.toLowerCase().includes('velocity')) {
-        responseText = `**Executive Sales Analysis Report**\n\n• **Active Pipeline Value:** $3.45M across 14 enterprise opportunities.\n• **Win Probability Forecast:** 68.4% (+4.2% over Q2 baseline).\n• **High-Priority Attention:** *Apex Global SaaS ($450,000)* is currently in contract review with legal approval expected within 48 hours.\n• **Recommended Next Step:** Schedule executive sponsor alignment call before Friday.`;
-        actionTags = [{ label: 'View Pipeline Kanban', query: 'Open sales pipeline kanban board' }, { label: 'Generate Contract Addendum', query: 'Create addendum draft for Apex' }];
-        sources.push('Sales Pipeline DB', 'Revenue Predictor Engine');
-      } else if (promptText.toLowerCase().includes('erp') || promptText.toLowerCase().includes('inventory') || promptText.toLowerCase().includes('receivable')) {
-        responseText = `**ERP Operations & Financial Overview**\n\n• **Accounts Receivable Balance:** $480,000 (94% current within 30-day terms).\n• **Critical Reorder Alerts:** 2 components in Austin Warehouse Central are at 18% reserve.\n• **Automated Purchase Request:** PR-2026-89 has been pre-drafted for vendor approval.`;
-        actionTags = [{ label: 'Approve Purchase Request', query: 'Approve PR-2026-89' }, { label: 'Export Ledger Summary', query: 'Export GL statements to PDF' }];
-        sources.push('ERP Finance Ledger', 'Warehouse Telemetry');
-      } else if (promptText.toLowerCase().includes('hr') || promptText.toLowerCase().includes('applicant') || promptText.toLowerCase().includes('candidate')) {
-        responseText = `**Talent Acquisition AI Match Summary**\n\n• **Open Requisition:** Senior Supply Chain Manager (Req #HR-402)\n• **Top Match:** *Sarah Lin* (94% AI Skill Affinity, 8 years enterprise logistics experience, former Fortune 500 lead).\n• **Interview Status:** Available for Panel Interview this Thursday at 2:00 PM EST.`;
-        actionTags = [{ label: 'Schedule Interview', query: 'Send interview invitation to Sarah Lin' }, { label: 'View Candidate Dossier', query: 'Open candidate profile' }];
-        sources.push('HR ATS Repository', 'Resume Parsing Vault');
-      } else {
-        responseText = `I have analyzed your request regarding: "${promptText}".\n\n**Key Findings & Recommendations:**\n• **Cross-Verification:** Enterprise records have been verified across CRM, ERP, and Knowledge Base nodes.\n• **Audit Trail:** SOC-2 compliance check passed with 0 permission violations.\n• **Automated Follow-up:** Bestie event listener has recorded this directive into operational memory.`;
-        actionTags = [{ label: 'Create Workflow Rule', query: 'Create automated rule for this query' }, { label: 'Save to Executive Brief', query: 'Bookmark analysis' }];
+      let actionTags = [
+        { label: 'Save to Executive Brief', query: 'Bookmark analysis' },
+        { label: 'Create Workflow Rule', query: 'Create automated rule for this query' },
+      ];
+
+      if (promptText.toLowerCase().includes('sale') || promptText.toLowerCase().includes('deal')) {
+        actionTags = [
+          { label: 'View Pipeline Kanban', query: 'Open sales pipeline kanban board' },
+          { label: 'Generate Contract Addendum', query: 'Create addendum draft' }
+        ];
+      } else if (promptText.toLowerCase().includes('erp') || promptText.toLowerCase().includes('inventory')) {
+        actionTags = [
+          { label: 'Approve Purchase Request', query: 'Approve PR-2026' },
+          { label: 'Export Ledger Summary', query: 'Export GL statements to PDF' }
+        ];
       }
 
       const bestieReply = {
         id: `bestie-${Date.now()}`,
         sender: 'bestie',
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        text: responseText,
+        text: aiResult.text,
         actions: actionTags,
-        sources,
+        sources: ['Google Gemini Neural Cloud', 'CRM nErgy Knowledge Mesh', 'Internal Telemetry'],
       };
 
       setConversation((prev) => [...prev, bestieReply]);
       setIsTyping(false);
-    }, 1100);
+    } catch (err) {
+      setIsTyping(false);
+      addToast({
+        title: 'Bestie Offline',
+        message: 'Could not connect to Gemini API. Showing local telemetry.',
+        type: 'error',
+      });
+    }
   };
 
   const handleCopy = (id, text) => {
