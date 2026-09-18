@@ -11,36 +11,26 @@ import {
   UploadCloud,
   Play,
   Download,
-  Save,
   Loader2,
   Wand2,
-  CheckCircle2,
   Zap,
   Cpu,
-  Clock,
   Layers,
-  X,
   Film,
   MessageSquare,
   Volume2,
   Radio,
-  Share2,
   Palette,
   Camera,
+  ChevronRight,
+  Database,
+  Activity,
+  CheckCircle2,
+  ShieldCheck,
+  Flame,
   ExternalLink
 } from 'lucide-react';
-import {
-  Breadcrumb,
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  Input,
-  Select,
-  Badge,
-  ProgressBar,
-  KPICard
-} from '../../components/ui';
+import { Breadcrumb } from '../../components/ui';
 import { useToast } from '../../context/ToastContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -49,7 +39,7 @@ export const CrmAiStudio = () => {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
 
-  // The Client-Specified 15 Sub-Studios
+  // The Client-Specified 15 Sub-Studios with Nova Drive #006742 Palette Alignment
   const subStudios = [
     { id: 'bestie', name: 'Bestie — My AI Agent', category: 'Copilot', icon: Sparkles, desc: 'Your 24/7 business operating partner and conversational workflow controller.', badge: 'Live AI Core' },
     { id: 'muzik', name: 'AAI Muzik Hit Studio', category: 'Audio & Music', icon: Music, desc: 'Generate original commercial background tracks, jingles, and brand soundtracks in any genre.', badge: 'Dolby Atmos' },
@@ -140,115 +130,687 @@ export const CrmAiStudio = () => {
   };
 
   return (
-    <div className="flex flex-col gap-6 max-w-7xl mx-auto">
-      {/* Page Header */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <div>
-          <Breadcrumb items={[{ label: 'CRM nErgy AI' }, { label: 'AI SuperHouse' }, { label: 'AI Content Studio' }]} />
-          <div className="flex items-center gap-3 mt-1">
-            <h1 className="text-2xl font-bold font-display tracking-tight text-primary flex items-center gap-2">
-              AI Content Studio & Production Labs
-            </h1>
-            <Badge variant="primary" className="bg-sky-500 text-white font-bold text-xs uppercase tracking-wider">
-              15 Specialized Studios
-            </Badge>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '22px',
+      maxWidth: '1440px',
+      margin: '0 auto',
+      paddingBottom: '3rem',
+      color: '#1e293b',
+      fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+    }}>
+      {/* 1. Nova Drive Themed Premium Banner / Header */}
+      <div style={{
+        background: 'linear-gradient(135deg, #006742 0%, #004d31 100%)',
+        borderRadius: '20px',
+        padding: '24px 28px',
+        color: '#ffffff',
+        boxShadow: '0 12px 28px -6px rgba(0, 103, 66, 0.35)',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: '18px',
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
+        {/* Ambient watermark glow */}
+        <div style={{
+          position: 'absolute',
+          right: '-40px',
+          top: '-40px',
+          width: '240px',
+          height: '240px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 70%)',
+          pointerEvents: 'none',
+        }} />
+
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            fontSize: '11px',
+            fontWeight: 800,
+            letterSpacing: '1.2px',
+            textTransform: 'uppercase',
+            color: '#a7f3d0',
+            marginBottom: '6px',
+          }}>
+            <span style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#34d399', boxShadow: '0 0 10px #34d399' }} />
+            REAL-TIME AI PRODUCTION FEED • OPERATIONS CENTER
           </div>
-          <p className="text-xs text-secondary mt-0.5">
-            Enterprise multi-modal content creation engine: cinema generation, talking avatars, neural voice synthesis, and sonic jingles.
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap' }}>
+            <h1 style={{
+              fontSize: '28px',
+              fontWeight: 900,
+              letterSpacing: '-0.5px',
+              margin: 0,
+              color: '#ffffff',
+            }}>
+              AI CONTENT STUDIO & PRODUCTION LABS
+            </h1>
+            <span style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '4px 12px',
+              borderRadius: '20px',
+              fontSize: '11px',
+              fontWeight: 800,
+              letterSpacing: '0.6px',
+              textTransform: 'uppercase',
+              backgroundColor: 'rgba(255, 255, 255, 0.18)',
+              color: '#ffffff',
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              backdropFilter: 'blur(8px)',
+            }}>
+              <Sparkles size={12} />
+              15 Specialized Studios
+            </span>
+          </div>
+
+          <p style={{ fontSize: '13px', color: '#d1fae5', margin: '6px 0 0 0', maxWidth: '850px', lineHeight: 1.5 }}>
+            Multi-modal generative engine: commercial cinema creation, talking avatars, neural voice synthesis, and sonic brand soundscapes.
           </p>
         </div>
 
-        {/* Action Link to Video Agent & Bestie */}
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            icon={Sparkles}
+        {/* Action Header Buttons */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', position: 'relative', zIndex: 1 }}>
+          <button
+            type="button"
             onClick={() => navigate('/crm/bestie')}
-            className="text-xs font-semibold"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '10px 18px',
+              borderRadius: '12px',
+              fontSize: '12px',
+              fontWeight: 700,
+              backgroundColor: 'rgba(255, 255, 255, 0.14)',
+              color: '#ffffff',
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              cursor: 'pointer',
+              backdropFilter: 'blur(8px)',
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.24)'}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.14)'}
           >
-            Open Bestie AI
-          </Button>
-          <Button
-            variant="primary"
-            size="sm"
-            icon={Video}
+            <Sparkles size={14} color="#a7f3d0" />
+            <span>Open Bestie AI</span>
+          </button>
+
+          <button
+            type="button"
             onClick={() => navigate('/crm/ai-video')}
-            className="text-xs font-semibold"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '10px 20px',
+              borderRadius: '12px',
+              fontSize: '12px',
+              fontWeight: 800,
+              backgroundColor: '#ffffff',
+              color: '#006742',
+              border: 'none',
+              cursor: 'pointer',
+              boxShadow: '0 4px 14px rgba(0, 0, 0, 0.15)',
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = '0 6px 18px rgba(0, 0, 0, 0.25)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 4px 14px rgba(0, 0, 0, 0.15)';
+            }}
           >
-            Launch 4-Step Video Agent
-          </Button>
+            <Video size={14} color="#006742" />
+            <span>Launch 4-Step Video Agent</span>
+          </button>
         </div>
       </div>
 
-      {/* KPI Highlight Strip */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <KPICard title="Total Studios" value="15 Sub-Studios" change="All Available" changeType="positive" icon={Sparkles} />
-        <KPICard title="Audio / Video Renders" value="1,840 Assets" change="+24% this week" changeType="positive" icon={Video} />
-        <KPICard title="Average Render Latency" value="1.4 Seconds" change="Real-time GPU" changeType="positive" icon={Zap} />
-        <KPICard title="Storage Vault" value="482 GB / 2 TB" change="Encrypted" changeType="positive" icon={FolderGit2} />
+      {/* Dynamic Keyframes & Hover Animations for Pic 1 Style Gradient Cards & 3D Isometric Cards */}
+      <style>{`
+        @keyframes float-bubble {
+          0%, 100% { transform: scale(1) translate(0, 0); }
+          50% { transform: scale(1.08) translate(-6px, -4px); }
+        }
+        .pic1-kpi-card {
+          position: relative;
+          overflow: hidden;
+          border-radius: 18px;
+          padding: 22px 24px;
+          display: flex;
+          flex-direction: column;
+          justifyContent: space-between;
+          min-height: 140px;
+          color: #ffffff;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          cursor: default;
+          border: none;
+        }
+        .pic1-kpi-card:hover {
+          transform: translateY(-6px) scale(1.015);
+        }
+        .pic1-watermark-1 {
+          position: absolute;
+          right: -30px;
+          bottom: -30px;
+          width: 140px;
+          height: 140px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.15);
+          pointer-events: none;
+          transition: all 0.4s ease;
+        }
+        .pic1-watermark-2 {
+          position: absolute;
+          right: 30px;
+          bottom: -60px;
+          width: 130px;
+          height: 130px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.1);
+          pointer-events: none;
+          transition: all 0.4s ease;
+        }
+        .pic1-kpi-card:hover .pic1-watermark-1 {
+          transform: scale(1.15) translate(-4px, -4px);
+        }
+        .pic1-kpi-card:hover .pic1-watermark-2 {
+          transform: scale(1.1) translate(6px, -2px);
+        }
+
+        /* 3D Isometric Perspective Card Styles Matching Reference - Compact & Responsive */
+        .card-3d-stage {
+          perspective: 1000px;
+          perspective-origin: center center;
+          padding: 4px 2px 10px 2px;
+        }
+        .card-3d-container {
+          position: relative;
+          transform-style: preserve-3d;
+          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        /* Bottom Stacked Layer Underneath */
+        .card-3d-underlay {
+          position: absolute;
+          inset: 0;
+          border-radius: 18px;
+          background: #0f172a;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          transform: translate3d(-4px, 6px, -15px) rotateZ(-1.5deg);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.16);
+          pointer-events: none;
+          z-index: 0;
+          overflow: hidden;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card-3d-underlay-corner {
+          position: absolute;
+          bottom: -10px;
+          left: -10px;
+          width: 42px;
+          height: 42px;
+          border-radius: 50%;
+          background: #00e676;
+        }
+        /* Main Floating 3D Card - Compact & Clean */
+        .card-3d-main {
+          position: relative;
+          z-index: 2;
+          background: #ffffff;
+          border-radius: 18px;
+          padding: 14px 14px;
+          border: 1.5px solid #e2e8f0;
+          box-shadow: -4px 8px 18px -2px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.02);
+          transform: rotateX(6deg) rotateY(-4deg) rotateZ(0.8deg);
+          transform-style: preserve-3d;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          cursor: pointer;
+          overflow: hidden;
+        }
+        /* Interactive 3D Hover */
+        .card-3d-container:hover .card-3d-main {
+          transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateY(-6px) scale(1.02);
+          box-shadow: 0 16px 30px -4px rgba(0, 103, 66, 0.22), 0 0 0 1px #006742;
+          border-color: #006742;
+        }
+        .card-3d-container:hover .card-3d-underlay {
+          transform: translate3d(-8px, 10px, -22px) rotateZ(-3deg);
+          box-shadow: 0 16px 26px rgba(0, 0, 0, 0.22);
+        }
+        .card-3d-main.is-active {
+          border-color: #006742;
+          box-shadow: 0 14px 28px -4px rgba(0, 103, 66, 0.26), 0 0 0 1.5px #006742;
+          transform: rotateX(2deg) rotateY(-1.5deg) rotateZ(0.3deg) translateY(-3px);
+        }
+      `}</style>
+
+      {/* 2. KPI Cards Strip - Pic 1 Vibrant Animated Gradient Cards */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+        gap: '18px',
+        width: '100%',
+      }}>
+        {/* KPI 1: Coral / Peach Gradient (#FE9496 to #ff7582) */}
+        <div
+          className="pic1-kpi-card"
+          style={{
+            background: 'linear-gradient(135deg, #fe9496 0%, #ff6b7a 100%)',
+            boxShadow: '0 10px 25px -4px rgba(254, 148, 150, 0.45)',
+          }}
+        >
+          <div className="pic1-watermark-1" />
+          <div className="pic1-watermark-2" />
+
+          <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ fontSize: '12px', fontWeight: 800, color: 'rgba(255, 255, 255, 0.9)', textTransform: 'uppercase', letterSpacing: '0.6px' }}>
+              TOTAL STUDIOS
+            </span>
+            <div style={{
+              width: '36px',
+              height: '36px',
+              borderRadius: '50%',
+              backgroundColor: 'rgba(255, 255, 255, 0.22)',
+              backdropFilter: 'blur(4px)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#ffffff',
+            }}>
+              <Sparkles size={18} />
+            </div>
+          </div>
+
+          <div style={{ position: 'relative', zIndex: 1, marginTop: '8px' }}>
+            <div style={{ fontSize: '28px', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.5px' }}>
+              15 Sub-Studios
+            </div>
+            <div style={{ fontSize: '11.5px', fontWeight: 700, color: 'rgba(255, 255, 255, 0.95)', display: 'flex', alignItems: 'center', gap: '6px', marginTop: '4px' }}>
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#ffffff', boxShadow: '0 0 8px #ffffff' }} />
+              <span>All Neural Cores Online</span>
+            </div>
+          </div>
+        </div>
+
+        {/* KPI 2: Sky Blue Gradient (#4BCBEB to #268bf0) */}
+        <div
+          className="pic1-kpi-card"
+          style={{
+            background: 'linear-gradient(135deg, #4bcbeb 0%, #1e87f0 100%)',
+            boxShadow: '0 10px 25px -4px rgba(75, 203, 235, 0.45)',
+          }}
+        >
+          <div className="pic1-watermark-1" />
+          <div className="pic1-watermark-2" />
+
+          <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ fontSize: '12px', fontWeight: 800, color: 'rgba(255, 255, 255, 0.9)', textTransform: 'uppercase', letterSpacing: '0.6px' }}>
+              AUDIO / VIDEO RENDERS
+            </span>
+            <div style={{
+              width: '36px',
+              height: '36px',
+              borderRadius: '50%',
+              backgroundColor: 'rgba(255, 255, 255, 0.22)',
+              backdropFilter: 'blur(4px)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#ffffff',
+            }}>
+              <Video size={18} />
+            </div>
+          </div>
+
+          <div style={{ position: 'relative', zIndex: 1, marginTop: '8px' }}>
+            <div style={{ fontSize: '28px', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.5px' }}>
+              1,840 Assets
+            </div>
+            <div style={{ fontSize: '11.5px', fontWeight: 700, color: 'rgba(255, 255, 255, 0.95)', display: 'flex', alignItems: 'center', gap: '6px', marginTop: '4px' }}>
+              <Activity size={13} />
+              <span>+24% output this week</span>
+            </div>
+          </div>
+        </div>
+
+        {/* KPI 3: Purple / Violet Gradient (#A05AFF to #7c3aed) */}
+        <div
+          className="pic1-kpi-card"
+          style={{
+            background: 'linear-gradient(135deg, #a05aff 0%, #7026e8 100%)',
+            boxShadow: '0 10px 25px -4px rgba(160, 90, 255, 0.45)',
+          }}
+        >
+          <div className="pic1-watermark-1" />
+          <div className="pic1-watermark-2" />
+
+          <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ fontSize: '12px', fontWeight: 800, color: 'rgba(255, 255, 255, 0.9)', textTransform: 'uppercase', letterSpacing: '0.6px' }}>
+              AVG RENDER LATENCY
+            </span>
+            <div style={{
+              width: '36px',
+              height: '36px',
+              borderRadius: '50%',
+              backgroundColor: 'rgba(255, 255, 255, 0.22)',
+              backdropFilter: 'blur(4px)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#ffffff',
+            }}>
+              <Zap size={18} />
+            </div>
+          </div>
+
+          <div style={{ position: 'relative', zIndex: 1, marginTop: '8px' }}>
+            <div style={{ fontSize: '28px', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.5px' }}>
+              1.4 Seconds
+            </div>
+            <div style={{ fontSize: '11.5px', fontWeight: 700, color: 'rgba(255, 255, 255, 0.95)', display: 'flex', alignItems: 'center', gap: '6px', marginTop: '4px' }}>
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#ffffff', boxShadow: '0 0 8px #ffffff' }} />
+              <span>Real-time Tensor Core GPU</span>
+            </div>
+          </div>
+        </div>
+
+        {/* KPI 4: Mint / Teal Turquoise Gradient (#1BCFB4 to #0fa892) */}
+        <div
+          className="pic1-kpi-card"
+          style={{
+            background: 'linear-gradient(135deg, #1bcfb4 0%, #0fa892 100%)',
+            boxShadow: '0 10px 25px -4px rgba(27, 207, 180, 0.45)',
+          }}
+        >
+          <div className="pic1-watermark-1" />
+          <div className="pic1-watermark-2" />
+
+          <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ fontSize: '12px', fontWeight: 800, color: 'rgba(255, 255, 255, 0.9)', textTransform: 'uppercase', letterSpacing: '0.6px' }}>
+              STORAGE VAULT
+            </span>
+            <div style={{
+              width: '36px',
+              height: '36px',
+              borderRadius: '50%',
+              backgroundColor: 'rgba(255, 255, 255, 0.22)',
+              backdropFilter: 'blur(4px)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#ffffff',
+            }}>
+              <Database size={18} />
+            </div>
+          </div>
+
+          <div style={{ position: 'relative', zIndex: 1, marginTop: '8px' }}>
+            <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
+              <span style={{ fontSize: '28px', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.5px' }}>482 GB</span>
+              <span style={{ fontSize: '12px', fontWeight: 800, color: 'rgba(255, 255, 255, 0.85)' }}>/ 2 TB (24%)</span>
+            </div>
+            {/* White translucent progress bar */}
+            <div style={{ width: '100%', height: '6px', backgroundColor: 'rgba(255, 255, 255, 0.25)', borderRadius: '4px', overflow: 'hidden', marginTop: '8px' }}>
+              <div style={{ width: '24%', height: '100%', backgroundColor: '#ffffff', borderRadius: '4px', boxShadow: '0 0 10px #ffffff' }} />
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Category Filter Pills */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-thin">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            type="button"
-            onClick={() => setSelectedCategory(cat)}
-            className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer border ${
-              selectedCategory === cat
-                ? 'bg-blue-600 text-white border-blue-600 shadow-sm'
-                : 'bg-surface text-secondary border-border hover:border-sky-400'
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
+      {/* 3. Category Filter Navigation Pills - #006742 Palette */}
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+        overflowX: 'auto',
+        padding: '6px',
+        borderRadius: '16px',
+        backgroundColor: '#ffffff',
+        border: '1px solid #e2e8f0',
+        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.03)',
+      }}>
+        {categories.map((cat) => {
+          const isCatActive = selectedCategory === cat;
+          return (
+            <button
+              key={cat}
+              type="button"
+              onClick={() => setSelectedCategory(cat)}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '8px 16px',
+                borderRadius: '12px',
+                fontSize: '12px',
+                fontWeight: isCatActive ? 800 : 600,
+                border: isCatActive ? '1px solid #006742' : '1px solid transparent',
+                backgroundColor: isCatActive ? '#006742' : 'transparent',
+                color: isCatActive ? '#ffffff' : '#64748b',
+                cursor: 'pointer',
+                whiteSpace: 'nowrap',
+                transition: 'all 0.15s ease',
+                boxShadow: isCatActive ? '0 4px 12px rgba(0, 103, 66, 0.25)' : 'none',
+              }}
+              onMouseEnter={(e) => {
+                if (!isCatActive) {
+                  e.currentTarget.style.backgroundColor = 'rgba(0, 103, 66, 0.06)';
+                  e.currentTarget.style.color = '#006742';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isCatActive) {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.color = '#64748b';
+                }
+              }}
+            >
+              {cat === 'All' && <Layers size={13} />}
+              {cat === 'Video Production' && <Film size={13} />}
+              {cat === 'Voice & Speech' && <Mic size={13} />}
+              {cat === 'Audio & Music' && <Music size={13} />}
+              {cat === 'Image Studio' && <Camera size={13} />}
+              {cat === 'Avatar & 3D' && <ImageIcon size={13} />}
+              {cat === 'Branding' && <Palette size={13} />}
+              {cat === 'Automations' && <Workflow size={13} />}
+              {cat === 'Model Training' && <Cpu size={13} />}
+              <span>{cat}</span>
+            </button>
+          );
+        })}
       </div>
 
-      {/* The 15 Sub-Studio Grid */}
+      {/* 4. The 15 Sub-Studio Grid */}
       <div>
-        <h2 className="text-sm font-bold text-secondary uppercase tracking-wider mb-3">
-          Select Production Studio ({filteredStudios.length})
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px', padding: '0 4px' }}>
+          <h2 style={{
+            fontSize: '13px',
+            fontWeight: 900,
+            color: '#006742',
+            textTransform: 'uppercase',
+            letterSpacing: '0.8px',
+            margin: 0,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
+          }}>
+            <span>SELECT PRODUCTION STUDIO</span>
+            <span style={{
+              backgroundColor: 'rgba(0, 103, 66, 0.1)',
+              color: '#006742',
+              padding: '2px 8px',
+              borderRadius: '6px',
+              fontSize: '11px',
+              fontWeight: 800,
+            }}>
+              {filteredStudios.length} Available
+            </span>
+          </h2>
+          <span style={{ fontSize: '11.5px', color: '#64748b' }}>Click any studio node to mount workspace</span>
+        </div>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(215px, 1fr))',
+          gap: '14px',
+          width: '100%',
+        }}>
           {filteredStudios.map((studio) => {
             const Icon = studio.icon;
             const isSelected = activeStudio === studio.id;
             return (
-              <div
-                key={studio.id}
-                onClick={() => {
-                  setActiveStudio(studio.id);
-                  if (studio.id === 'bestie') navigate('/crm/bestie');
-                  if (studio.id === 'video-agent') navigate('/crm/ai-video');
-                }}
-                className={`p-3.5 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
-                  isSelected
-                    ? 'border-sky-500 bg-sky-50/40 dark:bg-sky-950/30 shadow-md ring-2 ring-sky-400/20'
-                    : 'border-border bg-surface hover:border-sky-300 dark:hover:border-sky-700'
-                }`}
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <div
-                      className={`w-8 h-8 rounded-xl flex items-center justify-center ${
-                        isSelected ? 'bg-sky-500 text-white shadow-sm' : 'bg-surface-secondary text-primary'
-                      }`}
-                    >
-                      <Icon size={16} />
-                    </div>
-                    <span className="text-[10px] font-bold font-mono px-2 py-0.5 rounded bg-surface-secondary border border-border text-sky-600 dark:text-sky-400">
-                      {studio.badge}
-                    </span>
+              <div key={studio.id} className="card-3d-stage">
+                <div
+                  className="card-3d-container"
+                  onClick={() => {
+                    setActiveStudio(studio.id);
+                    if (studio.id === 'bestie') navigate('/crm/bestie');
+                    if (studio.id === 'video-agent') navigate('/crm/ai-video');
+                  }}
+                >
+                  {/* Bottom Stacked 3D Card */}
+                  <div className="card-3d-underlay">
+                    <div className="card-3d-underlay-corner" />
                   </div>
-                  <h3 className="font-bold text-xs text-primary line-clamp-1">{studio.name}</h3>
-                  <p className="text-[11px] text-tertiary mt-1 line-clamp-2 leading-relaxed">{studio.desc}</p>
-                </div>
-                <div className="mt-3 pt-2 border-t border-border/60 flex items-center justify-between text-[10px] font-semibold text-sky-600 dark:text-sky-400">
-                  <span>{isSelected ? 'Studio Active' : 'Enter Studio'}</span>
-                  <span>→</span>
+
+                  {/* Top Main 3D Tilted Card */}
+                  <div className={`card-3d-main ${isSelected ? 'is-active' : ''}`}>
+                    {/* 1. Proportional Curved Green Circle Backdrop */}
+                    <div style={{
+                      position: 'absolute',
+                      top: '-20px',
+                      right: '-20px',
+                      width: '85px',
+                      height: '85px',
+                      borderRadius: '50%',
+                      background: isSelected
+                        ? 'linear-gradient(135deg, #006742 0%, #00e676 100%)'
+                        : 'linear-gradient(135deg, rgba(0, 103, 66, 0.85) 0%, rgba(0, 230, 118, 0.75) 100%)',
+                      boxShadow: '0 4px 14px rgba(0, 103, 66, 0.2)',
+                      pointerEvents: 'none',
+                      zIndex: 0,
+                      transition: 'all 0.3s ease',
+                    }} />
+
+                    {/* 2. Top Header with Icon & Rating Badge */}
+                    <div style={{ position: 'relative', zIndex: 1 }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                        {/* Compact Icon */}
+                        <div style={{
+                          width: '34px',
+                          height: '34px',
+                          borderRadius: '10px',
+                          backgroundColor: '#ffffff',
+                          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                          border: '1px solid rgba(255, 255, 255, 0.9)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: '#006742',
+                          transform: 'translateZ(14px)',
+                        }}>
+                          <Icon size={17} color="#006742" strokeWidth={2.4} />
+                        </div>
+
+                        {/* Compact Rating Tag */}
+                        <div style={{
+                          padding: '2px 8px',
+                          borderRadius: '14px',
+                          backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                          boxShadow: '0 2px 6px rgba(0, 0, 0, 0.06)',
+                          backdropFilter: 'blur(4px)',
+                          fontSize: '9.5px',
+                          fontWeight: 800,
+                          color: '#006742',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '3px',
+                          transform: 'translateZ(10px)',
+                        }}>
+                          <span style={{ color: '#006742' }}>★</span>
+                          <span>{studio.badge}</span>
+                        </div>
+                      </div>
+
+                      {/* Title & Description */}
+                      <div style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.2px', lineHeight: 1.25 }}>
+                        {studio.name}
+                      </div>
+                      <div style={{ fontSize: '10.5px', color: '#64748b', marginTop: '4px', lineHeight: 1.35, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                        {studio.desc}
+                      </div>
+                    </div>
+
+                    {/* 3. Compact Dual Pill Buttons */}
+                    <div style={{
+                      position: 'relative',
+                      zIndex: 1,
+                      display: 'grid',
+                      gridTemplateColumns: '1fr 1fr',
+                      gap: '6px',
+                      marginTop: '12px',
+                      paddingTop: '10px',
+                      borderTop: '1px solid #f1f5f9',
+                      transform: 'translateZ(10px)',
+                    }}>
+                      <button
+                        type="button"
+                        style={{
+                          padding: '5px 6px',
+                          borderRadius: '16px',
+                          border: 'none',
+                          backgroundColor: isSelected ? '#006742' : '#00e676',
+                          color: isSelected ? '#ffffff' : '#072418',
+                          fontSize: '10px',
+                          fontWeight: 800,
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          boxShadow: '0 2px 8px rgba(0, 230, 118, 0.28)',
+                          transition: 'all 0.15s ease',
+                          whiteSpace: 'nowrap',
+                        }}
+                      >
+                        {isSelected ? '● Active' : 'Enter'}
+                      </button>
+
+                      <button
+                        type="button"
+                        style={{
+                          padding: '5px 6px',
+                          borderRadius: '16px',
+                          border: '1px solid #006742',
+                          backgroundColor: '#ffffff',
+                          color: '#006742',
+                          fontSize: '10px',
+                          fontWeight: 800,
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '2px',
+                          transition: 'all 0.15s ease',
+                          whiteSpace: 'nowrap',
+                        }}
+                      >
+                        <span>Launch</span>
+                        <ChevronRight size={10} />
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             );
@@ -256,210 +818,455 @@ export const CrmAiStudio = () => {
         </div>
       </div>
 
-      {/* Main Studio Workspace Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left Generation Workspace (7 cols) */}
-        <div className="lg:col-span-7 flex flex-col gap-4">
-          <Card className="border shadow-sm">
-            <CardHeader
-              title={`Production Lab: ${activeStudioObj.name}`}
-              subtitle={activeStudioObj.desc}
+      {/* 5. Main Studio Workspace Section: Production Lab & Studio Canvas */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))',
+        gap: '22px',
+      }}>
+        {/* Left Side: Production Lab */}
+        <div style={{
+          backgroundColor: '#ffffff',
+          border: '1px solid #e2e8f0',
+          borderRadius: '20px',
+          padding: '24px',
+          boxShadow: '0 4px 16px -2px rgba(0, 103, 66, 0.06)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '18px',
+        }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#006742' }} />
+              <span style={{ fontSize: '11px', fontWeight: 900, color: '#006742', textTransform: 'uppercase', letterSpacing: '0.8px' }}>
+                PRODUCTION LAB WORKSTATION
+              </span>
+            </div>
+            <div style={{ fontSize: '20px', fontWeight: 900, color: '#0f172a', marginTop: '4px' }}>
+              {activeStudioObj.name}
+            </div>
+            <div style={{ fontSize: '12px', color: '#64748b', marginTop: '2px' }}>
+              {activeStudioObj.desc}
+            </div>
+          </div>
+
+          {/* Model Preset Banner in #006742 */}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '12px 16px',
+            borderRadius: '12px',
+            backgroundColor: 'rgba(0, 103, 66, 0.06)',
+            border: '1px solid rgba(0, 103, 66, 0.2)',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', fontWeight: 700, color: '#006742' }}>
+              <Sparkles size={15} color="#006742" />
+              <span>Configured Model: <strong style={{ color: '#006742' }}>{modelPreset}</strong></span>
+            </div>
+            <span style={{ fontSize: '10px', fontWeight: 800, padding: '3px 8px', borderRadius: '6px', backgroundColor: '#006742', color: '#ffffff', textTransform: 'uppercase' }}>
+              {activeStudioObj.category}
+            </span>
+          </div>
+
+          {/* Prompt Directives Box */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', fontWeight: 800, color: '#334155' }}>
+              <span>Creative Prompt / Directives</span>
+              <span style={{ fontWeight: 500, color: '#64748b', fontSize: '11px' }}>{prompt.length} / 500 chars</span>
+            </div>
+            <textarea
+              rows={4}
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+              placeholder={`Describe what you want ${activeStudioObj.name} to generate...`}
+              style={{
+                width: '100%',
+                padding: '14px',
+                borderRadius: '12px',
+                border: '1px solid #cbd5e1',
+                backgroundColor: '#f8fafc',
+                color: '#0f172a',
+                fontSize: '13px',
+                resize: 'none',
+                boxSizing: 'border-box',
+                outline: 'none',
+                fontFamily: 'inherit',
+                lineHeight: 1.5,
+                transition: 'border-color 0.2s ease',
+              }}
+              onFocus={(e) => e.target.style.borderColor = '#006742'}
+              onBlur={(e) => e.target.style.borderColor = '#cbd5e1'}
             />
-            <CardBody className="p-5 flex flex-col gap-4">
-              {/* Studio Banner */}
-              <div className="p-3 rounded-xl bg-gradient-to-r from-sky-500/10 via-blue-500/10 to-transparent border border-sky-200 dark:border-sky-900/40 flex items-center justify-between">
-                <div className="flex items-center gap-2 text-xs font-semibold text-primary">
-                  <Sparkles size={16} className="text-sky-500" />
-                  <span>Configured Model: <strong>{modelPreset}</strong></span>
-                </div>
-                <Badge variant="primary" className="text-[10px] bg-sky-500 text-white font-mono">
-                  {activeStudioObj.category}
-                </Badge>
-              </div>
+          </div>
 
-              {/* Prompt Textarea */}
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-primary flex items-center justify-between">
-                  <span>Creative Prompt / Directives</span>
-                  <span className="text-tertiary font-normal text-[11px]">{prompt.length} / 500 chars</span>
-                </label>
-                <textarea
-                  rows={4}
-                  value={prompt}
-                  onChange={(e) => setPrompt(e.target.value)}
-                  placeholder={`Describe what you want ${activeStudioObj.name} to generate...`}
-                  className="w-full p-3 rounded-xl border border-border bg-surface text-sm text-primary placeholder:text-tertiary focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/20 resize-none font-medium"
-                />
-              </div>
-
-              {/* Generation Controls */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <div>
-                  <label className="text-xs font-bold text-primary mb-1 block">Aspect Ratio / Format</label>
-                  <Select
-                    value={aspectRatio}
-                    onChange={(e) => setAspectRatio(e.target.value)}
-                    options={[
-                      { value: '16:9', label: '16:9 Cinematic Widescreen' },
-                      { value: '9:16', label: '9:16 Vertical Story / Reels' },
-                      { value: '1:1', label: '1:1 Square Feed Asset' },
-                      { value: '4:3', label: '4:3 Classic Broadcast' },
-                    ]}
-                  />
-                </div>
-                <div>
-                  <label className="text-xs font-bold text-primary mb-1 block">Neural Engine Preset</label>
-                  <Select
-                    value={modelPreset}
-                    onChange={(e) => setModelPreset(e.target.value)}
-                    options={[
-                      { value: 'UltraCinema v4.2', label: 'UltraCinema v4.2 (Highest Fidelity)' },
-                      { value: 'HyperReal v3.0', label: 'HyperReal v3.0 (Photorealistic)' },
-                      { value: 'Commercial Ad Express', label: 'Commercial Ad Express (Fast Turnaround)' },
-                      { value: 'Studio Voice X2', label: 'Studio Voice X2 (Broadcast Quality)' },
-                    ]}
-                  />
-                </div>
-              </div>
-
-              {/* Reference Attachment Input */}
-              <div className="p-3 rounded-xl border border-dashed border-border flex items-center justify-between gap-3 text-xs bg-surface-secondary">
-                <div className="flex items-center gap-2">
-                  <UploadCloud size={18} className="text-secondary" />
-                  <span className="text-secondary">
-                    {referenceFile ? `Reference: ${referenceFile.name}` : 'Upload style reference audio, face photo or script'}
-                  </span>
-                </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => fileInputRef.current?.click()}
-                  className="text-xs"
-                >
-                  Choose File
-                </Button>
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  className="hidden"
-                  onChange={(e) => {
-                    if (e.target.files[0]) {
-                      setReferenceFile(e.target.files[0]);
-                      addToast({ title: 'Reference Loaded', message: e.target.files[0].name, type: 'info' });
-                    }
-                  }}
-                />
-              </div>
-
-              {/* Render Progress Bar */}
-              {isGenerating && (
-                <div className="flex flex-col gap-1.5 p-3 rounded-xl bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800">
-                  <div className="flex items-center justify-between text-xs font-bold text-sky-700 dark:text-sky-300">
-                    <span className="flex items-center gap-2">
-                      <Loader2 size={14} className="animate-spin" />
-                      Rendering Neural Asset via {activeStudioObj.name}...
-                    </span>
-                    <span>{generationProgress}%</span>
-                  </div>
-                  <ProgressBar progress={generationProgress} variant="primary" />
-                </div>
-              )}
-
-              {/* Generate Button */}
-              <Button
-                variant="primary"
-                size="lg"
-                disabled={isGenerating}
-                icon={Wand2}
-                onClick={handleGenerate}
-                className="w-full font-bold shadow-md shadow-sky-500/20"
+          {/* Controls: Aspect Ratio & Preset */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+            <div>
+              <label style={{ display: 'block', fontSize: '11.5px', fontWeight: 800, color: '#475569', marginBottom: '6px' }}>
+                Aspect Ratio / Format
+              </label>
+              <select
+                value={aspectRatio}
+                onChange={(e) => setAspectRatio(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '10px 12px',
+                  borderRadius: '10px',
+                  border: '1px solid #cbd5e1',
+                  backgroundColor: '#f8fafc',
+                  color: '#0f172a',
+                  fontSize: '12px',
+                  fontWeight: 600,
+                  outline: 'none',
+                }}
               >
-                {isGenerating ? 'Synthesizing Neural Asset...' : `Generate via ${activeStudioObj.name}`}
-              </Button>
-            </CardBody>
-          </Card>
+                <option value="16:9">16:9 Cinematic Widescreen</option>
+                <option value="9:16">9:16 Vertical Story / Reels</option>
+                <option value="1:1">1:1 Square Feed Asset</option>
+                <option value="4:3">4:3 Classic Broadcast</option>
+              </select>
+            </div>
+
+            <div>
+              <label style={{ display: 'block', fontSize: '11.5px', fontWeight: 800, color: '#475569', marginBottom: '6px' }}>
+                Neural Engine Preset
+              </label>
+              <select
+                value={modelPreset}
+                onChange={(e) => setModelPreset(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '10px 12px',
+                  borderRadius: '10px',
+                  border: '1px solid #cbd5e1',
+                  backgroundColor: '#f8fafc',
+                  color: '#0f172a',
+                  fontSize: '12px',
+                  fontWeight: 600,
+                  outline: 'none',
+                }}
+              >
+                <option value="UltraCinema v4.2">UltraCinema v4.2 (Highest Fidelity)</option>
+                <option value="HyperReal v3.0">HyperReal v3.0 (Photorealistic)</option>
+                <option value="Commercial Ad Express">Commercial Ad Express (Fast Turnaround)</option>
+                <option value="Studio Voice X2">Studio Voice X2 (Broadcast Quality)</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Reference File Box */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '12px 16px',
+            borderRadius: '12px',
+            border: '1px dashed #cbd5e1',
+            backgroundColor: '#f8fafc',
+            fontSize: '12px',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#64748b' }}>
+              <UploadCloud size={18} color="#006742" />
+              <span>{referenceFile ? `Reference: ${referenceFile.name}` : 'Upload style reference audio, portrait or script'}</span>
+            </div>
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              style={{
+                padding: '6px 14px',
+                borderRadius: '8px',
+                border: '1px solid #cbd5e1',
+                backgroundColor: '#ffffff',
+                color: '#006742',
+                fontSize: '11.5px',
+                fontWeight: 700,
+                cursor: 'pointer',
+              }}
+            >
+              Choose File
+            </button>
+            <input
+              ref={fileInputRef}
+              type="file"
+              style={{ display: 'none' }}
+              onChange={(e) => {
+                if (e.target.files[0]) {
+                  setReferenceFile(e.target.files[0]);
+                  addToast({ title: 'Reference Loaded', message: e.target.files[0].name, type: 'info' });
+                }
+              }}
+            />
+          </div>
+
+          {/* Progress Indicator */}
+          {isGenerating && (
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '8px',
+              padding: '14px',
+              borderRadius: '12px',
+              backgroundColor: 'rgba(0, 103, 66, 0.08)',
+              border: '1px solid rgba(0, 103, 66, 0.25)',
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', fontWeight: 800, color: '#006742' }}>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <Loader2 size={15} className="animate-spin" />
+                  Synthesizing Neural Asset via {activeStudioObj.name}...
+                </span>
+                <span>{generationProgress}%</span>
+              </div>
+              <div style={{ width: '100%', height: '8px', backgroundColor: '#e2e8f0', borderRadius: '6px', overflow: 'hidden' }}>
+                <div style={{ width: `${generationProgress}%`, height: '100%', backgroundColor: '#006742', transition: 'width 0.3s ease' }} />
+              </div>
+            </div>
+          )}
+
+          {/* Generate Button in #006742 */}
+          <button
+            type="button"
+            disabled={isGenerating}
+            onClick={handleGenerate}
+            style={{
+              width: '100%',
+              padding: '14px',
+              borderRadius: '12px',
+              border: 'none',
+              backgroundColor: '#006742',
+              color: '#ffffff',
+              fontSize: '13.5px',
+              fontWeight: 800,
+              cursor: isGenerating ? 'not-allowed' : 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '10px',
+              boxShadow: '0 8px 20px -4px rgba(0, 103, 66, 0.4)',
+              opacity: isGenerating ? 0.7 : 1,
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              if (!isGenerating) {
+                e.currentTarget.style.backgroundColor = '#005234';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!isGenerating) {
+                e.currentTarget.style.backgroundColor = '#006742';
+                e.currentTarget.style.transform = 'translateY(0)';
+              }
+            }}
+          >
+            {isGenerating ? (
+              <>
+                <Loader2 size={18} className="animate-spin" />
+                <span>Synthesizing Neural Asset...</span>
+              </>
+            ) : (
+              <>
+                <Wand2 size={18} />
+                <span>Generate via {activeStudioObj.name}</span>
+              </>
+            )}
+          </button>
         </div>
 
-        {/* Right Output & Recent Vault Library (5 cols) */}
-        <div className="lg:col-span-5 flex flex-col gap-4">
-          {/* Active Generated Output Preview */}
-          <Card className="border shadow-sm">
-            <CardHeader title="Studio Canvas Monitor" subtitle="Live synthesis preview viewport" />
-            <CardBody className="p-4 flex flex-col items-center justify-center">
-              {generatedAsset ? (
-                <div className="w-full flex flex-col gap-3">
-                  <div className="relative rounded-xl overflow-hidden border border-border group aspect-video bg-black flex items-center justify-center">
-                    <img
-                      src={generatedAsset.url}
-                      alt={generatedAsset.title}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                      <button
-                        type="button"
-                        onClick={() => addToast({ title: 'Playing Preview', message: 'Streaming 4K preview.', type: 'info' })}
-                        className="p-3 rounded-full bg-white text-slate-900 shadow-lg cursor-pointer hover:scale-110 transition-transform"
-                      >
-                        <Play size={20} className="fill-current" />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between text-xs">
-                    <div>
-                      <span className="font-bold text-primary block">{generatedAsset.title}</span>
-                      <span className="text-tertiary text-[11px]">{generatedAsset.studio} • Just now</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        icon={Download}
-                        onClick={() => addToast({ title: 'Exporting Asset', message: 'Saved to local system.', type: 'success' })}
-                      >
-                        Export
-                      </Button>
-                    </div>
-                  </div>
+        {/* Right Side: Studio Canvas Monitor & Recent Vault */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
+          {/* Canvas Monitor */}
+          <div style={{
+            backgroundColor: '#ffffff',
+            border: '1px solid #e2e8f0',
+            borderRadius: '20px',
+            padding: '20px',
+            boxShadow: '0 4px 16px -2px rgba(0, 103, 66, 0.06)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '14px',
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div>
+                <div style={{ fontSize: '15px', fontWeight: 900, color: '#006742' }}>
+                  Studio Canvas Monitor
                 </div>
-              ) : (
-                <div className="py-12 flex flex-col items-center text-center gap-2">
-                  <div className="w-12 h-12 rounded-2xl bg-surface-secondary border border-border flex items-center justify-center text-tertiary">
-                    <Film size={24} />
+                <div style={{ fontSize: '11.5px', color: '#64748b' }}>
+                  Live synthesis preview viewport
+                </div>
+              </div>
+              <span style={{
+                fontSize: '10px',
+                fontWeight: 800,
+                fontFamily: 'monospace',
+                padding: '3px 8px',
+                borderRadius: '6px',
+                backgroundColor: 'rgba(0, 103, 66, 0.1)',
+                color: '#006742',
+                border: '1px solid rgba(0, 103, 66, 0.25)',
+              }}>
+                4K UHD • REC [LIVE]
+              </span>
+            </div>
+
+            {/* Viewport Box */}
+            <div style={{
+              width: '100%',
+              aspectRatio: '16 / 9',
+              borderRadius: '14px',
+              overflow: 'hidden',
+              backgroundColor: '#071911',
+              border: '2px solid rgba(0, 103, 66, 0.3)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'relative',
+            }}>
+              {/* Corner crosshairs in #006742 */}
+              <div style={{ position: 'absolute', top: '10px', left: '10px', width: '12px', height: '12px', borderTop: '2px solid #006742', borderLeft: '2px solid #006742' }} />
+              <div style={{ position: 'absolute', top: '10px', right: '10px', width: '12px', height: '12px', borderTop: '2px solid #006742', borderRight: '2px solid #006742' }} />
+              <div style={{ position: 'absolute', bottom: '10px', left: '10px', width: '12px', height: '12px', borderBottom: '2px solid #006742', borderLeft: '2px solid #006742' }} />
+              <div style={{ position: 'absolute', bottom: '10px', right: '10px', width: '12px', height: '12px', borderBottom: '2px solid #006742', borderRight: '2px solid #006742' }} />
+
+              {generatedAsset ? (
+                <>
+                  <img
+                    src={generatedAsset.url}
+                    alt={generatedAsset.title}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                  <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0,0,0,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <button
+                      type="button"
+                      onClick={() => addToast({ title: 'Playing Preview', message: 'Streaming 4K preview.', type: 'info' })}
+                      style={{
+                        width: '52px',
+                        height: '52px',
+                        borderRadius: '50%',
+                        backgroundColor: '#ffffff',
+                        color: '#006742',
+                        border: 'none',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+                      }}
+                    >
+                      <Play size={22} fill="#006742" style={{ marginLeft: '2px' }} />
+                    </button>
                   </div>
-                  <span className="text-xs font-bold text-secondary">Awaiting Prompt Execution</span>
-                  <p className="text-[11px] text-tertiary max-w-xs">
-                    Configure directives on the left to render assets in this viewport.
-                  </p>
+                </>
+              ) : (
+                <div style={{ textAlign: 'center', color: '#6ee7b7', padding: '24px' }}>
+                  <Film size={34} style={{ margin: '0 auto 8px', color: '#34d399', opacity: 0.8 }} />
+                  <div style={{ fontSize: '13px', fontWeight: 800, color: '#ecfdf5' }}>Awaiting Prompt Execution</div>
+                  <div style={{ fontSize: '11px', color: '#a7f3d0', marginTop: '4px', maxWidth: '280px' }}>
+                    Configure directives on the left to render high-fidelity neural assets.
+                  </div>
                 </div>
               )}
-            </CardBody>
-          </Card>
+            </div>
 
-          {/* Recent Vault Library */}
-          <Card className="border shadow-sm flex-1">
-            <CardHeader title="Recent Production Vault" subtitle="Saved multi-studio assets" />
-            <CardBody className="p-3 space-y-2">
+            {generatedAsset && (
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '4px' }}>
+                <div>
+                  <div style={{ fontSize: '12.5px', fontWeight: 800, color: '#0f172a' }}>{generatedAsset.title}</div>
+                  <div style={{ fontSize: '11px', color: '#64748b' }}>{generatedAsset.studio} • Just now</div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => addToast({ title: 'Exporting Asset', message: 'Saved to local vault.', type: 'success' })}
+                  style={{
+                    padding: '7px 14px',
+                    borderRadius: '8px',
+                    border: '1px solid rgba(0, 103, 66, 0.25)',
+                    backgroundColor: 'rgba(0, 103, 66, 0.08)',
+                    color: '#006742',
+                    fontSize: '11.5px',
+                    fontWeight: 800,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                  }}
+                >
+                  <Download size={13} />
+                  <span>Export</span>
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Recent Vault */}
+          <div style={{
+            backgroundColor: '#ffffff',
+            border: '1px solid #e2e8f0',
+            borderRadius: '20px',
+            padding: '20px',
+            boxShadow: '0 4px 16px -2px rgba(0, 103, 66, 0.06)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '12px',
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div>
+                <div style={{ fontSize: '14px', fontWeight: 900, color: '#006742' }}>
+                  Recent Production Vault
+                </div>
+                <div style={{ fontSize: '11px', color: '#64748b' }}>
+                  Saved multi-studio assets
+                </div>
+              </div>
+              <span style={{ fontSize: '11px', fontWeight: 800, color: '#006742', fontFamily: 'monospace' }}>
+                {savedLibrary.length} Items
+              </span>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {savedLibrary.map((item) => (
                 <div
                   key={item.id}
-                  className="p-2.5 rounded-xl border border-border bg-surface hover:border-sky-300 transition-all flex items-center gap-3"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    padding: '9px 12px',
+                    borderRadius: '10px',
+                    border: '1px solid #f1f5f9',
+                    backgroundColor: '#f8fafc',
+                    transition: 'all 0.15s ease',
+                  }}
                 >
                   <img
                     src={item.url}
                     alt={item.title}
-                    className="w-14 h-10 rounded-lg object-cover flex-shrink-0"
+                    style={{ width: '48px', height: '36px', borderRadius: '6px', objectFit: 'cover', flexShrink: 0 }}
                   />
-                  <div className="flex-1 min-w-0">
-                    <span className="text-xs font-bold text-primary truncate block">{item.title}</span>
-                    <span className="text-[10px] text-tertiary">{item.studio} • {item.date}</span>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontSize: '12px', fontWeight: 800, color: '#0f172a', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {item.title}
+                    </div>
+                    <div style={{ fontSize: '10.5px', color: '#64748b' }}>
+                      {item.studio} • {item.date}
+                    </div>
                   </div>
-                  <Badge variant="default" className="text-[10px] uppercase font-mono flex-shrink-0">
+                  <span style={{
+                    fontSize: '10px',
+                    fontWeight: 800,
+                    padding: '2px 7px',
+                    borderRadius: '4px',
+                    backgroundColor: 'rgba(0, 103, 66, 0.08)',
+                    color: '#006742',
+                    border: '1px solid rgba(0, 103, 66, 0.2)',
+                    textTransform: 'uppercase',
+                  }}>
                     {item.type}
-                  </Badge>
+                  </span>
                 </div>
               ))}
-            </CardBody>
-          </Card>
+            </div>
+          </div>
         </div>
       </div>
     </div>
