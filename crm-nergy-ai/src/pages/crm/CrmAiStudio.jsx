@@ -46,7 +46,7 @@ export const CrmAiStudio = () => {
 
   // The Client-Specified 15 Sub-Studios with Nova Drive #006742 Palette Alignment
   const subStudios = [
-    { id: 'bestie', name: 'Bestie — My AI Agent', category: 'Copilot', icon: Sparkles, desc: 'Your 24/7 business operating partner and conversational workflow controller.', badge: 'Live AI Core' },
+    { id: 'bestie', name: 'Bestie — My AI Agent', category: 'AI Agent', icon: Sparkles, desc: 'Your 24/7 business operating partner and conversational workflow controller.', badge: 'Live AI Core' },
     { id: 'muzik', name: 'AAI Muzik Hit Studio', category: 'Audio & Music', icon: Music, desc: 'Generate original commercial background tracks, jingles, and brand soundtracks in any genre.', badge: 'Dolby Atmos' },
     { id: 'realtalk', name: 'AAI Real Talk', category: 'Voice & Speech', icon: Radio, desc: 'Ultra-realistic human conversational dialogues and podcast speech generation with natural emotion.', badge: 'Neural Voice' },
     { id: 'audio-writer', name: 'AI Audio Writer', category: 'Audio & Music', icon: Mic, desc: 'Voiceover scriptwriting, voice modulation, and sonic identity branding synthesizer.', badge: 'Script Sync' },

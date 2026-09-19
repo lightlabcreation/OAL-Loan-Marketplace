@@ -42,7 +42,7 @@ export const crmNavigation = [
   { id: 'erp', label: 'ERP & Operations', icon: Boxes, path: '/crm/erp', section: 'Enterprise ERP' },
 
   // AI SuperHouse
-  { id: 'bestie', label: 'Bestie AI Copilot', icon: Bot, path: '/crm/bestie', section: 'AI SuperHouse' },
+  { id: 'bestie', label: 'Bestie AI Agent', icon: Bot, path: '/crm/bestie', section: 'AI SuperHouse' },
   { id: 'ai', label: 'AI Content Studio', icon: Sparkles, path: '/crm/ai-studio', section: 'AI SuperHouse' },
   { id: 'ai-video', label: 'AI Video Agent', icon: Video, path: '/crm/ai-video', section: 'AI SuperHouse' },
   { id: 'marketing', label: 'AI Marketing Hub', icon: Megaphone, path: '/crm/marketing', section: 'AI SuperHouse' },

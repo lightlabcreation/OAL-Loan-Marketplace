@@ -201,9 +201,9 @@ export const Showcase = () => {
                       impact: 'Eliminates $2,400/seat/yr in fragmented 3rd party creative tools',
                     },
                     {
-                      feature: 'Autonomous Business Copilot',
+                      feature: 'Autonomous Business AI Agent',
                       salesforce: 'Einstein (Add-on bolt-on chatbot with heavy token billing)',
-                      nergy: 'Bestie AI Copilot natively wired to live CRM records & ERP supply chains',
+                      nergy: 'Bestie AI Agent natively wired to live CRM records & ERP supply chains',
                       impact: 'Real-time contextual action cards with zero per-prompt micro-fees',
                     },
                     {
@@ -275,7 +275,7 @@ export const Showcase = () => {
                   badge: '15 Sub-Studios',
                 },
                 {
-                  title: 'Bestie AI Copilot',
+                  title: 'Bestie AI Agent',
                   desc: 'Autonomous enterprise operating assistant with contextual action cards: Ask Bestie, Analyze, Automate, and Execute.',
                   icon: Bot,
                   path: '/crm/bestie',

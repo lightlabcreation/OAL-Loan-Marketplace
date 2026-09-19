@@ -125,7 +125,7 @@ export const Topbar = ({ onToggleSidebar, product = 'crm' }) => {
         { id: 'crm-comm', title: 'Communication Hub', subtitle: 'Direct email, omnichannel inbox & client message center', category: 'Pages & Modules', icon: MessageSquare, path: '/crm/communication', tags: 'email chat inbox call messages' },
         { id: 'crm-erp', title: 'ERP & Operations Center', subtitle: 'Procurement, inventory tracking, bill of materials & sales orders', category: 'Pages & Modules', icon: Boxes, path: '/crm/erp', tags: 'inventory supply chain orders procurement' },
         { id: 'crm-hr', title: 'HR & Recruiting Directory', subtitle: 'Employee lifecycle, candidate interviews & staff roster', category: 'Pages & Modules', icon: UserCheck, path: '/crm/hr', tags: 'hiring employees payroll team staff' },
-        { id: 'crm-ai', title: 'AI Content Studio & Copilot', subtitle: 'Generative CRM copilot, email writer & workflow automations', category: 'Pages & Modules', icon: Sparkles, path: '/crm/ai-studio', tags: 'artificial intelligence prompts copy copilot' },
+        { id: 'crm-ai', title: 'AI Content Studio & Agent Hub', subtitle: 'Generative CRM agent, email writer & workflow automations', category: 'Pages & Modules', icon: Sparkles, path: '/crm/ai-studio', tags: 'artificial intelligence prompts copy agent' },
         { id: 'crm-reports', title: 'Reports & Executive Analytics', subtitle: 'Executive financial summaries & audit reports', category: 'Pages & Modules', icon: FileText, path: '/crm/reports', tags: 'charts metrics exports pdf revenue' },
         { id: 'crm-profile', title: 'My Profile & Avatar Settings', subtitle: 'Personal account details, photo upload & credentials', category: 'Pages & Modules', icon: User, path: '/crm/profile', tags: 'profile photo picture name email password' },
         
@@ -398,7 +398,7 @@ export const Topbar = ({ onToggleSidebar, product = 'crm' }) => {
               e.currentTarget.style.borderColor = 'rgba(6, 182, 212, 0.4)';
               e.currentTarget.style.boxShadow = 'none';
             }}
-            title="Ask Bestie AI Copilot"
+            title="Ask Bestie AI Agent"
           >
             <Sparkles size={14} style={{ color: '#0ea5e9' }} />
             <span>Ask Bestie</span>
