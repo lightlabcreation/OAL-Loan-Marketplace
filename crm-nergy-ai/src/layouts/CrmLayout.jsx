@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Topbar } from './components/Topbar';
 import { Sidebar } from './components/Sidebar';
-import { Drawer } from '../components/ui/Drawer';
+import { CrmMobileBottomBar } from './components/CrmMobileBottomBar';
+import { CrmMobileAppDrawer } from './components/CrmMobileAppDrawer';
 import { ToastContainer } from '../components/ui/Toast';
 import { useResponsive } from '../hooks/useResponsive';
 
@@ -54,23 +55,6 @@ export const CrmLayout = () => {
           />
         )}
 
-        {/* Mobile Drawer Sidebar */}
-        {isMobile && (
-          <Drawer
-            isOpen={isMobileDrawerOpen}
-            onClose={() => setIsMobileDrawerOpen(false)}
-            position="left"
-            width="280px"
-          >
-            <Sidebar
-              isCollapsed={false}
-              onToggleCollapse={() => setIsMobileDrawerOpen(false)}
-              product="crm"
-              onCloseMobile={() => setIsMobileDrawerOpen(false)}
-            />
-          </Drawer>
-        )}
-
         {/* Main Content Area — ONLY THIS AREA SCROLLS */}
         <main
           className="main-content"
@@ -83,6 +67,7 @@ export const CrmLayout = () => {
             maxWidth: '100%',
             width: '100%',
             padding: isMobile ? '0.875rem' : '1.5rem',
+            paddingBottom: isMobile ? '80px' : '1.5rem',
             backgroundColor: 'var(--background)',
             boxSizing: 'border-box',
           }}
@@ -90,6 +75,21 @@ export const CrmLayout = () => {
           <Outlet />
         </main>
       </div>
+
+      {/* Native Mobile Bottom Navigation Bar (< 768px) */}
+      {isMobile && (
+        <CrmMobileBottomBar
+          onOpenDrawer={() => setIsMobileDrawerOpen(true)}
+          product="crm"
+        />
+      )}
+
+      {/* Native Mobile App Slide-Out Touch Drawer (< 768px) */}
+      <CrmMobileAppDrawer
+        isOpen={isMobile && isMobileDrawerOpen}
+        onClose={() => setIsMobileDrawerOpen(false)}
+        product="crm"
+      />
 
       {/* Global Toast Container */}
       <ToastContainer />
